@@ -15,11 +15,6 @@
     "label": "update lua nodes"
   },
   {
-    "id": "8de81703.d94798",
-    "type": "tab",
-    "label": "way to work"
-  },
-  {
     "id": "f093b8cc.ff2b58",
     "type": "mqtt-broker",
     "z": "",
@@ -48,6 +43,46 @@
     "id": "899805d0.4345c8",
     "type": "google-api-config",
     "z": ""
+  },
+  {
+    "id": "99bc08d8.a0cff8",
+    "type": "ui_tab",
+    "z": "",
+    "name": "Home",
+    "icon": "dashboard"
+  },
+  {
+    "id": "cffdbc2a.4ba77",
+    "type": "ui_tab",
+    "z": "",
+    "name": "Update Nodes",
+    "icon": "dashboard"
+  },
+  {
+    "id": "2cab6fde.1552e",
+    "type": "ui_base",
+    "name": "Node-RED Dashboard",
+    "theme": "theme-light"
+  },
+  {
+    "id": "1af04f91.de5e1",
+    "type": "ui_group",
+    "z": "",
+    "name": "Nodes",
+    "tab": "cffdbc2a.4ba77",
+    "order": 2,
+    "disp": true,
+    "width": "6"
+  },
+  {
+    "id": "68f8422e.2c21dc",
+    "type": "ui_group",
+    "z": "",
+    "name": "Files",
+    "tab": "cffdbc2a.4ba77",
+    "order": 1,
+    "disp": true,
+    "width": "6"
   },
   {
     "id": "16f1c24d.e0b3ce",
@@ -142,9 +177,9 @@
     "server": "smtp.1und1.de",
     "port": "465",
     "name": "mobil@jungierek.de",
-    "dname": "nodeRED",
-    "x": 959,
-    "y": 340,
+    "dname": "mobil@jungierek.de",
+    "x": 880,
+    "y": 226,
     "wires": []
   },
   {
@@ -630,35 +665,16 @@
     "wires": []
   },
   {
-    "id": "e91f03ff.b1878",
-    "type": "inject",
-    "z": "37197cb5.c49ee4",
-    "name": "sensor/DHT11/lounge",
-    "topic": "",
-    "payload": "sensor/DHT11/lounge",
-    "payloadType": "str",
-    "repeat": "",
-    "crontab": "",
-    "once": false,
-    "x": 200,
-    "y": 120,
-    "wires": [
-      [
-        "6ed6dc87.f74a94"
-      ]
-    ]
-  },
-  {
     "id": "a1be0ecd.3efd7",
     "type": "mqtt out",
     "z": "37197cb5.c49ee4",
     "name": "mqtt: nodes@home/.../service/update",
     "topic": "",
     "qos": "0",
-    "retain": "false",
+    "retain": "true",
     "broker": "f093b8cc.ff2b58",
-    "x": 810,
-    "y": 120,
+    "x": 1010,
+    "y": 220,
     "wires": []
   },
   {
@@ -666,14 +682,15 @@
     "type": "function",
     "z": "37197cb5.c49ee4",
     "name": "set topic + payload",
-    "func": "// junand 19.01.2017\n\n// node mqtt update topic\nmsg.topic = \"nodes@home/\" + msg.payload + \"/service/update\";\n\n// update url without update.list\nconst version = \"20161204_V0.20\";\nmsg.payload = \"http://192.168.2.8/website/nodes_at_home_ota/\" + version;\n\nreturn msg;",
+    "func": "// junand 19.01.2017\n\nif ( msg.topic == \"config_version\" ) {\n    context.set ( \"version\", msg.payload );\n    return null; // break flow\n}\n\nvar version = context.get ( \"version\");\nif ( version === undefined ) {\n    node.error ( \"NO version defined\" );\n    return null;\n}\n\n// node mqtt update topic\nmsg.topic = \"nodes@home/\" + msg.topic + \"/service/update\";\n\n// update url without update.list\n//msg.payload = \"http://192.168.2.8/website/nodes_at_home_ota/\" + version;\nmsg.payload = \"http://192.168.2.117/luanodes_ota/\" + version;\n\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
-    "x": 470,
-    "y": 120,
+    "x": 831,
+    "y": 321,
     "wires": [
       [
-        "7d796b61.193344"
+        "7d796b61.193344",
+        "a1be0ecd.3efd7"
       ]
     ]
   },
@@ -682,109 +699,11 @@
     "type": "debug",
     "z": "37197cb5.c49ee4",
     "name": "",
-    "active": true,
+    "active": false,
     "console": "false",
     "complete": "true",
-    "x": 740,
-    "y": 240,
-    "wires": []
-  },
-  {
-    "id": "ab89e7df.5f4958",
-    "type": "debug",
-    "z": "8de81703.d94798",
-    "name": "",
-    "active": true,
-    "console": "false",
-    "complete": "true",
-    "x": 610,
-    "y": 260,
-    "wires": []
-  },
-  {
-    "id": "24a17c06.257aa4",
-    "type": "google directions",
-    "z": "8de81703.d94798",
-    "name": "Anreise Hannover",
-    "googleAPI": "899805d0.4345c8",
-    "origin": "52.651089,13.5338005",
-    "destination": "52.334167,9.8232433",
-    "mode": "driving",
-    "waypoints": "",
-    "alternatives": "",
-    "avoid": "",
-    "language": "de",
-    "units": "metric",
-    "region": "",
-    "departure_time": "",
-    "arrival_time": "",
-    "transit_mode": "",
-    "transit_routing_preferences": "",
-    "x": 362,
-    "y": 200,
-    "wires": [
-      [
-        "ab89e7df.5f4958",
-        "35911cb0.d10024",
-        "e4b00aea.312008"
-      ]
-    ]
-  },
-  {
-    "id": "b00471a8.817fa",
-    "type": "inject",
-    "z": "8de81703.d94798",
-    "name": "",
-    "topic": "",
-    "payload": "",
-    "payloadType": "date",
-    "repeat": "",
-    "crontab": "",
-    "once": false,
-    "x": 160,
-    "y": 200,
-    "wires": [
-      [
-        "24a17c06.257aa4"
-      ]
-    ]
-  },
-  {
-    "id": "1643a689.004859",
-    "type": "comment",
-    "z": "8de81703.d94798",
-    "name": "coordinates",
-    "info": "home\n52.651089,13.5338005\n\nfi hannover\n52.334167,9.8232433",
-    "x": 760,
-    "y": 60,
-    "wires": []
-  },
-  {
-    "id": "35911cb0.d10024",
-    "type": "function",
-    "z": "8de81703.d94798",
-    "name": "mqtt payload",
-    "func": "// junand 20.01.2017\n\nvar s = null;\n\nif ( msg.payload.status == \"OK\" ) {\n\n    s = \"ok\"\n\n    const leg = msg.payload.routes [0].legs [0];\n\n    s = \"Anfahrt Hannover dauert \";\n    if ( leg.duration_in_traffic !== undefined ) {\n        s += leg.duration_in_traffic.text + \" statt \";\n    }\n    s += leg.duration.text + \" für \" + leg.distance.text;\n    \n\n}\n\nvar messages;\n\nif ( s === null ) {\n    messages = { messages: [{ line: 10, clear: true } ]};\n}\nelse {\n    messages = { messages: [{ line: 10, text: s } ]};\n}\n\nmsg.payload = messages; // preserve msg attributes!!!\n\nreturn msg;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 630,
-    "y": 200,
-    "wires": [
-      [
-        "9e283b00.3d4488"
-      ]
-    ]
-  },
-  {
-    "id": "9e283b00.3d4488",
-    "type": "debug",
-    "z": "8de81703.d94798",
-    "name": "",
-    "active": true,
-    "console": "false",
-    "complete": "false",
-    "x": 850,
-    "y": 240,
+    "x": 1090,
+    "y": 400,
     "wires": []
   },
   {
@@ -796,32 +715,6 @@
     "x": 920,
     "y": 129,
     "wires": []
-  },
-  {
-    "id": "67628c58.1134c4",
-    "type": "file",
-    "z": "8de81703.d94798",
-    "name": "dump.json",
-    "filename": "/home/pi/dump.json",
-    "appendNewline": true,
-    "createDir": true,
-    "overwriteFile": "false",
-    "x": 650,
-    "y": 320,
-    "wires": []
-  },
-  {
-    "id": "e4b00aea.312008",
-    "type": "json",
-    "z": "8de81703.d94798",
-    "name": "",
-    "x": 500,
-    "y": 320,
-    "wires": [
-      [
-        "67628c58.1134c4"
-      ]
-    ]
   },
   {
     "id": "5baf8e28.4ab6e",
@@ -997,6 +890,645 @@
     "complete": "false",
     "x": 1060,
     "y": 580,
+    "wires": []
+  },
+  {
+    "id": "d1ca3bfb.9f70e8",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update sensor/DHT11/lounge",
+    "group": "1af04f91.de5e1",
+    "order": 3,
+    "width": 0,
+    "height": 0,
+    "label": "sensor/DHT11/lounge",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "sensor/DHT11/lounge",
+    "x": 498,
+    "y": 156,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "f73c231.412c6e",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update sensor/DHT11/terrace",
+    "group": "1af04f91.de5e1",
+    "order": 4,
+    "width": 0,
+    "height": 0,
+    "label": "sensor/DHT11/terrace",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "sensor/DHT11/terrace",
+    "payloadType": "str",
+    "topic": "",
+    "x": 498,
+    "y": 196,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "cbd03bd3.819e18",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update sensor/DHT11/roof",
+    "group": "1af04f91.de5e1",
+    "order": 5,
+    "width": 0,
+    "height": 0,
+    "label": "sensor/DHT11/roof",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "sensor/DHT11/roof",
+    "x": 498,
+    "y": 236,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "4f54d98.76ed228",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update switch/sonoff/utilityroom",
+    "group": "1af04f91.de5e1",
+    "order": 7,
+    "width": 0,
+    "height": 0,
+    "label": "switch/sonoff/utilityroom",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "switch/sonoff/utilityroom",
+    "x": 508,
+    "y": 337,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "95d346b2.e835c8",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update switch/sonoff/garage",
+    "group": "1af04f91.de5e1",
+    "order": 8,
+    "width": 0,
+    "height": 0,
+    "label": "switch/sonoff/garage",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "switch/sonoff/garage",
+    "x": 498,
+    "y": 377,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "ccdbd261.d8a1b",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update switch/relay/terrace",
+    "group": "1af04f91.de5e1",
+    "order": 9,
+    "width": 0,
+    "height": 0,
+    "label": "switch/relay/terrace",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "switch/relay/terrace",
+    "x": 498,
+    "y": 417,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "37c7da04.7c0f76",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update switch/relay/backyard",
+    "group": "1af04f91.de5e1",
+    "order": 10,
+    "width": 0,
+    "height": 0,
+    "label": "switch/relay/backyard",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "switch/relay/backyard",
+    "x": 498,
+    "y": 457,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "256c7772.9d1d38",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update switch/relay/carport",
+    "group": "1af04f91.de5e1",
+    "order": 11,
+    "width": 0,
+    "height": 0,
+    "label": "switch/relay/carport",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "switch/relay/carport",
+    "x": 498,
+    "y": 497,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "169ea6a2.553249",
+    "type": "inject",
+    "z": "37197cb5.c49ee4",
+    "name": "disable button",
+    "topic": "config",
+    "payload": "false",
+    "payloadType": "bool",
+    "repeat": "",
+    "crontab": "",
+    "once": true,
+    "x": 130,
+    "y": 446,
+    "wires": [
+      [
+        "d420d6db.c79a58"
+      ]
+    ]
+  },
+  {
+    "id": "d420d6db.c79a58",
+    "type": "change",
+    "z": "37197cb5.c49ee4",
+    "name": "set msg.enabled",
+    "rules": [
+      {
+        "t": "move",
+        "p": "payload",
+        "pt": "msg",
+        "to": "enabled",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 160,
+    "y": 526,
+    "wires": [
+      [
+        "256c7772.9d1d38",
+        "7558bf53.a4f84",
+        "5a5cbecf.a6706",
+        "7790a1e0.9fad4",
+        "43f131a0.d41b4"
+      ]
+    ]
+  },
+  {
+    "id": "3ccaed06.d1c7e2",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update all nodes",
+    "group": "1af04f91.de5e1",
+    "order": 1,
+    "width": 0,
+    "height": 0,
+    "label": "update all",
+    "color": "",
+    "bgcolor": "red",
+    "icon": "update",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "",
+    "x": 189,
+    "y": 120,
+    "wires": [
+      [
+        "d1ca3bfb.9f70e8",
+        "f73c231.412c6e",
+        "cbd03bd3.819e18",
+        "4f54d98.76ed228",
+        "95d346b2.e835c8",
+        "ccdbd261.d8a1b",
+        "37c7da04.7c0f76",
+        "256c7772.9d1d38",
+        "389aeb93.9100f4",
+        "a7ad73b2.6ae9e",
+        "7558bf53.a4f84",
+        "5a5cbecf.a6706",
+        "c089c3bd.97a6a",
+        "7790a1e0.9fad4"
+      ]
+    ]
+  },
+  {
+    "id": "12d7c8ae.c7c777",
+    "type": "inject",
+    "z": "37197cb5.c49ee4",
+    "name": "update all",
+    "topic": "test",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 114,
+    "y": 46,
+    "wires": [
+      [
+        "3ccaed06.d1c7e2"
+      ]
+    ]
+  },
+  {
+    "id": "222037cb.f13c48",
+    "type": "inject",
+    "z": "37197cb5.c49ee4",
+    "name": "",
+    "topic": "config_version",
+    "payload": "20170121_V0.23",
+    "payloadType": "str",
+    "repeat": "",
+    "crontab": "",
+    "once": true,
+    "x": 810,
+    "y": 620,
+    "wires": [
+      [
+        "229fde18.7bd282"
+      ]
+    ]
+  },
+  {
+    "id": "65455831.78cf68",
+    "type": "inject",
+    "z": "37197cb5.c49ee4",
+    "name": "update one",
+    "topic": "test",
+    "payload": "TEST",
+    "payloadType": "str",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 180,
+    "y": 226,
+    "wires": [
+      [
+        "d1ca3bfb.9f70e8"
+      ]
+    ]
+  },
+  {
+    "id": "389aeb93.9100f4",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update switch/rfhub/first",
+    "group": "1af04f91.de5e1",
+    "order": 2,
+    "width": 0,
+    "height": 0,
+    "label": "switch/rfhub/first",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "switch/rfhub/first",
+    "x": 490,
+    "y": 106,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "a7ad73b2.6ae9e",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update cover/relay/garage",
+    "group": "1af04f91.de5e1",
+    "order": 6,
+    "width": 0,
+    "height": 0,
+    "label": "cover/relay/garage",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "cover/relay/garage",
+    "x": 490,
+    "y": 286,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "7558bf53.a4f84",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update light/xmastree/dining",
+    "group": "1af04f91.de5e1",
+    "order": 12,
+    "width": 0,
+    "height": 0,
+    "label": "light/xmastree/dining",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "light/xmastree/dining",
+    "x": 500,
+    "y": 546,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "5a5cbecf.a6706",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update sensor/button/no1",
+    "group": "1af04f91.de5e1",
+    "order": 13,
+    "width": 0,
+    "height": 0,
+    "label": "sensor/button/no1",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "sensor/button/no1",
+    "x": 490,
+    "y": 596,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "c089c3bd.97a6a",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update sensor/button/garage",
+    "group": "1af04f91.de5e1",
+    "order": 14,
+    "width": 0,
+    "height": 0,
+    "label": "sensor/button/garage",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "sensor/button/garage",
+    "x": 500,
+    "y": 635,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "7790a1e0.9fad4",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update sensor/button/no3",
+    "group": "1af04f91.de5e1",
+    "order": 15,
+    "width": 0,
+    "height": 0,
+    "label": "sensor/button/no3",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "sensor/button/no3",
+    "x": 490,
+    "y": 673,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "43f131a0.d41b4",
+    "type": "debug",
+    "z": "37197cb5.c49ee4",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "true",
+    "x": 220,
+    "y": 686,
+    "wires": []
+  },
+  {
+    "id": "9c88160f.18a868",
+    "type": "inject",
+    "z": "37197cb5.c49ee4",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 120,
+    "y": 766,
+    "wires": [
+      [
+        "761a7927.671948"
+      ]
+    ]
+  },
+  {
+    "id": "1bd2a942.86bc77",
+    "type": "exec",
+    "z": "37197cb5.c49ee4",
+    "command": "ls /home/pi/luanodes_ota/*.lua",
+    "addpay": false,
+    "append": "",
+    "useSpawn": "",
+    "timer": "",
+    "name": "",
+    "x": 477,
+    "y": 826,
+    "wires": [
+      [
+        "73f8d060.4c3b2"
+      ],
+      [],
+      []
+    ]
+  },
+  {
+    "id": "73f8d060.4c3b2",
+    "type": "split",
+    "z": "37197cb5.c49ee4",
+    "name": "",
+    "splt": "\\n",
+    "x": 697,
+    "y": 826,
+    "wires": [
+      [
+        "657919f4.11d3e8"
+      ]
+    ]
+  },
+  {
+    "id": "657919f4.11d3e8",
+    "type": "function",
+    "z": "37197cb5.c49ee4",
+    "name": "create command",
+    "func": "// junand 21.02.2017\n\nvar dest;\nvar cmd;\n\nfunction createDir ( path ) {\n\n    if ( !context.global.fs.existsSync ( dest ) ) {\n        context.global.fs.mkdirSync ( dest );\n    }\n    \n}\n\nif ( msg.topic == \"config_version\" ) {\n    \n    context.set ( \"version\", msg.payload );\n    \n    dest = \"/var/www/html/luanodes_ota/\" + msg.payload;\n    context.set ( \"dest\", dest );\n    //node.error ( dest );\n    \n    //createDir ( dest );\n    \n    return null; // break flow\n    \n}\n\ndest = context.get ( \"dest\" );\nif ( dest === undefined ) {\n    node.error ( \"NO destination defined\")\n    return null;\n}\n    \nif ( msg.payload === \"\" ) {\n    \n    cmd = \"cd \" + dest + \";../gen_list.sh\"; \n    \n}\nelse {\n\n    createDir ( dest );\n    \n    cmd = \"F=\\\"\" + msg.payload + \"\\\";\";\n    cmd += \"chmod 755 ${F};\"\n    cmd += \"mv $F \" + dest + \";\";\n\n}\n\nmsg.payload = cmd;\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 897,
+    "y": 826,
+    "wires": [
+      [
+        "27a8e412.397f7c"
+      ]
+    ]
+  },
+  {
+    "id": "27a8e412.397f7c",
+    "type": "exec",
+    "z": "37197cb5.c49ee4",
+    "command": " ",
+    "addpay": true,
+    "append": "",
+    "useSpawn": "",
+    "timer": "",
+    "name": "execute",
+    "x": 1087,
+    "y": 826,
+    "wires": [
+      [],
+      [],
+      []
+    ]
+  },
+  {
+    "id": "761a7927.671948",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "",
+    "group": "68f8422e.2c21dc",
+    "order": 3,
+    "width": 0,
+    "height": 0,
+    "label": "copy files",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "",
+    "x": 200,
+    "y": 826,
+    "wires": [
+      [
+        "1bd2a942.86bc77"
+      ]
+    ]
+  },
+  {
+    "id": "229fde18.7bd282",
+    "type": "ui_text_input",
+    "z": "37197cb5.c49ee4",
+    "name": "",
+    "label": "version",
+    "group": "68f8422e.2c21dc",
+    "order": 1,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "mode": "text",
+    "delay": "0",
+    "topic": "config_version",
+    "x": 940,
+    "y": 540,
+    "wires": [
+      [
+        "f406b015.0d596",
+        "657919f4.11d3e8",
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "f406b015.0d596",
+    "type": "debug",
+    "z": "37197cb5.c49ee4",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "payload",
+    "x": 1090,
+    "y": 620,
     "wires": []
   }
 ]
