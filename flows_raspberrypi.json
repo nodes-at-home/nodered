@@ -296,10 +296,10 @@
     "id": "1f55c701.4fff39",
     "type": "comment",
     "z": "c9cf8bbb.029148",
-    "name": "get weather forecast 1x per day",
+    "name": "get weather forecast",
     "info": "",
-    "x": 190,
-    "y": 80,
+    "x": 150,
+    "y": 137,
     "wires": []
   },
   {
@@ -309,41 +309,22 @@
     "name": "way to work",
     "info": "",
     "x": 130,
-    "y": 582,
+    "y": 666,
     "wires": []
-  },
-  {
-    "id": "ea2e262d.86bf68",
-    "type": "inject",
-    "z": "c9cf8bbb.029148",
-    "name": "Start 09:00 Weekend",
-    "topic": "weather \"Zepernick\" Weekend",
-    "payload": "",
-    "payloadType": "date",
-    "repeat": "",
-    "crontab": "00 9 * * 6,0",
-    "once": false,
-    "x": 180,
-    "y": 135,
-    "wires": [
-      [
-        "68cb162e.e560f8"
-      ]
-    ]
   },
   {
     "id": "6cb5654f.9708dc",
     "type": "inject",
     "z": "c9cf8bbb.029148",
-    "name": "Daily 05:00",
-    "topic": "weather \"Zepernick\" Daily",
+    "name": "Daily 05:00 .. 18:00",
+    "topic": "weather",
     "payload": "",
     "payloadType": "date",
     "repeat": "",
-    "crontab": "00 05 * * 1,2,3,4,5",
+    "crontab": "*/15 5-17 * * *",
     "once": false,
-    "x": 150,
-    "y": 195,
+    "x": 180,
+    "y": 187,
     "wires": [
       [
         "68cb162e.e560f8"
@@ -362,7 +343,7 @@
     "country": "Germany",
     "language": "de",
     "x": 380,
-    "y": 195,
+    "y": 187,
     "wires": [
       [
         "e9051825.eccda8"
@@ -378,10 +359,10 @@
     "outputs": 1,
     "noerr": 0,
     "x": 550,
-    "y": 195,
+    "y": 187,
     "wires": [
       [
-        "dac14d24.d9643"
+        "21eb0961.7dd8c6"
       ]
     ]
   },
@@ -389,15 +370,15 @@
     "id": "7148dc22.b09324",
     "type": "inject",
     "z": "c9cf8bbb.029148",
-    "name": "Stop 12:00",
-    "topic": "weather \"Zepernick\" Clear",
+    "name": "Stop 18:01",
+    "topic": "weather_clear",
     "payload": "",
     "payloadType": "date",
     "repeat": "",
-    "crontab": "00 12 * * *",
+    "crontab": "01 18 * * *",
     "once": false,
     "x": 144,
-    "y": 256,
+    "y": 340,
     "wires": [
       [
         "2ef5c432.c6dd0c"
@@ -424,7 +405,7 @@
     "to": "",
     "reg": false,
     "x": 434,
-    "y": 256,
+    "y": 340,
     "wires": [
       [
         "dac14d24.d9643"
@@ -441,7 +422,7 @@
     "createDir": true,
     "overwriteFile": "false",
     "x": 1070,
-    "y": 440,
+    "y": 524,
     "wires": []
   },
   {
@@ -454,7 +435,7 @@
     "retain": "true",
     "broker": "f093b8cc.ff2b58",
     "x": 997,
-    "y": 299,
+    "y": 383,
     "wires": []
   },
   {
@@ -468,7 +449,7 @@
     "syntax": "mustache",
     "template": "{{{timestamp_date}}}: [{{{topic}}}] {{{payload}}}",
     "x": 900,
-    "y": 440,
+    "y": 524,
     "wires": [
       [
         "a3681291.5bfe3",
@@ -482,7 +463,7 @@
     "z": "c9cf8bbb.029148",
     "name": "",
     "x": 1030,
-    "y": 360,
+    "y": 444,
     "wires": [
       [
         "daaf94f6.ad46c8"
@@ -494,11 +475,11 @@
     "type": "debug",
     "z": "c9cf8bbb.029148",
     "name": "",
-    "active": true,
+    "active": false,
     "console": "false",
     "complete": "false",
     "x": 1070,
-    "y": 500,
+    "y": 584,
     "wires": []
   },
   {
@@ -510,7 +491,7 @@
     "outputs": 1,
     "noerr": 0,
     "x": 875,
-    "y": 359.4285888671875,
+    "y": 443.4285888671875,
     "wires": [
       [
         "c5c075da.61ef98"
@@ -537,7 +518,7 @@
     "to": "",
     "reg": false,
     "x": 670,
-    "y": 340,
+    "y": 424,
     "wires": [
       [
         "5ae2eae3.4b5914",
@@ -553,7 +534,7 @@
     "name": "calendar",
     "info": "",
     "x": 120,
-    "y": 334,
+    "y": 418,
     "wires": []
   },
   {
@@ -568,7 +549,7 @@
     "crontab": "00 05 * * *",
     "once": false,
     "x": 180,
-    "y": 394,
+    "y": 478,
     "wires": [
       [
         "bf288de6.bb763"
@@ -587,7 +568,7 @@
     "crontab": "00 05 * * *",
     "once": false,
     "x": 190,
-    "y": 454,
+    "y": 538,
     "wires": [
       [
         "bf288de6.bb763"
@@ -606,7 +587,7 @@
     "crontab": "00 05 * * *",
     "once": false,
     "x": 200,
-    "y": 514,
+    "y": 598,
     "wires": [
       [
         "bf288de6.bb763"
@@ -621,7 +602,7 @@
     "name": "Abfallkalender",
     "calendar": "Abfallkalender",
     "x": 480,
-    "y": 454,
+    "y": 538,
     "wires": [
       [
         "8569385c.b137d8"
@@ -637,7 +618,7 @@
     "outputs": 1,
     "noerr": 0,
     "x": 490,
-    "y": 380,
+    "y": 464,
     "wires": [
       [
         "dac14d24.d9643"
@@ -661,7 +642,7 @@
     "name": "open weather forecast structure",
     "info": "[\n//  {\n//    \"dt\": 1484478000,\n//    \"temp\": {\n//      \"day\": 0.74,\n//      \"min\": -4.95,\n//      \"max\": 0.74,\n//      \"night\": -4.95,\n//      \"eve\": -2.24,\n//      \"morn\": 0\n//    },\n//    \"pressure\": 1020.91,\n//    \"humidity\": 97,\n//    \"weather\": [\n//      {\n//        \"id\": 600,\n//        \"main\": \"Snow\",\n//        \"description\": \"mäßiger Schnee\",\n//        \"icon\": \"13d\"\n//      }\n//    ],\n//    \"speed\": 5.67,\n//    \"deg\": 333,\n//    \"clouds\": 44,\n//    \"snow\": 0.59\n//  },\n//  {\n//    \"dt\": 1484564400,\n// ...\n//",
     "x": 992,
-    "y": 83,
+    "y": 86,
     "wires": []
   },
   {
@@ -682,29 +663,16 @@
     "type": "function",
     "z": "37197cb5.c49ee4",
     "name": "set topic + payload",
-    "func": "// junand 19.01.2017\n\nif ( msg.topic == \"config_version\" ) {\n    context.set ( \"version\", msg.payload );\n    return null; // break flow\n}\n\nvar version = context.get ( \"version\");\nif ( version === undefined ) {\n    node.error ( \"NO version defined\" );\n    return null;\n}\n\n// node mqtt update topic\nmsg.topic = \"nodes@home/\" + msg.topic + \"/service/update\";\n\n// update url without update.list\n//msg.payload = \"http://192.168.2.8/website/nodes_at_home_ota/\" + version;\nmsg.payload = \"http://192.168.2.117/luanodes_ota/\" + version;\n\nreturn msg;",
+    "func": "// junand 19.01.2017\n\nif ( msg.topic == \"config_version\" ) {\n    \n    //node.error ( msg.payload );\n    if (  msg.payload === \"\" ) {\n        context.set ( \"version\", undefined );\n        node.status ( {} );\n    }\n    else {\n        context.set ( \"version\", msg.payload );\n        node.status ( { fill: \"blue\", shape: \"dot\", text: msg.payload } );\n    }\n\n    return null; // break flow\n\n}\n\nvar version = context.get ( \"version\");\nif ( version === undefined ) {\n    node.error ( \"NO version defined\" );\n    return null;\n}\n\n// node mqtt update topic\nmsg.topic = \"nodes@home/\" + msg.topic + \"/service/update\";\n\n// update url without update.list\n//msg.payload = \"http://192.168.2.8/website/nodes_at_home_ota/\" + version;\nmsg.payload = \"http://192.168.2.117/luanodes_ota/\" + version;\n\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
-    "x": 831,
+    "x": 880,
     "y": 321,
     "wires": [
       [
-        "7d796b61.193344",
         "a1be0ecd.3efd7"
       ]
     ]
-  },
-  {
-    "id": "7d796b61.193344",
-    "type": "debug",
-    "z": "37197cb5.c49ee4",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "true",
-    "x": 1090,
-    "y": 400,
-    "wires": []
   },
   {
     "id": "b6376564.d080d8",
@@ -713,7 +681,7 @@
     "name": "text lines",
     "info": " 0: Außentemperatur\n 1: Innentemperatur\n 2: temperatures today\n 3: weather today\n 4: temperatures tomorrow\n 5: weather tommorow\n 6: calendar \"Müll\"\n 7: calendar \"Papier\"\n 8: calendar \"Gelber Sack\"\n 9: ...\n10: way to work andreas\n11: way to work undine\n12: ...\n13: ...\n14: ...\n15: ...\n16: ...\n17: ...\n18: ...\n19: ...",
     "x": 920,
-    "y": 129,
+    "y": 132,
     "wires": []
   },
   {
@@ -736,7 +704,7 @@
     "transit_mode": "",
     "transit_routing_preferences": "",
     "x": 410,
-    "y": 622,
+    "y": 706,
     "wires": [
       [
         "2196ea7d.8d5416"
@@ -755,7 +723,7 @@
     "crontab": "*/10 5 * * 1",
     "once": false,
     "x": 170,
-    "y": 622,
+    "y": 706,
     "wires": [
       [
         "5baf8e28.4ab6e"
@@ -771,7 +739,7 @@
     "outputs": 1,
     "noerr": 0,
     "x": 690,
-    "y": 622,
+    "y": 706,
     "wires": [
       [
         "dac14d24.d9643"
@@ -785,22 +753,22 @@
     "name": "coordinates",
     "info": "home\n52.651089,13.5338005\n\nfi hannover\n52.334167,9.8232433\n\nUndines Arbeit\n52.541312,13.426212",
     "x": 930,
-    "y": 171,
+    "y": 174,
     "wires": []
   },
   {
     "id": "f6a9a52d.8955c8",
     "type": "inject",
     "z": "c9cf8bbb.029148",
-    "name": "Mo-Do 05:00 .. 06:00",
+    "name": "Mo-Do 05:00 .. 07:00",
     "topic": "Undine",
     "payload": "",
     "payloadType": "date",
     "repeat": "",
-    "crontab": "*/10 5 * * 1",
+    "crontab": "*/10 5-6 * * 1,2,3,4",
     "once": false,
     "x": 180,
-    "y": 682,
+    "y": 766,
     "wires": [
       [
         "533ef34c.8cc27c"
@@ -827,7 +795,7 @@
     "transit_mode": "",
     "transit_routing_preferences": "",
     "x": 420,
-    "y": 682,
+    "y": 766,
     "wires": [
       [
         "2196ea7d.8d5416"
@@ -838,15 +806,15 @@
     "id": "9fffd371.e0a8b",
     "type": "inject",
     "z": "c9cf8bbb.029148",
-    "name": "Stop 7:00",
+    "name": "Stop 7:01",
     "topic": "clear traffic info",
     "payload": "",
     "payloadType": "date",
     "repeat": "",
-    "crontab": "00 07 * * *",
+    "crontab": "01 07 * * *",
     "once": false,
     "x": 150,
-    "y": 742,
+    "y": 826,
     "wires": [
       [
         "c4a28517.adb098"
@@ -873,7 +841,7 @@
     "to": "",
     "reg": false,
     "x": 440,
-    "y": 742,
+    "y": 826,
     "wires": [
       [
         "dac14d24.d9643"
@@ -888,8 +856,8 @@
     "active": true,
     "console": "false",
     "complete": "false",
-    "x": 1060,
-    "y": 580,
+    "x": 870,
+    "y": 607,
     "wires": []
   },
   {
@@ -929,9 +897,9 @@
     "color": "",
     "bgcolor": "",
     "icon": "",
-    "payload": "sensor/DHT11/terrace",
-    "payloadType": "str",
-    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "sensor/DHT11/terrace",
     "x": 498,
     "y": 196,
     "wires": [
@@ -1129,8 +1097,7 @@
         "256c7772.9d1d38",
         "7558bf53.a4f84",
         "5a5cbecf.a6706",
-        "7790a1e0.9fad4",
-        "43f131a0.d41b4"
+        "7790a1e0.9fad4"
       ]
     ]
   },
@@ -1200,9 +1167,9 @@
     "payloadType": "str",
     "repeat": "",
     "crontab": "",
-    "once": true,
-    "x": 810,
-    "y": 620,
+    "once": false,
+    "x": 590,
+    "y": 740,
     "wires": [
       [
         "229fde18.7bd282"
@@ -1373,18 +1340,6 @@
     ]
   },
   {
-    "id": "43f131a0.d41b4",
-    "type": "debug",
-    "z": "37197cb5.c49ee4",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "true",
-    "x": 220,
-    "y": 686,
-    "wires": []
-  },
-  {
     "id": "9c88160f.18a868",
     "type": "inject",
     "z": "37197cb5.c49ee4",
@@ -1442,8 +1397,8 @@
     "type": "function",
     "z": "37197cb5.c49ee4",
     "name": "create command",
-    "func": "// junand 21.02.2017\n\nvar dest;\nvar cmd;\n\nfunction createDir ( path ) {\n\n    if ( !context.global.fs.existsSync ( dest ) ) {\n        context.global.fs.mkdirSync ( dest );\n    }\n    \n}\n\nif ( msg.topic == \"config_version\" ) {\n    \n    context.set ( \"version\", msg.payload );\n    \n    dest = \"/var/www/html/luanodes_ota/\" + msg.payload;\n    context.set ( \"dest\", dest );\n    //node.error ( dest );\n    \n    //createDir ( dest );\n    \n    return null; // break flow\n    \n}\n\ndest = context.get ( \"dest\" );\nif ( dest === undefined ) {\n    node.error ( \"NO destination defined\")\n    return null;\n}\n    \nif ( msg.payload === \"\" ) {\n    \n    cmd = \"cd \" + dest + \";../gen_list.sh\"; \n    \n}\nelse {\n\n    createDir ( dest );\n    \n    cmd = \"F=\\\"\" + msg.payload + \"\\\";\";\n    cmd += \"chmod 755 ${F};\"\n    cmd += \"mv $F \" + dest + \";\";\n\n}\n\nmsg.payload = cmd;\n\nreturn msg;",
-    "outputs": 1,
+    "func": "// junand 21.02.2017\n\nvar dest;\nvar cmd;\n\nfunction createDir ( path ) {\n\n    if ( !context.global.fs.existsSync ( dest ) ) {\n        context.global.fs.mkdirSync ( dest );\n    }\n    \n}\n\nif ( msg.topic == \"config_version\" ) {\n    \n    //node.error ( msg.payload );\n    if (  msg.payload === \"\" ) {\n        \n        context.set ( \"version\", undefined );\n        node.status ( {} );\n        \n    }\n    else {\n        \n        dest = \"/var/www/html/luanodes_ota/\" + msg.payload;\n        context.set ( \"dest\", dest );\n        //node.error ( dest );\n        //createDir ( dest );\n        \n        context.set ( \"version\", msg.payload );\n        node.status ( { fill: \"blue\", shape: \"dot\", text: msg.payload } );\n        \n    }\n\n    return null; // break flow\n\n}\n\ndest = context.get ( \"dest\" );\nif ( dest === undefined ) {\n    node.error ( \"NO destination defined\")\n    return null;\n}\n    \nif ( msg.payload === \"\" ) { // last line!\n    \n    cmd = \"cd \" + dest + \";../gen_list.sh\"; \n    \n}\nelse {\n\n    createDir ( dest );\n    \n    cmd = \"F=\\\"\" + msg.payload + \"\\\";\";\n    cmd += \"chmod 755 ${F};\"\n    cmd += \"mv $F \" + dest + \";\";\n\n}\n\nmsg.payload = cmd;\n\nreturn msg;",
+    "outputs": "1",
     "noerr": 0,
     "x": 897,
     "y": 826,
@@ -1462,8 +1417,8 @@
     "append": "",
     "useSpawn": "",
     "timer": "",
-    "name": "execute",
-    "x": 1087,
+    "name": "execute mv",
+    "x": 1110,
     "y": 826,
     "wires": [
       [],
@@ -1500,35 +1455,210 @@
     "type": "ui_text_input",
     "z": "37197cb5.c49ee4",
     "name": "",
-    "label": "version",
+    "label": "version (yyyymmdd_Vn.nn)",
     "group": "68f8422e.2c21dc",
     "order": 1,
     "width": 0,
     "height": 0,
     "passthru": true,
     "mode": "text",
-    "delay": "0",
+    "delay": "1000",
     "topic": "config_version",
-    "x": 940,
-    "y": 540,
+    "x": 880,
+    "y": 480,
     "wires": [
       [
-        "f406b015.0d596",
         "657919f4.11d3e8",
-        "6ed6dc87.f74a94"
+        "6ed6dc87.f74a94",
+        "211f63a7.dc441c"
       ]
     ]
   },
   {
-    "id": "f406b015.0d596",
+    "id": "c0adca5b.c61708",
+    "type": "mqtt in",
+    "z": "c9cf8bbb.029148",
+    "name": "mqtt: nodes@home/display/pixel/kitchen",
+    "topic": "nodes@home/display/pixel/kitchen",
+    "qos": "0",
+    "broker": "f093b8cc.ff2b58",
+    "x": 220,
+    "y": 60,
+    "wires": [
+      [
+        "e78e3d0b.8fb5e"
+      ]
+    ]
+  },
+  {
+    "id": "e78e3d0b.8fb5e",
     "type": "debug",
-    "z": "37197cb5.c49ee4",
+    "z": "c9cf8bbb.029148",
     "name": "",
-    "active": false,
+    "active": true,
     "console": "false",
-    "complete": "payload",
-    "x": 1090,
-    "y": 620,
+    "complete": "true",
+    "x": 520,
+    "y": 60,
     "wires": []
+  },
+  {
+    "id": "211f63a7.dc441c",
+    "type": "ui_toast",
+    "z": "37197cb5.c49ee4",
+    "position": "bottom left",
+    "displayTime": "3",
+    "outputs": 0,
+    "ok": "OK",
+    "cancel": "",
+    "topic": "",
+    "name": "Version",
+    "x": 1120,
+    "y": 420,
+    "wires": []
+  },
+  {
+    "id": "92cf44af.967a78",
+    "type": "change",
+    "z": "c9cf8bbb.029148",
+    "name": "enable today before 12:00",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload.messages[0].enabled",
+        "pt": "msg",
+        "to": "true",
+        "tot": "bool"
+      },
+      {
+        "t": "set",
+        "p": "payload.messages[1].enabled",
+        "pt": "msg",
+        "to": "true",
+        "tot": "bool"
+      },
+      {
+        "t": "set",
+        "p": "payload.messages[2].enabled",
+        "pt": "msg",
+        "to": "false",
+        "tot": "bool"
+      },
+      {
+        "t": "set",
+        "p": "payload.messages[3].enabled",
+        "pt": "msg",
+        "to": "false",
+        "tot": "bool"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 770,
+    "y": 240,
+    "wires": [
+      [
+        "dac14d24.d9643"
+      ]
+    ]
+  },
+  {
+    "id": "59246a57.41cb74",
+    "type": "switch",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "property": "time.hour",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "lt",
+        "v": "12",
+        "vt": "num"
+      },
+      {
+        "t": "gte",
+        "v": "12",
+        "vt": "num"
+      }
+    ],
+    "checkall": "true",
+    "outputs": 2,
+    "x": 545,
+    "y": 260,
+    "wires": [
+      [
+        "92cf44af.967a78"
+      ],
+      [
+        "712a2312.bc325c"
+      ]
+    ]
+  },
+  {
+    "id": "712a2312.bc325c",
+    "type": "change",
+    "z": "c9cf8bbb.029148",
+    "name": "enable tomorrow after 12:00",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload.messages[0].enabled",
+        "pt": "msg",
+        "to": "false",
+        "tot": "bool"
+      },
+      {
+        "t": "set",
+        "p": "payload.messages[1].enabled",
+        "pt": "msg",
+        "to": "false",
+        "tot": "bool"
+      },
+      {
+        "t": "set",
+        "p": "payload.messages[2].enabled",
+        "pt": "msg",
+        "to": "true",
+        "tot": "bool"
+      },
+      {
+        "t": "set",
+        "p": "payload.messages[3].enabled",
+        "pt": "msg",
+        "to": "true",
+        "tot": "bool"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 780,
+    "y": 280,
+    "wires": [
+      [
+        "dac14d24.d9643"
+      ]
+    ]
+  },
+  {
+    "id": "21eb0961.7dd8c6",
+    "type": "function",
+    "z": "c9cf8bbb.029148",
+    "name": "insert time",
+    "func": "// junand 22.01.2017\n\nconst now = new Date ();\nmsg.time = { hour: now.getHours (), minute: now.getMinutes () };\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 385,
+    "y": 260,
+    "wires": [
+      [
+        "59246a57.41cb74"
+      ]
+    ]
   }
 ]
