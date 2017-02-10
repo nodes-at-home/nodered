@@ -5,14 +5,19 @@
     "label": "pixel node"
   },
   {
-    "id": "2fec4be1.48c8f4",
-    "type": "tab",
-    "label": "mail weather mayrhofen"
-  },
-  {
     "id": "37197cb5.c49ee4",
     "type": "tab",
     "label": "update lua nodes"
+  },
+  {
+    "id": "87853f2c.dd34d",
+    "type": "tab",
+    "label": "config lua nodes"
+  },
+  {
+    "id": "fc8ae83a.bd2f98",
+    "type": "tab",
+    "label": "debug lua nodes"
   },
   {
     "id": "f093b8cc.ff2b58",
@@ -83,214 +88,6 @@
     "order": 1,
     "disp": true,
     "width": "6"
-  },
-  {
-    "id": "16f1c24d.e0b3ce",
-    "type": "inject",
-    "z": "2fec4be1.48c8f4",
-    "name": "Start 05:00",
-    "topic": "",
-    "payload": "",
-    "payloadType": "date",
-    "repeat": "",
-    "crontab": "00 05 * * *",
-    "once": false,
-    "x": 150,
-    "y": 85,
-    "wires": [
-      [
-        "9fa098a4.4881f8"
-      ]
-    ]
-  },
-  {
-    "id": "9fa098a4.4881f8",
-    "type": "function",
-    "z": "2fec4be1.48c8f4",
-    "name": "store timestamp",
-    "func": "// junand 15.01.2017\n\nmsg.timestamp = msg.payload;\n\nvar date = new Date ( msg.payload );\nmsg.timestamp_date = date;\n\nmsg.timestamp_parts = {\n\t'month':\tdate.getMonth() + 1,\n\t'day':\t\tdate.getDate(),\n\t'year':\t\tdate.getFullYear(),\n\t'hours':\tdate.getHours(),\n\t'mins':\t\tdate.getMinutes(),\n\t'msecs':\tdate.getMilliseconds()\n}\n\nreturn msg;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 360,
-    "y": 85,
-    "wires": [
-      [
-        "927a966c.d10a78",
-        "b23bd2d9.3d27f"
-      ]
-    ]
-  },
-  {
-    "id": "927a966c.d10a78",
-    "type": "openweathermap",
-    "z": "2fec4be1.48c8f4",
-    "name": "Mayrhofen (current)",
-    "wtype": "current",
-    "lon": "11.87",
-    "lat": "47.17",
-    "city": "",
-    "country": "",
-    "language": "de",
-    "x": 170,
-    "y": 185,
-    "wires": [
-      [
-        "c70e4240.03e8c"
-      ]
-    ]
-  },
-  {
-    "id": "2eae8580.83292a",
-    "type": "debug",
-    "z": "2fec4be1.48c8f4",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "payload",
-    "x": 1010,
-    "y": 540,
-    "wires": []
-  },
-  {
-    "id": "10f4c22b.ea73ee",
-    "type": "template",
-    "z": "2fec4be1.48c8f4",
-    "name": "mail body",
-    "field": "payload",
-    "fieldType": "msg",
-    "format": "handlebars",
-    "syntax": "mustache",
-    "template": "\nNachricht vom {{{timestamp_date}}}\n\n{{{payload.current.detail}}}\n\nTemperatur: {{{payload.current.tempc}}}°C\nLuftfeuchtigkeit: {{{payload.current.humidity}}}%\nWindgeschwindigkeit: {{{payload.current.windspeed}}}m/s\n\nVorhersagen:\n\nHeute: \n    {{{payload.forecast0.weather.description}}}\n    {{{payload.forecast0.temp.night}}}°C bis {{{payload.forecast0.temp.day}}}°C\n\nMorgen: \n    {{{payload.forecast1.weather.description}}}\n    {{{payload.forecast1.temp.night}}}°C bis {{{payload.forecast1.temp.day}}}°C\n\nÜbermogen: \n    {{{payload.forecast2.weather.description}}}\n    {{{payload.forecast2.temp.night}}}°C bis {{{payload.forecast2.temp.day}}}°C\n\n",
-    "x": 780,
-    "y": 340,
-    "wires": [
-      [
-        "2eae8580.83292a",
-        "d66c7680.a44c78"
-      ]
-    ]
-  },
-  {
-    "id": "d66c7680.a44c78",
-    "type": "e-mail",
-    "z": "2fec4be1.48c8f4",
-    "server": "smtp.1und1.de",
-    "port": "465",
-    "name": "mobil@jungierek.de",
-    "dname": "mobil@jungierek.de",
-    "x": 880,
-    "y": 226,
-    "wires": []
-  },
-  {
-    "id": "b23bd2d9.3d27f",
-    "type": "openweathermap",
-    "z": "2fec4be1.48c8f4",
-    "name": "Mayrhofen (forecast)",
-    "wtype": "forecast",
-    "lon": "11.87",
-    "lat": "47.17",
-    "city": "",
-    "country": "",
-    "language": "de",
-    "x": 180,
-    "y": 258,
-    "wires": [
-      [
-        "3cd4dbe4.9118f4"
-      ]
-    ]
-  },
-  {
-    "id": "c70e4240.03e8c",
-    "type": "change",
-    "z": "2fec4be1.48c8f4",
-    "name": "set current",
-    "rules": [
-      {
-        "t": "move",
-        "p": "payload",
-        "pt": "msg",
-        "to": "payload.current",
-        "tot": "msg"
-      }
-    ],
-    "action": "",
-    "property": "",
-    "from": "",
-    "to": "",
-    "reg": false,
-    "x": 373,
-    "y": 185,
-    "wires": [
-      [
-        "99d884a1.4cdca8"
-      ]
-    ]
-  },
-  {
-    "id": "3cd4dbe4.9118f4",
-    "type": "change",
-    "z": "2fec4be1.48c8f4",
-    "name": "set forecast",
-    "rules": [
-      {
-        "t": "move",
-        "p": "payload",
-        "pt": "msg",
-        "to": "payload.forecast",
-        "tot": "msg"
-      }
-    ],
-    "action": "",
-    "property": "",
-    "from": "",
-    "to": "",
-    "reg": false,
-    "x": 374,
-    "y": 258,
-    "wires": [
-      [
-        "99d884a1.4cdca8"
-      ]
-    ]
-  },
-  {
-    "id": "508a5381.fabacc",
-    "type": "function",
-    "z": "2fec4be1.48c8f4",
-    "name": "set values",
-    "func": "// junand 15.01.2017\n\nvar forecast = msg.payload.forecast;\n\nmsg.payload.forecast0 = msg.payload.forecast [0];\nmsg.payload.forecast0.weather = msg.payload.forecast0.weather [0];\n\nmsg.payload.forecast1 = msg.payload.forecast [1];\nmsg.payload.forecast1.weather = msg.payload.forecast1.weather [0];\n\nmsg.payload.forecast2 = msg.payload.forecast [2];\nmsg.payload.forecast2.weather = msg.payload.forecast2.weather [0];\n\nmsg.payload.forecast = null;\n\nmsg.title = \"Der tägliche Wetterbericht aus Mayrhofen\";\n\n\nreturn msg;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 620,
-    "y": 340,
-    "wires": [
-      [
-        "10f4c22b.ea73ee"
-      ]
-    ]
-  },
-  {
-    "id": "99d884a1.4cdca8",
-    "type": "join",
-    "z": "2fec4be1.48c8f4",
-    "name": "",
-    "mode": "custom",
-    "build": "merged",
-    "property": "payload",
-    "propertyType": "msg",
-    "key": "topic",
-    "joiner": "\\n",
-    "timeout": "",
-    "count": "2",
-    "x": 570,
-    "y": 225,
-    "wires": [
-      [
-        "508a5381.fabacc"
-      ]
-    ]
   },
   {
     "id": "1f55c701.4fff39",
@@ -475,7 +272,7 @@
     "type": "debug",
     "z": "c9cf8bbb.029148",
     "name": "",
-    "active": false,
+    "active": true,
     "console": "false",
     "complete": "false",
     "x": 1070,
@@ -605,7 +402,8 @@
     "y": 538,
     "wires": [
       [
-        "8569385c.b137d8"
+        "8569385c.b137d8",
+        "563a079c.67feb8"
       ]
     ]
   },
@@ -853,7 +651,7 @@
     "type": "debug",
     "z": "c9cf8bbb.029148",
     "name": "",
-    "active": true,
+    "active": false,
     "console": "false",
     "complete": "false",
     "x": 870,
@@ -1495,7 +1293,7 @@
     "type": "debug",
     "z": "c9cf8bbb.029148",
     "name": "",
-    "active": true,
+    "active": false,
     "console": "false",
     "complete": "true",
     "x": 520,
@@ -1660,5 +1458,373 @@
         "59246a57.41cb74"
       ]
     ]
+  },
+  {
+    "id": "396d743b.57bdec",
+    "type": "template",
+    "z": "87853f2c.dd34d",
+    "name": "config",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "json",
+    "syntax": "mustache",
+    "template": "[\n  {\n    \"appCfg\": {\n      \"useOfflineCallback\": false,\n      \"timeBetweenSensorReadings\": 900000,\n      \"dhtPin\": 4\n    },\n    \"app\": \"tempNode\",\n    \"type\": \"DHT11\",\n    \"timer\": {\n      \"deepSleep\": 3,\n      \"startupDelay1\": 2000,\n      \"startup\": 0,\n      \"wifiLoopPeriod\": 1000,\n      \"periodic\": 2,\n      \"startupDelay2\": 5000,\n      \"deepSleepDelay\": 60000,\n      \"periodicPeriod\": 900000,\n      \"wifiLoop\": 1\n    },\n    \"location\": \"roof\",\n    \"class\": \"sensor\",\n    \"wifi\": {\n      \"gateway\": \"192.168.2.1\",\n      \"netmask\": \"255.255.255.0\",\n      \"ip\": \"192.168.2.22\"\n    },\n    \"chipid\": 1829768\n  },\n  {\n    \"appCfg\": {\n      \"device\": \"leds\",\n      \"useRGB\": false,\n      \"disablePrint\": true,\n      \"arduinoResetPin\": 6\n    },\n    \"app\": \"xmasNode\",\n    \"type\": \"xmastree\",\n    \"timer\": {\n      \"startupDelay1\": 2000,\n      \"startup\": 0,\n      \"periodicPeriod\": 900000,\n      \"startupDelay2\": 5000,\n      \"wifiLoop\": 1,\n      \"wifiLoopPeriod\": 1000,\n      \"periodic\": 2\n    },\n    \"location\": \"dining\",\n    \"class\": \"light\",\n    \"wifi\": {\n      \"gateway\": \"192.168.2.1\",\n      \"netmask\": \"255.255.255.0\",\n      \"ip\": \"192.168.2.31\"\n    },\n    \"chipid\": 2677473\n  },\n  {\n    \"appCfg\": {\n      \"useOfflineCallback\": false,\n      \"timeBetweenSensorReadings\": 900000,\n      \"dhtPin\": 4\n    },\n    \"app\": \"tempNode\",\n    \"type\": \"DHT11\",\n    \"timer\": {\n      \"deepSleep\": 3,\n      \"startupDelay1\": 2000,\n      \"startup\": 0,\n      \"wifiLoopPeriod\": 1000,\n      \"periodic\": 2,\n      \"startupDelay2\": 5000,\n      \"deepSleepDelay\": 60000,\n      \"periodicPeriod\": 900000,\n      \"wifiLoop\": 1\n    },\n    \"location\": \"lounge\",\n    \"class\": \"sensor\",\n    \"wifi\": {\n      \"gateway\": \"192.168.2.1\",\n      \"netmask\": \"255.255.255.0\",\n      \"ip\": \"192.168.2.21\"\n    },\n    \"chipid\": 1495931\n  },\n  {\n    \"appCfg\": {\n      \"useOfflineCallback\": false,\n      \"bme280SdaPin\": 2,\n      \"bme280SclPin\": 1,\n      \"dhtPin\": 4,\n      \"timeBetweenSensorReadings\": 900000\n    },\n    \"app\": \"tempNode\",\n    \"chipid\": 2028701,\n    \"timer\": {\n      \"deepSleep\": 3,\n      \"startupDelay1\": 2000,\n      \"startup\": 0,\n      \"wifiLoopPeriod\": 1000,\n      \"periodic\": 2,\n      \"startupDelay2\": 5000,\n      \"deepSleepDelay\": 60000,\n      \"periodicPeriod\": 900000,\n      \"wifiLoop\": 1\n    },\n    \"location\": \"lounge\",\n    \"class\": \"sensor\",\n    \"type\": \"DHT22_bmp280\",\n    \"mqttBroker\": \"192.168.137.1\"\n  },\n  {\n    \"appCfg\": {\n      \"relayPin\": 6,\n      \"flashHighPulseLength\": 50000,\n      \"ledPin\": 7,\n      \"device\": \"pump\",\n      \"flashLowPulseLength\": 200000,\n      \"extraPin\": 5\n    },\n    \"app\": \"sonoffNode\",\n    \"type\": \"sonoff\",\n    \"timer\": {\n      \"startupDelay1\": 2000,\n      \"startup\": 0,\n      \"debounce\": 3,\n      \"wifiLoopPeriod\": 1000,\n      \"periodic\": 2,\n      \"startupDelay2\": 5000,\n      \"debounceDelay\": 500,\n      \"periodicPeriod\": 900000,\n      \"wifiLoop\": 1\n    },\n    \"location\": \"utilityroom\",\n    \"class\": \"switch\",\n    \"wifi\": {\n      \"gateway\": \"192.168.2.1\",\n      \"netmask\": \"255.255.255.0\",\n      \"ip\": \"192.168.2.26\"\n    },\n    \"chipid\": 485535\n  },\n  {\n    \"appCfg\": {\n      \"rfpin\": 7,\n      \"rfrepeats\": 16,\n      \"ledpin\": 4,\n      \"dhtPin\": 6,\n      \"rfperiod\": 320\n    },\n    \"app\": \"rfNode\",\n    \"type\": \"rfhub\",\n    \"timer\": {\n      \"startupDelay1\": 2000,\n      \"startup\": 0,\n      \"wifiLoopPeriod\": 1000,\n      \"periodic\": 2,\n      \"startupDelay2\": 5000,\n      \"queuePeriod\": 500,\n      \"queue\": 3,\n      \"periodicPeriod\": 900000,\n      \"wifiLoop\": 1\n    },\n    \"location\": \"first\",\n    \"class\": \"switch\",\n    \"wifi\": {\n      \"gateway\": \"192.168.2.1\",\n      \"netmask\": \"255.255.255.0\",\n      \"ip\": \"192.168.2.20\"\n    },\n    \"chipid\": 1461824\n  },\n  {\n    \"appCfg\": {\n      \"buttonPin\": 1,\n      \"relayPin1\": 6,\n      \"flashHighPulseLength\": 50000,\n      \"ledPin\": 2,\n      \"relayPulseLength\": 30000,\n      \"flashLowPulseLength\": 200000,\n      \"relayPin2\": 7\n    },\n    \"app\": \"relayNode\",\n    \"type\": \"relay\",\n    \"timer\": {\n      \"startupDelay1\": 2000,\n      \"startup\": 0,\n      \"debounce\": 3,\n      \"wifiLoopPeriod\": 1000,\n      \"periodic\": 2,\n      \"startupDelay2\": 5000,\n      \"debounceDelay\": 500,\n      \"periodicPeriod\": 900000,\n      \"wifiLoop\": 1\n    },\n    \"location\": \"terrace\",\n    \"class\": \"switch\",\n    \"wifi\": {\n      \"gateway\": \"192.168.2.1\",\n      \"netmask\": \"255.255.255.0\",\n      \"ip\": \"192.168.2.28\"\n    },\n    \"chipid\": 982283\n  },\n  {\n    \"appCfg\": {\n      \"useOfflineCallback\": false,\n      \"useQuickStartupAfterDeepSleep\": true\n    },\n    \"app\": \"buttonNode\",\n    \"type\": \"button\",\n    \"timer\": {\n      \"deepSleep\": 3,\n      \"startupDelay1\": 2000,\n      \"startup\": 0,\n      \"deepSleepDelay\": 1000,\n      \"wifiLoop\": 1,\n      \"wifiLoopPeriod\": 1000,\n      \"startupDelay2\": 5000\n    },\n    \"location\": \"no3\",\n    \"class\": \"sensor\",\n    \"wifi\": {\n      \"gateway\": \"192.168.2.1\",\n      \"netmask\": \"255.255.255.0\",\n      \"ip\": \"192.168.2.34\"\n    },\n    \"chipid\": 35778\n  },\n  {\n    \"appCfg\": {\n      \"useOfflineCallback\": false,\n      \"useQuickStartupAfterDeepSleep\": true\n    },\n    \"app\": \"buttonNode\",\n    \"type\": \"button\",\n    \"timer\": {\n      \"deepSleep\": 3,\n      \"startupDelay1\": 2000,\n      \"startup\": 0,\n      \"deepSleepDelay\": 1000,\n      \"wifiLoop\": 1,\n      \"wifiLoopPeriod\": 1000,\n      \"startupDelay2\": 5000\n    },\n    \"location\": \"garage\",\n    \"class\": \"sensor\",\n    \"wifi\": {\n      \"gateway\": \"192.168.2.1\",\n      \"netmask\": \"255.255.255.0\",\n      \"ip\": \"192.168.2.33\"\n    },\n    \"chipid\": 16061971\n  },\n  {\n    \"appCfg\": {\n      \"buttonPin\": 1,\n      \"relayPin1\": 6,\n      \"flashHighPulseLength\": 50000,\n      \"ledPin\": 2,\n      \"relayPulseLength\": 30000,\n      \"flashLowPulseLength\": 200000,\n      \"relayPin2\": 7\n    },\n    \"app\": \"relayNode\",\n    \"type\": \"relay\",\n    \"timer\": {\n      \"startupDelay1\": 2000,\n      \"startup\": 0,\n      \"debounce\": 3,\n      \"wifiLoopPeriod\": 1000,\n      \"periodic\": 2,\n      \"startupDelay2\": 5000,\n      \"debounceDelay\": 500,\n      \"periodicPeriod\": 900000,\n      \"wifiLoop\": 1\n    },\n    \"location\": \"carport\",\n    \"class\": \"switch\",\n    \"wifi\": {\n      \"gateway\": \"192.168.2.1\",\n      \"netmask\": \"255.255.255.0\",\n      \"ip\": \"192.168.2.30\"\n    },\n    \"chipid\": 8734823\n  },\n  {\n    \"appCfg\": {\n      \"useOfflineCallback\": false,\n      \"timeBetweenSensorReadings\": 900000,\n      \"dhtPin\": 4\n    },\n    \"app\": \"tempNode\",\n    \"type\": \"DHT11\",\n    \"timer\": {\n      \"deepSleep\": 3,\n      \"startupDelay1\": 2000,\n      \"startup\": 0,\n      \"wifiLoopPeriod\": 1000,\n      \"periodic\": 2,\n      \"startupDelay2\": 5000,\n      \"deepSleepDelay\": 60000,\n      \"periodicPeriod\": 900000,\n      \"wifiLoop\": 1\n    },\n    \"location\": \"terrace\",\n    \"class\": \"sensor\",\n    \"wifi\": {\n      \"gateway\": \"192.168.2.1\",\n      \"netmask\": \"255.255.255.0\",\n      \"ip\": \"192.168.2.23\"\n    },\n    \"chipid\": 2030164\n  },\n  {\n    \"appCfg\": {\n      \"buttonPin\": 1,\n      \"relayPin1\": 6,\n      \"flashHighPulseLength\": 50000,\n      \"ledPin\": 2,\n      \"relayPulseLength\": 30000,\n      \"flashLowPulseLength\": 200000,\n      \"relayPin2\": 7\n    },\n    \"app\": \"relayNode\",\n    \"type\": \"relay\",\n    \"timer\": {\n      \"startupDelay1\": 2000,\n      \"startup\": 0,\n      \"debounce\": 3,\n      \"wifiLoopPeriod\": 1000,\n      \"periodic\": 2,\n      \"startupDelay2\": 5000,\n      \"debounceDelay\": 500,\n      \"periodicPeriod\": 900000,\n      \"wifiLoop\": 1\n    },\n    \"location\": \"backyard\",\n    \"class\": \"switch\",\n    \"wifi\": {\n      \"gateway\": \"192.168.2.1\",\n      \"netmask\": \"255.255.255.0\",\n      \"ip\": \"192.168.2.29\"\n    },\n    \"chipid\": 1689710\n  },\n  {\n    \"appCfg\": {\n      \"useOfflineCallback\": false,\n      \"useQuickStartupAfterDeepSleep\": true\n    },\n    \"app\": \"buttonNode\",\n    \"type\": \"button\",\n    \"timer\": {\n      \"deepSleep\": 3,\n      \"startupDelay1\": 2000,\n      \"startup\": 0,\n      \"deepSleepDelay\": 1000,\n      \"wifiLoop\": 1,\n      \"wifiLoopPeriod\": 1000,\n      \"startupDelay2\": 5000\n    },\n    \"location\": \"no1\",\n    \"class\": \"sensor\",\n    \"wifi\": {\n      \"gateway\": \"192.168.2.1\",\n      \"netmask\": \"255.255.255.0\",\n      \"ip\": \"192.168.2.32\"\n    },\n    \"chipid\": 15892791\n  },\n  {\n    \"appCfg\": {\n      \"relayPin\": 6,\n      \"flashHighPulseLength\": 50000,\n      \"ledPin\": 7,\n      \"extraPin\": 5,\n      \"flashLowPulseLength\": 200000,\n      \"buttonPin\": 3\n    },\n    \"app\": \"sonoffNode\",\n    \"type\": \"sonoff\",\n    \"timer\": {\n      \"startupDelay1\": 2000,\n      \"startup\": 0,\n      \"debounce\": 3,\n      \"wifiLoopPeriod\": 1000,\n      \"periodic\": 2,\n      \"startupDelay2\": 5000,\n      \"debounceDelay\": 500,\n      \"periodicPeriod\": 900000,\n      \"wifiLoop\": 1\n    },\n    \"location\": \"garage\",\n    \"class\": \"switch\",\n    \"wifi\": {\n      \"gateway\": \"192.168.2.1\",\n      \"netmask\": \"255.255.255.0\",\n      \"ip\": \"192.168.2.27\"\n    },\n    \"chipid\": 518010\n  },\n  {\n    \"appCfg\": {\n      \"relayPin\": 1,\n      \"openPositionPin\": 5,\n      \"dhtPin\": 4,\n      \"closedPositionPin\": 6\n    },\n    \"app\": \"garageNode\",\n    \"type\": \"relay\",\n    \"timer\": {\n      \"startupDelay1\": 2000,\n      \"startup\": 0,\n      \"debounce\": 3,\n      \"trigger\": 4,\n      \"wifiLoopPeriod\": 1000,\n      \"periodic\": 2,\n      \"state\": 5,\n      \"startupDelay2\": 5000,\n      \"debounceDelay\": 200,\n      \"statePeriod\": 1000,\n      \"triggerDelay\": 300,\n      \"periodicPeriod\": 900000,\n      \"wifiLoop\": 1\n    },\n    \"location\": \"garage\",\n    \"class\": \"cover\",\n    \"wifi\": {\n      \"gateway\": \"192.168.2.1\",\n      \"netmask\": \"255.255.255.0\",\n      \"ip\": \"192.168.2.25\"\n    },\n    \"chipid\": 8391351\n  }\n]",
+    "x": 180,
+    "y": 140,
+    "wires": [
+      [
+        "9063acc2.4b093",
+        "b9d3ed8c.382f5"
+      ]
+    ]
+  },
+  {
+    "id": "8bb0661d.e243d8",
+    "type": "inject",
+    "z": "87853f2c.dd34d",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 160,
+    "y": 80,
+    "wires": [
+      [
+        "396d743b.57bdec",
+        "aaf46bc4.285758"
+      ]
+    ]
+  },
+  {
+    "id": "9063acc2.4b093",
+    "type": "debug",
+    "z": "87853f2c.dd34d",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "false",
+    "x": 360,
+    "y": 140,
+    "wires": []
+  },
+  {
+    "id": "b9d3ed8c.382f5",
+    "type": "json",
+    "z": "87853f2c.dd34d",
+    "name": "",
+    "x": 300,
+    "y": 220,
+    "wires": [
+      [
+        "fc4e9051.847e4",
+        "448a07f2.e07da8"
+      ]
+    ]
+  },
+  {
+    "id": "fc4e9051.847e4",
+    "type": "debug",
+    "z": "87853f2c.dd34d",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "true",
+    "x": 490,
+    "y": 220,
+    "wires": []
+  },
+  {
+    "id": "aaf46bc4.285758",
+    "type": "debug",
+    "z": "87853f2c.dd34d",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "false",
+    "x": 370,
+    "y": 80,
+    "wires": []
+  },
+  {
+    "id": "448a07f2.e07da8",
+    "type": "splitter",
+    "z": "87853f2c.dd34d",
+    "name": "",
+    "property": "payload",
+    "x": 480,
+    "y": 320,
+    "wires": [
+      [
+        "d4275ed7.55f66",
+        "f55b3dd4.25cbf"
+      ]
+    ]
+  },
+  {
+    "id": "d4275ed7.55f66",
+    "type": "debug",
+    "z": "87853f2c.dd34d",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "false",
+    "x": 690,
+    "y": 320,
+    "wires": []
+  },
+  {
+    "id": "f55b3dd4.25cbf",
+    "type": "change",
+    "z": "87853f2c.dd34d",
+    "name": "",
+    "rules": [
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "\"nodes@home/config/\" & msg.payload.chipid",
+        "tot": "jsonata"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 630,
+    "y": 420,
+    "wires": [
+      [
+        "1aeb13ca.29dcac",
+        "f443a7fc.669df8"
+      ]
+    ]
+  },
+  {
+    "id": "f443a7fc.669df8",
+    "type": "mqtt out",
+    "z": "87853f2c.dd34d",
+    "name": "",
+    "topic": "",
+    "qos": "0",
+    "retain": "false",
+    "broker": "f093b8cc.ff2b58",
+    "x": 860,
+    "y": 480,
+    "wires": []
+  },
+  {
+    "id": "1aeb13ca.29dcac",
+    "type": "debug",
+    "z": "87853f2c.dd34d",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "true",
+    "x": 840,
+    "y": 420,
+    "wires": []
+  },
+  {
+    "id": "cac8e8cf.382648",
+    "type": "tcp in",
+    "z": "fc8ae83a.bd2f98",
+    "name": "",
+    "server": "server",
+    "host": "",
+    "port": "10001",
+    "datamode": "stream",
+    "datatype": "utf8",
+    "newline": "\\n",
+    "topic": "",
+    "base64": false,
+    "x": 220,
+    "y": 216,
+    "wires": [
+      [
+        "44ab1bb9.2b1cd4",
+        "1f6c1953.c84e17"
+      ]
+    ]
+  },
+  {
+    "id": "44ab1bb9.2b1cd4",
+    "type": "debug",
+    "z": "fc8ae83a.bd2f98",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 490,
+    "y": 216,
+    "wires": []
+  },
+  {
+    "id": "563a079c.67feb8",
+    "type": "debug",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "true",
+    "x": 640,
+    "y": 640,
+    "wires": []
+  },
+  {
+    "id": "97dd4d6c.e32c3",
+    "type": "inject",
+    "z": "fc8ae83a.bd2f98",
+    "name": "",
+    "topic": "",
+    "payload": "12345#[TEST] debug log",
+    "payloadType": "str",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 170,
+    "y": 316,
+    "wires": [
+      [
+        "1f6c1953.c84e17"
+      ]
+    ]
+  },
+  {
+    "id": "1f6c1953.c84e17",
+    "type": "change",
+    "z": "fc8ae83a.bd2f98",
+    "name": "",
+    "rules": [
+      {
+        "t": "set",
+        "p": "chipid",
+        "pt": "msg",
+        "to": "$split ( msg.payload, \"#\" ) [0]",
+        "tot": "jsonata"
+      },
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "$split ( msg.payload, \"#\" ) [1]",
+        "tot": "jsonata"
+      },
+      {
+        "t": "set",
+        "p": "filename",
+        "pt": "msg",
+        "to": "\"/home/pi/.node-red/log/node_\" & msg.chipid & \".log\"",
+        "tot": "jsonata"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 438,
+    "y": 316,
+    "wires": [
+      [
+        "cffac716.aac658"
+      ]
+    ]
+  },
+  {
+    "id": "3b09d52d.26ae1a",
+    "type": "debug",
+    "z": "fc8ae83a.bd2f98",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "true",
+    "x": 830,
+    "y": 316,
+    "wires": []
+  },
+  {
+    "id": "cffac716.aac658",
+    "type": "function",
+    "z": "fc8ae83a.bd2f98",
+    "name": "timestamp",
+    "func": "// junand 15.01.2017\n\nvar dt = new Date ();\nmsg.timestamp_date = dt;\nmsg.timestamp = +dt;\nmsg.timestamp_parts = {\n\t'month':\tdt.getMonth() + 1,\n\t'day':\t\tdt.getDate(),\n\t'year':\t\tdt.getFullYear(),\n\t'hours':\tdt.getHours(),\n\t'mins':\t\tdt.getMinutes(),\n\t'msecs':\tdt.getMilliseconds()\n}\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 630,
+    "y": 316,
+    "wires": [
+      [
+        "3b09d52d.26ae1a",
+        "98291db9.1054d"
+      ]
+    ]
+  },
+  {
+    "id": "98291db9.1054d",
+    "type": "template",
+    "z": "fc8ae83a.bd2f98",
+    "name": "log line",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "{{{timestamp_date}}}: {{{payload}}}",
+    "x": 820,
+    "y": 376,
+    "wires": [
+      [
+        "32bacd9f.c1ac52",
+        "b5c67af7.3fdbc8"
+      ]
+    ]
+  },
+  {
+    "id": "b5c67af7.3fdbc8",
+    "type": "file",
+    "z": "fc8ae83a.bd2f98",
+    "name": "<chipid>.log",
+    "filename": "",
+    "appendNewline": true,
+    "createDir": true,
+    "overwriteFile": "false",
+    "x": 1010,
+    "y": 436,
+    "wires": []
+  },
+  {
+    "id": "32bacd9f.c1ac52",
+    "type": "debug",
+    "z": "fc8ae83a.bd2f98",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 1010,
+    "y": 376,
+    "wires": []
+  },
+  {
+    "id": "57139689.f8bd18",
+    "type": "comment",
+    "z": "fc8ae83a.bd2f98",
+    "name": "receive log messages from esp8266 nodes",
+    "info": "",
+    "x": 210,
+    "y": 80,
+    "wires": []
+  },
+  {
+    "id": "a38547f8.40a908",
+    "type": "comment",
+    "z": "fc8ae83a.bd2f98",
+    "name": "Test",
+    "info": "",
+    "x": 100,
+    "y": 276,
+    "wires": []
   }
 ]
