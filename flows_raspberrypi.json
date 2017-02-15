@@ -328,9 +328,9 @@
     "id": "4466868a.755cc8",
     "type": "comment",
     "z": "c9cf8bbb.029148",
-    "name": "calendar",
+    "name": "calendar, daily 05:00 .. 20:00",
     "info": "",
-    "x": 120,
+    "x": 180,
     "y": 418,
     "wires": []
   },
@@ -338,14 +338,14 @@
     "id": "28941d3.07908e2",
     "type": "inject",
     "z": "c9cf8bbb.029148",
-    "name": "Search \"Müll\" 05:00",
+    "name": "\"Müll\"",
     "topic": "calender \"Müll\"",
     "payload": "Müll",
     "payloadType": "str",
     "repeat": "",
-    "crontab": "00 05 * * *",
+    "crontab": "*/15 5-19 * * *",
     "once": false,
-    "x": 180,
+    "x": 130,
     "y": 478,
     "wires": [
       [
@@ -357,14 +357,14 @@
     "id": "f2c8319a.c1cd5",
     "type": "inject",
     "z": "c9cf8bbb.029148",
-    "name": "Search \"Papier\" 05:00",
+    "name": "\"Papier\"",
     "topic": "calender \"Papier\"",
     "payload": "Papier",
     "payloadType": "str",
     "repeat": "",
-    "crontab": "00 05 * * *",
+    "crontab": "*/15 5-19 * * *",
     "once": false,
-    "x": 190,
+    "x": 140,
     "y": 538,
     "wires": [
       [
@@ -376,14 +376,14 @@
     "id": "a2d95a64.27a1a8",
     "type": "inject",
     "z": "c9cf8bbb.029148",
-    "name": "Search \"Gelber Sack\" 05:00",
+    "name": "\"Gelber Sack\"",
     "topic": "calender \"Gelber Sack\"",
     "payload": "Gelber Sack",
     "payloadType": "str",
     "repeat": "",
-    "crontab": "00 05 * * *",
+    "crontab": "*/15 5-19 * * *",
     "once": false,
-    "x": 200,
+    "x": 160,
     "y": 598,
     "wires": [
       [
@@ -398,7 +398,7 @@
     "google": "62d0e3d3.dcb47c",
     "name": "Abfallkalender",
     "calendar": "Abfallkalender",
-    "x": 480,
+    "x": 405,
     "y": 538,
     "wires": [
       [
@@ -654,8 +654,8 @@
     "active": false,
     "console": "false",
     "complete": "false",
-    "x": 870,
-    "y": 607,
+    "x": 850,
+    "y": 580,
     "wires": []
   },
   {
@@ -1311,8 +1311,8 @@
     "cancel": "",
     "topic": "",
     "name": "Version",
-    "x": 1120,
-    "y": 420,
+    "x": 1020,
+    "y": 380,
     "wires": []
   },
   {
@@ -1612,8 +1612,8 @@
     "qos": "0",
     "retain": "false",
     "broker": "f093b8cc.ff2b58",
-    "x": 860,
-    "y": 480,
+    "x": 850,
+    "y": 540,
     "wires": []
   },
   {
@@ -1657,8 +1657,8 @@
     "name": "",
     "active": true,
     "console": "false",
-    "complete": "false",
-    "x": 490,
+    "complete": "true",
+    "x": 470,
     "y": 216,
     "wires": []
   },
@@ -1670,8 +1670,8 @@
     "active": false,
     "console": "false",
     "complete": "true",
-    "x": 640,
-    "y": 640,
+    "x": 590,
+    "y": 540,
     "wires": []
   },
   {
@@ -1800,7 +1800,7 @@
     "type": "debug",
     "z": "fc8ae83a.bd2f98",
     "name": "",
-    "active": true,
+    "active": false,
     "console": "false",
     "complete": "false",
     "x": 1010,
@@ -1826,5 +1826,79 @@
     "x": 100,
     "y": 276,
     "wires": []
+  },
+  {
+    "id": "e1608a19.a43898",
+    "type": "change",
+    "z": "87853f2c.dd34d",
+    "name": "set mqtt msg",
+    "rules": [
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "\"nodes@home/bootstrap/version\"",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "\"http://192.168.2.117/luanodes_ota/\" & msg.payload",
+        "tot": "jsonata"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 630,
+    "y": 540,
+    "wires": [
+      [
+        "f443a7fc.669df8",
+        "1aeb13ca.29dcac"
+      ]
+    ]
+  },
+  {
+    "id": "15d23c1c.0ed164",
+    "type": "comment",
+    "z": "87853f2c.dd34d",
+    "name": "set node config in mqtt",
+    "info": "",
+    "x": 190,
+    "y": 40,
+    "wires": []
+  },
+  {
+    "id": "9ffd1543.fb54b8",
+    "type": "comment",
+    "z": "87853f2c.dd34d",
+    "name": "set bootsrap version",
+    "info": "",
+    "x": 170,
+    "y": 540,
+    "wires": []
+  },
+  {
+    "id": "42b80d3f.367d64",
+    "type": "inject",
+    "z": "87853f2c.dd34d",
+    "name": "",
+    "topic": "config_version",
+    "payload": "20170211_V0.26.1",
+    "payloadType": "str",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 220,
+    "y": 600,
+    "wires": [
+      [
+        "e1608a19.a43898"
+      ]
+    ]
   }
 ]
