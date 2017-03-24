@@ -20,6 +20,16 @@
     "label": "debug lua nodes"
   },
   {
+    "id": "a09e2385.86b3b",
+    "type": "tab",
+    "label": "watch mqtt topics"
+  },
+  {
+    "id": "e9aab946.903ab8",
+    "type": "tab",
+    "label": "test config"
+  },
+  {
     "id": "f093b8cc.ff2b58",
     "type": "mqtt-broker",
     "z": "",
@@ -48,13 +58,6 @@
     "id": "899805d0.4345c8",
     "type": "google-api-config",
     "z": ""
-  },
-  {
-    "id": "99bc08d8.a0cff8",
-    "type": "ui_tab",
-    "z": "",
-    "name": "Home",
-    "icon": "dashboard"
   },
   {
     "id": "cffdbc2a.4ba77",
@@ -90,6 +93,67 @@
     "width": "6"
   },
   {
+    "id": "12be5e5d.0d0f22",
+    "type": "mqtt-broker",
+    "z": "",
+    "broker": "192.168.2.117",
+    "port": "1883",
+    "clientid": "",
+    "usetls": false,
+    "compatmode": true,
+    "keepalive": "60",
+    "cleansession": true,
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": "",
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthPayload": ""
+  },
+  {
+    "id": "6ced38ac.829508",
+    "type": "websocket-listener",
+    "z": "",
+    "path": "/mqtt_to_websocket",
+    "wholemsg": "true"
+  },
+  {
+    "id": "f96cb939.bb8478",
+    "type": "mqtt-broker",
+    "z": "",
+    "broker": "10.0.75.1",
+    "port": "1883",
+    "clientid": "",
+    "usetls": false,
+    "compatmode": true,
+    "keepalive": "60",
+    "cleansession": true,
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": "",
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthPayload": ""
+  },
+  {
+    "id": "12abba1f.42ea06",
+    "type": "mqtt-broker",
+    "z": "",
+    "broker": "10.0.75.1",
+    "port": "1883",
+    "clientid": "",
+    "usetls": false,
+    "compatmode": true,
+    "keepalive": "60",
+    "cleansession": true,
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": "",
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthPayload": ""
+  },
+  {
     "id": "1f55c701.4fff39",
     "type": "comment",
     "z": "c9cf8bbb.029148",
@@ -113,7 +177,7 @@
     "id": "6cb5654f.9708dc",
     "type": "inject",
     "z": "c9cf8bbb.029148",
-    "name": "Daily 05:00 .. 18:00",
+    "name": "Daily 05:00 .. 22:00",
     "topic": "weather",
     "payload": "",
     "payloadType": "date",
@@ -167,12 +231,12 @@
     "id": "7148dc22.b09324",
     "type": "inject",
     "z": "c9cf8bbb.029148",
-    "name": "Stop 18:01",
+    "name": "Stop 22:01",
     "topic": "weather_clear",
     "payload": "",
     "payloadType": "date",
     "repeat": "",
-    "crontab": "01 18 * * *",
+    "crontab": "01 22 * * *",
     "once": false,
     "x": 144,
     "y": 340,
@@ -629,7 +693,7 @@
         "t": "set",
         "p": "payload",
         "pt": "msg",
-        "to": "{\"messages\":[{\"line\":10,\"clear\":true},{\"line\":11,\"clear\":true},{\"line\":4,\"clear\":true}]}",
+        "to": "{\"messages\":[{\"line\":10,\"clear\":true},{\"line\":11,\"clear\":true}]}",
         "tot": "json"
       }
     ],
@@ -961,7 +1025,7 @@
     "z": "37197cb5.c49ee4",
     "name": "",
     "topic": "config_version",
-    "payload": "20170121_V0.23",
+    "payload": "20170312_V0.30",
     "payloadType": "str",
     "repeat": "",
     "crontab": "",
@@ -1195,7 +1259,7 @@
     "type": "function",
     "z": "37197cb5.c49ee4",
     "name": "create command",
-    "func": "// junand 21.02.2017\n\nvar dest;\nvar cmd;\n\nfunction createDir ( path ) {\n\n    if ( !context.global.fs.existsSync ( dest ) ) {\n        context.global.fs.mkdirSync ( dest );\n    }\n    \n}\n\nif ( msg.topic == \"config_version\" ) {\n    \n    //node.error ( msg.payload );\n    if (  msg.payload === \"\" ) {\n        \n        context.set ( \"version\", undefined );\n        node.status ( {} );\n        \n    }\n    else {\n        \n        dest = \"/var/www/html/luanodes_ota/\" + msg.payload;\n        context.set ( \"dest\", dest );\n        //node.error ( dest );\n        //createDir ( dest );\n        \n        context.set ( \"version\", msg.payload );\n        node.status ( { fill: \"blue\", shape: \"dot\", text: msg.payload } );\n        \n    }\n\n    return null; // break flow\n\n}\n\ndest = context.get ( \"dest\" );\nif ( dest === undefined ) {\n    node.error ( \"NO destination defined\")\n    return null;\n}\n    \nif ( msg.payload === \"\" ) { // last line!\n    \n    cmd = \"cd \" + dest + \";../gen_list.sh\"; \n    \n}\nelse {\n\n    createDir ( dest );\n    \n    cmd = \"F=\\\"\" + msg.payload + \"\\\";\";\n    cmd += \"chmod 755 ${F};\"\n    cmd += \"mv $F \" + dest + \";\";\n\n}\n\nmsg.payload = cmd;\n\nreturn msg;",
+    "func": "// junand 21.02.2017\n\nvar dest;\nvar cmd;\n\nfunction createDir ( path ) {\n\n    if ( !context.global.fs.existsSync ( dest ) ) {\n        context.global.fs.mkdirSync ( dest );\n    }\n    \n}\n\nif ( msg.topic == \"config_version\" ) {\n    \n    //node.error ( msg.payload );\n    if (  msg.payload === \"\" ) {\n        \n        context.set ( \"version\", undefined );\n        node.status ( {} );\n        \n    }\n    else {\n        \n        dest = \"/var/www/html/luanodes_ota/\" + msg.payload;\n        context.set ( \"dest\", dest );\n        //node.error ( dest );\n        //createDir ( dest );\n        \n        context.set ( \"version\", msg.payload );\n        node.status ( { fill: \"blue\", shape: \"dot\", text: msg.payload } );\n        \n    }\n\n    return null; // break flow\n\n}\n\ndest = context.get ( \"dest\" );\nif ( dest === undefined ) {\n    node.error ( \"NO destination defined\")\n    return null;\n}\n    \nif ( msg.payload === \"\" ) { // last line!\n    \n    cmd = \"cd \" + dest + \";../gen_list_v2.sh\"; \n    \n}\nelse {\n\n    createDir ( dest );\n    \n    cmd = \"F=\\\"\" + msg.payload + \"\\\";\";\n    cmd += \"chmod 755 ${F};\"\n    cmd += \"mv $F \" + dest + \";\";\n\n}\n\nmsg.payload = cmd;\n\nreturn msg;",
     "outputs": "1",
     "noerr": 0,
     "x": 897,
@@ -1898,6 +1962,313 @@
     "wires": [
       [
         "e1608a19.a43898"
+      ]
+    ]
+  },
+  {
+    "id": "b89b5199.9db02",
+    "type": "mqtt in",
+    "z": "a09e2385.86b3b",
+    "name": "mqtt: # [prod]",
+    "topic": "#",
+    "qos": "0",
+    "broker": "12be5e5d.0d0f22",
+    "x": 130,
+    "y": 260,
+    "wires": [
+      [
+        "66af373f.8f6ab8"
+      ]
+    ]
+  },
+  {
+    "id": "b6cc55f2.310688",
+    "type": "debug",
+    "z": "a09e2385.86b3b",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "true",
+    "x": 409,
+    "y": 140,
+    "wires": []
+  },
+  {
+    "id": "f43c0223.f99c2",
+    "type": "websocket out",
+    "z": "a09e2385.86b3b",
+    "name": "",
+    "server": "6ced38ac.829508",
+    "client": "",
+    "x": 730,
+    "y": 260,
+    "wires": []
+  },
+  {
+    "id": "bed97701.a778b8",
+    "type": "websocket in",
+    "z": "a09e2385.86b3b",
+    "name": "",
+    "server": "6ced38ac.829508",
+    "client": "",
+    "x": 170,
+    "y": 140,
+    "wires": [
+      [
+        "b6cc55f2.310688"
+      ]
+    ]
+  },
+  {
+    "id": "438104f3.61c9dc",
+    "type": "debug",
+    "z": "a09e2385.86b3b",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 729,
+    "y": 200,
+    "wires": []
+  },
+  {
+    "id": "66af373f.8f6ab8",
+    "type": "delay",
+    "z": "a09e2385.86b3b",
+    "name": "",
+    "pauseType": "delay",
+    "timeout": "15",
+    "timeoutUnits": "seconds",
+    "rate": "100",
+    "nbRateUnits": "20",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 370,
+    "y": 260,
+    "wires": [
+      [
+        "f43c0223.f99c2",
+        "438104f3.61c9dc"
+      ]
+    ]
+  },
+  {
+    "id": "dbe92d76.72196",
+    "type": "mqtt in",
+    "z": "a09e2385.86b3b",
+    "name": "mqtt: # [dev]",
+    "topic": "#",
+    "qos": "0",
+    "broker": "f96cb939.bb8478",
+    "x": 130,
+    "y": 340,
+    "wires": [
+      [
+        "66af373f.8f6ab8"
+      ]
+    ]
+  },
+  {
+    "id": "a2c7aa25.625838",
+    "type": "comment",
+    "z": "a09e2385.86b3b",
+    "name": "file:///C:/Users/andre/Documents/GIT/d3-MQTT-Topic-Tree/mqtt_topic_tree.html",
+    "info": "",
+    "x": 898,
+    "y": 322,
+    "wires": []
+  },
+  {
+    "id": "284c9d28.623c62",
+    "type": "template",
+    "z": "e9aab946.903ab8",
+    "name": "config",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "json",
+    "syntax": "plain",
+    "template": "[\n  {\n    \"appCfg\": {\n      \"useOfflineCallback\": false,\n      \"timeBetweenSensorReadings\": 900000,\n      \"dhtPin\": 4\n    },\n    \"app\": \"tempNode\",\n    \"type\": \"DHT11\",\n    \"timer\": {\n      \"deepSleep\": 3,\n      \"startupDelay1\": 2000,\n      \"startup\": 0,\n      \"wifiLoopPeriod\": 1000,\n      \"periodic\": 2,\n      \"startupDelay2\": 5000,\n      \"deepSleepDelay\": 60000,\n      \"periodicPeriod\": 900000,\n      \"wifiLoop\": 1\n    },\n    \"location\": \"test\",\n    \"class\": \"sensor\",\n    \"wifi\": {\n      \"gateway\": \"192.168.2.1\",\n      \"netmask\": \"255.255.255.0\",\n      \"ip\": \"192.168.2.90\"\n    },\n    \"chipid\": 2677460\n  }\n]  ",
+    "x": 270,
+    "y": 100,
+    "wires": [
+      [
+        "de610dc3.75ddf"
+      ]
+    ]
+  },
+  {
+    "id": "de610dc3.75ddf",
+    "type": "json",
+    "z": "e9aab946.903ab8",
+    "name": "",
+    "x": 410,
+    "y": 100,
+    "wires": [
+      [
+        "d502fd6.17627"
+      ]
+    ]
+  },
+  {
+    "id": "d502fd6.17627",
+    "type": "splitter",
+    "z": "e9aab946.903ab8",
+    "name": "",
+    "property": "payload",
+    "x": 550,
+    "y": 100,
+    "wires": [
+      [
+        "2acec815.5f9978"
+      ]
+    ]
+  },
+  {
+    "id": "2acec815.5f9978",
+    "type": "change",
+    "z": "e9aab946.903ab8",
+    "name": "",
+    "rules": [
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "\"nodes@home/config/\" & msg.payload.chipid",
+        "tot": "jsonata"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 710,
+    "y": 100,
+    "wires": [
+      [
+        "1e103e0b.bd6c72",
+        "6f374f8d.d1edd"
+      ]
+    ]
+  },
+  {
+    "id": "1e103e0b.bd6c72",
+    "type": "mqtt out",
+    "z": "e9aab946.903ab8",
+    "name": "",
+    "topic": "",
+    "qos": "0",
+    "retain": "false",
+    "broker": "12be5e5d.0d0f22",
+    "x": 930,
+    "y": 100,
+    "wires": []
+  },
+  {
+    "id": "22bc5813.fb1808",
+    "type": "inject",
+    "z": "e9aab946.903ab8",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 120,
+    "y": 100,
+    "wires": [
+      [
+        "284c9d28.623c62"
+      ]
+    ]
+  },
+  {
+    "id": "6f374f8d.d1edd",
+    "type": "debug",
+    "z": "e9aab946.903ab8",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "true",
+    "x": 930,
+    "y": 240,
+    "wires": []
+  },
+  {
+    "id": "6b6b1a3c.768e64",
+    "type": "comment",
+    "z": "e9aab946.903ab8",
+    "name": "send config",
+    "info": "",
+    "x": 110,
+    "y": 60,
+    "wires": []
+  },
+  {
+    "id": "22154643.e99f5a",
+    "type": "comment",
+    "z": "e9aab946.903ab8",
+    "name": "send config trigger",
+    "info": "",
+    "x": 132,
+    "y": 200,
+    "wires": []
+  },
+  {
+    "id": "6ef3d88f.a59648",
+    "type": "inject",
+    "z": "e9aab946.903ab8",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 120,
+    "y": 240,
+    "wires": [
+      [
+        "2d337e44.62efe2"
+      ]
+    ]
+  },
+  {
+    "id": "2d337e44.62efe2",
+    "type": "change",
+    "z": "e9aab946.903ab8",
+    "name": "set msg.topic",
+    "rules": [
+      {
+        "t": "set",
+        "p": "chipid",
+        "pt": "msg",
+        "to": "2677460",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "\"nodes@home/nonode/\" & msg.chipid & \"/anywhere/service/config\"",
+        "tot": "jsonata"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 710,
+    "y": 240,
+    "wires": [
+      [
+        "1e103e0b.bd6c72",
+        "6f374f8d.d1edd"
       ]
     ]
   }
