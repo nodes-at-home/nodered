@@ -30,6 +30,11 @@
     "label": "test config"
   },
   {
+    "id": "399a3bf2.52cdb4",
+    "type": "tab",
+    "label": "monitor nodes"
+  },
+  {
     "id": "f093b8cc.ff2b58",
     "type": "mqtt-broker",
     "z": "",
@@ -974,7 +979,8 @@
         "259966f6.052b6a",
         "2e32edbd.c81332",
         "1111b8ca.abcf47",
-        "fa776777.dc3d08"
+        "fa776777.dc3d08",
+        "ea4ab4e3.57dc68"
       ]
     ]
   },
@@ -2517,5 +2523,198 @@
         "6ed6dc87.f74a94"
       ]
     ]
+  },
+  {
+    "id": "ea4ab4e3.57dc68",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update sensor/DHT11/test",
+    "group": "1af04f91.de5e1",
+    "order": 22,
+    "width": 0,
+    "height": 0,
+    "label": "sensor/DHT11/test",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "sensor/DHT11/test",
+    "x": 490,
+    "y": 880,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "ecea8778.4eb0d8",
+    "type": "inject",
+    "z": "399a3bf2.52cdb4",
+    "name": "every 15 min",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "900",
+    "crontab": "",
+    "once": false,
+    "x": 120,
+    "y": 408,
+    "wires": [
+      [
+        "13763df7.78cdf2"
+      ]
+    ]
+  },
+  {
+    "id": "9be52cb7.6c17b",
+    "type": "comment",
+    "z": "399a3bf2.52cdb4",
+    "name": "collect nodes@home/.../value/voltage",
+    "info": "",
+    "x": 190,
+    "y": 40,
+    "wires": []
+  },
+  {
+    "id": "82500ab2.42f758",
+    "type": "comment",
+    "z": "399a3bf2.52cdb4",
+    "name": "check last voltage message",
+    "info": "",
+    "x": 161,
+    "y": 357,
+    "wires": []
+  },
+  {
+    "id": "b10cf739.4f4f78",
+    "type": "mqtt in",
+    "z": "399a3bf2.52cdb4",
+    "name": "",
+    "topic": "nodes@home/+/+/+/value/voltage",
+    "qos": "0",
+    "broker": "12be5e5d.0d0f22",
+    "x": 180,
+    "y": 100,
+    "wires": [
+      [
+        "125adae4.17e155"
+      ]
+    ]
+  },
+  {
+    "id": "57ac7d3d.d3c6f4",
+    "type": "debug",
+    "z": "399a3bf2.52cdb4",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "true",
+    "x": 630,
+    "y": 100,
+    "wires": []
+  },
+  {
+    "id": "5fc05d1b.df2be4",
+    "type": "function",
+    "z": "399a3bf2.52cdb4",
+    "name": "store topic+time",
+    "func": "// store current timestamp under node topic\n\n// reset topics array\nif ( msg.topic == \"reset\" ) {\n    flow.set ( \"topics\", [] );\n    return null;\n}\n\n// 1. check for array existence\nvar topics = flow.get ( \"topics\" );\nif ( topics === undefined ) {\n    topics = [];\n    flow.set ( \"topics\", topics );\n}\n\n// 2. lookup for topic\nvar found = topics.length;\nfor ( i = 0; i < topics.length; i++ ) {\n    if ( topics [i].topic == msg.topic) {\n        found = i;\n    }\n}\n\n// 3. store timestamp\ntopics [found] = { topic: msg.topic, timestamp: msg.timestamp };\nflow.set ( \"topics\", topics );\n\n// 4. return topic array\nmsg.payload = topics;\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 620,
+    "y": 227,
+    "wires": [
+      [
+        "a50939a3.2f4818"
+      ]
+    ]
+  },
+  {
+    "id": "125adae4.17e155",
+    "type": "function",
+    "z": "399a3bf2.52cdb4",
+    "name": "timestamp",
+    "func": "// junand 15.01.2017\n\nvar dt = new Date ();\nmsg.timestamp_date = dt;\nmsg.timestamp = +dt;\nmsg.timestamp_parts = {\n\t'month':\tdt.getMonth() + 1,\n\t'day':\t\tdt.getDate(),\n\t'year':\t\tdt.getFullYear(),\n\t'hours':\tdt.getHours(),\n\t'mins':\t\tdt.getMinutes(),\n\t'msecs':\tdt.getMilliseconds()\n}\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 430,
+    "y": 100,
+    "wires": [
+      [
+        "5fc05d1b.df2be4",
+        "57ac7d3d.d3c6f4"
+      ]
+    ]
+  },
+  {
+    "id": "a50939a3.2f4818",
+    "type": "debug",
+    "z": "399a3bf2.52cdb4",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "true",
+    "x": 810,
+    "y": 227,
+    "wires": []
+  },
+  {
+    "id": "7649b292.9e09fc",
+    "type": "inject",
+    "z": "399a3bf2.52cdb4",
+    "name": "",
+    "topic": "reset",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 120,
+    "y": 227,
+    "wires": [
+      [
+        "5fc05d1b.df2be4"
+      ]
+    ]
+  },
+  {
+    "id": "50711692.8e31e8",
+    "type": "comment",
+    "z": "399a3bf2.52cdb4",
+    "name": "reset context",
+    "info": "",
+    "x": 111,
+    "y": 182,
+    "wires": []
+  },
+  {
+    "id": "13763df7.78cdf2",
+    "type": "function",
+    "z": "399a3bf2.52cdb4",
+    "name": "check timestamps",
+    "func": "// check timestamp table\n\nconst THRESHOLD = 30 * 60 * 1000; // ms\n\nvar current_timestamp = msg.payload;\n\nvar topics = flow.get ( \"topics\" );\n\n//node.warn ( \"start \" + current_timestamp );\n\nvar result = [];\n\nfor ( i = 0; i < topics.length; i++ ) {\n    var delta =  current_timestamp - topics [i].timestamp;\n    //node.warn ( \"cur=\" + current_timestamp + \" ts=\" + topics [i].timestamp + \" d=\" + delta );\n    //node.warn ( \"topic=\" + topics [i].topic + \" d=\" + delta );\n    if ( delta > THRESHOLD ) {\n        result [result.length] = { topic: topics [i].topic, ts: topics [i].timestamp };\n        //node.warn ( \"mqtt message delayed for \" + topics [i].topic );\n    }\n}\n\nif ( result.length > 0 ) {\n    msg.payload = result;\n}\nelse {\n    msg.payload = \"NO DELAYS\"\n}\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 460,
+    "y": 409,
+    "wires": [
+      [
+        "f54ada42.c847f8"
+      ]
+    ]
+  },
+  {
+    "id": "f54ada42.c847f8",
+    "type": "debug",
+    "z": "399a3bf2.52cdb4",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "true",
+    "x": 700,
+    "y": 420,
+    "wires": []
   }
 ]
