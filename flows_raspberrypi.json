@@ -527,7 +527,7 @@
     "type": "comment",
     "z": "c9cf8bbb.029148",
     "name": "text lines",
-    "info": " 0: Außentemperatur\n 1: Innentemperatur\n 2: temperatures today\n 3: weather today\n 4: temperatures tomorrow\n 5: weather tommorow\n 6: calendar \"Müll\"\n 7: calendar \"Papier\"\n 8: calendar \"Gelber Sack\"\n 9: ...\n10: way to work andreas\n11: way to work undine\n12: ...\n13: ...\n14: ...\n15: ...\n16: ...\n17: ...\n18: ...\n19: ...",
+    "info": " 0: Außentemperatur\n 1: Innentemperatur\n 2: temperatures today\n 3: weather today\n 4: temperatures tomorrow\n 5: weather tommorow\n 6: calendar \"Müll\"\n 7: calendar \"Papier\"\n 8: calendar \"Gelber Sack\"\n 9: calendar \"Biotonne\"\n10: way to work andreas\n11: way to work undine\n12: Pooltemperatur\n13: S-Bahn Abfahrt 1\n14: S-Bahn Abfahrt 2\n15: ...\n16: ...\n17: ...\n18: ...\n19: ...",
     "x": 920,
     "y": 132,
     "wires": []
@@ -583,14 +583,13 @@
     "type": "function",
     "z": "c9cf8bbb.029148",
     "name": "mqtt payload",
-    "func": "// junand 20.01.2017\n\nfunction durationText ( secs ) {\n    \n    const min = Math.floor ( secs / 60 );\n    const hour = Math.floor ( min / 60 );\n    \n    var result = \"\";\n    if ( hour > 0 ) result += hour + \"h \";\n    result += min % 60 + \"min\"\n    \n    return result;\n    \n}\n\nif ( msg.payload.status != \"OK\" ) return null;\n\n\nvar line = 10;\nvar s = \"H: \";\nif ( msg.topic.endsWith ( \"undine\" ) ) {\n    line = 11;\n    s = \"Arbeitsweg \"\n}\n\nconst leg = msg.payload.routes [0].legs [0];\nif ( leg.duration_in_traffic !== undefined ) {\n    s += durationText ( leg.duration_in_traffic.value ) + \" statt \";\n}\ns += durationText ( leg.duration.value );\n//    s += \" für \" + leg.distance.text;\n\nmsg.payload = { messages: [{ line: line, text: s } ]};\n\nreturn msg;",
+    "func": "// junand 20.01.2017\n\nfunction durationText ( secs ) {\n    \n    const min = Math.floor ( secs / 60 );\n    const hour = Math.floor ( min / 60 );\n    \n    var result = \"\";\n    if ( hour > 0 ) result += hour + \"h \";\n    result += min % 60 + \"min\"\n    \n    return result;\n    \n}\n\nif ( msg.payload.status != \"OK\" ) return null;\n\nvar line = 10;\nvar s = \"H: \";\nif ( msg.topic.endsWith ( \"undine\" ) ) {\n    line = 11;\n    s = \"Arbeitsweg \"\n}\n\nconst leg = msg.payload.routes [0].legs [0];\nif ( leg.duration_in_traffic !== undefined ) {\n    s += durationText ( leg.duration_in_traffic.value ) + \" statt \";\n}\ns += durationText ( leg.duration.value );\n//    s += \" für \" + leg.distance.text;\n\nmsg.payload = { messages: [{ line: line, text: s } ]};\n\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
     "x": 690,
     "y": 729,
     "wires": [
       [
-        "5ae2eae3.4b5914",
         "dac14d24.d9643"
       ]
     ]
@@ -617,7 +616,7 @@
     "crontab": "*/10 5-6 * * 1,2,3,4",
     "once": false,
     "x": 180,
-    "y": 789,
+    "y": 820,
     "wires": [
       [
         "533ef34c.8cc27c"
@@ -644,7 +643,7 @@
     "transit_mode": "",
     "transit_routing_preferences": "",
     "x": 420,
-    "y": 789,
+    "y": 820,
     "wires": [
       [
         "2196ea7d.8d5416"
@@ -656,14 +655,14 @@
     "type": "inject",
     "z": "c9cf8bbb.029148",
     "name": "Stop 7:01",
-    "topic": "nodes@home/display/pixel/kitchen/message/traffic",
+    "topic": "nodes@home/display/pixel/kitchen/message/traffic/andreas",
     "payload": "",
     "payloadType": "date",
     "repeat": "",
     "crontab": "01 07 * * *",
     "once": false,
     "x": 150,
-    "y": 849,
+    "y": 770,
     "wires": [
       [
         "c4a28517.adb098"
@@ -680,7 +679,7 @@
         "t": "set",
         "p": "payload",
         "pt": "msg",
-        "to": "{\"messages\":[{\"line\":10,\"clear\":true},{\"line\":11,\"clear\":true}]}",
+        "to": "{\"messages\":[{\"line\":10,\"clear\":true}]}",
         "tot": "json"
       }
     ],
@@ -689,8 +688,8 @@
     "from": "",
     "to": "",
     "reg": false,
-    "x": 460,
-    "y": 850,
+    "x": 402,
+    "y": 771,
     "wires": [
       [
         "dac14d24.d9643"
@@ -1969,7 +1968,7 @@
     "active": true,
     "console": "false",
     "complete": "false",
-    "x": 727,
+    "x": 725,
     "y": 200,
     "wires": []
   },
@@ -2859,6 +2858,241 @@
     "info": "",
     "x": 853,
     "y": 474,
+    "wires": []
+  },
+  {
+    "id": "97731a10.d88df8",
+    "type": "inject",
+    "z": "c9cf8bbb.029148",
+    "name": "Stop 7:01",
+    "topic": "nodes@home/display/pixel/kitchen/message/traffic/undine",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "01 07 * * *",
+    "once": false,
+    "x": 150,
+    "y": 859.9999389648438,
+    "wires": [
+      [
+        "4aa5a06e.69c21"
+      ]
+    ]
+  },
+  {
+    "id": "4aa5a06e.69c21",
+    "type": "change",
+    "z": "c9cf8bbb.029148",
+    "name": "clear messages",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "{\"messages\":[{\"line\":11,\"clear\":true}]}",
+        "tot": "json"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 404.9999694824219,
+    "y": 859.9999389648438,
+    "wires": [
+      [
+        "dac14d24.d9643"
+      ]
+    ]
+  },
+  {
+    "id": "e39c1e58.f0ccc",
+    "type": "comment",
+    "z": "c9cf8bbb.029148",
+    "name": "S-Bahn Abfahrten",
+    "info": "",
+    "x": 150,
+    "y": 920,
+    "wires": []
+  },
+  {
+    "id": "373330d7.26d42",
+    "type": "inject",
+    "z": "c9cf8bbb.029148",
+    "name": "every 10 min",
+    "topic": "nodes@home/display/pixel/kitchen/message/traffic/sbahn",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "600",
+    "crontab": "",
+    "once": true,
+    "x": 160,
+    "y": 960,
+    "wires": [
+      [
+        "9657b353.0b17c"
+      ]
+    ]
+  },
+  {
+    "id": "9657b353.0b17c",
+    "type": "function",
+    "z": "c9cf8bbb.029148",
+    "name": "VBB ReST Request",
+    "func": "// junand 13.06.2017\n\n// http://demo.hafas.de/openapi/vbb-proxy/location.name?accessId=Andreas-Andreas-7a6adab4c14&input=Zepernick&maxNo=1&type=S&format=json\n\n\n\nvar access_id = \"Andreas-Andreas-7a6adab4c14\";\n\nvar base_url = \"http://demo.hafas.de/openapi/vbb-proxy\";\nvar service = \"departureBoard\";\nvar extId = \"009350162\";\n\nvar msg = {\n    \"method\" : \"GET\",\n    \"url\" : base_url + \"/\" + service + \"?accessId=\" + access_id + \"&format=json&extId=009350162\"\n};\n \nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 373,
+    "y": 960,
+    "wires": [
+      [
+        "d63fd4e6.1ba838"
+      ]
+    ]
+  },
+  {
+    "id": "d63fd4e6.1ba838",
+    "type": "http request",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "method": "use",
+    "ret": "txt",
+    "url": "",
+    "tls": "",
+    "x": 571,
+    "y": 960,
+    "wires": [
+      [
+        "ebfbdb39.545218"
+      ]
+    ]
+  },
+  {
+    "id": "ebfbdb39.545218",
+    "type": "json",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "x": 650,
+    "y": 880,
+    "wires": [
+      [
+        "a29ec0b1.326ca",
+        "2fa9e56.c07231a"
+      ]
+    ]
+  },
+  {
+    "id": "2fa9e56.c07231a",
+    "type": "debug",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "false",
+    "x": 790,
+    "y": 1000,
+    "wires": []
+  },
+  {
+    "id": "a29ec0b1.326ca",
+    "type": "change",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload_new.messages[0].line",
+        "pt": "msg",
+        "to": "13",
+        "tot": "num"
+      },
+      {
+        "t": "set",
+        "p": "payload_new.messages[1].line",
+        "pt": "msg",
+        "to": "14",
+        "tot": "num"
+      },
+      {
+        "t": "set",
+        "p": "payload_new.messages[0].text",
+        "pt": "msg",
+        "to": "\"Abfahrt von \" & msg.payload.Departure[0].stop & \" nach \" & msg.payload.Departure[0].direction & \" um \" & msg.payload.Departure[0].rtTime",
+        "tot": "jsonata"
+      },
+      {
+        "t": "set",
+        "p": "payload_new.messages[1].text",
+        "pt": "msg",
+        "to": "\"Abfahrt von \" & msg.payload.Departure[1].stop & \" nach \" & msg.payload.Departure[1].direction & \" um \" & msg.payload.Departure[1].rtTime",
+        "tot": "jsonata"
+      },
+      {
+        "t": "move",
+        "p": "payload_new",
+        "pt": "msg",
+        "to": "payload",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "nodes@home/display/pixel/kitchen/message/traffic/sbahn",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 820,
+    "y": 880,
+    "wires": [
+      [
+        "8c5d5abc.729328",
+        "dac14d24.d9643",
+        "b4e8de8d.e4c62"
+      ]
+    ]
+  },
+  {
+    "id": "965a5516.a43ee8",
+    "type": "debug",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "false",
+    "x": 990,
+    "y": 960,
+    "wires": []
+  },
+  {
+    "id": "8c5d5abc.729328",
+    "type": "json",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "x": 830,
+    "y": 960,
+    "wires": [
+      [
+        "965a5516.a43ee8"
+      ]
+    ]
+  },
+  {
+    "id": "b4e8de8d.e4c62",
+    "type": "debug",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "true",
+    "x": 1020,
+    "y": 800,
     "wires": []
   }
 ]
