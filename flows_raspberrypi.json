@@ -265,7 +265,7 @@
     "type": "file",
     "z": "c9cf8bbb.029148",
     "name": "pixelnode.log",
-    "filename": "/home/pi/nodered_pixelnode.log",
+    "filename": "/home/pi/.node-red/log/pixelnode.log",
     "appendNewline": true,
     "createDir": true,
     "overwriteFile": "false",
@@ -277,7 +277,7 @@
     "id": "1d09515.f0434af",
     "type": "mqtt out",
     "z": "c9cf8bbb.029148",
-    "name": "matt: nodes@home/display/pixel/kitchen/message/...",
+    "name": "mqtt: nodes@home/display/pixel/kitchen/message/...",
     "topic": "",
     "qos": "0",
     "retain": "true",
@@ -323,7 +323,7 @@
     "type": "debug",
     "z": "c9cf8bbb.029148",
     "name": "",
-    "active": true,
+    "active": false,
     "console": "false",
     "complete": "false",
     "x": 1070,
@@ -1965,7 +1965,7 @@
     "type": "debug",
     "z": "a09e2385.86b3b",
     "name": "",
-    "active": true,
+    "active": false,
     "console": "false",
     "complete": "false",
     "x": 725,
@@ -1987,7 +1987,7 @@
     "randomLast": "5",
     "randomUnits": "seconds",
     "drop": false,
-    "x": 372,
+    "x": 375,
     "y": 260,
     "wires": [
       [
@@ -2576,7 +2576,7 @@
     "type": "function",
     "z": "399a3bf2.52cdb4",
     "name": "store topic+time",
-    "func": "// store current timestamp under node topic\n\n// reset topics array\nif ( msg.topic == \"reset\" ) {\n    flow.set ( \"topics\", [] );\n    return null;\n}\n\n// 1. check for array existence\nvar topics = flow.get ( \"topics\" );\nif ( topics === undefined ) {\n    topics = [];\n    flow.set ( \"topics\", topics );\n}\n\nvar store_topic_timestamp = true;\n\n// 2. lookup for exception topic\nvar exceptions = flow.get ( \"exception_topics\" );\nif ( exceptions !== undefined ) {\n    for ( i = 0; i < exceptions.length; i++ ) {\n        if ( msg.topic == exceptions [i] ) {\n            store_topic_timestamp = false;\n        }\n    }\n}\n\nnode.log ( \"topic=\" + msg.topic );\nnode.log ( \"store=\" + store_topic_timestamp );\n\nif ( store_topic_timestamp ) {\n    \n    // 3. lookup for topic\n    var found = topics.length;\n    for ( i = 0; i < topics.length; i++ ) {\n        if ( topics [i].topic == msg.topic) {\n            found = i;\n        }\n    }\n    \n    // 4. store timestamp\n    topics [found] = { topic: msg.topic, timestamp: msg.timestamp };\n    flow.set ( \"topics\", topics );\n    \n}\n\n// 5. return topic array\nmsg.payload = topics;\n\nreturn msg;",
+    "func": "// store current timestamp under node topic\n\n// reset topics array\nif ( msg.topic == \"reset\" ) {\n    flow.set ( \"topics\", [] );\n    return null;\n}\nelse if ( msg.topic == \"exception_topics\" ) {\n    flow.set ( \"exception_topics\", msg.payload );\n    return null;\n}\n\n// 1. check for array existence\nvar topics = flow.get ( \"topics\" );\nif ( topics === undefined ) {\n    topics = [];\n    flow.set ( \"topics\", topics );\n}\n\nvar store_topic_timestamp = true;\n\n// 2. lookup for exception topic\nvar exceptions = flow.get ( \"exception_topics\" );\nif ( exceptions !== undefined ) {\n    for ( i = 0; i < exceptions.length; i++ ) {\n        if ( msg.topic == exceptions [i] ) {\n            store_topic_timestamp = false;\n        }\n    }\n}\n\nnode.log ( \"topic=\" + msg.topic );\nnode.log ( \"store=\" + store_topic_timestamp );\n\nif ( store_topic_timestamp ) {\n    \n    // 3. lookup for topic\n    var found = topics.length;\n    for ( i = 0; i < topics.length; i++ ) {\n        if ( topics [i].topic == msg.topic) {\n            found = i;\n        }\n    }\n    \n    // 4. store timestamp\n    topics [found] = { topic: msg.topic, timestamp: msg.timestamp };\n    flow.set ( \"topics\", topics );\n    \n}\n\n// 5. return topic array\nmsg.payload = topics;\n\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
     "x": 776,
@@ -2650,7 +2650,7 @@
     "type": "function",
     "z": "399a3bf2.52cdb4",
     "name": "check timestamps",
-    "func": "// check timestamp table\n\nconst THRESHOLD = 30 * 60 * 1000; // ms\n\nvar current_timestamp = msg.payload;\nmsg.timestamp = msg.payload;\n\nvar topics = flow.get ( \"topics\" );\n\nvar result = [];\n\nfor ( i = 0; i < topics.length; i++ ) {\n    var delta =  current_timestamp - topics [i].timestamp;\n    if ( delta > THRESHOLD ) {\n        result [result.length] = { topic: topics [i].topic, ts: topics [i].timestamp };\n    }\n}\n\nif ( result.length > 0 ) {\n    msg.payload = result;\n}\nelse {\n    msg = null;\n}\n\nreturn msg;",
+    "func": "// check timestamp table\n\nconst THRESHOLD = 30 * 60 * 1000; // ms\n\nvar current_timestamp = msg.payload;\nmsg.timestamp = msg.payload;\n\nvar topics = flow.get ( \"topics\" );\n\nvar result = [];\n\nfor ( i = 0; i < topics.length; i++ ) {\n    var delta =  current_timestamp - topics [i].timestamp;\n    if ( delta > THRESHOLD ) {\n        result [result.length] = { topic: topics [i].topic, ts: topics [i].timestamp };\n    }\n}\n\nif ( result.length > 0 ) {\n    msg.payload = result;\n}\nelse {\n    msg.payload = \"no nodes\";\n}\n\nreturn msg;",
     "outputs": "1",
     "noerr": 0,
     "x": 379,
@@ -2810,15 +2810,18 @@
     "type": "template",
     "z": "399a3bf2.52cdb4",
     "name": "exception_topics",
-    "field": "exception_topics",
-    "fieldType": "flow",
+    "field": "payload",
+    "fieldType": "msg",
     "format": "json",
     "syntax": "plain",
-    "template": "[\n    \"nodes@home/switch/sonoff/location1/value/voltage\",\n    \"nodes@home/switch/sonoff/location4/value/voltage\",\n    \"nodes@home/sensor/DHT11/test/value/voltage\",\n    \"nodes@home/sensor/button/no1/value/voltage\",\n    \"nodes@home/sensor/button/no3/value/voltage\",\n    \"nodes@home/sensor/button/garage/value/voltage\",\n    \"nodes@home/light/sonoff/kitchen/value/voltage\"\n]",
-    "x": 424,
+    "template": "[\n    \"nodes@home/switch/sonoff/location1/value/voltage\",\n    \"nodes@home/switch/sonoff/location4/value/voltage\",\n    \"nodes@home/sensor/DHT11/test/value/voltage\",\n    \"nodes@home/sensor/button/no1/value/voltage\",\n    \"nodes@home/sensor/button/no3/value/voltage\",\n    \"nodes@home/sensor/button/garage/value/voltage\",\n    \"nodes@home/sensor/button/indoor/value/voltage\",\n    \"nodes@home/light/sonoff/kitchen/value/voltage\"\n]",
+    "x": 413,
     "y": 335,
     "wires": [
-      []
+      [
+        "3f10e43e.9df55c",
+        "e9ccb23d.132a2"
+      ]
     ]
   },
   {
@@ -2910,7 +2913,7 @@
     "id": "e39c1e58.f0ccc",
     "type": "comment",
     "z": "c9cf8bbb.029148",
-    "name": "S-Bahn Abfahrten",
+    "name": "S-Bahn Departures",
     "info": "",
     "x": 150,
     "y": 920,
@@ -2940,10 +2943,10 @@
     "type": "function",
     "z": "c9cf8bbb.029148",
     "name": "VBB ReST Request",
-    "func": "// junand 13.06.2017\n\n// http://demo.hafas.de/openapi/vbb-proxy/location.name?accessId=Andreas-Andreas-7a6adab4c14&input=Zepernick&maxNo=1&type=S&format=json\n\n\n\nvar access_id = \"Andreas-Andreas-7a6adab4c14\";\n\nvar base_url = \"http://demo.hafas.de/openapi/vbb-proxy\";\nvar service = \"departureBoard\";\nvar extId = \"009350162\";\n\nvar msg = {\n    \"method\" : \"GET\",\n    \"url\" : base_url + \"/\" + service + \"?accessId=\" + access_id + \"&format=json&extId=009350162\"\n};\n \nreturn msg;",
+    "func": "// junand 13.06.2017\n// Fahrplandaten mit freundlicher Genehmigung des VBB\n\nif ( msg.topic == \"vbb_access_id\" ) {\n    var s = msg.payload.substr ( 0, msg.payload.length - 1 );\n    flow.set ( \"vbb_access_id\", s );\n    node.status ( \n        { \n            fill: \"blue\", \n            shape: \"dot\", \n            text: s\n        } \n    );    return null;\n}\n\nvar access_id = flow.get ( \"vbb_access_id\" );\nif ( access_id === null ) return null;\n\n// test\n//var base_url = \"http://demo.hafas.de/openapi/vbb-proxy\";\n// prod\nvar base_url = \"http://fahrinfo.vbb.de/restproxy\";\n\nvar service = \"departureBoard\";\nvar extId = \"extId=009350162\";\nvar id = \"id=A=1@X=13514302@Y=52649065@\";\n\nvar stationId = id;\n\nvar msg = {\n    \"method\" : \"GET\",\n    \"url\" : base_url + \"/\" + service + \"?accessId=\" + access_id + \"&format=json&\" + stationId\n};\n \nreturn msg;",
     "outputs": 1,
     "noerr": 0,
-    "x": 373,
+    "x": 452,
     "y": 960,
     "wires": [
       [
@@ -2960,7 +2963,7 @@
     "ret": "txt",
     "url": "",
     "tls": "",
-    "x": 571,
+    "x": 650,
     "y": 960,
     "wires": [
       [
@@ -2973,26 +2976,13 @@
     "type": "json",
     "z": "c9cf8bbb.029148",
     "name": "",
-    "x": 650,
+    "x": 747,
     "y": 880,
     "wires": [
       [
-        "a29ec0b1.326ca",
-        "2fa9e56.c07231a"
+        "a29ec0b1.326ca"
       ]
     ]
-  },
-  {
-    "id": "2fa9e56.c07231a",
-    "type": "debug",
-    "z": "c9cf8bbb.029148",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "false",
-    "x": 790,
-    "y": 1000,
-    "wires": []
   },
   {
     "id": "a29ec0b1.326ca",
@@ -3000,6 +2990,13 @@
     "z": "c9cf8bbb.029148",
     "name": "",
     "rules": [
+      {
+        "t": "set",
+        "p": "select",
+        "pt": "msg",
+        "to": "msg.payload.Departure[Product.operatorCode='DBS']",
+        "tot": "jsonata"
+      },
       {
         "t": "set",
         "p": "payload_new.messages[0].line",
@@ -3018,15 +3015,22 @@
         "t": "set",
         "p": "payload_new.messages[0].text",
         "pt": "msg",
-        "to": "\"Abfahrt von \" & msg.payload.Departure[0].stop & \" nach \" & msg.payload.Departure[0].direction & \" um \" & msg.payload.Departure[0].rtTime",
+        "to": "\"um \" & msg.select[0].rtTime & \" nach \" & msg.select[0].direction",
         "tot": "jsonata"
       },
       {
         "t": "set",
         "p": "payload_new.messages[1].text",
         "pt": "msg",
-        "to": "\"Abfahrt von \" & msg.payload.Departure[1].stop & \" nach \" & msg.payload.Departure[1].direction & \" um \" & msg.payload.Departure[1].rtTime",
+        "to": "\"um \" & msg.select[1].rtTime & \" nach \" & msg.select[1].direction",
         "tot": "jsonata"
+      },
+      {
+        "t": "move",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload_old",
+        "tot": "msg"
       },
       {
         "t": "move",
@@ -3048,38 +3052,12 @@
     "from": "",
     "to": "",
     "reg": false,
-    "x": 820,
+    "x": 917,
     "y": 880,
     "wires": [
       [
-        "8c5d5abc.729328",
         "dac14d24.d9643",
         "b4e8de8d.e4c62"
-      ]
-    ]
-  },
-  {
-    "id": "965a5516.a43ee8",
-    "type": "debug",
-    "z": "c9cf8bbb.029148",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "false",
-    "x": 990,
-    "y": 960,
-    "wires": []
-  },
-  {
-    "id": "8c5d5abc.729328",
-    "type": "json",
-    "z": "c9cf8bbb.029148",
-    "name": "",
-    "x": 830,
-    "y": 960,
-    "wires": [
-      [
-        "965a5516.a43ee8"
       ]
     ]
   },
@@ -3091,8 +3069,68 @@
     "active": true,
     "console": "false",
     "complete": "true",
-    "x": 1020,
-    "y": 800,
+    "x": 1107,
+    "y": 880,
     "wires": []
+  },
+  {
+    "id": "3f10e43e.9df55c",
+    "type": "json",
+    "z": "399a3bf2.52cdb4",
+    "name": "",
+    "x": 597,
+    "y": 335,
+    "wires": [
+      [
+        "5fc05d1b.df2be4"
+      ]
+    ]
+  },
+  {
+    "id": "e9ccb23d.132a2",
+    "type": "file",
+    "z": "399a3bf2.52cdb4",
+    "name": "",
+    "filename": "/home/pi/.node-red/log/exception_nodes.log",
+    "appendNewline": true,
+    "createDir": true,
+    "overwriteFile": "true",
+    "x": 950,
+    "y": 360,
+    "wires": []
+  },
+  {
+    "id": "dd45aa8e.25e4d8",
+    "type": "file in",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "filename": "/home/pi/.node-red/vbb_access_id.txt",
+    "format": "utf8",
+    "x": 328,
+    "y": 1020,
+    "wires": [
+      [
+        "9657b353.0b17c"
+      ]
+    ]
+  },
+  {
+    "id": "7c8caa60.7f1724",
+    "type": "inject",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "topic": "vbb_access_id",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": true,
+    "x": 188,
+    "y": 1082,
+    "wires": [
+      [
+        "dd45aa8e.25e4d8"
+      ]
+    ]
   }
 ]
