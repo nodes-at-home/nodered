@@ -147,7 +147,7 @@
     "name": "get weather forecast",
     "info": "",
     "x": 150,
-    "y": 137,
+    "y": 160,
     "wires": []
   },
   {
@@ -172,7 +172,7 @@
     "crontab": "*/15 5-17 * * *",
     "once": false,
     "x": 180,
-    "y": 187,
+    "y": 205,
     "wires": [
       [
         "68cb162e.e560f8"
@@ -191,7 +191,7 @@
     "country": "Germany",
     "language": "de",
     "x": 380,
-    "y": 187,
+    "y": 205,
     "wires": [
       [
         "e9051825.eccda8"
@@ -207,7 +207,7 @@
     "outputs": 1,
     "noerr": 0,
     "x": 550,
-    "y": 187,
+    "y": 205,
     "wires": [
       [
         "21eb0961.7dd8c6"
@@ -225,7 +225,7 @@
     "repeat": "",
     "crontab": "01 22 * * *",
     "once": false,
-    "x": 144,
+    "x": 150,
     "y": 340,
     "wires": [
       [
@@ -527,7 +527,7 @@
     "type": "comment",
     "z": "c9cf8bbb.029148",
     "name": "text lines",
-    "info": " 0: Außentemperatur\n 1: Innentemperatur\n 2: temperatures today\n 3: weather today\n 4: temperatures tomorrow\n 5: weather tommorow\n 6: calendar \"Müll\"\n 7: calendar \"Papier\"\n 8: calendar \"Gelber Sack\"\n 9: calendar \"Biotonne\"\n10: way to work andreas\n11: way to work undine\n12: Pooltemperatur\n13: S-Bahn Abfahrt 1\n14: S-Bahn Abfahrt 2\n15: ...\n16: ...\n17: ...\n18: ...\n19: ...",
+    "info": " 0: Außentemperatur\n 1: Innentemperatur\n 2: temperatures today\n 3: weather today\n 4: temperatures tomorrow\n 5: weather tommorow\n 6: calendar \"Müll\"\n 7: calendar \"Papier\"\n 8: calendar \"Gelber Sack\"\n 9: calendar \"Biotonne\"\n10: way to work andreas\n11: way to work undine\n12: Pooltemperatur\n13: S-Bahn Abfahrt 1\n14: S-Bahn Abfahrt 2\n15: current weather Brisbane\n16: ...\n17: ...\n18: ...\n19: ...",
     "x": 920,
     "y": 132,
     "wires": []
@@ -1373,7 +1373,7 @@
     "to": "",
     "reg": false,
     "x": 770,
-    "y": 240,
+    "y": 258,
     "wires": [
       [
         "dac14d24.d9643"
@@ -1402,7 +1402,7 @@
     "checkall": "true",
     "outputs": 2,
     "x": 545,
-    "y": 260,
+    "y": 278,
     "wires": [
       [
         "92cf44af.967a78"
@@ -1453,7 +1453,7 @@
     "to": "",
     "reg": false,
     "x": 780,
-    "y": 280,
+    "y": 298,
     "wires": [
       [
         "dac14d24.d9643"
@@ -1469,7 +1469,7 @@
     "outputs": 1,
     "noerr": 0,
     "x": 385,
-    "y": 260,
+    "y": 278,
     "wires": [
       [
         "59246a57.41cb74"
@@ -1672,7 +1672,7 @@
     "type": "debug",
     "z": "fc8ae83a.bd2f98",
     "name": "",
-    "active": true,
+    "active": false,
     "console": "false",
     "complete": "true",
     "x": 470,
@@ -2609,7 +2609,7 @@
     "type": "debug",
     "z": "399a3bf2.52cdb4",
     "name": "",
-    "active": true,
+    "active": false,
     "console": "false",
     "complete": "true",
     "x": 967,
@@ -2667,7 +2667,7 @@
     "type": "debug",
     "z": "399a3bf2.52cdb4",
     "name": "",
-    "active": true,
+    "active": false,
     "console": "false",
     "complete": "true",
     "x": 560,
@@ -3132,5 +3132,94 @@
         "dd45aa8e.25e4d8"
       ]
     ]
+  },
+  {
+    "id": "55428bb8.80a064",
+    "type": "inject",
+    "z": "c9cf8bbb.029148",
+    "name": "Daily 05:00 .. 22:00",
+    "topic": "nodes@home/display/pixel/kitchen/message/brisbane",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "*/15 5-17 * * *",
+    "once": false,
+    "x": 180,
+    "y": 1180,
+    "wires": [
+      [
+        "78864514.cd9c1c"
+      ]
+    ]
+  },
+  {
+    "id": "78864514.cd9c1c",
+    "type": "openweathermap",
+    "z": "c9cf8bbb.029148",
+    "name": "Brisbane",
+    "wtype": "current",
+    "lon": "153.028091",
+    "lat": "-27.467939",
+    "city": "",
+    "country": "",
+    "language": "de",
+    "x": 360,
+    "y": 1180,
+    "wires": [
+      [
+        "4d4d9c14.97f994"
+      ]
+    ]
+  },
+  {
+    "id": "4d4d9c14.97f994",
+    "type": "change",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "rules": [
+      {
+        "t": "move",
+        "p": "payload",
+        "pt": "msg",
+        "to": "current_weather",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "payload.messages[0].line",
+        "pt": "msg",
+        "to": "15",
+        "tot": "num"
+      },
+      {
+        "t": "set",
+        "p": "payload.messages[0].text",
+        "pt": "msg",
+        "to": "\"in \" & msg.location.city & \" sind \" & msg.current_weather.tempc & \"°C und \" & msg.current_weather.detail",
+        "tot": "jsonata"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 520,
+    "y": 1180,
+    "wires": [
+      [
+        "dac14d24.d9643"
+      ]
+    ]
+  },
+  {
+    "id": "ca5f15fc.4351a8",
+    "type": "comment",
+    "z": "c9cf8bbb.029148",
+    "name": "Current Weather in Brisbane",
+    "info": "",
+    "x": 180,
+    "y": 1140,
+    "wires": []
   }
 ]
