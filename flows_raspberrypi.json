@@ -448,7 +448,7 @@
     "google": "62d0e3d3.dcb47c",
     "name": "Abfallkalender",
     "calendar": "Abfallkalender",
-    "x": 420,
+    "x": 421,
     "y": 480,
     "wires": [
       [
@@ -2977,11 +2977,11 @@
     "type": "json",
     "z": "c9cf8bbb.029148",
     "name": "",
-    "x": 747,
-    "y": 880,
+    "x": 803,
+    "y": 960,
     "wires": [
       [
-        "a29ec0b1.326ca"
+        "8a7accb0.053d3"
       ]
     ]
   },
@@ -2989,14 +2989,14 @@
     "id": "a29ec0b1.326ca",
     "type": "change",
     "z": "c9cf8bbb.029148",
-    "name": "",
+    "name": "pixel message",
     "rules": [
       {
         "t": "set",
-        "p": "select",
+        "p": "topic",
         "pt": "msg",
-        "to": "msg.payload.Departure[Product.operatorCode='DBS']",
-        "tot": "jsonata"
+        "to": "nodes@home/display/pixel/kitchen/message/traffic/sbahn",
+        "tot": "str"
       },
       {
         "t": "set",
@@ -3039,13 +3039,6 @@
         "pt": "msg",
         "to": "payload",
         "tot": "msg"
-      },
-      {
-        "t": "set",
-        "p": "topic",
-        "pt": "msg",
-        "to": "nodes@home/display/pixel/kitchen/message/traffic/sbahn",
-        "tot": "str"
       }
     ],
     "action": "",
@@ -3053,7 +3046,7 @@
     "from": "",
     "to": "",
     "reg": false,
-    "x": 917,
+    "x": 925,
     "y": 880,
     "wires": [
       [
@@ -3246,5 +3239,74 @@
         "6ed6dc87.f74a94"
       ]
     ]
+  },
+  {
+    "id": "ac7b56da.a31378",
+    "type": "function",
+    "z": "c9cf8bbb.029148",
+    "name": "check time offset",
+    "func": "// junand 22.01.2017\n\nconst timezoneOffset = -new Date ().getTimezoneOffset ();\nnode.warn ( timezoneOffset );\nconst offset = 10 * 60 * 1000 + timezoneOffset * 60 * 1000; // 10 min in ms + timezoneoffset\n\nvar result = [];\n\nconst now = new Date ().getTime ();\n\nfor ( var i = 0; i < msg.select.length; i++ ) {\n    \n    var departure = msg.select [i];\n    var date = new Date ( departure.rtDate + \"T\" + departure.rtTime );\n\n    if ( now + offset < date.getTime () ) {\n        result [result.length] = msg.select [i];\n    }\n    \n}\n\nmsg.select = result;\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 712,
+    "y": 880,
+    "wires": [
+      [
+        "a29ec0b1.326ca",
+        "94b65b6b.b6c158"
+      ]
+    ]
+  },
+  {
+    "id": "8a7accb0.053d3",
+    "type": "change",
+    "z": "c9cf8bbb.029148",
+    "name": "select",
+    "rules": [
+      {
+        "t": "set",
+        "p": "select",
+        "pt": "msg",
+        "to": "msg.payload.Departure[Product.operatorCode='DBS']",
+        "tot": "jsonata"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 930,
+    "y": 960,
+    "wires": [
+      [
+        "42dec873.7bee78",
+        "ac7b56da.a31378"
+      ]
+    ]
+  },
+  {
+    "id": "42dec873.7bee78",
+    "type": "debug",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "true",
+    "x": 940,
+    "y": 1040,
+    "wires": []
+  },
+  {
+    "id": "94b65b6b.b6c158",
+    "type": "debug",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "true",
+    "x": 840,
+    "y": 820,
+    "wires": []
   }
 ]
