@@ -1,3 +1,3 @@
 #!/bin/bash
 
-jq '.' < ~/.node-red/flows_raspberrypi.json > flows_raspberrypi.json
+jq '.' < ~/.node-red/flows_nodesathome.json > flows_nodesathome.json
