@@ -12,7 +12,9 @@
   {
     "id": "87853f2c.dd34d",
     "type": "tab",
-    "label": "config lua nodes"
+    "label": "config lua nodes",
+    "disabled": true,
+    "info": ""
   },
   {
     "id": "fc8ae83a.bd2f98",
@@ -32,7 +34,9 @@
   {
     "id": "399a3bf2.52cdb4",
     "type": "tab",
-    "label": "monitor nodes"
+    "label": "monitor nodes",
+    "disabled": true,
+    "info": ""
   },
   {
     "id": "8e2c5c11.fae26",
@@ -4755,7 +4759,7 @@
     "type": "debug",
     "z": "8e2c5c11.fae26",
     "name": "",
-    "active": false,
+    "active": true,
     "console": "false",
     "complete": "true",
     "x": 1310,
