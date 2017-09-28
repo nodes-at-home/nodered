@@ -3427,13 +3427,6 @@
         "t": "delete",
         "p": "tmp",
         "pt": "msg"
-      },
-      {
-        "t": "set",
-        "p": "enabled",
-        "pt": "msg",
-        "to": "false",
-        "tot": "bool"
       }
     ],
     "action": "",
@@ -3520,17 +3513,17 @@
       },
       {
         "t": "eq",
+        "v": "sensor/button/garage",
+        "vt": "str"
+      },
+      {
+        "t": "eq",
         "v": "sensor/button/pool",
         "vt": "str"
       },
       {
         "t": "eq",
-        "v": "sensor/button/no3",
-        "vt": "str"
-      },
-      {
-        "t": "eq",
-        "v": "switch/sonoff/location1",
+        "v": "switch/sonoff/brewery",
         "vt": "str"
       },
       {
@@ -3565,7 +3558,7 @@
       },
       {
         "t": "eq",
-        "v": "sensor/ds18b20/test",
+        "v": "sensor/ds18b20/brewery",
         "vt": "str"
       }
     ],
@@ -3668,12 +3661,13 @@
     "type": "ui_switch",
     "z": "8e2c5c11.fae26",
     "name": "",
-    "label": "sensor/ds18b20/test",
+    "label": "sensor/ds18b20/brewery",
     "group": "4759591f.23c438",
     "order": 5,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -3684,12 +3678,10 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1008,
+    "x": 1018,
     "y": 880,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -3723,7 +3715,8 @@
     "order": 3,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -3737,9 +3730,7 @@
     "x": 1008,
     "y": 120,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -3773,7 +3764,8 @@
     "order": 4,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -3787,9 +3779,7 @@
     "x": 998,
     "y": 160,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -3823,7 +3813,8 @@
     "order": 2,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -3837,9 +3828,7 @@
     "x": 1008,
     "y": 80,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -3873,7 +3862,8 @@
     "order": 5,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -3887,9 +3877,7 @@
     "x": 1008,
     "y": 200,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -3935,7 +3923,8 @@
     "order": 1,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -3949,9 +3938,7 @@
     "x": 988,
     "y": 40,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -3985,7 +3972,8 @@
     "order": 6,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -3999,9 +3987,7 @@
     "x": 998,
     "y": 240,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -4035,7 +4021,8 @@
     "order": 8,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -4049,9 +4036,7 @@
     "x": 1008,
     "y": 320,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -4085,7 +4070,8 @@
     "order": 7,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -4099,9 +4085,7 @@
     "x": 1018,
     "y": 280,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -4114,7 +4098,8 @@
     "order": 10,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -4128,9 +4113,7 @@
     "x": 1008,
     "y": 400,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -4185,7 +4168,8 @@
     "order": 1,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -4199,9 +4183,7 @@
     "x": 1008,
     "y": 440,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -4235,7 +4217,8 @@
     "order": 2,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -4249,9 +4232,7 @@
     "x": 1008,
     "y": 480,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -4285,7 +4266,8 @@
     "order": 3,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -4299,9 +4281,7 @@
     "x": 1008,
     "y": 520,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -4330,12 +4310,13 @@
     "type": "ui_switch",
     "z": "8e2c5c11.fae26",
     "name": "",
-    "label": "sensor/button/no3",
+    "label": "sensor/button/pool",
     "group": "4759591f.23c438",
     "order": 4,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -4349,9 +4330,7 @@
     "x": 998,
     "y": 560,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -4380,12 +4359,13 @@
     "type": "ui_switch",
     "z": "8e2c5c11.fae26",
     "name": "",
-    "label": "switch/sonoff/location1",
+    "label": "switch/sonoff/brewery",
     "group": "3156ce3a.ed9862",
     "order": 1,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -4399,9 +4379,7 @@
     "x": 1008,
     "y": 600,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -4430,12 +4408,13 @@
     "type": "ui_switch",
     "z": "8e2c5c11.fae26",
     "name": "",
-    "label": "switch/sonoff/location2",
+    "label": "switch/sonoff/location2 (Pool)",
     "group": "3156ce3a.ed9862",
     "order": 2,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -4446,12 +4425,10 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1008,
+    "x": 1028,
     "y": 640,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -4485,7 +4462,8 @@
     "order": 5,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -4499,9 +4477,7 @@
     "x": 998,
     "y": 680,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -4535,7 +4511,8 @@
     "order": 6,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -4549,9 +4526,7 @@
     "x": 998,
     "y": 720,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -4585,7 +4560,8 @@
     "order": 11,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -4599,9 +4575,7 @@
     "x": 1008,
     "y": 760,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -4630,12 +4604,13 @@
     "type": "ui_switch",
     "z": "8e2c5c11.fae26",
     "name": "",
-    "label": "switch/sonoff/location3",
+    "label": "switch/sonoff/location3 (Galerie)",
     "group": "3156ce3a.ed9862",
     "order": 3,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -4646,12 +4621,10 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1008,
+    "x": 1038,
     "y": 800,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -4685,7 +4658,8 @@
     "order": 4,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -4699,9 +4673,7 @@
     "x": 1008,
     "y": 840,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
   },
   {
@@ -4735,7 +4707,8 @@
     "order": 9,
     "width": 0,
     "height": 0,
-    "passthru": true,
+    "passthru": false,
+    "decouple": "true",
     "topic": "",
     "style": "",
     "onvalue": "1",
@@ -4749,21 +4722,7 @@
     "x": 1008,
     "y": 360,
     "wires": [
-      [
-        "bc5ec473.cad088"
-      ]
+      []
     ]
-  },
-  {
-    "id": "bc5ec473.cad088",
-    "type": "debug",
-    "z": "8e2c5c11.fae26",
-    "name": "",
-    "active": true,
-    "console": "false",
-    "complete": "true",
-    "x": 1310,
-    "y": 460,
-    "wires": []
   }
 ]
