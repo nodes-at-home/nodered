@@ -10,13 +10,6 @@
     "label": "update lua nodes"
   },
   {
-    "id": "87853f2c.dd34d",
-    "type": "tab",
-    "label": "config lua nodes",
-    "disabled": true,
-    "info": ""
-  },
-  {
     "id": "fc8ae83a.bd2f98",
     "type": "tab",
     "label": "debug lua nodes"
@@ -27,22 +20,38 @@
     "label": "watch mqtt topics"
   },
   {
+    "id": "8e2c5c11.fae26",
+    "type": "tab",
+    "label": "node state",
+    "disabled": false,
+    "info": ""
+  },
+  {
+    "id": "f7610a0.d8198f8",
+    "type": "tab",
+    "label": "brewery",
+    "disabled": false,
+    "info": ""
+  },
+  {
+    "id": "87853f2c.dd34d",
+    "type": "tab",
+    "label": "config lua nodes",
+    "disabled": true,
+    "info": ""
+  },
+  {
     "id": "e9aab946.903ab8",
     "type": "tab",
-    "label": "test config"
+    "label": "test config",
+    "disabled": true,
+    "info": ""
   },
   {
     "id": "399a3bf2.52cdb4",
     "type": "tab",
     "label": "monitor nodes",
     "disabled": true,
-    "info": ""
-  },
-  {
-    "id": "8e2c5c11.fae26",
-    "type": "tab",
-    "label": "node state",
-    "disabled": false,
     "info": ""
   },
   {
@@ -207,6 +216,83 @@
     "order": 3,
     "disp": true,
     "width": "6"
+  },
+  {
+    "id": "b633c301.c253c",
+    "type": "mqtt-broker",
+    "z": "",
+    "broker": "192.168.2.117",
+    "port": "1883",
+    "clientid": "",
+    "usetls": false,
+    "compatmode": true,
+    "keepalive": "60",
+    "cleansession": true,
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": "",
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthPayload": ""
+  },
+  {
+    "id": "165a13ba.7f27ec",
+    "type": "ui_group",
+    "z": "",
+    "name": "Temperatur",
+    "tab": "eb63d2fd.5cd68",
+    "order": 2,
+    "disp": true,
+    "width": "10"
+  },
+  {
+    "id": "e1a7eb0b.d543f8",
+    "type": "ui_group",
+    "z": "",
+    "name": "Steuerung",
+    "tab": "eb63d2fd.5cd68",
+    "order": 1,
+    "disp": true,
+    "width": "4"
+  },
+  {
+    "id": "903ce37b.b2576",
+    "type": "ui_group",
+    "z": "",
+    "name": "Rezept",
+    "tab": "eb63d2fd.5cd68",
+    "order": 3,
+    "disp": true,
+    "width": "10"
+  },
+  {
+    "id": "1a9412b.dfe4aed",
+    "type": "influxdb",
+    "z": "",
+    "hostname": "192.168.2.117",
+    "port": "8086",
+    "protocol": "http",
+    "database": "brewery",
+    "name": "",
+    "usetls": false,
+    "tls": ""
+  },
+  {
+    "id": "6f6ec204.ae7e8c",
+    "type": "ui_group",
+    "z": "",
+    "name": "Spannungsversorgung",
+    "tab": "eb63d2fd.5cd68",
+    "order": 4,
+    "disp": true,
+    "width": "4"
+  },
+  {
+    "id": "eb63d2fd.5cd68",
+    "type": "ui_tab",
+    "z": "",
+    "name": "Brauerei",
+    "icon": "dashboard"
   },
   {
     "id": "1f55c701.4fff39",
@@ -4723,6 +4809,1461 @@
     "y": 360,
     "wires": [
       []
+    ]
+  },
+  {
+    "id": "658c4693.b73878",
+    "type": "comment",
+    "z": "f7610a0.d8198f8",
+    "name": "Minutentakt",
+    "info": "",
+    "x": 130,
+    "y": 260,
+    "wires": []
+  },
+  {
+    "id": "617730a.b4ef3d",
+    "type": "function",
+    "z": "f7610a0.d8198f8",
+    "name": "2-point-controller",
+    "func": "\n// junand 19.09.2017\n\n//----------------------------------------------------------------\nvar recipeName = context.get ( \"recipeName\" );\nvar brewStart = context.get ( \"brewStart\" );\nvar temperature = context.get ( \"temperature\" ) || 0;\nvar hysteresis = context.get ( \"hysteresis\" ) || 1;\nvar periodLength = context.get ( \"periodLength\" ) || 1;\nvar alarm = context.get ( \"alarm\" );\n\nvar periodCount = context.get ( \"periodCount\" ) || 0;\nvar heaterOn = context.get ( \"heaterOn\" ) || false;\n\n//----------------------------------------------------------------\nconst stateIDLE = \"idle\";\nconst stateSTARTING = \"starting\";\nconst statePERIOD_STARTED = \"started\";\nconst statePERIOD_FINISHED = \"finished\";\n\nvar state = context.get ( \"state\" ) || stateIDLE;\n\n//----------------------------------------------------------------\n\nfunction createHeaterMessage ( onOff ) { return { payload: onOff }; }\nfunction createStepMessage () { return { topic: \"step\", payload: \"x\" }; }\nfunction createPeriodeMessage ( count ) { return { payload: count }; }\nfunction createAlarmMessage () { return { payload: \"x\" }; }\n\nfunction createChartMessage ( temp, target ) { \n    \n    if ( target ) {\n        return [\n            { topic: \"value\", payload: temp },\n            { topic: \"target\", payload: target }\n        ];\n    }\n    else {\n        return { topic: \"value\", payload: temp };\n    }\n}\n\nfunction createInfluxMessage ( brewTemp, outerTemp ) {\n    //var h = heaterOn ? \"on\" : \"off\";\n    return {\n        //measurement: \"prod\",\n        payload: [\n            // fields\n            {\n                state: state,\n                brewTemp: brewTemp,\n                target: temperature,\n                heater: heaterOn ? \"on\" : \"off\",\n                outerTemp: outerTemp\n            },\n            // tags\n            {\n                recipe: recipeName,\n                brewStart: brewStart\n            }\n        ]\n    }\n}\n\n//----------------------------------------------------------------\nif ( msg.topic == \"stop\" ) {\n    context.set ( \"state\", stateIDLE );\n    node.status ( { fill: \"grey\", shape: \"dot\", text: \"idle\" } );\n    return { payload: \"OFF\" };\n}\nelse if ( msg.topic == \"finished\" ) {\n    context.set ( \"state\", statePERIOD_FINISHED );\n    node.status ( { fill: \"grey\", shape: \"dot\", text: \"finished\" } );\n    return { payload: \"OFF\" };\n}\nelse if ( msg.topic == \"start\" ) {\n    \n    recipeName = msg.recipeName || recipeName || \"unknown\";\n    brewStart = msg.brewStart || brewStart || \"unknown\";\n    var t = msg.temperature || 0; \n    if ( t > 0 && t < 105 ) temperature = t;\n    var h = msg.hysteresis || 0;\n    if ( h > 0 && h < 10 ) hysteresis = h;\n    var p = msg.duration || 0;\n    if ( p > 0 ) periodLength = p;\n\n    //node.warn ( \"t=\" + temperature + \" h=\" + hysteresis + \" p=\" + periodLength );\n    \n    context.set ( \"recipeName\", recipeName );\n    context.set ( \"brewStart\", brewStart );\n    context.set ( \"temperature\", temperature );\n    context.set ( \"hysteresis\", hysteresis );\n    context.set ( \"periodLength\", periodLength );\n    context.set ( \"alarm\", msg.alarm );\n    \n    context.set ( \"periodCount\", 0 );\n    context.set ( \"heaterOn\", false );\n    \n    context.set ( \"state\", stateSTARTING );\n    node.status ( { fill: \"grey\", shape: \"dot\", text: \"starting\" } );\n    \n//    return [null, null, createTargetMessage ( temperature ), createPeriodeMessage ( 0 )];\n    return [null, null, null, createPeriodeMessage ( 0 )];\n\n}\nelse if ( msg.topic == \"hysteresis\" ) {\n    context.set ( \"hysteresis\", hysteresis );\n}\nelse if ( msg.topic == \"tick\" ) { // every min\n    // check for period length\n    if ( state == stateIDLE ) {\n        node.status ( { fill: \"grey\", shape: \"dot\", text: \"idle\" } );\n    }\n    else if ( state == statePERIOD_STARTED ) {\n        context.set ( \"periodCount\", ++periodCount );\n        if ( periodCount > periodLength ) {\n            context.set ( \"state\", statePERIOD_FINISHED );\n            context.set ( \"temperature\", null );\n            // ??? here heater off ???\n            return [createHeaterMessage ( \"OFF\" ), createStepMessage ()]; \n        }\n        else {\n            if ( alarm ) {\n                for ( var i = 0; i < alarm.length; i++ ) {\n                    if ( periodCount == alarm [i] + 1 ) {\n                        return [null, null, null, createPeriodeMessage ( periodCount ), createAlarmMessage ()];\n                    }\n                }\n            }\n            return [null, null, null, createPeriodeMessage ( periodCount )];\n        }\n    }\n}\nelse if ( msg.topic == \"nodes@home/switch/sonoff/brewery/socket\" ) {\n    context.set ( \"heaterOn\", msg.payload == \"ON\" ? true : false );\n}\nelse {\n    // temperature received\n    if ( state == stateIDLE ) {\n        node.status ( { fill: \"grey\", shape: \"dot\", text: \"idle\" } );\n    }\n    else if ( msg.payload && msg.payload.brew && msg.payload.outer ) {\n        var brewTemp = msg.payload.brew;\n        var outerTemp = msg.payload.outer;\n        if ( state == statePERIOD_FINISHED ) {\n            return [null, null, createChartMessage ( brewTemp ), null, null, createInfluxMessage ( brewTemp, outerTemp )];\n        }\n        else {\n            var heaterMsg = null;\n            if ( brewTemp >= temperature ) {\n                if ( state == stateSTARTING ) context.set ( \"state\", statePERIOD_STARTED );\n                if ( heaterOn ) {\n                    heaterOn = false;\n                    context.set ( \"heaterOn\", heaterOn );\n                    node.status ( { fill: \"blue\", shape: \"dot\", text: \"cooling\" } );\n                    heaterMsg = createHeaterMessage ( \"OFF\" );\n                }\n            }\n            else if ( brewTemp <= temperature - hysteresis ) {\n                if ( !heaterOn ) {\n                    heaterOn = true;\n                    context.set ( \"heaterOn\", heaterOn );\n                    node.status ( { fill: \"red\", shape: \"dot\", text: \"heating\" } );\n                    heaterMsg = createHeaterMessage ( \"ON\" );\n                }\n            }\n            // on every temp, send target and data fields\n            return [heaterMsg, null, createChartMessage ( brewTemp, temperature ), null, null, createInfluxMessage ( brewTemp, outerTemp )];\n        }\n    }\n}\n",
+    "outputs": "6",
+    "noerr": 0,
+    "x": 530,
+    "y": 380,
+    "wires": [
+      [
+        "9df68206.7eef8",
+        "d26fb24c.d2df7"
+      ],
+      [
+        "1db36e4f.8fd562"
+      ],
+      [
+        "4da30c15.2fab94"
+      ],
+      [
+        "c7879e27.30b6c"
+      ],
+      [
+        "6cdd6de1.362d24"
+      ],
+      [
+        "4b6bbf56.90a31"
+      ]
+    ],
+    "outputLabels": [
+      "heater switch (on/off)",
+      "next step (target reached)",
+      "chart data",
+      "ticker",
+      "alarm",
+      "influxdb"
+    ]
+  },
+  {
+    "id": "9df68206.7eef8",
+    "type": "mqtt out",
+    "z": "f7610a0.d8198f8",
+    "name": "mqtt",
+    "topic": "nodes@home/switch/sonoff/brewery/socket",
+    "qos": "1",
+    "retain": "false",
+    "broker": "b633c301.c253c",
+    "x": 670,
+    "y": 200,
+    "wires": []
+  },
+  {
+    "id": "d169158f.c15348",
+    "type": "inject",
+    "z": "f7610a0.d8198f8",
+    "name": "tick",
+    "topic": "tick",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "60",
+    "crontab": "",
+    "once": false,
+    "x": 110,
+    "y": 300,
+    "wires": [
+      [
+        "617730a.b4ef3d"
+      ]
+    ]
+  },
+  {
+    "id": "4da30c15.2fab94",
+    "type": "ui_chart",
+    "z": "f7610a0.d8198f8",
+    "name": "chart",
+    "group": "165a13ba.7f27ec",
+    "order": 1,
+    "width": 0,
+    "height": 0,
+    "label": "Verlauf",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm",
+    "interpolate": "linear",
+    "nodata": "IDLE",
+    "dot": false,
+    "ymin": "0",
+    "ymax": "110",
+    "removeOlder": "2",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "3600",
+    "cutout": 0,
+    "colors": [
+      "#0000ff",
+      "#ff0000",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "useOldStyle": true,
+    "x": 930,
+    "y": 340,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "1d0b78cb.be0807",
+    "type": "ui_gauge",
+    "z": "f7610a0.d8198f8",
+    "name": "brew temperature",
+    "group": "165a13ba.7f27ec",
+    "order": 2,
+    "width": 0,
+    "height": 0,
+    "gtype": "gage",
+    "title": "Sud",
+    "label": "°C",
+    "format": "{{value | number:1}}",
+    "min": 0,
+    "max": "100",
+    "colors": [
+      "#0000ff",
+      "#ff00ff",
+      "#ca3838"
+    ],
+    "seg1": "67",
+    "seg2": "90",
+    "x": 970,
+    "y": 260,
+    "wires": []
+  },
+  {
+    "id": "33fc0b3c.c86a54",
+    "type": "change",
+    "z": "f7610a0.d8198f8",
+    "name": "get value",
+    "rules": [
+      {
+        "t": "move",
+        "p": "payload.brew",
+        "pt": "msg",
+        "to": "payload",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 800,
+    "y": 260,
+    "wires": [
+      [
+        "1d0b78cb.be0807"
+      ]
+    ]
+  },
+  {
+    "id": "d26fb24c.d2df7",
+    "type": "ui_switch",
+    "z": "f7610a0.d8198f8",
+    "name": "heater",
+    "label": "Heizung",
+    "group": "e1a7eb0b.d543f8",
+    "order": 6,
+    "width": 0,
+    "height": 0,
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "ON",
+    "onvalueType": "str",
+    "onicon": "trending_up",
+    "oncolor": "red",
+    "offvalue": "OFF",
+    "offvalueType": "str",
+    "officon": "trending_down",
+    "offcolor": "blue",
+    "x": 930,
+    "y": 300,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "cda4f9e6.9061e8",
+    "type": "ui_button",
+    "z": "f7610a0.d8198f8",
+    "name": "start",
+    "group": "e1a7eb0b.d543f8",
+    "order": 2,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "label": "Start",
+    "color": "white",
+    "bgcolor": "green",
+    "icon": "",
+    "payload": "x",
+    "payloadType": "str",
+    "topic": "start",
+    "x": 110,
+    "y": 560,
+    "wires": [
+      [
+        "1db36e4f.8fd562",
+        "d280f7b1.202c08"
+      ]
+    ]
+  },
+  {
+    "id": "72902b14.065de4",
+    "type": "ui_button",
+    "z": "f7610a0.d8198f8",
+    "name": "stop",
+    "group": "e1a7eb0b.d543f8",
+    "order": 3,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "label": "Stop",
+    "color": "white",
+    "bgcolor": "grey",
+    "icon": "",
+    "payload": "x",
+    "payloadType": "str",
+    "topic": "stop",
+    "x": 110,
+    "y": 600,
+    "wires": [
+      [
+        "1db36e4f.8fd562"
+      ]
+    ]
+  },
+  {
+    "id": "cafc91d8.85fd3",
+    "type": "ui_text",
+    "z": "f7610a0.d8198f8",
+    "group": "903ce37b.b2576",
+    "order": 5,
+    "width": "9",
+    "height": "1",
+    "name": "line2",
+    "label": "",
+    "format": "{{msg.payload}}",
+    "layout": "row-left",
+    "x": 930,
+    "y": 740,
+    "wires": []
+  },
+  {
+    "id": "27663aa9.2e5636",
+    "type": "ui_text",
+    "z": "f7610a0.d8198f8",
+    "group": "903ce37b.b2576",
+    "order": 7,
+    "width": "9",
+    "height": "1",
+    "name": "line3",
+    "label": "",
+    "format": "{{msg.payload}}",
+    "layout": "row-left",
+    "x": 930,
+    "y": 754,
+    "wires": []
+  },
+  {
+    "id": "62d2d252.d2b29c",
+    "type": "ui_text",
+    "z": "f7610a0.d8198f8",
+    "group": "903ce37b.b2576",
+    "order": 9,
+    "width": "9",
+    "height": "1",
+    "name": "line4",
+    "label": "",
+    "format": "{{msg.payload}}",
+    "layout": "row-left",
+    "x": 930,
+    "y": 774,
+    "wires": []
+  },
+  {
+    "id": "c5efaa64.4e64f8",
+    "type": "ui_text",
+    "z": "f7610a0.d8198f8",
+    "group": "903ce37b.b2576",
+    "order": 11,
+    "width": "9",
+    "height": "1",
+    "name": "line5",
+    "label": "",
+    "format": "{{msg.payload}}",
+    "layout": "row-left",
+    "x": 930,
+    "y": 794,
+    "wires": []
+  },
+  {
+    "id": "83b5f943.719fe8",
+    "type": "template",
+    "z": "f7610a0.d8198f8",
+    "name": "recipe",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "json",
+    "syntax": "plain",
+    "template": "{\n    \"name\": \"Pale Ale\",\n    \"comment\": \"www.hobbybrauserversand.de\",\n    \"steps\": [\n        {\n            \"id\": 1,\n            \"step\": \"Einmaischen\",\n            \"temperature\": 61,\n            \"duration\": 10,\n            \"hysteresis\": 1.0,\n            \"alarm\": [0] \n        },\n        {\n            \"id\": 2,\n            \"step\": \"Maltoserast\",\n            \"temperature\": 62,\n            \"duration\": 45,\n            \"hysteresis\": 1.0\n        },\n        {\n            \"id\": 3,\n            \"step\": \"Verzuckerung\",\n            \"temperature\": 71,\n            \"duration\": 30,\n            \"hysteresis\": 1.0\n        },\n        {\n            \"id\": 4,\n            \"step\": \"Abmaischen\",\n            \"temperature\": 78,\n            \"duration\": 10,\n            \"hysteresis\": 1.0\n        },\n        {\n            \"id\": 5,\n            \"step\": \"Pause\",\n            \"temperature\": 10,\n            \"duration\": 1000\n        },\n        {\n            \"id\": 6,\n            \"step\": \"Kochen\",\n            \"temperature\": 100,\n            \"duration\": 90,\n            \"hysteresis\": 0.1,\n            \"alarm\": [20, 85]\n        }\n    ]\n}",
+    "output": "str",
+    "x": 230,
+    "y": 780,
+    "wires": [
+      [
+        "8ee58300.4c0ab"
+      ]
+    ]
+  },
+  {
+    "id": "9178a1a6.5de78",
+    "type": "splitter",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "property": "payload.steps",
+    "x": 470,
+    "y": 780,
+    "wires": [
+      [
+        "13746d4a.adb6b3"
+      ]
+    ]
+  },
+  {
+    "id": "8ee58300.4c0ab",
+    "type": "json",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "pretty": false,
+    "x": 350,
+    "y": 780,
+    "wires": [
+      [
+        "a20e9284.ab2a4",
+        "9178a1a6.5de78",
+        "1db36e4f.8fd562"
+      ]
+    ]
+  },
+  {
+    "id": "45dd7343.b664dc",
+    "type": "switch",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "property": "id",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "1",
+        "vt": "num"
+      },
+      {
+        "t": "eq",
+        "v": "2",
+        "vt": "num"
+      },
+      {
+        "t": "eq",
+        "v": "3",
+        "vt": "num"
+      },
+      {
+        "t": "eq",
+        "v": "4",
+        "vt": "num"
+      },
+      {
+        "t": "eq",
+        "v": "5",
+        "vt": "num"
+      },
+      {
+        "t": "eq",
+        "v": "6",
+        "vt": "num"
+      },
+      {
+        "t": "eq",
+        "v": "7",
+        "vt": "num"
+      },
+      {
+        "t": "eq",
+        "v": "8",
+        "vt": "num"
+      }
+    ],
+    "checkall": "true",
+    "outputs": 8,
+    "x": 790,
+    "y": 780,
+    "wires": [
+      [
+        "55b144a5.3cc28c"
+      ],
+      [
+        "cafc91d8.85fd3"
+      ],
+      [
+        "27663aa9.2e5636"
+      ],
+      [
+        "62d2d252.d2b29c"
+      ],
+      [
+        "c5efaa64.4e64f8"
+      ],
+      [
+        "4ce38a2d.afc724"
+      ],
+      [
+        "6493c2fd.ef9f7c"
+      ],
+      [
+        "8ea860fb.5408f"
+      ]
+    ]
+  },
+  {
+    "id": "13746d4a.adb6b3",
+    "type": "change",
+    "z": "f7610a0.d8198f8",
+    "name": "line text",
+    "rules": [
+      {
+        "t": "set",
+        "p": "id",
+        "pt": "msg",
+        "to": "payload.id",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "\"[\" & payload.id & \"] \" & payload.step & \": \" & payload.temperature & \"°C für \" & payload.duration & \"min\"",
+        "tot": "jsonata"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 601,
+    "y": 780,
+    "wires": [
+      [
+        "45dd7343.b664dc"
+      ]
+    ]
+  },
+  {
+    "id": "23c6faa6.f1a456",
+    "type": "inject",
+    "z": "f7610a0.d8198f8",
+    "name": "load",
+    "topic": "recipe",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": true,
+    "x": 110,
+    "y": 780,
+    "wires": [
+      [
+        "83b5f943.719fe8"
+      ]
+    ]
+  },
+  {
+    "id": "d4024786.7bc568",
+    "type": "ui_switch",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "label": "",
+    "group": "903ce37b.b2576",
+    "order": 10,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "true",
+    "onvalueType": "bool",
+    "onicon": "play_arrow",
+    "oncolor": "green",
+    "offvalue": "false",
+    "offvalueType": "bool",
+    "officon": "indeterminate_check_box",
+    "offcolor": "grey",
+    "x": 930,
+    "y": 580,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "505853c5.39bbac",
+    "type": "ui_switch",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "label": "",
+    "group": "903ce37b.b2576",
+    "order": 4,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "true",
+    "onvalueType": "bool",
+    "onicon": "play_arrow",
+    "oncolor": "green",
+    "offvalue": "false",
+    "offvalueType": "bool",
+    "officon": "indeterminate_check_box",
+    "offcolor": "grey",
+    "x": 930,
+    "y": 520,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "19ae8bd8.81cf64",
+    "type": "ui_switch",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "label": "",
+    "group": "903ce37b.b2576",
+    "order": 6,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "true",
+    "onvalueType": "bool",
+    "onicon": "play_arrow",
+    "oncolor": "green",
+    "offvalue": "false",
+    "offvalueType": "bool",
+    "officon": "indeterminate_check_box",
+    "offcolor": "grey",
+    "x": 930,
+    "y": 540,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "401d82b4.b5fedc",
+    "type": "ui_switch",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "label": "",
+    "group": "903ce37b.b2576",
+    "order": 8,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "true",
+    "onvalueType": "bool",
+    "onicon": "play_arrow",
+    "oncolor": "green",
+    "offvalue": "false",
+    "offvalueType": "bool",
+    "officon": "indeterminate_check_box",
+    "offcolor": "grey",
+    "x": 930,
+    "y": 560,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "55b144a5.3cc28c",
+    "type": "ui_text",
+    "z": "f7610a0.d8198f8",
+    "group": "903ce37b.b2576",
+    "order": 3,
+    "width": "9",
+    "height": "1",
+    "name": "line1",
+    "label": "",
+    "format": "{{msg.payload}}",
+    "layout": "row-left",
+    "x": 930,
+    "y": 720,
+    "wires": []
+  },
+  {
+    "id": "1dc68892.ac81c7",
+    "type": "ui_switch",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "label": "",
+    "group": "903ce37b.b2576",
+    "order": 2,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "true",
+    "onvalueType": "bool",
+    "onicon": "play_arrow",
+    "oncolor": "green",
+    "offvalue": "false",
+    "offvalueType": "bool",
+    "officon": "indeterminate_check_box",
+    "offcolor": "grey",
+    "x": 930,
+    "y": 500,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "1db36e4f.8fd562",
+    "type": "function",
+    "z": "f7610a0.d8198f8",
+    "name": "scheduler",
+    "func": "// junand 20.09.2017\n\nfunction getStopMessages ( topic ) {\n    \n    return [\n        { topic: topic||\"stop\", payload: \"x\" },\n        [\n            { id: 0, payload: false },\n            { id: 1, payload: false },\n            { id: 2, payload: false },\n            { id: 3, payload: false },\n            { id: 4, payload: false },\n            { id: 5, payload: false },\n            { id: 6, payload: false },\n            { id: 7, payload: false }\n        ]\n    ];\n\n}\n\nfunction createDateString ( d ) {\n\n    var datestring = \n        (\"0\" + d.getDate ()).slice ( -2 ) + \"-\" + \n        (\"0\" + (d.getMonth () + 1)).slice ( -2 ) + \"-\" +\n        d.getFullYear () + \" \" + \n        (\"0\" + d.getHours ()).slice ( -2 ) + \":\" + \n        (\"0\" + d.getMinutes ()).slice ( -2 );\n\n    return datestring;        \n}\n\nfunction getStepMessages ( i ) {\n    \n    var recipe = context.get ( \"recipe\" );\n    if ( i === 0 ) { \n        recipe.brewStart = createDateString ( new Date () );\n        context.set ( \"recipe\", recipe );\n    }\n    if ( i < recipe.steps.length ) {\n        // start controller\n        context.set ( \"step\", i + 1 );\n        return [\n            {   \n                topic: \"start\", \n                recipeName: recipe.name,\n                brewStart: recipe.brewStart,\n                temperature: recipe.steps [i].temperature, \n                duration: recipe.steps [i].duration, \n                hysteresis: recipe.steps [i].hysteresis,\n                alarm: recipe.steps [i].alarm \n            },\n            [\n                { id: 0, payload: i === 0 ? true : false },\n                { id: 1, payload: i === 1 ? true : false },\n                { id: 2, payload: i === 2 ? true : false },\n                { id: 3, payload: i === 3 ? true : false },\n                { id: 4, payload: i === 4 ? true : false },\n                { id: 5, payload: i === 5 ? true : false },\n                { id: 6, payload: i === 6 ? true : false },\n                { id: 7, payload: i === 7 ? true : false }\n            ]\n        ];\n    }\n    else {\n        // stop controller\n        context.set ( \"step\", null );\n        return getStopMessages ( \"finished\" );\n    }\n\n}\n\nif ( msg.topic == \"recipe\" ) {\n    context.set ( \"recipe\", msg.payload );\n    return getStopMessages ();\n}\nelse if ( msg.topic == \"start\" ) {\n    context.set ( \"step\", 0 );\n    return getStepMessages ( 0 );\n}\nelse if ( msg.topic == \"stop\" ) {\n    context.set ( \"step\", null );\n    return getStopMessages ();\n}\nelse if ( msg.topic == \"step\" ) {\n    var step = context.get ( \"step\" );\n    if ( step ) return getStepMessages ( step );\n}\n",
+    "outputs": "2",
+    "noerr": 0,
+    "x": 540,
+    "y": 600,
+    "wires": [
+      [
+        "617730a.b4ef3d",
+        "f54b313d.4d42b"
+      ],
+      [
+        "4fb46268.4ec56c"
+      ]
+    ]
+  },
+  {
+    "id": "4fb46268.4ec56c",
+    "type": "switch",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "property": "id",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "0",
+        "vt": "num"
+      },
+      {
+        "t": "eq",
+        "v": "1",
+        "vt": "num"
+      },
+      {
+        "t": "eq",
+        "v": "2",
+        "vt": "num"
+      },
+      {
+        "t": "eq",
+        "v": "3",
+        "vt": "num"
+      },
+      {
+        "t": "eq",
+        "v": "4",
+        "vt": "num"
+      },
+      {
+        "t": "eq",
+        "v": "5",
+        "vt": "num"
+      },
+      {
+        "t": "eq",
+        "v": "6",
+        "vt": "num"
+      },
+      {
+        "t": "eq",
+        "v": "7",
+        "vt": "num"
+      }
+    ],
+    "checkall": "true",
+    "outputs": 8,
+    "x": 790,
+    "y": 572,
+    "wires": [
+      [
+        "1dc68892.ac81c7"
+      ],
+      [
+        "505853c5.39bbac"
+      ],
+      [
+        "19ae8bd8.81cf64"
+      ],
+      [
+        "401d82b4.b5fedc"
+      ],
+      [
+        "d4024786.7bc568"
+      ],
+      [
+        "d23bc3d.e52ce4"
+      ],
+      [
+        "9f5a85b8.a34698"
+      ],
+      [
+        "685b16a7.ec5958"
+      ]
+    ]
+  },
+  {
+    "id": "8d985d4d.cb751",
+    "type": "ui_button",
+    "z": "f7610a0.d8198f8",
+    "name": "next",
+    "group": "e1a7eb0b.d543f8",
+    "order": 4,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "label": "Weiter",
+    "color": "black",
+    "bgcolor": "white",
+    "icon": "",
+    "payload": "x",
+    "payloadType": "str",
+    "topic": "step",
+    "x": 109,
+    "y": 640,
+    "wires": [
+      [
+        "1db36e4f.8fd562"
+      ]
+    ]
+  },
+  {
+    "id": "4ce38a2d.afc724",
+    "type": "ui_text",
+    "z": "f7610a0.d8198f8",
+    "group": "903ce37b.b2576",
+    "order": 13,
+    "width": "9",
+    "height": "1",
+    "name": "line6",
+    "label": "",
+    "format": "{{msg.payload}}",
+    "layout": "row-left",
+    "x": 930,
+    "y": 814,
+    "wires": []
+  },
+  {
+    "id": "6493c2fd.ef9f7c",
+    "type": "ui_text",
+    "z": "f7610a0.d8198f8",
+    "group": "903ce37b.b2576",
+    "order": 15,
+    "width": "9",
+    "height": "1",
+    "name": "line7",
+    "label": "",
+    "format": "{{msg.payload}}",
+    "layout": "row-left",
+    "x": 930,
+    "y": 834,
+    "wires": []
+  },
+  {
+    "id": "8ea860fb.5408f",
+    "type": "ui_text",
+    "z": "f7610a0.d8198f8",
+    "group": "903ce37b.b2576",
+    "order": 17,
+    "width": "9",
+    "height": "1",
+    "name": "line8",
+    "label": "",
+    "format": "{{msg.payload}}",
+    "layout": "row-left",
+    "x": 930,
+    "y": 854,
+    "wires": []
+  },
+  {
+    "id": "d23bc3d.e52ce4",
+    "type": "ui_switch",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "label": "",
+    "group": "903ce37b.b2576",
+    "order": 12,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "true",
+    "onvalueType": "bool",
+    "onicon": "play_arrow",
+    "oncolor": "green",
+    "offvalue": "false",
+    "offvalueType": "bool",
+    "officon": "indeterminate_check_box",
+    "offcolor": "grey",
+    "x": 930,
+    "y": 600,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "9f5a85b8.a34698",
+    "type": "ui_switch",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "label": "",
+    "group": "903ce37b.b2576",
+    "order": 14,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "true",
+    "onvalueType": "bool",
+    "onicon": "play_arrow",
+    "oncolor": "green",
+    "offvalue": "false",
+    "offvalueType": "bool",
+    "officon": "indeterminate_check_box",
+    "offcolor": "grey",
+    "x": 930,
+    "y": 620,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "685b16a7.ec5958",
+    "type": "ui_switch",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "label": "",
+    "group": "903ce37b.b2576",
+    "order": 16,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "true",
+    "onvalueType": "bool",
+    "onicon": "play_arrow",
+    "oncolor": "green",
+    "offvalue": "false",
+    "offvalueType": "bool",
+    "officon": "indeterminate_check_box",
+    "offcolor": "grey",
+    "x": 930,
+    "y": 640,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "c7879e27.30b6c",
+    "type": "ui_text",
+    "z": "f7610a0.d8198f8",
+    "group": "903ce37b.b2576",
+    "order": 18,
+    "width": "10",
+    "height": "2",
+    "name": "ticker",
+    "label": "",
+    "format": "{{msg.payload}} min",
+    "layout": "col-center",
+    "x": 930,
+    "y": 380,
+    "wires": []
+  },
+  {
+    "id": "a20e9284.ab2a4",
+    "type": "ui_text",
+    "z": "f7610a0.d8198f8",
+    "group": "903ce37b.b2576",
+    "order": 1,
+    "width": 0,
+    "height": 0,
+    "name": "recipe name",
+    "label": "",
+    "format": "{{msg.payload.name}}",
+    "layout": "row-left",
+    "x": 950,
+    "y": 680,
+    "wires": []
+  },
+  {
+    "id": "2fd74a54.02a7b6",
+    "type": "ui_audio",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "group": "e1a7eb0b.d543f8",
+    "voice": "0",
+    "always": "",
+    "x": 940,
+    "y": 420,
+    "wires": []
+  },
+  {
+    "id": "6cdd6de1.362d24",
+    "type": "file in",
+    "z": "f7610a0.d8198f8",
+    "name": "mp3",
+    "filename": "/data/wecker.mp3",
+    "format": "",
+    "chunk": false,
+    "sendError": false,
+    "x": 810,
+    "y": 420,
+    "wires": [
+      [
+        "2fd74a54.02a7b6"
+      ]
+    ]
+  },
+  {
+    "id": "aa42308b.3e996",
+    "type": "ui_switch",
+    "z": "f7610a0.d8198f8",
+    "name": "socket",
+    "label": "Heizung",
+    "group": "e1a7eb0b.d543f8",
+    "order": 5,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "decouple": "false",
+    "topic": "nodes@home/switch/sonoff/brewery/socket",
+    "style": "",
+    "onvalue": "ON",
+    "onvalueType": "str",
+    "onicon": "",
+    "oncolor": "",
+    "offvalue": "OFF",
+    "offvalueType": "str",
+    "officon": "",
+    "offcolor": "",
+    "x": 230,
+    "y": 200,
+    "wires": [
+      [
+        "9df68206.7eef8",
+        "d26fb24c.d2df7",
+        "617730a.b4ef3d"
+      ]
+    ]
+  },
+  {
+    "id": "fb523284.265d6",
+    "type": "mqtt in",
+    "z": "f7610a0.d8198f8",
+    "name": "mqtt",
+    "topic": "nodes@home/switch/sonoff/brewery/socket/value/state",
+    "qos": "1",
+    "broker": "b633c301.c253c",
+    "x": 110,
+    "y": 200,
+    "wires": [
+      [
+        "aa42308b.3e996"
+      ]
+    ]
+  },
+  {
+    "id": "95dd237f.744c8",
+    "type": "comment",
+    "z": "f7610a0.d8198f8",
+    "name": "Manuelle Steuerung",
+    "info": "",
+    "x": 150,
+    "y": 160,
+    "wires": []
+  },
+  {
+    "id": "456b2164.e3f2e",
+    "type": "comment",
+    "z": "f7610a0.d8198f8",
+    "name": "Steuerung Rezeptur",
+    "info": "",
+    "x": 150,
+    "y": 520,
+    "wires": []
+  },
+  {
+    "id": "dd37fead.7e6b4",
+    "type": "comment",
+    "z": "f7610a0.d8198f8",
+    "name": "Hysterese einstellen",
+    "info": "",
+    "x": 150,
+    "y": 60,
+    "wires": []
+  },
+  {
+    "id": "725733d2.a2e4fc",
+    "type": "ui_numeric",
+    "z": "f7610a0.d8198f8",
+    "name": "hysteresis",
+    "label": "Hysterese",
+    "group": "e1a7eb0b.d543f8",
+    "order": 1,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "topic": "hysteresis",
+    "format": "{{value}}",
+    "min": 0,
+    "max": "5.0",
+    "step": "0.1",
+    "x": 380,
+    "y": 100,
+    "wires": [
+      [
+        "617730a.b4ef3d"
+      ]
+    ]
+  },
+  {
+    "id": "f54b313d.4d42b",
+    "type": "switch",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "property": "topic",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "start",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "outputs": 1,
+    "x": 110,
+    "y": 100,
+    "wires": [
+      [
+        "f154e6db.0ee738"
+      ]
+    ]
+  },
+  {
+    "id": "f154e6db.0ee738",
+    "type": "change",
+    "z": "f7610a0.d8198f8",
+    "name": "mv",
+    "rules": [
+      {
+        "t": "move",
+        "p": "hysteresis",
+        "pt": "msg",
+        "to": "payload",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 240,
+    "y": 100,
+    "wires": [
+      [
+        "725733d2.a2e4fc"
+      ]
+    ]
+  },
+  {
+    "id": "9e3b0ec0.72348",
+    "type": "ui_button",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "group": "e1a7eb0b.d543f8",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "passthru": false,
+    "label": "100°C",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "{\"brew\":100,\"outer\":20}",
+    "payloadType": "str",
+    "topic": "",
+    "x": 110,
+    "y": 440,
+    "wires": [
+      [
+        "997780d6.e1dd5"
+      ]
+    ]
+  },
+  {
+    "id": "4b6bbf56.90a31",
+    "type": "influxdb out",
+    "z": "f7610a0.d8198f8",
+    "influxdb": "1a9412b.dfe4aed",
+    "name": "influxdb",
+    "measurement": "brews2017",
+    "precision": "",
+    "retentionPolicy": "",
+    "x": 940,
+    "y": 460,
+    "wires": []
+  },
+  {
+    "id": "bf6ce8b1.9ea918",
+    "type": "ui_button",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "group": "e1a7eb0b.d543f8",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "passthru": false,
+    "label": "20°C",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "{\"brew\":20,\"outer\":10}",
+    "payloadType": "str",
+    "topic": "",
+    "x": 110,
+    "y": 460,
+    "wires": [
+      [
+        "997780d6.e1dd5"
+      ]
+    ]
+  },
+  {
+    "id": "f14b3d6.612cec",
+    "type": "ui_gauge",
+    "z": "f7610a0.d8198f8",
+    "name": "outer temperature",
+    "group": "165a13ba.7f27ec",
+    "order": 3,
+    "width": 0,
+    "height": 0,
+    "gtype": "gage",
+    "title": "Außen",
+    "label": "°C",
+    "format": "{{value | number:1}}",
+    "min": 0,
+    "max": "40",
+    "colors": [
+      "#0000ff",
+      "#ff00ff",
+      "#ca3838"
+    ],
+    "seg1": "10",
+    "seg2": "23",
+    "x": 970,
+    "y": 220,
+    "wires": []
+  },
+  {
+    "id": "5bcc022d.16b5cc",
+    "type": "mqtt in",
+    "z": "f7610a0.d8198f8",
+    "name": "mqtt",
+    "topic": "nodes@home/sensor/ds18b20/brewery/value/temperature",
+    "qos": "1",
+    "broker": "b633c301.c253c",
+    "x": 110,
+    "y": 400,
+    "wires": [
+      [
+        "997780d6.e1dd5"
+      ]
+    ]
+  },
+  {
+    "id": "997780d6.e1dd5",
+    "type": "json",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "pretty": false,
+    "x": 230,
+    "y": 399,
+    "wires": [
+      [
+        "617730a.b4ef3d",
+        "33fc0b3c.c86a54",
+        "2e2c30df.48b3b"
+      ]
+    ]
+  },
+  {
+    "id": "959e8caa.34d12",
+    "type": "comment",
+    "z": "f7610a0.d8198f8",
+    "name": "Temperatursensor",
+    "info": "",
+    "x": 150,
+    "y": 360,
+    "wires": []
+  },
+  {
+    "id": "d280f7b1.202c08",
+    "type": "change",
+    "z": "f7610a0.d8198f8",
+    "name": "blank",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "[]",
+        "tot": "json"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 390,
+    "y": 520,
+    "wires": [
+      [
+        "4da30c15.2fab94"
+      ]
+    ]
+  },
+  {
+    "id": "ecc934a9.ed7898",
+    "type": "mqtt in",
+    "z": "f7610a0.d8198f8",
+    "name": "mqtt",
+    "topic": "nodes@home/sensor/ds18b20/brewery/value/voltage",
+    "qos": "1",
+    "broker": "b633c301.c253c",
+    "x": 530,
+    "y": 100,
+    "wires": [
+      [
+        "ed05005b.00cd7"
+      ]
+    ]
+  },
+  {
+    "id": "ed05005b.00cd7",
+    "type": "json",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "pretty": false,
+    "x": 650,
+    "y": 100,
+    "wires": [
+      [
+        "3f414587.a861da"
+      ]
+    ]
+  },
+  {
+    "id": "3f414587.a861da",
+    "type": "change",
+    "z": "f7610a0.d8198f8",
+    "name": "get value",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload.value / 1000",
+        "tot": "jsonata"
+      },
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "value",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 800,
+    "y": 100,
+    "wires": [
+      [
+        "4ab701e.658a6",
+        "9f4a0d6b.cfd71"
+      ]
+    ]
+  },
+  {
+    "id": "b3ba783a.dd56b8",
+    "type": "comment",
+    "z": "f7610a0.d8198f8",
+    "name": "Akkuspannung",
+    "info": "",
+    "x": 560,
+    "y": 60,
+    "wires": []
+  },
+  {
+    "id": "4ab701e.658a6",
+    "type": "ui_gauge",
+    "z": "f7610a0.d8198f8",
+    "name": "voltage",
+    "group": "6f6ec204.ae7e8c",
+    "order": 2,
+    "width": 0,
+    "height": 0,
+    "gtype": "gage",
+    "title": "Akku",
+    "label": "V",
+    "format": "{{value | number:2}}",
+    "min": "3.5",
+    "max": "4.2",
+    "colors": [
+      "#ff0000",
+      "#ffff00",
+      "#008000"
+    ],
+    "seg1": "3.7",
+    "seg2": "3.95",
+    "x": 940,
+    "y": 100,
+    "wires": []
+  },
+  {
+    "id": "9f4a0d6b.cfd71",
+    "type": "ui_chart",
+    "z": "f7610a0.d8198f8",
+    "name": "chart",
+    "group": "6f6ec204.ae7e8c",
+    "order": 1,
+    "width": 0,
+    "height": 0,
+    "label": "Spannungsverlauf",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "---",
+    "dot": false,
+    "ymin": "3.5",
+    "ymax": "4.2",
+    "removeOlder": "2",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "3600",
+    "cutout": 0,
+    "colors": [
+      "#8080ff",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "useOldStyle": false,
+    "x": 930,
+    "y": 60,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "2e2c30df.48b3b",
+    "type": "change",
+    "z": "f7610a0.d8198f8",
+    "name": "get value",
+    "rules": [
+      {
+        "t": "move",
+        "p": "payload.outer",
+        "pt": "msg",
+        "to": "payload",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 800,
+    "y": 220,
+    "wires": [
+      [
+        "f14b3d6.612cec"
+      ]
     ]
   }
 ]
