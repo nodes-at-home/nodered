@@ -357,14 +357,15 @@
     "type": "function",
     "z": "c9cf8bbb.029148",
     "name": "mqtt payload",
-    "func": "// junand 15.01.2017\n// convert open weather forecast to pixel node message structure\n//\n// the payload is the 5 day forecast from open weather\n// msg.payload [0] -> today\n// msg.payload [1] -> tomorrow\n// ...\n// msg.payload [4] -> ...\n\nfunction temperatureMessage ( day, temp ) {\n    return day + \" \" + temp.night + \"°C bis \" + temp.day + \"°C\";\n}\n\nfunction descriptionMessage ( day, description ) {\n    return day + \" \" + description;\n}\n\nvar messages = {\n/*    display: {\n        duration: 5\n    }, */\n    messages: [ \n        { line:2, text: temperatureMessage ( \"heute\", msg.payload [0].temp ) },\n        { line:3, text: descriptionMessage ( \"heute\", msg.payload [0].weather [0].description ) },\n        { line:4, text: temperatureMessage ( \"morgen\", msg.payload [1].temp ) },\n        { line:5, text: descriptionMessage ( \"morgen\", msg.payload [1].weather [0].description ) }\n    ] \n};\n\nmsg.payload = messages; // preserve msg attributes!!!\n\nreturn msg;",
+    "func": "// junand 15.01.2017\n// convert open weather forecast to pixel node message structure\n//\n// the payload is the 5 day forecast from open weather, with every 3 hor forecast\n// msg.payload [0] -> now\n// msg.payload [1] -> +3h\n// ...\n// msg.payload [40] -> ...\n\nfunction temperatureMessage ( day, min, max ) {\n    return day + \" \" + min + \"°C bis \" + max + \"°C\";\n}\n\nfunction descriptionMessage ( day, description ) {\n//    return day + \" \" + description;\n    return day + \" \" + description.charAt ( 0 ).toLowerCase () + description.slice ( 1 );\n}\n\n// calculate min/max temp\nvar per3h = msg.payload;\nvar todayDate = per3h [0].dt_txt.split ( \" \" ) [0];\nvar tomorrowDate = per3h [8].dt_txt.split ( \" \" ) [0]; // next day\n\nvar todayMinTemp = 999;\nvar todayMaxTemp = -999;\nvar tomorrowMinTemp = 999;\nvar tomorrowMaxTemp = -999;\n\nfor ( var i = 0; i < 16; i++ ) { // check only the first two day\n    var dt = per3h [i].dt_txt.split ( \" \" );\n    if ( dt [0] === todayDate ) {\n        if ( per3h [i].main.temp_min < todayMinTemp ) todayMinTemp = per3h [i].main.temp_min;\n        if ( per3h [i].main.temp_max > todayMaxTemp ) todayMaxTemp = per3h [i].main.temp_max;\n    }\n    else if ( dt [0] === tomorrowDate ) {\n        if ( per3h [i].main.temp_min < tomorrowMinTemp ) tomorrowMinTemp = per3h [i].main.temp_min;\n        if ( per3h [i].main.temp_max > tomorrowMaxTemp ) tomorrowMaxTemp = per3h [i].main.temp_max;\n    }\n}\n\nvar messages = {\n/*    display: {\n        duration: 5\n    }, */\n    messages: [ \n        { line:2, text: temperatureMessage ( \"heute\", todayMinTemp, todayMaxTemp ) },\n        { line:3, text: descriptionMessage ( \"heute\", msg.payload [0].weather [0].description ) },\n        { line:4, text: temperatureMessage ( \"morgen\", tomorrowMinTemp, tomorrowMaxTemp ) },\n        { line:5, text: descriptionMessage ( \"morgen\", msg.payload [8].weather [0].description ) }\n    ] \n};\n\nmsg.payload = messages; // preserve msg attributes!!!\n\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
     "x": 550,
     "y": 205,
     "wires": [
       [
-        "21eb0961.7dd8c6"
+        "21eb0961.7dd8c6",
+        "a9844775.58dec8"
       ]
     ]
   },
@@ -5787,38 +5788,6 @@
     ]
   },
   {
-    "id": "aa42308b.3e996",
-    "type": "ui_switch",
-    "z": "f7610a0.d8198f8",
-    "name": "socket",
-    "label": "Heizung",
-    "group": "e1a7eb0b.d543f8",
-    "order": 5,
-    "width": 0,
-    "height": 0,
-    "passthru": true,
-    "decouple": "false",
-    "topic": "nodes@home/switch/sonoff/brewery/socket",
-    "style": "",
-    "onvalue": "ON",
-    "onvalueType": "str",
-    "onicon": "",
-    "oncolor": "",
-    "offvalue": "OFF",
-    "offvalueType": "str",
-    "officon": "",
-    "offcolor": "",
-    "x": 230,
-    "y": 200,
-    "wires": [
-      [
-        "9df68206.7eef8",
-        "d26fb24c.d2df7",
-        "617730a.b4ef3d"
-      ]
-    ]
-  },
-  {
     "id": "fb523284.265d6",
     "type": "mqtt in",
     "z": "f7610a0.d8198f8",
@@ -5830,7 +5799,8 @@
     "y": 200,
     "wires": [
       [
-        "aa42308b.3e996"
+        "d26fb24c.d2df7",
+        "617730a.b4ef3d"
       ]
     ]
   },
@@ -5940,31 +5910,6 @@
     ]
   },
   {
-    "id": "9e3b0ec0.72348",
-    "type": "ui_button",
-    "z": "f7610a0.d8198f8",
-    "name": "",
-    "group": "e1a7eb0b.d543f8",
-    "order": 0,
-    "width": 0,
-    "height": 0,
-    "passthru": false,
-    "label": "100°C",
-    "color": "",
-    "bgcolor": "",
-    "icon": "",
-    "payload": "{\"brew\":100,\"outer\":20}",
-    "payloadType": "str",
-    "topic": "",
-    "x": 110,
-    "y": 440,
-    "wires": [
-      [
-        "997780d6.e1dd5"
-      ]
-    ]
-  },
-  {
     "id": "4b6bbf56.90a31",
     "type": "influxdb out",
     "z": "f7610a0.d8198f8",
@@ -5976,31 +5921,6 @@
     "x": 940,
     "y": 460,
     "wires": []
-  },
-  {
-    "id": "bf6ce8b1.9ea918",
-    "type": "ui_button",
-    "z": "f7610a0.d8198f8",
-    "name": "",
-    "group": "e1a7eb0b.d543f8",
-    "order": 0,
-    "width": 0,
-    "height": 0,
-    "passthru": false,
-    "label": "20°C",
-    "color": "",
-    "bgcolor": "",
-    "icon": "",
-    "payload": "{\"brew\":20,\"outer\":10}",
-    "payloadType": "str",
-    "topic": "",
-    "x": 110,
-    "y": 460,
-    "wires": [
-      [
-        "997780d6.e1dd5"
-      ]
-    ]
   },
   {
     "id": "f14b3d6.612cec",
@@ -6265,5 +6185,27 @@
         "f14b3d6.612cec"
       ]
     ]
+  },
+  {
+    "id": "af1380b6.843cf",
+    "type": "comment",
+    "z": "c9cf8bbb.029148",
+    "name": "Rework open weather",
+    "info": "- call every 3h\n- compute for every whole day min/max temp",
+    "x": 770,
+    "y": 40,
+    "wires": []
+  },
+  {
+    "id": "a9844775.58dec8",
+    "type": "debug",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 780,
+    "y": 160,
+    "wires": []
   }
 ]
