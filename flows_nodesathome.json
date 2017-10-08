@@ -3255,22 +3255,15 @@
         "t": "set",
         "p": "payload_new.messages[0].text",
         "pt": "msg",
-        "to": "\"um \" & msg.select[0].rtTime & \" nach \" & msg.select[0].direction",
+        "to": "\"um \" & msg.payload[0].time & \" nach \" & msg.payload[0].direction",
         "tot": "jsonata"
       },
       {
         "t": "set",
         "p": "payload_new.messages[1].text",
         "pt": "msg",
-        "to": "\"um \" & msg.select[1].rtTime & \" nach \" & msg.select[1].direction",
+        "to": "\"um \" & msg.payload[1].time & \" nach \" & msg.payload[1].direction",
         "tot": "jsonata"
-      },
-      {
-        "t": "move",
-        "p": "payload",
-        "pt": "msg",
-        "to": "payload_old",
-        "tot": "msg"
       },
       {
         "t": "move",
@@ -3484,7 +3477,7 @@
     "type": "function",
     "z": "c9cf8bbb.029148",
     "name": "check time offset",
-    "func": "// junand 22.01.2017\n\nconst timezoneOffset = -new Date ().getTimezoneOffset ();\nconst offset = 10 * 60 * 1000 + timezoneOffset * 60 * 1000; // 10 min in ms + timezoneoffset\n\nvar result = [];\n\nconst now = new Date ().getTime ();\n\nfor ( var i = 0; i < msg.select.length; i++ ) {\n    \n    var departure = msg.select [i];\n    var date = new Date ( departure.rtDate + \"T\" + departure.rtTime );\n\n    if ( now + offset < date.getTime () ) {\n        result [result.length] = msg.select [i];\n    }\n    \n}\n\nmsg.select = result;\n\nreturn msg;",
+    "func": "// junand 22.01.2017\n\nif ( !msg.payload ) return null;\n\nconst timezoneOffset = -new Date ().getTimezoneOffset ();\nconst offset = 10 * 60 * 1000 + timezoneOffset * 60 * 1000; // 10 min in ms + timezoneoffset\n\nvar result = [];\n\nconst now = new Date ().getTime ();\n\nfor ( var i = 0; i < msg.payload.length; i++ ) {\n    \n    var departure = msg.payload [i];\n    var date = new Date ( departure.date + \"T\" + departure.time );\n\n    if ( now + offset < date.getTime () ) {\n        result [result.length] = msg.payload [i];\n    }\n    \n}\n\nmsg.payload = result;\n\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
     "x": 712,
@@ -3504,7 +3497,7 @@
     "rules": [
       {
         "t": "set",
-        "p": "select",
+        "p": "payload",
         "pt": "msg",
         "to": "msg.payload.Departure[Product.operatorCode='DBS']",
         "tot": "jsonata"
