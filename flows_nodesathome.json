@@ -3582,7 +3582,7 @@
       },
       {
         "t": "set",
-        "p": "payload",
+        "p": "topic",
         "pt": "msg",
         "to": "tmp[1] & \"/\" & tmp[2] & \"/\" & tmp[3]",
         "tot": "jsonata"
@@ -3591,6 +3591,13 @@
         "t": "delete",
         "p": "tmp",
         "pt": "msg"
+      },
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "dummy",
+        "tot": "str"
       }
     ],
     "action": "",
@@ -3612,7 +3619,7 @@
     "type": "switch",
     "z": "8e2c5c11.fae26",
     "name": "",
-    "property": "payload",
+    "property": "topic",
     "propertyType": "msg",
     "rules": [
       {
@@ -3816,7 +3823,8 @@
     "y": 880,
     "wires": [
       [
-        "f8817a0.bc2f188"
+        "f8817a0.bc2f188",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -3865,7 +3873,8 @@
     "y": 120,
     "wires": [
       [
-        "8e28218c.aadd4"
+        "8e28218c.aadd4",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -3914,7 +3923,8 @@
     "y": 160,
     "wires": [
       [
-        "bc70220c.686dc"
+        "bc70220c.686dc",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -3963,7 +3973,8 @@
     "y": 80,
     "wires": [
       [
-        "328aa148.35c13e"
+        "328aa148.35c13e",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -4012,7 +4023,8 @@
     "y": 200,
     "wires": [
       [
-        "8b2d5329.b5c28"
+        "8b2d5329.b5c28",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -4073,7 +4085,8 @@
     "y": 40,
     "wires": [
       [
-        "6e7e0db3.9a5294"
+        "6e7e0db3.9a5294",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -4122,7 +4135,8 @@
     "y": 240,
     "wires": [
       [
-        "1b1eda50.91f4c6"
+        "1b1eda50.91f4c6",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -4171,7 +4185,8 @@
     "y": 320,
     "wires": [
       [
-        "ed806de9.190b4"
+        "ed806de9.190b4",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -4220,7 +4235,8 @@
     "y": 280,
     "wires": [
       [
-        "623f7cc4.f7e694"
+        "623f7cc4.f7e694",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -4297,7 +4313,8 @@
     "y": 400,
     "wires": [
       [
-        "5b195719.2adeb8"
+        "5b195719.2adeb8",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -4318,7 +4335,8 @@
     "y": 440,
     "wires": [
       [
-        "3d00aea7.021082"
+        "3d00aea7.021082",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -4514,7 +4532,8 @@
     "y": 600,
     "wires": [
       [
-        "ed8d97b5.601ed8"
+        "ed8d97b5.601ed8",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -4563,7 +4582,8 @@
     "y": 640,
     "wires": [
       [
-        "4510ee2.d12641"
+        "4510ee2.d12641",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -4612,7 +4632,8 @@
     "y": 680,
     "wires": [
       [
-        "ef307e76.0f92f"
+        "ef307e76.0f92f",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -4661,7 +4682,8 @@
     "y": 720,
     "wires": [
       [
-        "313da23.1c2fd5e"
+        "313da23.1c2fd5e",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -4710,7 +4732,8 @@
     "y": 760,
     "wires": [
       [
-        "cd0b1092.27afb"
+        "cd0b1092.27afb",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -4759,7 +4782,8 @@
     "y": 800,
     "wires": [
       [
-        "9671647f.748cd8"
+        "9671647f.748cd8",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -4808,7 +4832,8 @@
     "y": 840,
     "wires": [
       [
-        "4827f00d.03286"
+        "4827f00d.03286",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -4857,7 +4882,8 @@
     "y": 360,
     "wires": [
       [
-        "dd0e73d3.559f3"
+        "dd0e73d3.559f3",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -6425,5 +6451,120 @@
         "45dd7343.b664dc"
       ]
     ]
+  },
+  {
+    "id": "f1399c8c.93ab8",
+    "type": "switch",
+    "z": "8e2c5c11.fae26",
+    "name": "",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "0",
+        "vt": "num"
+      }
+    ],
+    "checkall": "true",
+    "outputs": 1,
+    "x": 830,
+    "y": 1060,
+    "wires": [
+      [
+        "bf07b832.b1d128"
+      ]
+    ]
+  },
+  {
+    "id": "15a66c63.568814",
+    "type": "debug",
+    "z": "8e2c5c11.fae26",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "true",
+    "x": 1090,
+    "y": 1120,
+    "wires": []
+  },
+  {
+    "id": "1aa5792d.be0547",
+    "type": "inject",
+    "z": "8e2c5c11.fae26",
+    "name": "",
+    "topic": "",
+    "payload": "1",
+    "payloadType": "num",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 670,
+    "y": 1060,
+    "wires": [
+      [
+        "f1399c8c.93ab8"
+      ]
+    ]
+  },
+  {
+    "id": "d5d988d5.0c43b8",
+    "type": "http request",
+    "z": "8e2c5c11.fae26",
+    "name": "simplepush",
+    "method": "GET",
+    "ret": "txt",
+    "url": "",
+    "tls": "",
+    "x": 1100,
+    "y": 1060,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "bf07b832.b1d128",
+    "type": "change",
+    "z": "8e2c5c11.fae26",
+    "name": "url",
+    "rules": [
+      {
+        "t": "set",
+        "p": "node",
+        "pt": "msg",
+        "to": "$replace ( topic, \"/\", \"_\" ) & \" is not alive\"",
+        "tot": "jsonata"
+      },
+      {
+        "t": "set",
+        "p": "url",
+        "pt": "msg",
+        "to": "\"https://api.simplepush.io/send/Qz2wVh/\" & node & \"/event/nodes\"",
+        "tot": "jsonata"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 950,
+    "y": 1060,
+    "wires": [
+      [
+        "15a66c63.568814",
+        "d5d988d5.0c43b8"
+      ]
+    ]
+  },
+  {
+    "id": "a2ae81f3.6cd23",
+    "type": "comment",
+    "z": "8e2c5c11.fae26",
+    "name": "send msg to simplepush if trigger is outtimed",
+    "info": "",
+    "x": 950,
+    "y": 1020,
+    "wires": []
   }
 ]
