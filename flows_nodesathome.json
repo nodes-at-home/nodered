@@ -1187,7 +1187,8 @@
         "1111b8ca.abcf47",
         "fa776777.dc3d08",
         "ea4ab4e3.57dc68",
-        "fb143377.559be"
+        "fb143377.559be",
+        "30628acc.5130e6"
       ]
     ]
   },
@@ -1337,7 +1338,7 @@
     "payloadType": "date",
     "topic": "sensor/button/indoor",
     "x": 500,
-    "y": 521,
+    "y": 520,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -1361,7 +1362,7 @@
     "payloadType": "date",
     "topic": "sensor/button/garage",
     "x": 500,
-    "y": 560,
+    "y": 559,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -1372,20 +1373,21 @@
     "id": "7790a1e0.9fad4",
     "type": "ui_button",
     "z": "37197cb5.c49ee4",
-    "name": "update sensor/button/no3",
+    "name": "update sensor/button/pool",
     "group": "c39c0138.5637",
     "order": 4,
     "width": 0,
     "height": 0,
-    "label": "sensor/button/no3",
+    "passthru": false,
+    "label": "sensor/button/pool",
     "color": "",
     "bgcolor": "",
     "icon": "",
     "payload": "",
     "payloadType": "date",
-    "topic": "sensor/button/no3",
+    "topic": "sensor/button/pool",
     "x": 490,
-    "y": 598,
+    "y": 597,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -2457,20 +2459,21 @@
     "id": "aaa81c71.7f79d",
     "type": "ui_button",
     "z": "37197cb5.c49ee4",
-    "name": "update switch/sonoff/location1",
+    "name": "update switch/sonoff/brewery",
     "group": "1af04f91.de5e1",
     "order": 12,
     "width": 0,
     "height": 0,
-    "label": "switch/sonoff/location1",
+    "passthru": false,
+    "label": "switch/sonoff/brewery",
     "color": "",
     "bgcolor": "",
     "icon": "",
     "payload": "",
     "payloadType": "date",
-    "topic": "switch/sonoff/location1",
-    "x": 510,
-    "y": 640,
+    "topic": "switch/sonoff/brewery",
+    "x": 500,
+    "y": 960,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -2481,20 +2484,21 @@
     "id": "c5600b1.02ee7f8",
     "type": "ui_button",
     "z": "37197cb5.c49ee4",
-    "name": "update switch/sonoff/location2",
+    "name": "update switch/sonoff/location2 (pool)",
     "group": "1af04f91.de5e1",
     "order": 13,
     "width": 0,
     "height": 0,
-    "label": "switch/sonoff/location2",
+    "passthru": false,
+    "label": "switch/sonoff/location2 (pool)",
     "color": "",
     "bgcolor": "",
     "icon": "",
     "payload": "",
     "payloadType": "date",
     "topic": "switch/sonoff/location2",
-    "x": 510,
-    "y": 677,
+    "x": 530,
+    "y": 660,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -2518,7 +2522,7 @@
     "payloadType": "date",
     "topic": "switch/relay1/dining",
     "x": 500,
-    "y": 717,
+    "y": 700,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -2542,7 +2546,7 @@
     "payloadType": "date",
     "topic": "switch/relay2/dining",
     "x": 500,
-    "y": 756,
+    "y": 739,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -2665,7 +2669,7 @@
     "payloadType": "date",
     "topic": "switch/sonoff/yardgate",
     "x": 510,
-    "y": 797,
+    "y": 780,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -2676,20 +2680,21 @@
     "id": "1111b8ca.abcf47",
     "type": "ui_button",
     "z": "37197cb5.c49ee4",
-    "name": "update switch/sonoff/location3",
+    "name": "update switch/sonoff/location3 (gallery)",
     "group": "1af04f91.de5e1",
     "order": 14,
     "width": 0,
     "height": 0,
-    "label": "switch/sonoff/location3",
+    "passthru": false,
+    "label": "switch/sonoff/location3 (gallery)",
     "color": "",
     "bgcolor": "",
     "icon": "",
     "payload": "",
     "payloadType": "date",
     "topic": "switch/sonoff/location3",
-    "x": 510,
-    "y": 837,
+    "x": 530,
+    "y": 820,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -2713,7 +2718,7 @@
     "payloadType": "date",
     "topic": "switch/sonoff/location4",
     "x": 510,
-    "y": 877,
+    "y": 860,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -3452,20 +3457,21 @@
     "id": "fb143377.559be",
     "type": "ui_button",
     "z": "37197cb5.c49ee4",
-    "name": "update sensor/ds18b20/test",
+    "name": "update sensor/ds18b20/brewery",
     "group": "c39c0138.5637",
     "order": 5,
     "width": 0,
     "height": 0,
-    "label": "sensor/ds18b20/test",
+    "passthru": false,
+    "label": "sensor/ds18b20/brewery",
     "color": "",
     "bgcolor": "",
     "icon": "",
     "payload": "",
     "payloadType": "date",
-    "topic": "sensor/ds18b20/test",
-    "x": 500,
-    "y": 940,
+    "topic": "sensor/ds18b20/brewery",
+    "x": 510,
+    "y": 920,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -6566,5 +6572,30 @@
     "x": 950,
     "y": 1020,
     "wires": []
+  },
+  {
+    "id": "30628acc.5130e6",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update light/sonoff/kitchen",
+    "group": "1af04f91.de5e1",
+    "order": 12,
+    "width": 0,
+    "height": 0,
+    "passthru": false,
+    "label": "light/sonoff/kitchen",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "light/sonoff/kitchen",
+    "x": 490,
+    "y": 1020,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
   }
 ]
