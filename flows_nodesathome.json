@@ -34,6 +34,13 @@
     "info": ""
   },
   {
+    "id": "65bfe802.954608",
+    "type": "tab",
+    "label": "ambient",
+    "disabled": false,
+    "info": ""
+  },
+  {
     "id": "87853f2c.dd34d",
     "type": "tab",
     "label": "config lua nodes",
@@ -201,47 +208,11 @@
     "width": "6"
   },
   {
-    "id": "12be5e5d.0d0f22",
-    "type": "mqtt-broker",
-    "z": "",
-    "broker": "192.168.2.117",
-    "port": "1883",
-    "clientid": "",
-    "usetls": false,
-    "compatmode": true,
-    "keepalive": "60",
-    "cleansession": true,
-    "willTopic": "",
-    "willQos": "0",
-    "willPayload": "",
-    "birthTopic": "",
-    "birthQos": "0",
-    "birthPayload": ""
-  },
-  {
     "id": "6ced38ac.829508",
     "type": "websocket-listener",
     "z": "",
     "path": "/mqtt_to_websocket",
     "wholemsg": "true"
-  },
-  {
-    "id": "f96cb939.bb8478",
-    "type": "mqtt-broker",
-    "z": "",
-    "broker": "10.0.75.1",
-    "port": "1883",
-    "clientid": "",
-    "usetls": false,
-    "compatmode": true,
-    "keepalive": "60",
-    "cleansession": true,
-    "willTopic": "",
-    "willQos": "0",
-    "willPayload": "",
-    "birthTopic": "",
-    "birthQos": "0",
-    "birthPayload": ""
   },
   {
     "id": "c39c0138.5637",
@@ -250,15 +221,6 @@
     "name": "Nodes 2",
     "tab": "cffdbc2a.4ba77",
     "order": 3,
-    "disp": true,
-    "width": "6"
-  },
-  {
-    "id": "a0f6a6f6.d9d1e8",
-    "type": "ui_group",
-    "z": "",
-    "name": "Alive",
-    "tab": "",
     "disp": true,
     "width": "6"
   },
@@ -299,24 +261,6 @@
     "order": 3,
     "disp": true,
     "width": "6"
-  },
-  {
-    "id": "b633c301.c253c",
-    "type": "mqtt-broker",
-    "z": "",
-    "broker": "192.168.2.117",
-    "port": "1883",
-    "clientid": "",
-    "usetls": false,
-    "compatmode": true,
-    "keepalive": "60",
-    "cleansession": true,
-    "willTopic": "",
-    "willQos": "0",
-    "willPayload": "",
-    "birthTopic": "",
-    "birthQos": "0",
-    "birthPayload": ""
   },
   {
     "id": "165a13ba.7f27ec",
@@ -377,6 +321,18 @@
     "name": "Brauerei",
     "icon": "dashboard",
     "order": 3
+  },
+  {
+    "id": "9f5822ca.ea672",
+    "type": "influxdb",
+    "z": "",
+    "hostname": "127.0.0.1",
+    "port": "8086",
+    "protocol": "http",
+    "database": "ambient",
+    "name": "",
+    "usetls": false,
+    "tls": ""
   },
   {
     "id": "1f55c701.4fff39",
@@ -2155,7 +2111,7 @@
     "name": "mqtt: # [prod]",
     "topic": "#",
     "qos": "0",
-    "broker": "12be5e5d.0d0f22",
+    "broker": "f093b8cc.ff2b58",
     "x": 130,
     "y": 260,
     "wires": [
@@ -2235,22 +2191,6 @@
       [
         "f43c0223.f99c2",
         "438104f3.61c9dc"
-      ]
-    ]
-  },
-  {
-    "id": "dbe92d76.72196",
-    "type": "mqtt in",
-    "z": "a09e2385.86b3b",
-    "name": "mqtt: # [dev]",
-    "topic": "#",
-    "qos": "0",
-    "broker": "f96cb939.bb8478",
-    "x": 130,
-    "y": 340,
-    "wires": [
-      [
-        "66af373f.8f6ab8"
       ]
     ]
   },
@@ -2345,7 +2285,7 @@
     "topic": "",
     "qos": "0",
     "retain": "false",
-    "broker": "12be5e5d.0d0f22",
+    "broker": "f093b8cc.ff2b58",
     "x": 930,
     "y": 100,
     "wires": []
@@ -2795,7 +2735,7 @@
     "name": "",
     "topic": "nodes@home/+/+/+/value/voltage",
     "qos": "0",
-    "broker": "12be5e5d.0d0f22",
+    "broker": "f093b8cc.ff2b58",
     "x": 180,
     "y": 100,
     "wires": [
@@ -2971,7 +2911,7 @@
     "name": "",
     "topic": "nodes@home/+/+/+/value/error",
     "qos": "0",
-    "broker": "12be5e5d.0d0f22",
+    "broker": "f093b8cc.ff2b58",
     "x": 170,
     "y": 598,
     "wires": [
@@ -3554,7 +3494,7 @@
     "name": "",
     "topic": "nodes@home/+/+/+/value/voltage",
     "qos": "2",
-    "broker": "12be5e5d.0d0f22",
+    "broker": "f093b8cc.ff2b58",
     "x": 170,
     "y": 440,
     "wires": [
@@ -3737,10 +3677,15 @@
         "t": "eq",
         "v": "sensor/ds18b20/brewery",
         "vt": "str"
+      },
+      {
+        "t": "eq",
+        "v": "sensor/gesture/kitchen",
+        "vt": "str"
       }
     ],
     "checkall": "true",
-    "outputs": 22,
+    "outputs": 23,
     "x": 570,
     "y": 440,
     "wires": [
@@ -3809,6 +3754,9 @@
       ],
       [
         "1a9a4c68.211884"
+      ],
+      [
+        "2de52c61.1624f4"
       ]
     ]
   },
@@ -4979,7 +4927,7 @@
     "topic": "nodes@home/switch/sonoff/brewery/socket",
     "qos": "1",
     "retain": "false",
-    "broker": "b633c301.c253c",
+    "broker": "f093b8cc.ff2b58",
     "x": 591,
     "y": 180,
     "wires": []
@@ -5868,7 +5816,7 @@
     "name": "mqtt",
     "topic": "nodes@home/switch/sonoff/brewery/socket/value/state",
     "qos": "1",
-    "broker": "b633c301.c253c",
+    "broker": "f093b8cc.ff2b58",
     "x": 110,
     "y": 200,
     "wires": [
@@ -6029,7 +5977,7 @@
     "name": "mqtt",
     "topic": "nodes@home/sensor/ds18b20/brewery/value/temperature",
     "qos": "1",
-    "broker": "b633c301.c253c",
+    "broker": "f093b8cc.ff2b58",
     "x": 110,
     "y": 400,
     "wires": [
@@ -6098,7 +6046,7 @@
     "name": "mqtt",
     "topic": "nodes@home/sensor/ds18b20/brewery/value/voltage",
     "qos": "1",
-    "broker": "b633c301.c253c",
+    "broker": "f093b8cc.ff2b58",
     "x": 530,
     "y": 100,
     "wires": [
@@ -6487,7 +6435,7 @@
     "type": "debug",
     "z": "8e2c5c11.fae26",
     "name": "",
-    "active": true,
+    "active": false,
     "console": "false",
     "complete": "true",
     "x": 1090,
@@ -6597,5 +6545,121 @@
         "6ed6dc87.f74a94"
       ]
     ]
+  },
+  {
+    "id": "2de52c61.1624f4",
+    "type": "trigger",
+    "z": "8e2c5c11.fae26",
+    "op1": "1",
+    "op2": "0",
+    "op1type": "str",
+    "op2type": "str",
+    "duration": "20",
+    "extend": true,
+    "units": "min",
+    "reset": "",
+    "name": "",
+    "x": 799,
+    "y": 920,
+    "wires": [
+      [
+        "89703dc8.54a22",
+        "f1399c8c.93ab8"
+      ]
+    ]
+  },
+  {
+    "id": "89703dc8.54a22",
+    "type": "ui_switch",
+    "z": "8e2c5c11.fae26",
+    "name": "",
+    "label": "sensor/gesture/kitchen",
+    "group": "4759591f.23c438",
+    "order": 5,
+    "width": 0,
+    "height": 0,
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "1",
+    "onvalueType": "str",
+    "onicon": "done",
+    "oncolor": "green",
+    "offvalue": "0",
+    "offvalueType": "str",
+    "officon": "error_outline",
+    "offcolor": "red",
+    "x": 1009,
+    "y": 920,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "3cbd592a.4b97f6",
+    "type": "comment",
+    "z": "65bfe802.954608",
+    "name": "track ambient values from gesture node",
+    "info": "",
+    "x": 250,
+    "y": 80,
+    "wires": []
+  },
+  {
+    "id": "4246d070.f16f5",
+    "type": "mqtt in",
+    "z": "65bfe802.954608",
+    "name": "ambient",
+    "topic": "nodes@home/sensor/gesture/kitchen/value/ambient",
+    "qos": "2",
+    "broker": "f093b8cc.ff2b58",
+    "x": 150,
+    "y": 140,
+    "wires": [
+      [
+        "d816c80a.e7abd8"
+      ]
+    ]
+  },
+  {
+    "id": "d816c80a.e7abd8",
+    "type": "json",
+    "z": "65bfe802.954608",
+    "name": "",
+    "pretty": false,
+    "x": 290,
+    "y": 140,
+    "wires": [
+      [
+        "7a82cf50.9444f",
+        "911ab03c.dfc16"
+      ]
+    ]
+  },
+  {
+    "id": "911ab03c.dfc16",
+    "type": "debug",
+    "z": "65bfe802.954608",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "false",
+    "x": 630,
+    "y": 100,
+    "wires": []
+  },
+  {
+    "id": "7a82cf50.9444f",
+    "type": "influxdb out",
+    "z": "65bfe802.954608",
+    "influxdb": "9f5822ca.ea672",
+    "name": "influxdb",
+    "measurement": "clear",
+    "precision": "",
+    "retentionPolicy": "",
+    "x": 620,
+    "y": 140,
+    "wires": []
   }
 ]
