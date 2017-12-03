@@ -290,7 +290,7 @@
     "tab": "eb63d2fd.5cd68",
     "order": 3,
     "disp": true,
-    "width": "10"
+    "width": "12"
   },
   {
     "id": "1a9412b.dfe4aed",
@@ -3603,10 +3603,15 @@
         "t": "eq",
         "v": "light/sonoff/kitchen",
         "vt": "str"
+      },
+      {
+        "t": "eq",
+        "v": "sensor/ds18b20/fermenter",
+        "vt": "str"
       }
     ],
     "checkall": "true",
-    "outputs": 24,
+    "outputs": 25,
     "x": 570,
     "y": 440,
     "wires": [
@@ -3681,6 +3686,9 @@
       ],
       [
         "f22514e3.aa2568"
+      ],
+      [
+        "ac61e02e.ab6af"
       ]
     ]
   },
@@ -4472,7 +4480,7 @@
     "name": "",
     "label": "switch/sonoff/location2 (Pool)",
     "group": "3156ce3a.ed9862",
-    "order": 2,
+    "order": 1,
     "width": 0,
     "height": 0,
     "passthru": false,
@@ -4522,7 +4530,7 @@
     "name": "",
     "label": "switch/relay1/dining",
     "group": "3156ce3a.ed9862",
-    "order": 5,
+    "order": 4,
     "width": 0,
     "height": 0,
     "passthru": false,
@@ -4572,7 +4580,7 @@
     "name": "",
     "label": "switch/relay2/dining",
     "group": "3156ce3a.ed9862",
-    "order": 6,
+    "order": 5,
     "width": 0,
     "height": 0,
     "passthru": false,
@@ -4672,7 +4680,7 @@
     "name": "",
     "label": "switch/sonoff/location3 (Galerie)",
     "group": "3156ce3a.ed9862",
-    "order": 3,
+    "order": 2,
     "width": 0,
     "height": 0,
     "passthru": false,
@@ -4722,7 +4730,7 @@
     "name": "",
     "label": "switch/sonoff/location4",
     "group": "3156ce3a.ed9862",
-    "order": 4,
+    "order": 3,
     "width": 0,
     "height": 0,
     "passthru": false,
@@ -4797,7 +4805,7 @@
     "id": "658c4693.b73878",
     "type": "comment",
     "z": "f7610a0.d8198f8",
-    "name": "Minutentakt",
+    "name": "Sekundentakt",
     "info": "",
     "x": 130,
     "y": 260,
@@ -4808,7 +4816,7 @@
     "type": "function",
     "z": "f7610a0.d8198f8",
     "name": "2-point-controller",
-    "func": "\n// junand 19.09.2017\n\n//----------------------------------------------------------------\nconst DEFAULT_RECIPE_NAME = \"unknown\";\nconst DEFAULT_BREW_START = \"unknown\";\nconst DEFAULT_TEMP = 1;\nconst DEFAULT_HEATING = \"control\";\nconst DEFAULT_HYSTERESIS = 1;\nconst DEFAULT_DURATION = 1;\nconst DEFAULT_HEATER_ON = false;\n\nvar recipeName = context.get ( \"recipeName\" );\nvar brewStart = context.get ( \"brewStart\" );\nvar temperature = context.get ( \"temperature\" ) || DEFAULT_TEMP;\nvar heatingMode = context.get ( \"heating\" ) || DEFAULT_HEATING;\nvar hysteresis = context.get ( \"hysteresis\" ) || DEFAULT_HYSTERESIS;\nvar periodLength = context.get ( \"periodLength\" ) || DEFAULT_DURATION;\nvar alarm = context.get ( \"alarm\" );\n\nconst PERIOD_INCREMENT = 10;\nconst PERIOD_ZERO = { min: 0, sec: 0 };\nvar periodCount = context.get ( \"periodCount\" ) || PERIOD_ZERO;\nvar heaterOn = context.get ( \"heaterOn\" ) || DEFAULT_HEATER_ON;\n\n//----------------------------------------------------------------\nconst STATE_IDLE = \"idle\";\nconst STATE_STARTING = \"starting\";\nconst STATE_PERIOD_STARTED = \"started\";\nconst STATE_PERIOD_FINISHED = \"finished\";\n\nvar state = context.get ( \"state\" ) || STATE_IDLE;\n\n//----------------------------------------------------------------\nfunction incPeriodCount ( cnt ) {\n    //cnt.sec++;\n    cnt.sec += 10;\n    if ( cnt.sec > 59 ) {\n        cnt.sec = 0;\n        cnt.min++;\n    }\n    return cnt;\n}\n\n//----------------------------------------------------------------\nfunction createHeaterMessage ( onOff ) { return { payload: onOff }; }\nfunction createStepMessage () { return { topic: \"next\", payload: \"x\" }; }\nfunction createPeriodeMessage ( count ) { return { payload: count.min + \":\" + (\"0\" + count.sec).slice ( -2 ) }; }\nfunction createAlarmMessage ( type ) { return { payload: type }; }\n\nfunction createChartMessage ( temp, target ) { \n    if ( target ) {\n        return [\n            { topic: \"value\", payload: temp },\n            { topic: \"target\", payload: target }\n        ];\n    }\n    else {\n        return { topic: \"value\", payload: temp };\n    }\n}\n\nfunction createInfluxMessage ( brewTemp, outerTemp ) {\n    return {\n        //measurement: \"prod\",\n        payload: [\n            // fields\n            {\n                state: state,\n                brewTemp: brewTemp,\n                target: temperature,\n                heater: heaterOn ? \"on\" : \"off\",\n                outerTemp: outerTemp\n            },\n            // tags\n            {\n                recipe: recipeName,\n                brewStart: brewStart\n            }\n        ]\n    };\n}\n\n//----------------------------------------------------------------\nif ( msg.topic == \"stop\" ) {\n    context.set ( \"state\", STATE_IDLE );\n    node.status ( { fill: \"grey\", shape: \"dot\", text: \"idle\" } );\n    return { payload: \"OFF\" };\n}\nelse if ( msg.topic == \"finished\" ) {\n    context.set ( \"state\", STATE_PERIOD_FINISHED );\n    node.status ( { fill: \"grey\", shape: \"dot\", text: \"finished\" } );\n    return { payload: \"OFF\" };\n}\nelse if ( msg.topic == \"start\" ) {\n    \n    recipeName = msg.recipeName || recipeName || DEFAULT_RECIPE_NAME;\n    brewStart = msg.brewStart || brewStart || DEFAULT_BREW_START;\n    var t = msg.temperature || DEFAULT_TEMP; \n    if ( t > 0 && t < 105 ) temperature = t;\n    heatingMode = msg.heating || heatingMode || DEFAULT_HEATING;\n    var h = msg.hysteresis || DEFAULT_HYSTERESIS;\n    if ( h > 0 && h < 10 ) hysteresis = h;\n    var p = msg.duration || DEFAULT_DURATION;\n    if ( p === \"wait\" || p > 0 ) periodLength = p;\n\n    //node.warn ( \"mode=\" + heatingMode + \" t=\" + temperature + \" h=\" + hysteresis + \" p=\" + periodLength );\n    \n    context.set ( \"recipeName\", recipeName );\n    context.set ( \"brewStart\", brewStart );\n    context.set ( \"temperature\", temperature );\n    context.set ( \"heating\", heatingMode );\n    context.set ( \"hysteresis\", hysteresis );\n    context.set ( \"periodLength\", periodLength );\n    context.set ( \"alarm\", msg.alarm );\n    \n    context.set ( \"periodCount\", PERIOD_ZERO );\n    context.set ( \"heaterOn\", heaterOn );\n\n    context.set ( \"state\", STATE_STARTING );\n    node.status ( { fill: \"grey\", shape: \"dot\", text: \"starting\" } );\n    \n    return [null, null, null, createPeriodeMessage ( PERIOD_ZERO )];\n\n}\nelse if ( msg.topic == \"hysteresis\" ) {\n    context.set ( \"hysteresis\", hysteresis );\n}\nelse if ( msg.topic == \"tick\" ) { // every sec\n    // check for period length\n    if ( state == STATE_IDLE ) {\n        node.status ( { fill: \"grey\", shape: \"dot\", text: \"idle\" } );\n    }\n    else if ( state == STATE_PERIOD_STARTED ) {\n        context.set ( \"periodCount\", incPeriodCount ( periodCount ) );\n        var alarmMsg = null;\n        if ( alarm ) {\n            for ( var i = 0; i < alarm.length; i++ ) {\n                if ( periodCount.min == alarm [i] ) {\n                    if ( periodCount.sec === 0 || alarm [i] === 0 && periodCount.sec === PERIOD_INCREMENT ) { // exception for 00:00, 1 sec later\n                        alarmMsg = createAlarmMessage ( \"ring\" );\n                        break;\n                    }\n                }\n            }\n        }\n        if ( periodLength == \"wait\" ) {} // do nothing, only tick and maybe ring\n        else {\n            if ( periodCount.min >= periodLength ) {\n                context.set ( \"state\", STATE_PERIOD_FINISHED );\n                context.set ( \"temperature\", null );\n                // ??? here heater off ???\n                if ( !alarmMsg ) alarmMsg = createAlarmMessage ( \"tweet2x\" );\n                return [createHeaterMessage ( \"OFF\" ), createStepMessage (), null, createPeriodeMessage ( periodCount ), alarmMsg]; \n            }\n        }\n        // tick\n        return [null, null, null, createPeriodeMessage ( periodCount ), alarmMsg];\n    }\n}\nelse if ( msg.topic == \"nodes@home/switch/sonoff/brewery/socket\" ) {\n    context.set ( \"heaterOn\", msg.payload == \"ON\" ? true : false );\n}\nelse {\n    // temperature received\n    if ( state == STATE_IDLE ) {\n        node.status ( { fill: \"grey\", shape: \"dot\", text: \"idle\" } );\n    }\n    else if ( msg.payload && msg.payload.brew && msg.payload.outer ) {\n        var brewTemp = msg.payload.brew;\n        var outerTemp = msg.payload.outer;\n        if ( state == STATE_PERIOD_FINISHED ) {\n            return [null, null, createChartMessage ( brewTemp ), null, null, createInfluxMessage ( brewTemp, outerTemp )];\n        }\n        else {\n            \n            var heaterMsg = null;\n            var alarmMsg = null;\n            var newHeaterOn = null;\n            \n            if ( brewTemp >= temperature ) {\n                if ( state == STATE_STARTING ) {\n                    context.set ( \"state\", STATE_PERIOD_STARTED );\n                    alarmMsg = createAlarmMessage ( \"tweet2x\" );\n                }\n            }\n\n            if ( heatingMode == \"no\" ) {\n                if ( heaterOn ) newHeaterOn = false;\n            }\n            else if ( heatingMode == \"one_time\" ) {\n                if ( state == STATE_STARTING ) {\n                    if ( !heaterOn ) newHeaterOn = true;\n                }\n            }\n            else if ( heatingMode == \"control\" ) {\n                if ( brewTemp <= temperature - hysteresis ) {\n                    if ( !heaterOn ) newHeaterOn = true;\n                }\n            }\n            else if ( heatingMode == \"full\" ) {\n                if ( !heaterOn ) newHeaterOn = true;\n            }\n            \n            if ( newHeaterOn !== null ) {\n                //node.warn ( \"switch heater from \" + heaterOn + \" to \" + newHeaterOn );                    \n                context.set ( \"heaterOn\", newHeaterOn );\n                if ( !alarmMsg ) alarmMsg = createAlarmMessage ( \"tweet\" );\n                if ( newHeaterOn ) {\n                    node.status ( { fill: \"red\", shape: \"dot\", text: \"heating\" } );\n                    heaterMsg = createHeaterMessage ( \"ON\" );\n                }\n                else {\n                    node.status ( { fill: \"blue\", shape: \"dot\", text: \"cooling\" } );\n                    heaterMsg = createHeaterMessage ( \"OFF\" );\n                }\n            }\n            \n            // on every temp, send target and data fields\n            return [heaterMsg, null, createChartMessage ( brewTemp, temperature ), null, alarmMsg, createInfluxMessage ( brewTemp, outerTemp )];\n        }\n    }\n}\n",
+    "func": "\n// junand 19.09.2017\n\n//----------------------------------------------------------------\nconst DEFAULT_RECIPE_NAME = \"unknown\";\nconst DEFAULT_BREW_START = \"unknown\";\nconst DEFAULT_TEMP = 1;\nconst DEFAULT_HEATING = \"control\";\nconst DEFAULT_HYSTERESIS = 1;\nconst DEFAULT_DURATION = 1;\nconst DEFAULT_HEATER_ON = false;\n\nvar recipeName = context.get ( \"recipeName\" );\nvar brewStart = context.get ( \"brewStart\" );\nvar temperature = context.get ( \"temperature\" ) || DEFAULT_TEMP;\nvar heatingMode = context.get ( \"heating\" ) || DEFAULT_HEATING;\nvar hysteresis = context.get ( \"hysteresis\" ) || DEFAULT_HYSTERESIS;\nvar periodLength = context.get ( \"periodLength\" ) || DEFAULT_DURATION;\nvar alarm = context.get ( \"alarm\" );\n\nconst PERIOD_INCREMENT = 1;\nconst PERIOD_ZERO = { min: 0, sec: 0 };\nvar periodCount = context.get ( \"periodCount\" ) || PERIOD_ZERO;\nvar heaterOn = context.get ( \"heaterOn\" ) || DEFAULT_HEATER_ON;\n\n//----------------------------------------------------------------\nconst STATE_IDLE = \"idle\";\nconst STATE_STARTING = \"starting\";\nconst STATE_PERIOD_STARTED = \"started\";\nconst STATE_PERIOD_FINISHED = \"finished\";\n\nvar state = context.get ( \"state\" ) || STATE_IDLE;\n\n//----------------------------------------------------------------\nfunction incPeriodCount ( cnt ) {\n    cnt.sec += PERIOD_INCREMENT;\n    if ( cnt.sec > 59 ) {\n        cnt.sec = 0;\n        cnt.min++;\n    }\n    return cnt;\n}\n\n//----------------------------------------------------------------\nfunction createHeaterMessage ( onOff ) { return { payload: onOff }; }\nfunction createStepMessage () { return { topic: \"next\", payload: \"x\" }; }\nfunction createPeriodeMessage ( count ) { return { payload: count.min + \":\" + (\"0\" + count.sec).slice ( -2 ) }; }\nfunction createAlarmMessage ( type ) { return { payload: type }; }\n\nfunction createChartMessage ( temp, target ) { \n    if ( target ) {\n        return [\n            { topic: \"value\", payload: temp },\n            { topic: \"target\", payload: target }\n        ];\n    }\n    else {\n        return { topic: \"value\", payload: temp };\n    }\n}\n\nfunction createInfluxMessage ( brewTemp, outerTemp ) {\n    return {\n        //measurement: \"prod\",\n        payload: [\n            // fields\n            {\n                state: state,\n                brewTemp: brewTemp,\n                target: temperature,\n                heater: heaterOn ? \"on\" : \"off\",\n                outerTemp: outerTemp\n            },\n            // tags\n            {\n                recipe: recipeName,\n                brewStart: brewStart\n            }\n        ]\n    };\n}\n\n//----------------------------------------------------------------\nif ( msg.topic == \"stop\" ) {\n    context.set ( \"state\", STATE_IDLE );\n    node.status ( { fill: \"grey\", shape: \"dot\", text: \"idle\" } );\n    context.set ( \"heaterOn\", false );\n    return { payload: \"OFF\" };\n}\nelse if ( msg.topic == \"finished\" ) {\n    context.set ( \"state\", STATE_PERIOD_FINISHED );\n    node.status ( { fill: \"grey\", shape: \"dot\", text: \"finished\" } );\n    return { payload: \"OFF\" };\n}\nelse if ( msg.topic == \"start\" ) {\n    \n    recipeName = msg.recipeName || recipeName || DEFAULT_RECIPE_NAME;\n    brewStart = msg.brewStart || brewStart || DEFAULT_BREW_START;\n    var t = msg.temperature || DEFAULT_TEMP; \n    if ( t > 0 && t < 105 ) temperature = t;\n    heatingMode = msg.heating || heatingMode || DEFAULT_HEATING;\n    var h = msg.hysteresis || DEFAULT_HYSTERESIS;\n    if ( h > 0 && h < 10 ) hysteresis = h;\n    var p = msg.duration || DEFAULT_DURATION;\n    if ( p === \"wait\" || p > 0 ) periodLength = p;\n\n    //node.warn ( \"[START] mode=\" + heatingMode + \" t=\" + temperature + \" h=\" + hysteresis + \" p=\" + periodLength );\n    \n    context.set ( \"recipeName\", recipeName );\n    context.set ( \"brewStart\", brewStart );\n    context.set ( \"temperature\", temperature );\n    context.set ( \"heating\", heatingMode );\n    context.set ( \"hysteresis\", hysteresis );\n    context.set ( \"periodLength\", periodLength );\n    context.set ( \"alarm\", msg.alarm );\n    \n    context.set ( \"periodCount\", PERIOD_ZERO );\n    context.set ( \"heaterOn\", heaterOn );\n\n    context.set ( \"state\", STATE_STARTING );\n    node.status ( { fill: \"grey\", shape: \"dot\", text: \"starting\" } );\n    \n    return [null, null, null, createPeriodeMessage ( PERIOD_ZERO )];\n\n}\nelse if ( msg.topic == \"hysteresis\" ) {\n    context.set ( \"hysteresis\", hysteresis );\n}\nelse if ( msg.topic == \"tick\" ) { // every sec\n    // check for period length\n    if ( state == STATE_IDLE ) {\n        node.status ( { fill: \"grey\", shape: \"dot\", text: \"idle\" } );\n    }\n    else if ( state == STATE_PERIOD_STARTED ) {\n        context.set ( \"periodCount\", incPeriodCount ( periodCount ) );\n        var alarmMsg = null;\n        if ( alarm ) {\n            for ( var i = 0; i < alarm.length; i++ ) {\n                if ( periodCount.min == alarm [i] ) {\n                    if ( periodCount.sec === 0 || alarm [i] === 0 && periodCount.sec === PERIOD_INCREMENT ) { // exception for 00:00, 1 sec later\n                        alarmMsg = createAlarmMessage ( \"ring\" );\n                        break;\n                    }\n                }\n            }\n        }\n        if ( periodLength == \"wait\" ) {} // do nothing, only tick and maybe ring\n        else {\n            if ( periodCount.min >= periodLength ) {\n                context.set ( \"state\", STATE_PERIOD_FINISHED );\n                context.set ( \"temperature\", null );\n                context.set ( \"heaterOn\", false );\n                // ??? here heater off ???\n                if ( !alarmMsg ) alarmMsg = createAlarmMessage ( \"tweet2x\" );\n                return [createHeaterMessage ( \"OFF\" ), createStepMessage (), null, createPeriodeMessage ( periodCount ), alarmMsg]; \n            }\n        }\n        \n        //node.warn ( \"[TICK] p=\" + periodLength + \" min=\" + periodCount.min + \" sec=\" + periodCount.sec + \" state=\" + state );\n\n        // tick\n        return [null, null, null, createPeriodeMessage ( periodCount ), alarmMsg];\n    }\n}\nelse if ( msg.topic == \"nodes@home/switch/sonoff/brewery/socket\" ) {\n    context.set ( \"heaterOn\", msg.payload == \"ON\" ? true : false );\n}\nelse {\n    // temperature received\n    if ( state == STATE_IDLE ) {\n        node.status ( { fill: \"grey\", shape: \"dot\", text: \"idle\" } );\n    }\n    else if ( msg.payload && msg.payload.brew && msg.payload.outer ) {\n        var brewTemp = msg.payload.brew;\n        var outerTemp = msg.payload.outer;\n        if ( state == STATE_PERIOD_FINISHED ) {\n            return [null, null, createChartMessage ( brewTemp ), null, null, createInfluxMessage ( brewTemp, outerTemp )];\n        }\n        else {\n            \n            var heaterMsg = null;\n            var alarmMsg = null;\n            var newHeaterOn = null;\n            \n            if ( brewTemp >= temperature ) {\n                if ( heaterOn && heatingMode != \"full\" ) newHeaterOn = false;\n                if ( state == STATE_STARTING ) {\n                    context.set ( \"state\", STATE_PERIOD_STARTED );\n                    alarmMsg = createAlarmMessage ( \"tweet2x\" );\n                }\n            }\n\n            if ( heatingMode == \"no\" ) {\n                if ( heaterOn ) newHeaterOn = false;\n            }\n            else if ( heatingMode == \"one_time\" ) {\n                if ( state == STATE_STARTING ) {\n                    if ( !heaterOn ) newHeaterOn = true;\n                }\n            }\n            else if ( heatingMode == \"control\" ) {\n                if ( brewTemp <= temperature - hysteresis ) {\n                    if ( !heaterOn ) newHeaterOn = true;\n                }\n            }\n            else if ( heatingMode == \"full\" ) {\n                if ( !heaterOn ) newHeaterOn = true;\n            }\n            \n            if ( newHeaterOn !== null ) {\n                //node.warn ( \"switch heater from \" + heaterOn + \" to \" + newHeaterOn );                    \n                context.set ( \"heaterOn\", newHeaterOn );\n                if ( !alarmMsg ) alarmMsg = createAlarmMessage ( \"tweet\" );\n                if ( newHeaterOn ) {\n                    node.status ( { fill: \"red\", shape: \"dot\", text: \"heating\" } );\n                    heaterMsg = createHeaterMessage ( \"ON\" );\n                }\n                else {\n                    node.status ( { fill: \"blue\", shape: \"dot\", text: \"cooling\" } );\n                    heaterMsg = createHeaterMessage ( \"OFF\" );\n                }\n            }\n            \n            //node.warn ( \"[TEMP] heater=\" + heaterOn + \" newHeater=\" + newHeaterOn + \" mode=\" + heatingMode + \" state=\" + state );\n            \n            // on every temp, send target and data fields\n            return [heaterMsg, null, createChartMessage ( brewTemp, temperature ), null, alarmMsg, createInfluxMessage ( brewTemp, outerTemp )];\n        }\n    }\n}\n",
     "outputs": "6",
     "noerr": 0,
     "x": 530,
@@ -4852,8 +4860,8 @@
     "qos": "1",
     "retain": "false",
     "broker": "f093b8cc.ff2b58",
-    "x": 591,
-    "y": 180,
+    "x": 690,
+    "y": 280,
     "wires": []
   },
   {
@@ -4897,6 +4905,7 @@
     "removeOlderPoints": "",
     "removeOlderUnit": "3600",
     "cutout": 0,
+    "useOneColor": false,
     "colors": [
       "#0000ff",
       "#ff0000",
@@ -5054,14 +5063,14 @@
     "z": "f7610a0.d8198f8",
     "group": "903ce37b.b2576",
     "order": 5,
-    "width": "9",
+    "width": "11",
     "height": "1",
     "name": "line2",
     "label": "",
     "format": "<font size=\"+2\">{{msg.payload}}</font size>",
     "layout": "row-left",
     "x": 930,
-    "y": 740,
+    "y": 786,
     "wires": []
   },
   {
@@ -5070,14 +5079,14 @@
     "z": "f7610a0.d8198f8",
     "group": "903ce37b.b2576",
     "order": 7,
-    "width": "9",
+    "width": "11",
     "height": "1",
     "name": "line3",
     "label": "",
     "format": "<font size=\"+2\">{{msg.payload}}</font size>",
     "layout": "row-left",
     "x": 930,
-    "y": 754,
+    "y": 800,
     "wires": []
   },
   {
@@ -5086,14 +5095,14 @@
     "z": "f7610a0.d8198f8",
     "group": "903ce37b.b2576",
     "order": 9,
-    "width": "9",
+    "width": "11",
     "height": "1",
     "name": "line4",
     "label": "",
     "format": "<font size=\"+2\">{{msg.payload}}</font size>",
     "layout": "row-left",
     "x": 930,
-    "y": 774,
+    "y": 820,
     "wires": []
   },
   {
@@ -5102,29 +5111,29 @@
     "z": "f7610a0.d8198f8",
     "group": "903ce37b.b2576",
     "order": 11,
-    "width": "9",
+    "width": "11",
     "height": "1",
     "name": "line5",
     "label": "",
     "format": "<font size=\"+2\">{{msg.payload}}</font size>",
     "layout": "row-left",
     "x": 930,
-    "y": 794,
+    "y": 840,
     "wires": []
   },
   {
     "id": "83b5f943.719fe8",
     "type": "template",
     "z": "f7610a0.d8198f8",
-    "name": "recipe",
+    "name": "brew1",
     "field": "payload",
     "fieldType": "msg",
     "format": "json",
     "syntax": "plain",
     "template": "{\n    \"name\": \"Pale Ale\",\n    \"comment\": \"www.hobbybrauserversand.de\",\n    \"steps\": [\n        {\n            \"id\": 1,\n            \"step\": \"Einmaischen\",\n            \"temperature\": 61,\n            \"heating\": \"one_time\",\n            \"duration\": 10,\n            \"alarm\": [0]\n        },\n        {\n            \"id\": 2,\n            \"step\": \"Maltoserast\",\n            \"temperature\": 62,\n            \"heating\": \"control\",\n            \"duration\": 45,\n            \"hysteresis\": 0.5\n        },\n        {\n            \"id\": 3,\n            \"step\": \"Verzuckerung\",\n            \"temperature\": 71,\n            \"heating\": \"control\",\n            \"duration\": 30,\n            \"hysteresis\": 0.5\n        },\n        {\n            \"id\": 4,\n            \"step\": \"Abmaischen\",\n            \"temperature\": 78,\n            \"heating\": \"one_time\",\n            \"duration\": \"wait\"\n        },\n        {\n            \"id\": 5,\n            \"step\": \"Läuterruhe\",\n            \"temperature\": 1,\n            \"heating\": \"no\",\n            \"duration\": 20,\n            \"alarm\": [20]\n        },\n        {\n            \"id\": 6,\n            \"step\": \"Läutern\",\n            \"temperature\": 1,\n            \"heating\": \"no\",\n            \"duration\": \"wait\"\n        },\n        {\n            \"id\": 7,\n            \"step\": \"Kochen\",\n            \"temperature\": 100,\n            \"heating\": \"full\",\n            \"duration\": 90,\n            \"hysteresis\": 0.1,\n            \"alarm\": [20, 85]\n        }\n    ]\n}",
     "output": "str",
-    "x": 270,
-    "y": 780,
+    "x": 250,
+    "y": 860,
     "wires": [
       []
     ]
@@ -5136,7 +5145,7 @@
     "name": "",
     "property": "payload.steps",
     "x": 530,
-    "y": 780,
+    "y": 826,
     "wires": [
       [
         "e5df4c9f.1150d"
@@ -5150,7 +5159,7 @@
     "name": "",
     "pretty": false,
     "x": 390,
-    "y": 780,
+    "y": 826,
     "wires": [
       [
         "1db36e4f.8fd562",
@@ -5206,12 +5215,22 @@
         "t": "eq",
         "v": "8",
         "vt": "num"
+      },
+      {
+        "t": "eq",
+        "v": "9",
+        "vt": "str"
+      },
+      {
+        "t": "eq",
+        "v": "10",
+        "vt": "str"
       }
     ],
     "checkall": "true",
-    "outputs": 8,
+    "outputs": 10,
     "x": 790,
-    "y": 780,
+    "y": 826,
     "wires": [
       [
         "55b144a5.3cc28c"
@@ -5236,6 +5255,12 @@
       ],
       [
         "8ea860fb.5408f"
+      ],
+      [
+        "a9d87078.c5afe"
+      ],
+      [
+        "f61ad05b.bd3ec"
       ]
     ]
   },
@@ -5250,12 +5275,13 @@
     "repeat": "",
     "crontab": "",
     "once": true,
-    "x": 150,
-    "y": 780,
+    "x": 110,
+    "y": 820,
     "wires": [
       [
         "83b5f943.719fe8",
-        "c030098a.559b68"
+        "c030098a.559b68",
+        "76baf4ff.c8f8bc"
       ]
     ]
   },
@@ -5377,14 +5403,14 @@
     "z": "f7610a0.d8198f8",
     "group": "903ce37b.b2576",
     "order": 3,
-    "width": "9",
+    "width": "11",
     "height": "1",
     "name": "line1",
     "label": "",
     "format": "<font size=\"+2\">{{msg.payload}}</font size>",
     "layout": "row-left",
     "x": 930,
-    "y": 720,
+    "y": 766,
     "wires": []
   },
   {
@@ -5420,7 +5446,7 @@
     "type": "function",
     "z": "f7610a0.d8198f8",
     "name": "scheduler",
-    "func": "// junand 20.09.2017\n\nfunction getStopMessages ( topic ) {\n    \n    return [\n        { topic: topic||\"stop\", payload: \"x\" },\n        [\n            { id: 0, payload: false },\n            { id: 1, payload: false },\n            { id: 2, payload: false },\n            { id: 3, payload: false },\n            { id: 4, payload: false },\n            { id: 5, payload: false },\n            { id: 6, payload: false },\n            { id: 7, payload: false }\n        ]\n    ];\n\n}\n\nfunction createDateString ( d ) {\n\n    var datestring = \n        (\"0\" + d.getDate ()).slice ( -2 ) + \"-\" + \n        (\"0\" + (d.getMonth () + 1)).slice ( -2 ) + \"-\" +\n        d.getFullYear () + \" \" + \n        (\"0\" + d.getHours ()).slice ( -2 ) + \":\" + \n        (\"0\" + d.getMinutes ()).slice ( -2 );\n\n    return datestring;        \n}\n\nfunction getStepMessages ( i ) {\n    \n    var recipe = context.get ( \"recipe\" );\n    if ( i === 0 ) { \n        recipe.brewStart = createDateString ( new Date () );\n        context.set ( \"recipe\", recipe );\n    }\n    if ( i < recipe.steps.length ) {\n        // start controller\n        context.set ( \"step\", i + 1 );\n        return [\n            {   \n                topic: \"start\", \n                recipeName: recipe.name,\n                brewStart: recipe.brewStart,\n                temperature: recipe.steps [i].temperature, \n                heating: recipe.steps [i].heating,\n                duration: recipe.steps [i].duration, \n                hysteresis: recipe.steps [i].hysteresis,\n                alarm: recipe.steps [i].alarm \n            },\n            [\n                { id: 0, payload: i === 0 ? true : false },\n                { id: 1, payload: i === 1 ? true : false },\n                { id: 2, payload: i === 2 ? true : false },\n                { id: 3, payload: i === 3 ? true : false },\n                { id: 4, payload: i === 4 ? true : false },\n                { id: 5, payload: i === 5 ? true : false },\n                { id: 6, payload: i === 6 ? true : false },\n                { id: 7, payload: i === 7 ? true : false }\n            ]\n        ];\n    }\n    else {\n        // stop controller\n        context.set ( \"step\", null );\n        return getStopMessages ( \"finished\" );\n    }\n\n}\n\nif ( msg.topic == \"recipe\" ) {\n    context.set ( \"recipe\", msg.payload );\n    return getStopMessages ();\n}\nelse if ( msg.topic == \"start\" ) {\n    context.set ( \"step\", 0 );\n    return getStepMessages ( 0 );\n}\nelse if ( msg.topic == \"stop\" ) {\n    context.set ( \"step\", null );\n    return getStopMessages ();\n}\nelse if ( msg.topic == \"next\" ) {\n    var step = context.get ( \"step\" );\n    if ( step ) return getStepMessages ( step );\n}\n",
+    "func": "// junand 20.09.2017\n\nfunction getStopMessages ( topic ) {\n    \n    return [\n        { topic: topic||\"stop\", payload: \"x\" },\n        [\n            { id: 0, payload: false },\n            { id: 1, payload: false },\n            { id: 2, payload: false },\n            { id: 3, payload: false },\n            { id: 4, payload: false },\n            { id: 5, payload: false },\n            { id: 6, payload: false },\n            { id: 7, payload: false },\n            { id: 8, payload: false },\n            { id: 9, payload: false }\n        ]\n    ];\n\n}\n\nfunction createDateString ( d ) {\n\n    var datestring = \n        (\"0\" + d.getDate ()).slice ( -2 ) + \"-\" + \n        (\"0\" + (d.getMonth () + 1)).slice ( -2 ) + \"-\" +\n        d.getFullYear () + \" \" + \n        (\"0\" + d.getHours ()).slice ( -2 ) + \":\" + \n        (\"0\" + d.getMinutes ()).slice ( -2 );\n\n    return datestring;        \n}\n\nfunction getStepMessages ( i ) {\n    \n    var recipe = context.get ( \"recipe\" );\n    if ( i === 0 ) { \n        recipe.brewStart = createDateString ( new Date () );\n        context.set ( \"recipe\", recipe );\n    }\n    if ( i < recipe.steps.length ) {\n        // start controller\n        context.set ( \"step\", i + 1 );\n        return [\n            {   \n                topic: \"start\", \n                recipeName: recipe.name,\n                brewStart: recipe.brewStart,\n                temperature: recipe.steps [i].temperature, \n                heating: recipe.steps [i].heating,\n                duration: recipe.steps [i].duration, \n                hysteresis: recipe.steps [i].hysteresis,\n                alarm: recipe.steps [i].alarm \n            },\n            [\n                { id: 0, payload: i === 0 ? true : false },\n                { id: 1, payload: i === 1 ? true : false },\n                { id: 2, payload: i === 2 ? true : false },\n                { id: 3, payload: i === 3 ? true : false },\n                { id: 4, payload: i === 4 ? true : false },\n                { id: 5, payload: i === 5 ? true : false },\n                { id: 6, payload: i === 6 ? true : false },\n                { id: 7, payload: i === 7 ? true : false },\n                { id: 8, payload: i === 8 ? true : false },\n                { id: 9, payload: i === 9 ? true : false }\n            ]\n        ];\n    }\n    else {\n        // stop controller\n        context.set ( \"step\", null );\n        return getStopMessages ( \"finished\" );\n    }\n\n}\n\nif ( msg.topic == \"recipe\" ) {\n    context.set ( \"recipe\", msg.payload );\n    return getStopMessages ();\n}\nelse if ( msg.topic == \"start\" ) {\n    context.set ( \"step\", 0 );\n    return getStepMessages ( 0 );\n}\nelse if ( msg.topic == \"stop\" ) {\n    context.set ( \"step\", null );\n    return getStopMessages ();\n}\nelse if ( msg.topic == \"next\" ) {\n    var step = context.get ( \"step\" );\n    if ( step ) return getStepMessages ( step );\n}\n",
     "outputs": "2",
     "noerr": 0,
     "x": 540,
@@ -5482,10 +5508,20 @@
         "t": "eq",
         "v": "7",
         "vt": "num"
+      },
+      {
+        "t": "eq",
+        "v": "8",
+        "vt": "str"
+      },
+      {
+        "t": "eq",
+        "v": "9",
+        "vt": "str"
       }
     ],
     "checkall": "true",
-    "outputs": 8,
+    "outputs": 10,
     "x": 790,
     "y": 572,
     "wires": [
@@ -5512,6 +5548,12 @@
       ],
       [
         "685b16a7.ec5958"
+      ],
+      [
+        "4666744b.d75abc"
+      ],
+      [
+        "b328f55b.7bd638"
       ]
     ]
   },
@@ -5546,14 +5588,14 @@
     "z": "f7610a0.d8198f8",
     "group": "903ce37b.b2576",
     "order": 13,
-    "width": "9",
+    "width": "11",
     "height": "1",
     "name": "line6",
     "label": "",
     "format": "<font size=\"+2\">{{msg.payload}}</font size>",
     "layout": "row-left",
     "x": 930,
-    "y": 814,
+    "y": 860,
     "wires": []
   },
   {
@@ -5562,14 +5604,14 @@
     "z": "f7610a0.d8198f8",
     "group": "903ce37b.b2576",
     "order": 15,
-    "width": "9",
+    "width": "11",
     "height": "1",
     "name": "line7",
     "label": "",
     "format": "<font size=\"+2\">{{msg.payload}}</font size>",
     "layout": "row-left",
     "x": 930,
-    "y": 834,
+    "y": 880,
     "wires": []
   },
   {
@@ -5578,14 +5620,14 @@
     "z": "f7610a0.d8198f8",
     "group": "903ce37b.b2576",
     "order": 17,
-    "width": "9",
+    "width": "11",
     "height": "1",
     "name": "line8",
     "label": "",
     "format": "<font size=\"+2\">{{msg.payload}}</font size>",
     "layout": "row-left",
     "x": 930,
-    "y": 854,
+    "y": 900,
     "wires": []
   },
   {
@@ -5677,7 +5719,7 @@
     "type": "ui_text",
     "z": "f7610a0.d8198f8",
     "group": "903ce37b.b2576",
-    "order": 18,
+    "order": 22,
     "width": "10",
     "height": "4",
     "name": "ticker",
@@ -5701,7 +5743,7 @@
     "format": "<font size=\"+3\">{{msg.payload.name}}</font size>",
     "layout": "row-left",
     "x": 950,
-    "y": 680,
+    "y": 726,
     "wires": []
   },
   {
@@ -5861,7 +5903,7 @@
     "z": "f7610a0.d8198f8",
     "influxdb": "1a9412b.dfe4aed",
     "name": "influxdb",
-    "measurement": "test",
+    "measurement": "brews2017",
     "precision": "",
     "retentionPolicy": "",
     "x": 940,
@@ -5961,148 +6003,6 @@
       [
         "4da30c15.2fab94"
       ]
-    ]
-  },
-  {
-    "id": "ecc934a9.ed7898",
-    "type": "mqtt in",
-    "z": "f7610a0.d8198f8",
-    "name": "mqtt",
-    "topic": "nodes@home/sensor/ds18b20/brewery/value/voltage",
-    "qos": "1",
-    "broker": "f093b8cc.ff2b58",
-    "x": 530,
-    "y": 100,
-    "wires": [
-      [
-        "ed05005b.00cd7"
-      ]
-    ]
-  },
-  {
-    "id": "ed05005b.00cd7",
-    "type": "json",
-    "z": "f7610a0.d8198f8",
-    "name": "",
-    "pretty": false,
-    "x": 650,
-    "y": 100,
-    "wires": [
-      [
-        "3f414587.a861da"
-      ]
-    ]
-  },
-  {
-    "id": "3f414587.a861da",
-    "type": "change",
-    "z": "f7610a0.d8198f8",
-    "name": "get value",
-    "rules": [
-      {
-        "t": "set",
-        "p": "payload",
-        "pt": "msg",
-        "to": "payload.value / 1000",
-        "tot": "jsonata"
-      },
-      {
-        "t": "set",
-        "p": "topic",
-        "pt": "msg",
-        "to": "value",
-        "tot": "str"
-      }
-    ],
-    "action": "",
-    "property": "",
-    "from": "",
-    "to": "",
-    "reg": false,
-    "x": 800,
-    "y": 100,
-    "wires": [
-      [
-        "4ab701e.658a6",
-        "9f4a0d6b.cfd71"
-      ]
-    ]
-  },
-  {
-    "id": "b3ba783a.dd56b8",
-    "type": "comment",
-    "z": "f7610a0.d8198f8",
-    "name": "Akkuspannung",
-    "info": "",
-    "x": 560,
-    "y": 60,
-    "wires": []
-  },
-  {
-    "id": "4ab701e.658a6",
-    "type": "ui_gauge",
-    "z": "f7610a0.d8198f8",
-    "name": "voltage",
-    "group": "6f6ec204.ae7e8c",
-    "order": 2,
-    "width": 0,
-    "height": 0,
-    "gtype": "gage",
-    "title": "Akku",
-    "label": "V",
-    "format": "{{value | number:2}}",
-    "min": "3.5",
-    "max": "4.2",
-    "colors": [
-      "#ff0000",
-      "#ffff00",
-      "#008000"
-    ],
-    "seg1": "3.7",
-    "seg2": "3.95",
-    "x": 940,
-    "y": 100,
-    "wires": []
-  },
-  {
-    "id": "9f4a0d6b.cfd71",
-    "type": "ui_chart",
-    "z": "f7610a0.d8198f8",
-    "name": "chart",
-    "group": "6f6ec204.ae7e8c",
-    "order": 1,
-    "width": 0,
-    "height": 0,
-    "label": "Spannungsverlauf",
-    "chartType": "line",
-    "legend": "false",
-    "xformat": "HH:mm:ss",
-    "interpolate": "linear",
-    "nodata": "---",
-    "dot": false,
-    "ymin": "3.5",
-    "ymax": "4.2",
-    "removeOlder": "2",
-    "removeOlderPoints": "",
-    "removeOlderUnit": "3600",
-    "cutout": 0,
-    "colors": [
-      "#8080ff",
-      "#aec7e8",
-      "#ff7f0e",
-      "#2ca02c",
-      "#98df8a",
-      "#d62728",
-      "#ff9896",
-      "#9467bd",
-      "#c5b0d5"
-    ],
-    "useOldStyle": false,
-    "x": 930,
-    "y": 60,
-    "wires": [
-      [],
-      []
     ]
   },
   {
@@ -6277,25 +6177,6 @@
     ]
   },
   {
-    "id": "afd81abb.705178",
-    "type": "inject",
-    "z": "f7610a0.d8198f8",
-    "name": "",
-    "topic": "",
-    "payload": "",
-    "payloadType": "date",
-    "repeat": "7",
-    "crontab": "",
-    "once": false,
-    "x": 90,
-    "y": 500,
-    "wires": [
-      [
-        "f77b45eb.5535f8"
-      ]
-    ]
-  },
-  {
     "id": "c030098a.559b68",
     "type": "template",
     "z": "f7610a0.d8198f8",
@@ -6306,12 +6187,10 @@
     "syntax": "plain",
     "template": "{\n    \"name\": \"Test\",\n    \"comment\": \"www.hobbybrauserversand.de\",\n    \"steps\": [\n        {\n            \"id\": 1,\n            \"step\": \"Einmaischen\",\n            \"temperature\": 61,\n            \"heating\": \"one_time\",\n            \"duration\": 1,\n            \"alarm\": [0]\n        },\n        {\n            \"id\": 2,\n            \"step\": \"Maltoserast\",\n            \"temperature\": 62,\n            \"heating\": \"control\",\n            \"duration\": 4,\n            \"hysteresis\": 0.5\n        },\n        {\n            \"id\": 3,\n            \"step\": \"Verzuckerung\",\n            \"temperature\": 71,\n            \"heating\": \"control\",\n            \"duration\": 3,\n            \"hysteresis\": 0.5\n        },\n        {\n            \"id\": 4,\n            \"step\": \"Abmaischen\",\n            \"temperature\": 78,\n            \"heating\": \"one_time\",\n            \"duration\": \"wait\",\n            \"alarm\": [1]\n        },\n        {\n            \"id\": 5,\n            \"step\": \"Läuterruhe\",\n            \"heating\": \"no\",\n            \"duration\": 2,\n            \"alarm\": [2]\n        },\n        {\n            \"id\": 6,\n            \"step\": \"Läutern\",\n            \"heating\": \"no\",\n            \"duration\": \"wait\"\n        },\n        {\n            \"id\": 7,\n            \"step\": \"Kochen\",\n            \"temperature\": 100,\n            \"heating\": \"full\",\n            \"duration\": 3,\n            \"hysteresis\": 0.1,\n            \"alarm\": [1, 2]\n        }\n    ]\n}",
     "output": "str",
-    "x": 270,
-    "y": 740,
+    "x": 250,
+    "y": 820,
     "wires": [
-      [
-        "8ee58300.4c0ab"
-      ]
+      []
     ]
   },
   {
@@ -6319,11 +6198,11 @@
     "type": "function",
     "z": "f7610a0.d8198f8",
     "name": "line text",
-    "func": "// junand 03.10.2017\n\n// payload.duration === \"wait\"\n\nmsg.id = msg.payload.id;\n\nvar result = \"[\" + msg.payload.id + \"] \" + msg.payload.step;\n\nif ( msg.payload.temperature ) result += \": \" + msg.payload.temperature + \"°C\";\n\nif ( msg.payload.duration === \"wait\" ) result += \", dann WEITER\";\nelse result += \" für \" + msg.payload.duration + \"min\";\n\nmsg.payload = result;\n\nreturn msg;",
+    "func": "// junand 03.10.2017\n\nmsg.id = msg.payload.id;\n\nvar result = \"[\" + msg.payload.id + \"] \" + msg.payload.step;\n\nif ( msg.payload.temperature ) result += \": \" + msg.payload.temperature + \"°C\";\n\nif ( msg.payload.duration === \"wait\" ) result += \", dann WEITER\";\nelse result += \" für \" + msg.payload.duration + \"min\";\n\nmsg.payload = result;\n\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
     "x": 660,
-    "y": 780,
+    "y": 826,
     "wires": [
       [
         "45dd7343.b664dc"
@@ -6347,7 +6226,7 @@
     "checkall": "true",
     "outputs": 1,
     "x": 830,
-    "y": 1060,
+    "y": 1108,
     "wires": [
       [
         "bf07b832.b1d128"
@@ -6363,7 +6242,7 @@
     "console": "false",
     "complete": "true",
     "x": 1090,
-    "y": 1120,
+    "y": 1168,
     "wires": []
   },
   {
@@ -6378,7 +6257,7 @@
     "crontab": "",
     "once": false,
     "x": 670,
-    "y": 1060,
+    "y": 1108,
     "wires": [
       [
         "f1399c8c.93ab8"
@@ -6395,7 +6274,7 @@
     "url": "",
     "tls": "",
     "x": 1100,
-    "y": 1060,
+    "y": 1108,
     "wires": [
       []
     ]
@@ -6427,7 +6306,7 @@
     "to": "",
     "reg": false,
     "x": 950,
-    "y": 1060,
+    "y": 1108,
     "wires": [
       [
         "15a66c63.568814",
@@ -6442,7 +6321,7 @@
     "name": "send msg to simplepush if trigger is outtimed",
     "info": "",
     "x": 950,
-    "y": 1020,
+    "y": 1068,
     "wires": []
   },
   {
@@ -6499,7 +6378,7 @@
     "name": "",
     "label": "sensor/gesture/kitchen",
     "group": "3156ce3a.ed9862",
-    "order": 5,
+    "order": 6,
     "width": 0,
     "height": 0,
     "passthru": false,
@@ -6670,7 +6549,7 @@
     "name": "",
     "label": "light/sonoff/kitchen",
     "group": "3156ce3a.ed9862",
-    "order": 5,
+    "order": 7,
     "width": 0,
     "height": 0,
     "passthru": false,
@@ -6687,6 +6566,592 @@
     "offcolor": "red",
     "x": 999,
     "y": 960,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "dd29d3fe.3e2fb",
+    "type": "comment",
+    "z": "f7610a0.d8198f8",
+    "name": "Rezepte",
+    "info": "",
+    "x": 260,
+    "y": 780,
+    "wires": []
+  },
+  {
+    "id": "76baf4ff.c8f8bc",
+    "type": "template",
+    "z": "f7610a0.d8198f8",
+    "name": "brew2",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "json",
+    "syntax": "plain",
+    "template": "{\n    \"name\": \"Dog Days\",\n    \"comment\": \"eigene Rezept (clone)\",\n    \"steps\": [\n        {\n            \"id\": 1,\n            \"step\": \"Mit 12l einmaischen\",\n            \"temperature\": 61,\n            \"heating\": \"one_time\",\n            \"duration\": 1,\n            \"alarm\": [0]\n        },\n        {\n            \"id\": 2,\n            \"step\": \"Eiweißrast\",\n            \"temperature\": 55,\n            \"heating\": \"control\",\n            \"duration\": 10\n        },\n        {\n            \"id\": 3,\n            \"step\": \"Maltoserast\",\n            \"temperature\": 62,\n            \"heating\": \"control\",\n            \"duration\": 45,\n            \"hysteresis\": 0.5\n        },\n        {\n            \"id\": 4,\n            \"step\": \"Verzuckerung\",\n            \"temperature\": 71,\n            \"heating\": \"control\",\n            \"duration\": 30,\n            \"hysteresis\": 0.5\n        },\n        {\n            \"id\": 5,\n            \"step\": \"Abmaischen\",\n            \"temperature\": 78,\n            \"heating\": \"control\",\n            \"duration\": 10,\n            \"alarm\": [10] \n        },\n        {\n            \"id\": 6,\n            \"step\": \"Läuterruhe\",\n            \"temperature\": 1,\n            \"heating\": \"no\",\n            \"duration\": 20,\n            \"alarm\": [20]\n        },\n        {\n            \"id\": 7,\n            \"step\": \"Mit 10l Nachguss läutern\",\n            \"temperature\": 1,\n            \"heating\": \"no\",\n            \"duration\": \"wait\"\n        },\n        {\n            \"id\": 8,\n            \"step\": \"Kochen bis Würzebruch\",\n            \"temperature\": 100,\n            \"heating\": \"full\",\n            \"duration\": \"wait\",\n            \"hysteresis\": 0.1\n        },\n        {\n            \"id\": 9,\n            \"step\": \"Hopfengabe und kochen\",\n            \"temperature\": 100,\n            \"heating\": \"full\",\n            \"duration\": 10,\n            \"hysteresis\": 0.1,\n            \"alarm\": [0]\n        }\n    ]\n}",
+    "output": "str",
+    "x": 250,
+    "y": 900,
+    "wires": [
+      [
+        "8ee58300.4c0ab"
+      ]
+    ]
+  },
+  {
+    "id": "a9d87078.c5afe",
+    "type": "ui_text",
+    "z": "f7610a0.d8198f8",
+    "group": "903ce37b.b2576",
+    "order": 19,
+    "width": "11",
+    "height": "1",
+    "name": "line9",
+    "label": "",
+    "format": "<font size=\"+2\">{{msg.payload}}</font size>",
+    "layout": "row-left",
+    "x": 930,
+    "y": 926,
+    "wires": []
+  },
+  {
+    "id": "f61ad05b.bd3ec",
+    "type": "ui_text",
+    "z": "f7610a0.d8198f8",
+    "group": "903ce37b.b2576",
+    "order": 21,
+    "width": "11",
+    "height": "1",
+    "name": "line10",
+    "label": "",
+    "format": "<font size=\"+2\">{{msg.payload}}</font size>",
+    "layout": "row-left",
+    "x": 930,
+    "y": 946,
+    "wires": []
+  },
+  {
+    "id": "4666744b.d75abc",
+    "type": "ui_switch",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "label": "",
+    "group": "903ce37b.b2576",
+    "order": 18,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "true",
+    "onvalueType": "bool",
+    "onicon": "play_arrow",
+    "oncolor": "green",
+    "offvalue": "false",
+    "offvalueType": "bool",
+    "officon": "indeterminate_check_box",
+    "offcolor": "grey",
+    "x": 930,
+    "y": 660,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "b328f55b.7bd638",
+    "type": "ui_switch",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "label": "",
+    "group": "903ce37b.b2576",
+    "order": 20,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "true",
+    "onvalueType": "bool",
+    "onicon": "play_arrow",
+    "oncolor": "green",
+    "offvalue": "false",
+    "offvalueType": "bool",
+    "officon": "indeterminate_check_box",
+    "offcolor": "grey",
+    "x": 930,
+    "y": 680,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "56d644bb.e1ac8c",
+    "type": "mqtt in",
+    "z": "f7610a0.d8198f8",
+    "name": "mqtt",
+    "topic": "nodes@home/sensor/button/pool/value/state",
+    "qos": "1",
+    "broker": "f093b8cc.ff2b58",
+    "x": 110,
+    "y": 720,
+    "wires": [
+      [
+        "bf4ddd64.60afd"
+      ]
+    ]
+  },
+  {
+    "id": "40535bb5.9c8ec4",
+    "type": "comment",
+    "z": "f7610a0.d8198f8",
+    "name": "Button",
+    "info": "",
+    "x": 110,
+    "y": 680,
+    "wires": []
+  },
+  {
+    "id": "bf4ddd64.60afd",
+    "type": "switch",
+    "z": "f7610a0.d8198f8",
+    "name": "on",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "ON",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "outputs": 1,
+    "x": 230,
+    "y": 720,
+    "wires": [
+      [
+        "8d985d4d.cb751"
+      ]
+    ]
+  },
+  {
+    "id": "fb34eb0e.b755d8",
+    "type": "mqtt in",
+    "z": "f7610a0.d8198f8",
+    "name": "brewery",
+    "topic": "nodes@home/sensor/ds18b20/brewery/value/voltage",
+    "qos": "1",
+    "broker": "f093b8cc.ff2b58",
+    "x": 110,
+    "y": 1020,
+    "wires": [
+      [
+        "12bdcdaa.be4cf2"
+      ]
+    ]
+  },
+  {
+    "id": "12bdcdaa.be4cf2",
+    "type": "json",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "pretty": false,
+    "x": 279,
+    "y": 1020,
+    "wires": [
+      [
+        "f43fa3bd.9e00f"
+      ]
+    ]
+  },
+  {
+    "id": "f43fa3bd.9e00f",
+    "type": "change",
+    "z": "f7610a0.d8198f8",
+    "name": "get value",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload.value / 1000",
+        "tot": "jsonata"
+      },
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "value",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 422,
+    "y": 1020,
+    "wires": [
+      [
+        "ed51fc95.2e9a2",
+        "f9e1568d.defda8"
+      ]
+    ]
+  },
+  {
+    "id": "8b6b7065.73283",
+    "type": "comment",
+    "z": "f7610a0.d8198f8",
+    "name": "Akkuspannung",
+    "info": "",
+    "x": 140,
+    "y": 980,
+    "wires": []
+  },
+  {
+    "id": "ed51fc95.2e9a2",
+    "type": "ui_gauge",
+    "z": "f7610a0.d8198f8",
+    "name": "voltage",
+    "group": "6f6ec204.ae7e8c",
+    "order": 2,
+    "width": 0,
+    "height": 0,
+    "gtype": "gage",
+    "title": "Akku Sudkessel",
+    "label": "V",
+    "format": "{{value | number:2}}",
+    "min": "3.5",
+    "max": "4.2",
+    "colors": [
+      "#ff0000",
+      "#ffff00",
+      "#008000"
+    ],
+    "seg1": "3.7",
+    "seg2": "3.95",
+    "x": 569,
+    "y": 1020,
+    "wires": []
+  },
+  {
+    "id": "f9e1568d.defda8",
+    "type": "ui_chart",
+    "z": "f7610a0.d8198f8",
+    "name": "chart",
+    "group": "6f6ec204.ae7e8c",
+    "order": 1,
+    "width": 0,
+    "height": 0,
+    "label": "Spannungsverlauf Sudkessel",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "---",
+    "dot": false,
+    "ymin": "3.5",
+    "ymax": "4.2",
+    "removeOlder": "6",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "3600",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#8080ff",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "useOldStyle": false,
+    "x": 559,
+    "y": 980,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "ec4de4e8.3e35a8",
+    "type": "mqtt in",
+    "z": "f7610a0.d8198f8",
+    "name": "fermenter",
+    "topic": "nodes@home/sensor/ds18b20/fermenter/value/voltage",
+    "qos": "1",
+    "broker": "f093b8cc.ff2b58",
+    "x": 120,
+    "y": 1100,
+    "wires": [
+      [
+        "80d0506b.64a53"
+      ]
+    ]
+  },
+  {
+    "id": "80d0506b.64a53",
+    "type": "json",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "pretty": false,
+    "x": 279,
+    "y": 1100,
+    "wires": [
+      [
+        "25a40ce0.e3fe24"
+      ]
+    ]
+  },
+  {
+    "id": "25a40ce0.e3fe24",
+    "type": "change",
+    "z": "f7610a0.d8198f8",
+    "name": "get value",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload.value / 1000",
+        "tot": "jsonata"
+      },
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "value",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 422,
+    "y": 1100,
+    "wires": [
+      [
+        "f736c86b.2b4dc8",
+        "3f11ea5.1c0a316"
+      ]
+    ]
+  },
+  {
+    "id": "f736c86b.2b4dc8",
+    "type": "ui_gauge",
+    "z": "f7610a0.d8198f8",
+    "name": "voltage",
+    "group": "6f6ec204.ae7e8c",
+    "order": 4,
+    "width": 0,
+    "height": 0,
+    "gtype": "gage",
+    "title": "Akku Gärfass",
+    "label": "V",
+    "format": "{{value | number:2}}",
+    "min": "3.5",
+    "max": "4.2",
+    "colors": [
+      "#ff0000",
+      "#ffff00",
+      "#008000"
+    ],
+    "seg1": "3.7",
+    "seg2": "3.95",
+    "x": 569,
+    "y": 1100,
+    "wires": []
+  },
+  {
+    "id": "3f11ea5.1c0a316",
+    "type": "ui_chart",
+    "z": "f7610a0.d8198f8",
+    "name": "chart",
+    "group": "6f6ec204.ae7e8c",
+    "order": 3,
+    "width": 0,
+    "height": 0,
+    "label": "Spannungsverlauf Gärfass",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "dd HH:mm",
+    "interpolate": "linear",
+    "nodata": "---",
+    "dot": false,
+    "ymin": "3.5",
+    "ymax": "4.2",
+    "removeOlder": "7",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "86400",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#8080ff",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "useOldStyle": false,
+    "x": 559,
+    "y": 1060,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "4ee50ea3.b0c85",
+    "type": "ui_gauge",
+    "z": "f7610a0.d8198f8",
+    "name": "fermenter temperature",
+    "group": "165a13ba.7f27ec",
+    "order": 3,
+    "width": 0,
+    "height": 0,
+    "gtype": "gage",
+    "title": "Gärfass",
+    "label": "°C",
+    "format": "{{value | number:1}}",
+    "min": 0,
+    "max": "40",
+    "colors": [
+      "#0000ff",
+      "#ff00ff",
+      "#ca3838"
+    ],
+    "seg1": "10",
+    "seg2": "23",
+    "x": 980,
+    "y": 140,
+    "wires": []
+  },
+  {
+    "id": "938e5a41.54e2c8",
+    "type": "change",
+    "z": "f7610a0.d8198f8",
+    "name": "get value",
+    "rules": [
+      {
+        "t": "move",
+        "p": "payload.value",
+        "pt": "msg",
+        "to": "payload",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 800,
+    "y": 140,
+    "wires": [
+      [
+        "4ee50ea3.b0c85"
+      ]
+    ]
+  },
+  {
+    "id": "c23febb8.df9b48",
+    "type": "json",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "pretty": false,
+    "x": 670,
+    "y": 140,
+    "wires": [
+      [
+        "938e5a41.54e2c8"
+      ]
+    ]
+  },
+  {
+    "id": "374c28d0.1c3fb8",
+    "type": "mqtt in",
+    "z": "f7610a0.d8198f8",
+    "name": "mqtt",
+    "topic": "nodes@home/sensor/ds18b20/fermenter/value/temperature",
+    "qos": "1",
+    "broker": "f093b8cc.ff2b58",
+    "x": 550,
+    "y": 141,
+    "wires": [
+      [
+        "c23febb8.df9b48"
+      ]
+    ]
+  },
+  {
+    "id": "e90fb28.492395",
+    "type": "comment",
+    "z": "f7610a0.d8198f8",
+    "name": "Schaltbare Steckdose",
+    "info": "",
+    "x": 740,
+    "y": 240,
+    "wires": []
+  },
+  {
+    "id": "ac61e02e.ab6af",
+    "type": "trigger",
+    "z": "8e2c5c11.fae26",
+    "op1": "1",
+    "op2": "0",
+    "op1type": "str",
+    "op2type": "str",
+    "duration": "20",
+    "extend": true,
+    "units": "min",
+    "reset": "",
+    "name": "",
+    "x": 799,
+    "y": 1000,
+    "wires": [
+      [
+        "c8e22b03.5fc6e8",
+        "f1399c8c.93ab8"
+      ]
+    ]
+  },
+  {
+    "id": "c8e22b03.5fc6e8",
+    "type": "ui_switch",
+    "z": "8e2c5c11.fae26",
+    "name": "",
+    "label": "sensor/ds18b20/fermenter",
+    "group": "4759591f.23c438",
+    "order": 5,
+    "width": 0,
+    "height": 0,
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "1",
+    "onvalueType": "str",
+    "onicon": "done",
+    "oncolor": "green",
+    "offvalue": "0",
+    "offvalueType": "str",
+    "officon": "error_outline",
+    "offcolor": "red",
+    "x": 1019,
+    "y": 1000,
     "wires": [
       []
     ]
