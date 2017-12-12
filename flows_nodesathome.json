@@ -4907,7 +4907,7 @@
     "z": "f7610a0.d8198f8",
     "name": "mqtt",
     "topic": "nodes@home/switch/sonoff/brewery/socket",
-    "qos": "1",
+    "qos": "0",
     "retain": "false",
     "broker": "f093b8cc.ff2b58",
     "x": 690,
@@ -5831,7 +5831,7 @@
     "z": "f7610a0.d8198f8",
     "name": "mqtt",
     "topic": "nodes@home/switch/sonoff/brewery/socket/value/state",
-    "qos": "1",
+    "qos": "0",
     "broker": "f093b8cc.ff2b58",
     "x": 110,
     "y": 200,
@@ -6465,7 +6465,7 @@
     "z": "65bfe802.954608",
     "name": "ambient",
     "topic": "nodes@home/sensor/gesture/kitchen/value/ambient",
-    "qos": "2",
+    "qos": "0",
     "broker": "f093b8cc.ff2b58",
     "x": 150,
     "y": 140,
@@ -7663,7 +7663,8 @@
     "wires": [
       [
         "3a250fcd.08e1c",
-        "f7812820.281e18"
+        "f7812820.281e18",
+        "cb02d1e1.5faf2"
       ]
     ]
   },
@@ -7846,6 +7847,67 @@
     "wires": [
       [
         "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "176b455d.51b0fb",
+    "type": "mqtt out",
+    "z": "f7610a0.d8198f8",
+    "name": "tilt",
+    "topic": "nodes@home/sensor/spindle/fermenter/value/tilt",
+    "qos": "0",
+    "retain": "true",
+    "broker": "f093b8cc.ff2b58",
+    "x": 817,
+    "y": 1540,
+    "wires": []
+  },
+  {
+    "id": "cb02d1e1.5faf2",
+    "type": "change",
+    "z": "f7610a0.d8198f8",
+    "name": "value",
+    "rules": [
+      {
+        "t": "move",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload.value",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "payload.unit",
+        "pt": "msg",
+        "to": "°",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 562,
+    "y": 1541,
+    "wires": [
+      [
+        "2f303b07.bd86b4"
+      ]
+    ]
+  },
+  {
+    "id": "2f303b07.bd86b4",
+    "type": "json",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "pretty": false,
+    "x": 690,
+    "y": 1540,
+    "wires": [
+      [
+        "176b455d.51b0fb"
       ]
     ]
   }
