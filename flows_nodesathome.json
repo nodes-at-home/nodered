@@ -696,7 +696,8 @@
     "y": 480,
     "wires": [
       [
-        "8569385c.b137d8"
+        "8569385c.b137d8",
+        "dae739c5.9d2108"
       ]
     ]
   },
@@ -7921,5 +7922,17 @@
         "176b455d.51b0fb"
       ]
     ]
+  },
+  {
+    "id": "dae739c5.9d2108",
+    "type": "debug",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "true",
+    "x": 400,
+    "y": 420,
+    "wires": []
   }
 ]
