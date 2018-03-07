@@ -4918,7 +4918,7 @@
     "type": "mqtt out",
     "z": "f7610a0.d8198f8",
     "name": "mqtt",
-    "topic": "nodes@home/switch/sonoff/brewery/socket",
+    "topic": "nodes@home/switch/sonoff/pool/socket",
     "qos": "0",
     "retain": "false",
     "broker": "f093b8cc.ff2b58",
@@ -5343,7 +5343,8 @@
       [
         "83b5f943.719fe8",
         "c030098a.559b68",
-        "76baf4ff.c8f8bc"
+        "76baf4ff.c8f8bc",
+        "7cdd08f7.7ad828"
       ]
     ]
   },
@@ -5842,7 +5843,7 @@
     "type": "mqtt in",
     "z": "f7610a0.d8198f8",
     "name": "mqtt",
-    "topic": "nodes@home/switch/sonoff/brewery/socket/value/state",
+    "topic": "nodes@home/switch/sonoff/pool/socket/value/state",
     "qos": "0",
     "broker": "f093b8cc.ff2b58",
     "x": 110,
@@ -6656,9 +6657,7 @@
     "x": 250,
     "y": 900,
     "wires": [
-      [
-        "8ee58300.4c0ab"
-      ]
+      []
     ]
   },
   {
@@ -7425,14 +7424,14 @@
     "label": "°C",
     "format": "{{value | number:1}}",
     "min": "15",
-    "max": "25",
+    "max": "35",
     "colors": [
       "#ffff00",
       "#80ff80",
       "#ffff00"
     ],
-    "seg1": "17",
-    "seg2": "23",
+    "seg1": "23",
+    "seg2": "27",
     "x": 584,
     "y": 1400,
     "wires": []
@@ -7529,7 +7528,7 @@
     "nodata": "---",
     "dot": false,
     "ymin": "15",
-    "ymax": "25",
+    "ymax": "35",
     "removeOlder": "2",
     "removeOlderPoints": "",
     "removeOlderUnit": "604800",
@@ -7934,5 +7933,24 @@
     "x": 400,
     "y": 420,
     "wires": []
+  },
+  {
+    "id": "7cdd08f7.7ad828",
+    "type": "template",
+    "z": "f7610a0.d8198f8",
+    "name": "brew3",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "json",
+    "syntax": "plain",
+    "template": "{\n    \"name\": \"Sierra Nevada Pale Ale\",\n    \"comment\": \"Amihopfen Braupaket\",\n    \"steps\": [\n        {\n            \"id\": 1,\n            \"step\": \"Mit 14,6l einmaischen\",\n            \"temperature\": 55,\n            \"heating\": \"one_time\",\n            \"duration\": 1,\n            \"alarm\": [0]\n        },\n        {\n            \"id\": 2,\n            \"step\": \"Eiweißrast\",\n            \"temperature\": 55,\n            \"heating\": \"control\",\n            \"duration\": 10\n        },\n        {\n            \"id\": 3,\n            \"step\": \"Maltoserast\",\n            \"temperature\": 63,\n            \"heating\": \"control\",\n            \"duration\": 35,\n            \"hysteresis\": 0.5\n        },\n        {\n            \"id\": 4,\n            \"step\": \"Verzuckerung\",\n            \"temperature\": 72,\n            \"heating\": \"control\",\n            \"duration\": 25,\n            \"hysteresis\": 0.5\n        },\n        {\n            \"id\": 5,\n            \"step\": \"Abmaischen\",\n            \"temperature\": 78,\n            \"heating\": \"control\",\n            \"duration\": 10,\n            \"alarm\": [10] \n        },\n        {\n            \"id\": 6,\n            \"step\": \"Läuterruhe\",\n            \"temperature\": 1,\n            \"heating\": \"no\",\n            \"duration\": 20,\n            \"alarm\": [20]\n        },\n        {\n            \"id\": 7,\n            \"step\": \"Mit 13,5l Nachguss läutern\",\n            \"temperature\": 1,\n            \"heating\": \"no\",\n            \"duration\": \"wait\"\n        },\n        {\n            \"id\": 8,\n            \"step\": \"Kochen bis Würzebruch\",\n            \"temperature\": 100,\n            \"heating\": \"full\",\n            \"duration\": \"wait\",\n            \"hysteresis\": 0.1\n        },\n        {\n            \"id\": 9,\n            \"step\": \"Hopfengabe und kochen\",\n            \"temperature\": 100,\n            \"heating\": \"full\",\n            \"duration\": 70,\n            \"hysteresis\": 0.1,\n            \"alarm\": [10,40,60,70]\n        }\n    ]\n}",
+    "output": "str",
+    "x": 250,
+    "y": 940,
+    "wires": [
+      [
+        "8ee58300.4c0ab"
+      ]
+    ]
   }
 ]
