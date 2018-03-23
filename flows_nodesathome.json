@@ -62,6 +62,43 @@
     "info": ""
   },
   {
+    "id": "c46b0d17.3f804",
+    "type": "subflow",
+    "name": "brew_recipes",
+    "info": "",
+    "in": [],
+    "out": []
+  },
+  {
+    "id": "faed8bee.a87248",
+    "type": "subflow",
+    "name": "Recipes",
+    "info": "",
+    "in": [
+      {
+        "x": -20,
+        "y": 880,
+        "wires": [
+          {
+            "id": "c9a5fda0.147dc"
+          }
+        ]
+      }
+    ],
+    "out": [
+      {
+        "x": 760,
+        "y": 880,
+        "wires": [
+          {
+            "id": "c1e3c969.49a798",
+            "port": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "f093b8cc.ff2b58",
     "type": "mqtt-broker",
     "z": "",
@@ -5186,15 +5223,15 @@
   {
     "id": "83b5f943.719fe8",
     "type": "template",
-    "z": "f7610a0.d8198f8",
-    "name": "brew1",
+    "z": "faed8bee.a87248",
+    "name": "Pale Ale",
     "field": "payload",
     "fieldType": "msg",
     "format": "json",
     "syntax": "plain",
     "template": "{\n    \"name\": \"Pale Ale\",\n    \"comment\": \"www.hobbybrauserversand.de\",\n    \"steps\": [\n        {\n            \"id\": 1,\n            \"step\": \"Einmaischen\",\n            \"temperature\": 61,\n            \"heating\": \"one_time\",\n            \"duration\": 10,\n            \"alarm\": [0]\n        },\n        {\n            \"id\": 2,\n            \"step\": \"Maltoserast\",\n            \"temperature\": 62,\n            \"heating\": \"control\",\n            \"duration\": 45,\n            \"hysteresis\": 0.5\n        },\n        {\n            \"id\": 3,\n            \"step\": \"Verzuckerung\",\n            \"temperature\": 71,\n            \"heating\": \"control\",\n            \"duration\": 30,\n            \"hysteresis\": 0.5\n        },\n        {\n            \"id\": 4,\n            \"step\": \"Abmaischen\",\n            \"temperature\": 78,\n            \"heating\": \"one_time\",\n            \"duration\": \"wait\"\n        },\n        {\n            \"id\": 5,\n            \"step\": \"Läuterruhe\",\n            \"temperature\": 1,\n            \"heating\": \"no\",\n            \"duration\": 20,\n            \"alarm\": [20]\n        },\n        {\n            \"id\": 6,\n            \"step\": \"Läutern\",\n            \"temperature\": 1,\n            \"heating\": \"no\",\n            \"duration\": \"wait\"\n        },\n        {\n            \"id\": 7,\n            \"step\": \"Kochen\",\n            \"temperature\": 100,\n            \"heating\": \"full\",\n            \"duration\": 90,\n            \"hysteresis\": 0.1,\n            \"alarm\": [20, 85]\n        }\n    ]\n}",
     "output": "str",
-    "x": 250,
+    "x": 260,
     "y": 860,
     "wires": [
       []
@@ -5338,13 +5375,10 @@
     "crontab": "",
     "once": true,
     "x": 110,
-    "y": 820,
+    "y": 826,
     "wires": [
       [
-        "83b5f943.719fe8",
-        "c030098a.559b68",
-        "76baf4ff.c8f8bc",
-        "7cdd08f7.7ad828"
+        "6b3f25d9.89727c"
       ]
     ]
   },
@@ -6242,8 +6276,8 @@
   {
     "id": "c030098a.559b68",
     "type": "template",
-    "z": "f7610a0.d8198f8",
-    "name": "test",
+    "z": "faed8bee.a87248",
+    "name": "Test",
     "field": "payload",
     "fieldType": "msg",
     "format": "json",
@@ -6636,7 +6670,7 @@
   {
     "id": "dd29d3fe.3e2fb",
     "type": "comment",
-    "z": "f7610a0.d8198f8",
+    "z": "faed8bee.a87248",
     "name": "Rezepte",
     "info": "",
     "x": 260,
@@ -6646,15 +6680,15 @@
   {
     "id": "76baf4ff.c8f8bc",
     "type": "template",
-    "z": "f7610a0.d8198f8",
-    "name": "brew2",
+    "z": "faed8bee.a87248",
+    "name": "Dog Days V1",
     "field": "payload",
     "fieldType": "msg",
     "format": "json",
     "syntax": "plain",
     "template": "{\n    \"name\": \"Dog Days\",\n    \"comment\": \"eigene Rezept (clone)\",\n    \"steps\": [\n        {\n            \"id\": 1,\n            \"step\": \"Mit 12l einmaischen\",\n            \"temperature\": 61,\n            \"heating\": \"one_time\",\n            \"duration\": 1,\n            \"alarm\": [0]\n        },\n        {\n            \"id\": 2,\n            \"step\": \"Eiweißrast\",\n            \"temperature\": 55,\n            \"heating\": \"control\",\n            \"duration\": 10\n        },\n        {\n            \"id\": 3,\n            \"step\": \"Maltoserast\",\n            \"temperature\": 62,\n            \"heating\": \"control\",\n            \"duration\": 45,\n            \"hysteresis\": 0.5\n        },\n        {\n            \"id\": 4,\n            \"step\": \"Verzuckerung\",\n            \"temperature\": 71,\n            \"heating\": \"control\",\n            \"duration\": 30,\n            \"hysteresis\": 0.5\n        },\n        {\n            \"id\": 5,\n            \"step\": \"Abmaischen\",\n            \"temperature\": 78,\n            \"heating\": \"control\",\n            \"duration\": 10,\n            \"alarm\": [10] \n        },\n        {\n            \"id\": 6,\n            \"step\": \"Läuterruhe\",\n            \"temperature\": 1,\n            \"heating\": \"no\",\n            \"duration\": 20,\n            \"alarm\": [20]\n        },\n        {\n            \"id\": 7,\n            \"step\": \"Mit 10l Nachguss läutern\",\n            \"temperature\": 1,\n            \"heating\": \"no\",\n            \"duration\": \"wait\"\n        },\n        {\n            \"id\": 8,\n            \"step\": \"Kochen bis Würzebruch\",\n            \"temperature\": 100,\n            \"heating\": \"full\",\n            \"duration\": \"wait\",\n            \"hysteresis\": 0.1\n        },\n        {\n            \"id\": 9,\n            \"step\": \"Hopfengabe und kochen\",\n            \"temperature\": 100,\n            \"heating\": \"full\",\n            \"duration\": 10,\n            \"hysteresis\": 0.1,\n            \"alarm\": [0]\n        }\n    ]\n}",
     "output": "str",
-    "x": 250,
+    "x": 270,
     "y": 900,
     "wires": [
       []
@@ -7937,20 +7971,79 @@
   {
     "id": "7cdd08f7.7ad828",
     "type": "template",
-    "z": "f7610a0.d8198f8",
-    "name": "brew3",
+    "z": "faed8bee.a87248",
+    "name": "Sierra Nevada Pale Ale",
     "field": "payload",
     "fieldType": "msg",
     "format": "json",
     "syntax": "plain",
     "template": "{\n    \"name\": \"Sierra Nevada Pale Ale\",\n    \"comment\": \"Amihopfen Braupaket\",\n    \"steps\": [\n        {\n            \"id\": 1,\n            \"step\": \"Mit 14,6l einmaischen\",\n            \"temperature\": 55,\n            \"heating\": \"one_time\",\n            \"duration\": 1,\n            \"alarm\": [0]\n        },\n        {\n            \"id\": 2,\n            \"step\": \"Eiweißrast\",\n            \"temperature\": 55,\n            \"heating\": \"control\",\n            \"duration\": 10\n        },\n        {\n            \"id\": 3,\n            \"step\": \"Maltoserast\",\n            \"temperature\": 63,\n            \"heating\": \"control\",\n            \"duration\": 35,\n            \"hysteresis\": 0.5\n        },\n        {\n            \"id\": 4,\n            \"step\": \"Verzuckerung\",\n            \"temperature\": 72,\n            \"heating\": \"control\",\n            \"duration\": 25,\n            \"hysteresis\": 0.5\n        },\n        {\n            \"id\": 5,\n            \"step\": \"Abmaischen\",\n            \"temperature\": 78,\n            \"heating\": \"control\",\n            \"duration\": 10,\n            \"alarm\": [10] \n        },\n        {\n            \"id\": 6,\n            \"step\": \"Läuterruhe\",\n            \"temperature\": 1,\n            \"heating\": \"no\",\n            \"duration\": 20,\n            \"alarm\": [20]\n        },\n        {\n            \"id\": 7,\n            \"step\": \"Mit 13,5l Nachguss läutern\",\n            \"temperature\": 1,\n            \"heating\": \"no\",\n            \"duration\": \"wait\"\n        },\n        {\n            \"id\": 8,\n            \"step\": \"Kochen bis Würzebruch\",\n            \"temperature\": 100,\n            \"heating\": \"full\",\n            \"duration\": \"wait\",\n            \"hysteresis\": 0.1\n        },\n        {\n            \"id\": 9,\n            \"step\": \"Hopfengabe und kochen\",\n            \"temperature\": 100,\n            \"heating\": \"full\",\n            \"duration\": 70,\n            \"hysteresis\": 0.1,\n            \"alarm\": [10,40,60,70]\n        }\n    ]\n}",
     "output": "str",
-    "x": 250,
+    "x": 310,
     "y": 940,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "c9a5fda0.147dc",
+    "type": "change",
+    "z": "faed8bee.a87248",
+    "name": "1:1",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 110,
+    "y": 880,
+    "wires": [
+      [
+        "c030098a.559b68",
+        "83b5f943.719fe8",
+        "76baf4ff.c8f8bc",
+        "7cdd08f7.7ad828",
+        "c1e3c969.49a798"
+      ]
+    ]
+  },
+  {
+    "id": "6b3f25d9.89727c",
+    "type": "subflow:faed8bee.a87248",
+    "z": "f7610a0.d8198f8",
+    "name": "Recipes",
+    "x": 252,
+    "y": 826,
     "wires": [
       [
         "8ee58300.4c0ab"
       ]
+    ]
+  },
+  {
+    "id": "c1e3c969.49a798",
+    "type": "template",
+    "z": "faed8bee.a87248",
+    "name": "Dog Days V2",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "json",
+    "syntax": "plain",
+    "template": "{\n    \"name\": \"Dog Days V2\",\n    \"comment\": \"eigene Rezept (clone)\",\n    \"steps\": [\n        {\n            \"id\": 1,\n            \"step\": \"Mit 16l einmaischen\",\n            \"temperature\": 55,\n            \"heating\": \"one_time\",\n            \"duration\": 1,\n            \"alarm\": [0]\n        },\n        {\n            \"id\": 2,\n            \"step\": \"Eiweißrast\",\n            \"temperature\": 55,\n            \"heating\": \"control\",\n            \"duration\": 10\n        },\n        {\n            \"id\": 3,\n            \"step\": \"Maltoserast\",\n            \"temperature\": 62,\n            \"heating\": \"control\",\n            \"duration\": 45,\n            \"hysteresis\": 0.5\n        },\n        {\n            \"id\": 4,\n            \"step\": \"Verzuckerung\",\n            \"temperature\": 71,\n            \"heating\": \"control\",\n            \"duration\": 30,\n            \"hysteresis\": 0.5\n        },\n        {\n            \"id\": 5,\n            \"step\": \"Abmaischen\",\n            \"temperature\": 78,\n            \"heating\": \"control\",\n            \"duration\": 10,\n            \"alarm\": [10] \n        },\n        {\n            \"id\": 6,\n            \"step\": \"Läuterruhe\",\n            \"temperature\": 1,\n            \"heating\": \"no\",\n            \"duration\": 20,\n            \"alarm\": [20]\n        },\n        {\n            \"id\": 7,\n            \"step\": \"Mit 13l Nachguss läutern\",\n            \"temperature\": 1,\n            \"heating\": \"no\",\n            \"duration\": \"wait\"\n        },\n        {\n            \"id\": 8,\n            \"step\": \"Kochen bis Würzebruch\",\n            \"temperature\": 100,\n            \"heating\": \"full\",\n            \"duration\": \"wait\",\n            \"hysteresis\": 0.1\n        },\n        {\n            \"id\": 9,\n            \"step\": \"1. Hopfengabe und kochen\",\n            \"temperature\": 100,\n            \"heating\": \"full\",\n            \"duration\": 60,\n            \"hysteresis\": 0.1,\n            \"alarm\": [0]\n        },\n        {\n            \"id\": 10,\n            \"step\": \"2. Hopfengabe und kochen\",\n            \"temperature\": 100,\n            \"heating\": \"full\",\n            \"duration\": 20,\n            \"hysteresis\": 0.1,\n            \"alarm\": [0]\n        }\n    ]\n}\n",
+    "output": "str",
+    "x": 270,
+    "y": 980,
+    "wires": [
+      []
     ]
   }
 ]
