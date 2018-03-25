@@ -3704,10 +3704,15 @@
         "t": "eq",
         "v": "sensor/spindle/fermenter",
         "vt": "str"
+      },
+      {
+        "t": "eq",
+        "v": "switch/ssr/brewery",
+        "vt": "str"
       }
     ],
     "checkall": "true",
-    "outputs": 26,
+    "outputs": 27,
     "x": 570,
     "y": 440,
     "wires": [
@@ -3788,6 +3793,9 @@
       ],
       [
         "e03d2c43.e11fc"
+      ],
+      [
+        "e4862060.d7295"
       ]
     ]
   },
@@ -6323,7 +6331,7 @@
     "checkall": "true",
     "outputs": 1,
     "x": 830,
-    "y": 1149,
+    "y": 1197,
     "wires": [
       [
         "bf07b832.b1d128"
@@ -6339,7 +6347,7 @@
     "console": "false",
     "complete": "true",
     "x": 1090,
-    "y": 1209,
+    "y": 1257,
     "wires": []
   },
   {
@@ -6354,7 +6362,7 @@
     "crontab": "",
     "once": false,
     "x": 670,
-    "y": 1149,
+    "y": 1197,
     "wires": [
       [
         "f1399c8c.93ab8"
@@ -6371,7 +6379,7 @@
     "url": "",
     "tls": "",
     "x": 1100,
-    "y": 1149,
+    "y": 1197,
     "wires": [
       []
     ]
@@ -6403,7 +6411,7 @@
     "to": "",
     "reg": false,
     "x": 950,
-    "y": 1149,
+    "y": 1197,
     "wires": [
       [
         "15a66c63.568814",
@@ -6418,7 +6426,7 @@
     "name": "send msg to simplepush if trigger is outtimed",
     "info": "",
     "x": 950,
-    "y": 1109,
+    "y": 1157,
     "wires": []
   },
   {
@@ -8042,6 +8050,56 @@
     "output": "str",
     "x": 370,
     "y": 260,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "e4862060.d7295",
+    "type": "trigger",
+    "z": "8e2c5c11.fae26",
+    "op1": "1",
+    "op2": "0",
+    "op1type": "str",
+    "op2type": "str",
+    "duration": "25",
+    "extend": true,
+    "units": "min",
+    "reset": "",
+    "name": "",
+    "x": 801,
+    "y": 1080,
+    "wires": [
+      [
+        "4e10d3f2.f6e7cc",
+        "f1399c8c.93ab8"
+      ]
+    ]
+  },
+  {
+    "id": "4e10d3f2.f6e7cc",
+    "type": "ui_switch",
+    "z": "8e2c5c11.fae26",
+    "name": "",
+    "label": "switch/ssr/brewery",
+    "group": "4759591f.23c438",
+    "order": 5,
+    "width": 0,
+    "height": 0,
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "1",
+    "onvalueType": "str",
+    "onicon": "done",
+    "oncolor": "green",
+    "offvalue": "0",
+    "offvalueType": "str",
+    "officon": "error_outline",
+    "offcolor": "red",
+    "x": 1001,
+    "y": 1080,
     "wires": [
       []
     ]
