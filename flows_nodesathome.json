@@ -1250,11 +1250,11 @@
         "1111b8ca.abcf47",
         "fa776777.dc3d08",
         "ea4ab4e3.57dc68",
-        "fb143377.559be",
         "30628acc.5130e6",
         "a2528b01.80cda8",
         "bd16e16f.9a17b",
-        "c1f32206.0a9d1"
+        "c1f32206.0a9d1",
+        "62197c5a.e4cf94"
       ]
     ]
   },
@@ -2471,7 +2471,7 @@
     "payloadType": "date",
     "topic": "switch/sonoff/brewery",
     "x": 420,
-    "y": 1080,
+    "y": 1040,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -3457,31 +3457,6 @@
     "wires": []
   },
   {
-    "id": "fb143377.559be",
-    "type": "ui_button",
-    "z": "37197cb5.c49ee4",
-    "name": "update sensor/ds18b20/brewery",
-    "group": "457a1e5.d114de",
-    "order": 5,
-    "width": 0,
-    "height": 0,
-    "passthru": true,
-    "label": "sensor/ds18b20/brewery",
-    "color": "",
-    "bgcolor": "",
-    "icon": "",
-    "payload": "",
-    "payloadType": "date",
-    "topic": "sensor/ds18b20/brewery",
-    "x": 430,
-    "y": 1040,
-    "wires": [
-      [
-        "6ed6dc87.f74a94"
-      ]
-    ]
-  },
-  {
     "id": "ac7b56da.a31378",
     "type": "function",
     "z": "c9cf8bbb.029148",
@@ -3753,22 +3728,17 @@
       },
       {
         "t": "eq",
-        "v": "sensor/ds18b20/fermenter",
-        "vt": "str"
-      },
-      {
-        "t": "eq",
         "v": "sensor/spindle/fermenter",
         "vt": "str"
       },
       {
         "t": "eq",
-        "v": "switch/ssr/brewery",
+        "v": "control/ssr/brewery",
         "vt": "str"
       }
     ],
     "checkall": "true",
-    "outputs": 27,
+    "outputs": 26,
     "x": 570,
     "y": 440,
     "wires": [
@@ -3845,9 +3815,6 @@
         "f22514e3.aa2568"
       ],
       [
-        "ac61e02e.ab6af"
-      ],
-      [
         "e03d2c43.e11fc"
       ],
       [
@@ -3884,7 +3851,7 @@
     "name": "",
     "label": "sensor/ds18b20/brewery",
     "group": "4759591f.23c438",
-    "order": 5,
+    "order": 6,
     "width": 0,
     "height": 0,
     "passthru": false,
@@ -4593,7 +4560,7 @@
     "name": "",
     "label": "switch/sonoff/brewery",
     "group": "4759591f.23c438",
-    "order": 1,
+    "order": 5,
     "width": 0,
     "height": 0,
     "passthru": false,
@@ -6841,56 +6808,6 @@
     ]
   },
   {
-    "id": "ac61e02e.ab6af",
-    "type": "trigger",
-    "z": "8e2c5c11.fae26",
-    "op1": "1",
-    "op2": "0",
-    "op1type": "str",
-    "op2type": "str",
-    "duration": "20",
-    "extend": true,
-    "units": "min",
-    "reset": "",
-    "name": "",
-    "x": 799,
-    "y": 1000,
-    "wires": [
-      [
-        "c8e22b03.5fc6e8",
-        "f1399c8c.93ab8"
-      ]
-    ]
-  },
-  {
-    "id": "c8e22b03.5fc6e8",
-    "type": "ui_switch",
-    "z": "8e2c5c11.fae26",
-    "name": "",
-    "label": "sensor/ds18b20/fermenter",
-    "group": "4759591f.23c438",
-    "order": 5,
-    "width": 0,
-    "height": 0,
-    "passthru": false,
-    "decouple": "true",
-    "topic": "",
-    "style": "",
-    "onvalue": "1",
-    "onvalueType": "str",
-    "onicon": "done",
-    "oncolor": "green",
-    "offvalue": "0",
-    "offvalueType": "str",
-    "officon": "error_outline",
-    "offcolor": "red",
-    "x": 1019,
-    "y": 1000,
-    "wires": [
-      []
-    ]
-  },
-  {
     "id": "50c12cb8.8be3f4",
     "type": "mqtt in",
     "z": "f7610a0.d8198f8",
@@ -7441,8 +7358,8 @@
     "units": "min",
     "reset": "",
     "name": "",
-    "x": 801,
-    "y": 1040,
+    "x": 799,
+    "y": 1000,
     "wires": [
       [
         "60f50c66.f8b834",
@@ -7457,7 +7374,7 @@
     "name": "",
     "label": "sensor/spindle/fermenter",
     "group": "4759591f.23c438",
-    "order": 5,
+    "order": 7,
     "width": 0,
     "height": 0,
     "passthru": false,
@@ -7472,8 +7389,8 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1021,
-    "y": 1040,
+    "x": 1019,
+    "y": 1000,
     "wires": [
       []
     ]
@@ -7482,21 +7399,21 @@
     "id": "bd16e16f.9a17b",
     "type": "ui_button",
     "z": "37197cb5.c49ee4",
-    "name": "update sensor/ds18b20/fermenter",
+    "name": "update sensor/ds18b20/brewery",
     "group": "457a1e5.d114de",
     "order": 6,
     "width": 0,
     "height": 0,
     "passthru": true,
-    "label": "sensor/ds18b20/fermenter",
+    "label": "sensor/ds18b20/brewery",
     "color": "",
     "bgcolor": "",
     "icon": "",
     "payload": "",
     "payloadType": "date",
-    "topic": "sensor/ds18b20/fermenter",
-    "x": 440,
-    "y": 1120,
+    "topic": "sensor/ds18b20/brewery",
+    "x": 430,
+    "y": 1080,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -7614,8 +7531,8 @@
     "units": "min",
     "reset": "",
     "name": "",
-    "x": 801,
-    "y": 1080,
+    "x": 799,
+    "y": 1040,
     "wires": [
       [
         "4e10d3f2.f6e7cc",
@@ -7628,9 +7545,9 @@
     "type": "ui_switch",
     "z": "8e2c5c11.fae26",
     "name": "",
-    "label": "switch/ssr/brewery",
+    "label": "control/ssr/brewery",
     "group": "4759591f.23c438",
-    "order": 5,
+    "order": 8,
     "width": 0,
     "height": 0,
     "passthru": false,
@@ -7645,8 +7562,8 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1001,
-    "y": 1080,
+    "x": 999,
+    "y": 1040,
     "wires": [
       []
     ]
@@ -9357,5 +9274,30 @@
     "x": 559,
     "y": 1420,
     "wires": []
+  },
+  {
+    "id": "62197c5a.e4cf94",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update control/ssr/brewery",
+    "group": "457a1e5.d114de",
+    "order": 6,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "label": "control/ssr/brewery",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "control/ssr/brewery",
+    "x": 420,
+    "y": 1120,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
   }
 ]
