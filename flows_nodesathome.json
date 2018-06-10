@@ -69,14 +69,6 @@
     "info": ""
   },
   {
-    "id": "c46b0d17.3f804",
-    "type": "subflow",
-    "name": "brew_recipes",
-    "info": "",
-    "in": [],
-    "out": []
-  },
-  {
     "id": "f093b8cc.ff2b58",
     "type": "mqtt-broker",
     "z": "",
@@ -355,15 +347,15 @@
     "id": "b12a4a7f.ebf3c8",
     "type": "ui_tab",
     "z": "",
-    "name": "Gärfass",
+    "name": "Gärspindel",
     "icon": "dashboard",
-    "order": 5
+    "order": 6
   },
   {
     "id": "7c483f48.dca68",
     "type": "ui_group",
     "z": "",
-    "name": "Spannungsversorgung",
+    "name": "Akkuspannung",
     "tab": "b12a4a7f.ebf3c8",
     "order": 3,
     "disp": true,
@@ -373,7 +365,7 @@
     "id": "7c25d4b3.83714c",
     "type": "ui_group",
     "z": "",
-    "name": "Temperaturverlauf",
+    "name": "Temperatur",
     "tab": "b12a4a7f.ebf3c8",
     "order": 1,
     "disp": true,
@@ -383,7 +375,7 @@
     "id": "ff05a58d.b32e78",
     "type": "ui_group",
     "z": "",
-    "name": "Gärung",
+    "name": "Spindelneigung",
     "tab": "b12a4a7f.ebf3c8",
     "order": 2,
     "disp": true,
@@ -446,6 +438,44 @@
     "order": 4,
     "disp": false,
     "width": "29"
+  },
+  {
+    "id": "f5c1d8d5.e934a8",
+    "type": "ui_tab",
+    "z": "",
+    "name": "Nachguss",
+    "icon": "dashboard",
+    "order": 5
+  },
+  {
+    "id": "dd05ddf5.dd4e",
+    "type": "ui_group",
+    "z": "",
+    "name": "Temperatur 1 (gelb)",
+    "tab": "f5c1d8d5.e934a8",
+    "order": 1,
+    "disp": true,
+    "width": "10"
+  },
+  {
+    "id": "8455d317.fd8ec",
+    "type": "ui_group",
+    "z": "",
+    "name": "Spannungsversorgung",
+    "tab": "f5c1d8d5.e934a8",
+    "order": 3,
+    "disp": true,
+    "width": "6"
+  },
+  {
+    "id": "f5c64a1d.91b058",
+    "type": "ui_group",
+    "z": "",
+    "name": "Temperatur 2 (weiß)",
+    "tab": "f5c1d8d5.e934a8",
+    "order": 2,
+    "disp": true,
+    "width": "10"
   },
   {
     "id": "1f55c701.4fff39",
@@ -4948,11 +4978,11 @@
     "id": "617730a.b4ef3d",
     "type": "function",
     "z": "f7610a0.d8198f8",
-    "name": "2-point-controller",
-    "func": "\n// junand 19.09.2017\n\n//----------------------------------------------------------------\nconst DEFAULT_RECIPE_NAME = \"unknown\";\nconst DEFAULT_BREW_START = \"unknown\";\nconst DEFAULT_TEMP = 1;\nconst DEFAULT_HEATING = \"control\";\nconst DEFAULT_STIRRING = \"off\";\nconst DEFAULT_HYSTERESIS = 1;\nconst DEFAULT_DURATION = 1;\nconst DEFAULT_HEATER_ON = false;\nconst DEFAULT_STIRRER_ON = false;\n\nvar recipeName = context.get ( \"recipeName\" );\nvar brewStart = context.get ( \"brewStart\" );\nvar temperature = context.get ( \"temperature\" ) || DEFAULT_TEMP;\nvar heatingMode = context.get ( \"heating\" ) || DEFAULT_HEATING;\nvar stirringMode = context.get ( \"stirring\" ) || DEFAULT_STIRRING;\nvar hysteresis = context.get ( \"hysteresis\" ) || DEFAULT_HYSTERESIS;\nvar periodLength = context.get ( \"periodLength\" ) || DEFAULT_DURATION;\nvar alarm = context.get ( \"alarm\" );\n\nconst PERIOD_INCREMENT = 1;                            // <- accelerate time here\nconst PERIOD_ZERO = { min: 0, sec: 0 };\nvar periodCount = context.get ( \"periodCount\" ) || PERIOD_ZERO;\nvar heaterOn = context.get ( \"heaterOn\" ) || DEFAULT_HEATER_ON;\nvar stirrerOn = context.get ( \"stirrerOn\" ) || DEFAULT_STIRRER_ON;\n\n//----------------------------------------------------------------\nconst STATE_IDLE = \"idle\";\nconst STATE_STARTING = \"starting\";\nconst STATE_PERIOD_STARTED = \"started\";\nconst STATE_PERIOD_FINISHED = \"finished\";\n\nvar state = context.get ( \"state\" ) || STATE_IDLE;\n\n//----------------------------------------------------------------\nfunction incPeriodCount ( cnt ) {\n    cnt.sec += PERIOD_INCREMENT;\n    if ( cnt.sec > 59 ) {\n        cnt.sec = 0;\n        cnt.min++;\n    }\n    return cnt;\n}\n\n//----------------------------------------------------------------\nfunction createHeaterMessage ( onOff ) { return { payload: onOff }; }\nfunction createStirrerMessage ( onOff ) { return { payload: onOff }; }\nfunction createStepMessage () { return { topic: \"next\", payload: \"x\" }; }\nfunction createPeriodeMessage ( count ) { return { payload: count.min + \":\" + (\"0\" + count.sec).slice ( -2 ) }; }\nfunction createAlarmMessage ( audio, notification ) { \n    var result = [{ topic: \"audio\", payload: audio }];\n    if ( notification ) {\n        result [1] = { topic: \"Alarm\", payload: notification };\n    }\n    return result; \n}\n\nfunction createChartMessage ( temp, target ) { \n    if ( target ) {\n        return [\n            { topic: \"value\", payload: temp },\n            { topic: \"target\", payload: target }\n        ];\n    }\n    else {\n        return { topic: \"value\", payload: temp };\n    }\n}\n\nfunction createInfluxMessage ( brewTemp ) {\n    return {\n        //measurement: \"prod\",\n        payload: [\n            // fields\n            {\n                state: state,\n                brewTemp: brewTemp,\n                target: temperature,\n                heater: heaterOn ? \"on\" : \"off\",\n                stirrer: stirrerOn ? \"on\" : \"off\"\n            },\n            // tags\n            {\n                recipe: recipeName,\n                brewStart: brewStart\n            }\n        ]\n    };\n}\n\n//----------------------------------------------------------------\n\n//node.warn ( \"[EVENT] state=\" + state + \" min=\" + periodCount.min + \" sec=\" + periodCount.sec );\n\n\nif ( msg.topic == \"stop\" ) {\n    context.set ( \"state\", STATE_IDLE );\n    node.status ( { fill: \"grey\", shape: \"dot\", text: \"idle\" } );\n    context.set ( \"heaterOn\", false );\n    context.set ( \"stirrerOn\", false );\n    return [createHeaterMessage ( \"OFF\" ), null, null, null, null, null, createStirrerMessage ( \"OFF\" )];\n}\nelse if ( msg.topic == \"finished\" ) {\n    context.set ( \"state\", STATE_PERIOD_FINISHED );\n    node.status ( { fill: \"grey\", shape: \"dot\", text: \"finished\" } );\n    return [createHeaterMessage ( \"OFF\" ), null, null, null, null, null, createStirrerMessage ( \"OFF\" )];\n}\nelse if ( msg.topic == \"start\" ) {\n    \n    recipeName = msg.recipeName || recipeName || DEFAULT_RECIPE_NAME;\n    brewStart = msg.brewStart || brewStart || DEFAULT_BREW_START;\n    var t = msg.temperature || DEFAULT_TEMP; \n    if ( t > 0 && t < 105 ) temperature = t;\n    heatingMode = msg.heating || heatingMode || DEFAULT_HEATING;\n    stirringMode = msg.stirring || stirringMode || DEFAULT_STIRRING;\n    var h = msg.hysteresis || DEFAULT_HYSTERESIS;\n    if ( h > 0 && h < 10 ) hysteresis = h;\n    var p = msg.duration || DEFAULT_DURATION;\n    if ( p === \"wait\" || p > 0 ) periodLength = p;\n\n    //node.warn ( \"[START] mode=\" + heatingMode + \" stirrer=\" + stirringMode + \" t=\" + temperature + \" h=\" + hysteresis + \" p=\" + periodLength );\n    \n    context.set ( \"recipeName\", recipeName );\n    context.set ( \"brewStart\", brewStart );\n    context.set ( \"temperature\", temperature );\n    context.set ( \"heating\", heatingMode );\n    context.set ( \"stirring\", stirringMode );\n    context.set ( \"hysteresis\", hysteresis );\n    context.set ( \"periodLength\", periodLength );\n    context.set ( \"alarm\", msg.alarm );\n    \n    context.set ( \"periodCount\", PERIOD_ZERO );\n    context.set ( \"heaterOn\", heaterOn );\n\n    context.set ( \"state\", STATE_STARTING );\n    node.status ( { fill: \"grey\", shape: \"dot\", text: \"starting\" } );\n    \n    return [null, null, null, createPeriodeMessage ( PERIOD_ZERO )];\n\n}\nelse if ( msg.topic == \"hysteresis\" ) {\n    context.set ( \"hysteresis\", hysteresis );\n}\nelse if ( msg.topic == \"tick\" ) { // every sec\n    // check for period length\n    if ( state == STATE_IDLE ) {\n        node.status ( { fill: \"grey\", shape: \"dot\", text: \"idle\" } );\n    }\n    else if ( state == STATE_PERIOD_STARTED ) {\n        context.set ( \"periodCount\", incPeriodCount ( periodCount ) );\n        var alarmMsg = null;\n        if ( alarm ) {\n            for ( var i = 0; i < alarm.length; i++ ) {\n                var alarmtime = null;\n                if ( typeof ( alarm [i] ) === \"number\" ) alarmtime = alarm [i];\n                else alarmtime = alarm [i].time;\n                if ( periodCount.min == alarmtime ) {\n                    if ( periodCount.sec === 0 || alarmtime === 0 && periodCount.sec === PERIOD_INCREMENT ) { // exception for 00:00, 1 sec later\n                        alarmMsg = createAlarmMessage ( \"ring\", alarm [i].text );\n                        break;\n                    }\n                }\n            }\n        }\n        if ( periodLength == \"wait\" ) {} // do nothing, only tick and maybe ring\n        else {\n            if ( periodCount.min >= periodLength ) {\n                context.set ( \"state\", STATE_PERIOD_FINISHED );\n                context.set ( \"temperature\", null );\n                context.set ( \"heaterOn\", false );\n                context.set ( \"stirrerOn\", false );\n                if ( !alarmMsg ) alarmMsg = createAlarmMessage ( \"tweet2x\" );\n                return [createHeaterMessage ( \"OFF\" ), createStepMessage (), null, createPeriodeMessage ( periodCount ), alarmMsg, null, createStirrerMessage ( \"OFF\" )]; \n            }\n        }\n        \n        //node.warn ( \"[TICK] p=\" + periodLength + \" min=\" + periodCount.min + \" sec=\" + periodCount.sec + \" state=\" + state );\n\n        // tick\n        return [null, null, null, createPeriodeMessage ( periodCount ), alarmMsg];\n    }\n}\nelse if ( msg.topic == \"nodes@home/switch/ssr/brewery/socket1\" ) {\n    context.set ( \"heaterOn\", msg.payload == \"ON\" ? true : false );\n}\nelse if ( msg.topic == \"nodes@home/switch/ssr/brewery/socket2\" ) {\n    context.set ( \"stirrerOn\", msg.payload == \"ON\" ? true : false );\n}\nelse {\n    // temperature received\n    if ( state == STATE_IDLE ) {\n        node.status ( { fill: \"grey\", shape: \"dot\", text: \"idle\" } );\n    }\n    else if ( msg.payload && msg.payload.value ) {\n        var brewTemp = msg.payload.value;\n        if ( state == STATE_PERIOD_FINISHED ) {\n            return [null, null, createChartMessage ( brewTemp ), null, null, createInfluxMessage ( brewTemp )];\n        }\n        else {\n            \n            var heaterMsg = null;\n            var stirrerMsg = null;\n            var alarmMsg = null;\n            var newHeaterOn = null;\n            var newStirrerOn = null;\n\n            if ( brewTemp >= temperature ) {\n                if ( heaterOn && heatingMode != \"full\" ) newHeaterOn = false;\n                if ( stirrerOn && stirringMode != \"full\" ) newStirrerOn = false;\n                if ( state == STATE_STARTING ) {\n                    context.set ( \"state\", STATE_PERIOD_STARTED );\n                    alarmMsg = createAlarmMessage ( \"tweet2x\" );\n                }\n            }\n\n            if ( heatingMode == \"off\" ) {\n                if ( heaterOn ) newHeaterOn = false;\n            }\n            else if ( heatingMode == \"one_time\" ) {\n                if ( state == STATE_STARTING ) {\n                    if ( !heaterOn ) newHeaterOn = true;\n                }\n            }\n            else if ( heatingMode == \"control\" ) {\n                if ( brewTemp <= temperature - hysteresis ) {\n                    if ( !heaterOn ) newHeaterOn = true;\n                }\n            }\n            else if ( heatingMode == \"full\" ) {\n                if ( !heaterOn ) newHeaterOn = true;\n            }\n            \n            if ( newHeaterOn !== null ) {\n                //node.warn ( \"switch heater from \" + heaterOn + \" to \" + newHeaterOn );                    \n                context.set ( \"heaterOn\", newHeaterOn );\n                if ( !alarmMsg ) alarmMsg = createAlarmMessage ( \"tweet\" );\n                if ( newHeaterOn ) {\n                    node.status ( { fill: \"red\", shape: \"dot\", text: \"heating\" } );\n                    heaterMsg = createHeaterMessage ( \"ON\" );\n                }\n                else {\n                    node.status ( { fill: \"blue\", shape: \"dot\", text: \"cooling\" } );\n                    heaterMsg = createHeaterMessage ( \"OFF\" );\n                }\n            }\n            \n            if ( stirringMode == \"off\" ) {\n                if ( stirrerOn ) newStirrerOn = false;\n            }\n            else if ( stirringMode == \"control\" ) {\n                if ( brewTemp <= temperature - hysteresis ) {\n                    if ( !stirrerOn ) newStirrerOn = true;\n                }\n            }\n            else if ( stirringMode == \"full\" ) {\n                if ( !stirrerOn ) newStirrerOn = true;\n            }\n            \n            if ( newStirrerOn !== null ) {\n                //node.warn ( \"switch stirrer from \" + stirrerOn + \" to \" + newStirrerOn );                    \n                context.set ( \"stirrerOn\", newStirrerOn );\n                stirrerMsg = createStirrerMessage ( newStirrerOn ? \"ON\" : \"OFF\" );\n            }\n\n            //node.warn ( \"[TEMP] heater=\" + heaterOn + \" newHeater=\" + newHeaterOn + \" mode=\" + heatingMode + \" p=\" + periodLength + \" min=\" + periodCount.min + \" sec=\" + periodCount.sec + \" state=\" + state );\n            \n            // on every temp, send target and data fields\n            return [heaterMsg, null, createChartMessage ( brewTemp, temperature ), null, alarmMsg, createInfluxMessage ( brewTemp ), stirrerMsg];\n            \n        }\n    }\n}\n",
+    "name": "2-point-controllerorange",
+    "func": "\n// junand 19.09.2017\n\n//----------------------------------------------------------------\nconst DEFAULT_RECIPE_NAME = \"unknown\";\nconst DEFAULT_BREW_START = \"unknown\";\nconst DEFAULT_STEP_DESCIPTION = \"unknown\";\nconst DEFAULT_TEMP = 1;\nconst DEFAULT_HEATING = \"control\";\nconst DEFAULT_STIRRING = \"off\";\nconst DEFAULT_HYSTERESIS = 1;\nconst DEFAULT_DURATION = 1;\nconst DEFAULT_HEATER_ON = false;\nconst DEFAULT_STIRRER_ON = false;\n\nvar recipeName = context.get ( \"recipeName\" );\nvar brewStart = context.get ( \"brewStart\" );\nvar stepDescription = context.get ( \"stepDescription\" );\nvar temperature = context.get ( \"temperature\" ) || DEFAULT_TEMP;\nvar heatingMode = context.get ( \"heating\" ) || DEFAULT_HEATING;\nvar stirringMode = context.get ( \"stirring\" ) || DEFAULT_STIRRING;\nvar hysteresis = context.get ( \"hysteresis\" ) || DEFAULT_HYSTERESIS;\nvar periodLength = context.get ( \"periodLength\" ) || DEFAULT_DURATION;\nvar alarm = context.get ( \"alarm\" );\n\nconst PERIOD_INCREMENT = 1;                            // <- accelerate time here\nconst PERIOD_ZERO = { min: 0, sec: 0 };\nvar periodCount = context.get ( \"periodCount\" ) || PERIOD_ZERO;\nvar heaterOn = context.get ( \"heaterOn\" ) || DEFAULT_HEATER_ON;\nvar stirrerOn = context.get ( \"stirrerOn\" ) || DEFAULT_STIRRER_ON;\n\n//----------------------------------------------------------------\nconst STATE_IDLE = \"idle\";\nconst STATE_START = \"start\";\nconst STATE_STARTING = \"starting\";\nconst STATE_PERIOD_STARTED = \"started\";\nconst STATE_PERIOD_FINISHED = \"finished\";\n\nvar state = context.get ( \"state\" ) || STATE_IDLE;\n\n//----------------------------------------------------------------\nfunction incPeriodCount ( cnt ) {\n    cnt.sec += PERIOD_INCREMENT;\n    if ( cnt.sec > 59 ) {\n        cnt.sec = 0;\n        cnt.min++;\n    }\n    return cnt;\n}\n\n//----------------------------------------------------------------\nfunction createHeaterMessage ( onOff ) { return { payload: onOff }; }\nfunction createStirrerMessage ( onOff ) { return { payload: onOff }; }\nfunction createStepMessage () { return { topic: \"next\", payload: \"x\" }; }\nfunction createPeriodeMessage ( count ) { return { payload: count.min + \":\" + (\"0\" + count.sec).slice ( -2 ) }; }\nfunction createAlarmMessage ( audio, notification ) { \n    var result = [{ topic: \"audio\", payload: audio }];\n    if ( notification ) {\n        result [1] = { topic: \"Alarm\", payload: notification };\n    }\n    return result; \n}\n\nfunction createChartMessage ( temp, target ) { \n    if ( target ) {\n        return [\n            { topic: \"value\", payload: temp },\n            { topic: \"target\", payload: target }\n        ];\n    }\n    else {\n        return { topic: \"value\", payload: temp };\n    }\n}\n\nfunction createInfluxMessage ( brewTemp ) {\n    return {\n        measurement: \"°C\",\n        payload: [\n            // fields\n            {\n                state: state,\n                step: stepDescription,\n                brewTemp: brewTemp,\n                target: temperature,\n                heater: heaterOn ? \"on\" : \"off\",\n                stirrer: stirrerOn ? \"on\" : \"off\",\n                counterMin: periodCount.min,\n                counterSec: periodCount.sec,\n            },\n            // tags\n            {\n                recipe: recipeName,\n                brewStart: brewStart\n            }\n        ]\n    };\n}\n\n//----------------------------------------------------------------\n\n//node.warn ( \"[EVENT] state=\" + state + \" min=\" + periodCount.min + \" sec=\" + periodCount.sec );\n\n\nif ( msg.topic == \"stop\" ) {\n    context.set ( \"state\", STATE_IDLE );\n    node.status ( { fill: \"grey\", shape: \"dot\", text: STATE_IDLE } );\n    context.set ( \"heaterOn\", false );\n    context.set ( \"stirrerOn\", false );\n    return [createHeaterMessage ( \"OFF\" ), null, null, null, null, null, createStirrerMessage ( \"OFF\" )];\n}\nelse if ( msg.topic == \"finished\" ) {\n    context.set ( \"state\", STATE_PERIOD_FINISHED );\n    node.status ( { fill: \"black\", shape: \"dot\", text: \"finished\" } );\n    return [createHeaterMessage ( \"OFF\" ), null, null, null, null, null, createStirrerMessage ( \"OFF\" )];\n}\nelse if ( msg.topic == \"start\" ) {\n    \n    recipeName = msg.recipeName || recipeName || DEFAULT_RECIPE_NAME;\n    brewStart = msg.brewStart || brewStart || DEFAULT_BREW_START;\n    stepDescription = msg.step || step || DEFAULT_STEP_DESCIPTION;\n    var t = msg.temperature || DEFAULT_TEMP; \n    if ( t > 0 && t < 105 ) temperature = t;\n    heatingMode = msg.heating || heatingMode || DEFAULT_HEATING;\n    stirringMode = msg.stirring || stirringMode || DEFAULT_STIRRING;\n    var h = msg.hysteresis || DEFAULT_HYSTERESIS;\n    if ( h > 0 && h < 10 ) hysteresis = h;\n    var p = msg.duration || DEFAULT_DURATION;\n    if ( p === \"wait\" || p > 0 ) periodLength = p;\n\n    //node.warn ( \"[START] mode=\" + heatingMode + \" stirrer=\" + stirringMode + \" t=\" + temperature + \" h=\" + hysteresis + \" p=\" + periodLength );\n    \n    context.set ( \"recipeName\", recipeName );\n    context.set ( \"brewStart\", brewStart );\n    context.set ( \"stepDescription\", stepDescription );\n    context.set ( \"temperature\", temperature );\n    context.set ( \"heating\", heatingMode );\n    context.set ( \"stirring\", stirringMode );\n    context.set ( \"hysteresis\", hysteresis );\n    context.set ( \"periodLength\", periodLength );\n    context.set ( \"alarm\", msg.alarm );\n    \n    context.set ( \"periodCount\", PERIOD_ZERO );\n    context.set ( \"heaterOn\", heaterOn );\n\n    context.set ( \"state\", STATE_START );\n    node.status ( { fill: \"yellow\", shape: \"dot\", text: STATE_START } );\n    \n    return [null, null, null, createPeriodeMessage ( PERIOD_ZERO )];\n\n}\nelse if ( msg.topic == \"hysteresis\" ) {\n    context.set ( \"hysteresis\", hysteresis );\n}\nelse if ( msg.topic == \"tick\" ) { // every sec\n    // check for period length\n    if ( state == STATE_IDLE ) {\n        node.status ( { fill: \"grey\", shape: \"dot\", text: \"idle\" } );\n    }\n    else if ( state == STATE_PERIOD_STARTED ) {\n        context.set ( \"periodCount\", incPeriodCount ( periodCount ) );\n        var alarmMsg = null;\n        if ( alarm ) {\n            for ( var i = 0; i < alarm.length; i++ ) {\n                var alarmtime = null;\n                if ( typeof ( alarm [i] ) === \"number\" ) alarmtime = alarm [i];\n                else alarmtime = alarm [i].time;\n                if ( periodCount.min == alarmtime ) {\n                    if ( periodCount.sec === 0 || alarmtime === 0 && periodCount.sec === PERIOD_INCREMENT ) { // exception for 00:00, 1 sec later\n                        alarmMsg = createAlarmMessage ( \"ring\", alarm [i].text );\n                        break;\n                    }\n                }\n            }\n        }\n        if ( periodLength == \"wait\" ) {} // do nothing, only tick and maybe ring\n        else {\n            if ( periodCount.min >= periodLength ) {\n                context.set ( \"state\", STATE_PERIOD_FINISHED );\n                node.status ( { fill: \"black\", shape: \"dot\", text: STATE_PERIOD_FINISHED } );\n                context.set ( \"temperature\", null );\n                context.set ( \"heaterOn\", false );\n                context.set ( \"stirrerOn\", false );\n                if ( !alarmMsg ) alarmMsg = createAlarmMessage ( \"tweet2x\" );\n                return [createHeaterMessage ( \"OFF\" ), createStepMessage (), null, createPeriodeMessage ( periodCount ), alarmMsg, null, createStirrerMessage ( \"OFF\" )]; \n            }\n        }\n        \n        //node.warn ( \"[TICK] p=\" + periodLength + \" min=\" + periodCount.min + \" sec=\" + periodCount.sec + \" state=\" + state );\n\n        // tick\n        return [null, null, null, createPeriodeMessage ( periodCount ), alarmMsg];\n    }\n}\nelse if ( msg.topic == \"nodes@home/control/ssr/brewery/socket1\" ) {\n    context.set ( \"heaterOn\", msg.payload == \"ON\" ? true : false );\n}\nelse if ( msg.topic == \"nodes@home/control/ssr/brewery/socket2\" ) {\n    context.set ( \"stirrerOn\", msg.payload == \"ON\" ? true : false );\n}\nelse {\n    // temperature received\n    if ( state == STATE_IDLE ) {\n        node.status ( { fill: \"grey\", shape: \"dot\", text: \"idle\" } );\n    }\n    else if ( msg.payload && msg.payload.value ) {\n        var brewTemp = msg.payload.value;\n        if ( state == STATE_PERIOD_FINISHED ) {\n            return [null, null, createChartMessage ( brewTemp ), null, null, createInfluxMessage ( brewTemp )];\n        }\n        else {\n            \n            // special treatment for beginning a new step with same target temperature\n            if ( state == STATE_START ) {\n                if ( brewTemp >= temperature - hysteresis ) {\n                    state = STATE_PERIOD_STARTED;\n                    node.status ( { fill: \"green\", shape: \"dot\", text: state } );\n                    context.set ( \"state\", state );\n                }\n                else {\n                    state = STATE_STARTING;\n                    node.status ( { fill: \"yellow\", shape: \"dot\", text: state } );\n                    context.set ( \"state\", state );\n                }\n            }\n\n            var heaterMsg = null;\n            var stirrerMsg = null;\n            var alarmMsg = null;\n            var newHeaterOn = null;\n            var newStirrerOn = null;\n\n            if ( brewTemp >= temperature ) {\n                if ( heaterOn && heatingMode != \"full\" ) newHeaterOn = false;\n                if ( stirrerOn && stirringMode != \"full\" ) newStirrerOn = false;\n                if ( state == STATE_STARTING ) {\n                    context.set ( \"state\", STATE_PERIOD_STARTED );\n                    node.status ( { fill: \"green\", shape: \"dot\", text: STATE_PERIOD_STARTED } );\n                    alarmMsg = createAlarmMessage ( \"tweet2x\" );\n                }\n            }\n\n            if ( heatingMode == \"off\" ) {\n                if ( heaterOn ) newHeaterOn = false;\n            }\n            else if ( heatingMode == \"one_time\" ) {\n                if ( state == STATE_STARTING ) {\n                    if ( !heaterOn ) newHeaterOn = true;\n                }\n            }\n            else if ( heatingMode == \"control\" ) {\n                if ( brewTemp <= temperature - hysteresis ) {\n                    if ( !heaterOn ) newHeaterOn = true;\n                }\n            }\n            else if ( heatingMode == \"full\" ) {\n                if ( !heaterOn ) newHeaterOn = true;\n            }\n            \n            if ( newHeaterOn !== null ) {\n                //node.warn ( \"switch heater from \" + heaterOn + \" to \" + newHeaterOn );                    \n                context.set ( \"heaterOn\", newHeaterOn );\n                if ( !alarmMsg ) alarmMsg = createAlarmMessage ( \"tweet\" );\n                if ( newHeaterOn ) {\n                    //node.status ( { fill: \"red\", shape: \"dot\", text: \"heating\" } );\n                    heaterMsg = createHeaterMessage ( \"ON\" );\n                }\n                else {\n                    //node.status ( { fill: \"blue\", shape: \"dot\", text: \"cooling\" } );\n                    heaterMsg = createHeaterMessage ( \"OFF\" );\n                }\n            }\n            \n            if ( stirringMode == \"off\" ) {\n                if ( stirrerOn ) newStirrerOn = false;\n            }\n            else if ( stirringMode == \"control\" ) {\n                if ( brewTemp <= temperature - hysteresis ) {\n                    if ( !stirrerOn ) newStirrerOn = true;\n                }\n            }\n            else if ( stirringMode == \"full\" ) {\n                if ( !stirrerOn ) newStirrerOn = true;\n            }\n            \n            if ( newStirrerOn !== null ) {\n                //node.warn ( \"switch stirrer from \" + stirrerOn + \" to \" + newStirrerOn );                    \n                context.set ( \"stirrerOn\", newStirrerOn );\n                stirrerMsg = createStirrerMessage ( newStirrerOn ? \"ON\" : \"OFF\" );\n            }\n\n            //node.warn ( \"[TEMP] heater=\" + heaterOn + \" newHeater=\" + newHeaterOn + \" mode=\" + heatingMode + \" p=\" + periodLength + \" min=\" + periodCount.min + \" sec=\" + periodCount.sec + \" state=\" + state );\n            \n            // on every temp, send target and data fields\n            return [heaterMsg, null, createChartMessage ( brewTemp, temperature ), null, alarmMsg, createInfluxMessage ( brewTemp ), stirrerMsg];\n            \n        }\n    }\n}\n",
     "outputs": "7",
     "noerr": 0,
-    "x": 550,
+    "x": 570,
     "y": 420,
     "wires": [
       [
@@ -5456,7 +5486,7 @@
     "type": "function",
     "z": "f7610a0.d8198f8",
     "name": "scheduler",
-    "func": "// junand 20.09.2017\n\n//node.warn ( \"payload=\" + msg.payload + \" topic=\" + msg.topic );\n\nfunction getStopMessages ( topic ) {\n    \n    return [\n        { topic: topic||\"stop\", payload: \"x\" },\n        [\n            { id: 0, payload: false },\n            { id: 1, payload: false },\n            { id: 2, payload: false },\n            { id: 3, payload: false },\n            { id: 4, payload: false },\n            { id: 5, payload: false },\n            { id: 6, payload: false },\n            { id: 7, payload: false },\n            { id: 8, payload: false },\n            { id: 9, payload: false },\n            { id: 10, payload: false },\n            { id: 11, payload: false },\n            { id: 12, payload: false }\n        ]\n    ];\n\n}\n\nfunction createDateString ( d ) {\n\n    var datestring = \n        (\"0\" + d.getDate ()).slice ( -2 ) + \"-\" + \n        (\"0\" + (d.getMonth () + 1)).slice ( -2 ) + \"-\" +\n        d.getFullYear () + \" \" + \n        (\"0\" + d.getHours ()).slice ( -2 ) + \":\" + \n        (\"0\" + d.getMinutes ()).slice ( -2 );\n\n    return datestring;        \n}\n\nfunction getStepMessages ( i ) {\n    \n    var recipe = context.get ( \"recipe\" );\n    if ( i === 0 ) { \n        recipe.brewStart = createDateString ( new Date () );\n        context.set ( \"recipe\", recipe );\n    }\n    if ( i < recipe.steps.length && recipe.steps [i].step ) {\n        // start controller\n        context.set ( \"step\", i + 1 );\n        return [\n            {   \n                topic: \"start\", \n                recipeName: recipe.name,\n                brewStart: recipe.brewStart,\n                temperature: recipe.steps [i].temperature, \n                heating: recipe.steps [i].heating,\n                stirring: recipe.steps [i].stirring,\n                duration: recipe.steps [i].duration, \n                hysteresis: recipe.steps [i].hysteresis,\n                alarm: recipe.steps [i].alarm \n            },\n            [\n                { id: 0, payload: i === 0 ? true : false },\n                { id: 1, payload: i === 1 ? true : false },\n                { id: 2, payload: i === 2 ? true : false },\n                { id: 3, payload: i === 3 ? true : false },\n                { id: 4, payload: i === 4 ? true : false },\n                { id: 5, payload: i === 5 ? true : false },\n                { id: 6, payload: i === 6 ? true : false },\n                { id: 7, payload: i === 7 ? true : false },\n                { id: 8, payload: i === 8 ? true : false },\n                { id: 9, payload: i === 9 ? true : false },\n                { id: 10, payload: i === 10 ? true : false },\n                { id: 11, payload: i === 11 ? true : false },\n                { id: 12, payload: i === 12 ? true : false }\n            ]\n        ];\n    }\n    else {\n        // stop controller\n        context.set ( \"step\", null );\n        return getStopMessages ( \"finished\" );\n    }\n\n}\n\nif ( msg.topic == \"recipe\" ) {\n    context.set ( \"recipe\", msg.payload );\n    return getStopMessages ();\n}\nelse if ( msg.topic == \"start\" ) {\n    context.set ( \"step\", 0 );\n    return getStepMessages ( 0 );\n}\nelse if ( msg.topic == \"stop\" ) {\n    context.set ( \"step\", null );\n    return getStopMessages ();\n}\nelse if ( msg.topic == \"next\" ) {\n    var step = context.get ( \"step\" );\n    if ( step ) return getStepMessages ( step );\n}\n",
+    "func": "// junand 20.09.2017\n\n//node.warn ( \"payload=\" + msg.payload + \" topic=\" + msg.topic );\n\nfunction getStopMessages ( topic ) {\n    \n    return [\n        { topic: topic||\"stop\", payload: \"x\" },\n        [\n            { id: 0, payload: false },\n            { id: 1, payload: false },\n            { id: 2, payload: false },\n            { id: 3, payload: false },\n            { id: 4, payload: false },\n            { id: 5, payload: false },\n            { id: 6, payload: false },\n            { id: 7, payload: false },\n            { id: 8, payload: false },\n            { id: 9, payload: false },\n            { id: 10, payload: false },\n            { id: 11, payload: false },\n            { id: 12, payload: false }\n        ]\n    ];\n\n}\n\nfunction createDateString ( d ) {\n\n    var datestring = \n        (\"0\" + d.getDate ()).slice ( -2 ) + \"-\" + \n        (\"0\" + (d.getMonth () + 1)).slice ( -2 ) + \"-\" +\n        d.getFullYear () + \" \" + \n        (\"0\" + d.getHours ()).slice ( -2 ) + \":\" + \n        (\"0\" + d.getMinutes ()).slice ( -2 );\n\n    return datestring;        \n}\n\nfunction getStepMessages ( i ) {\n    \n    var recipe = context.get ( \"recipe\" );\n    if ( i === 0 ) { \n        recipe.brewStart = createDateString ( new Date () );\n        context.set ( \"recipe\", recipe );\n    }\n    if ( i < recipe.steps.length && recipe.steps [i].step ) {\n        // start controller\n        context.set ( \"step\", i + 1 );\n        return [\n            {   \n                topic: \"start\", \n                recipeName: recipe.name,\n                brewStart: recipe.brewStart,\n                step: recipe.steps [i].step,\n                temperature: recipe.steps [i].temperature, \n                heating: recipe.steps [i].heating,\n                stirring: recipe.steps [i].stirring,\n                duration: recipe.steps [i].duration, \n                hysteresis: recipe.steps [i].hysteresis,\n                alarm: recipe.steps [i].alarm \n            },\n            [\n                { id: 0, payload: i === 0 ? true : false },\n                { id: 1, payload: i === 1 ? true : false },\n                { id: 2, payload: i === 2 ? true : false },\n                { id: 3, payload: i === 3 ? true : false },\n                { id: 4, payload: i === 4 ? true : false },\n                { id: 5, payload: i === 5 ? true : false },\n                { id: 6, payload: i === 6 ? true : false },\n                { id: 7, payload: i === 7 ? true : false },\n                { id: 8, payload: i === 8 ? true : false },\n                { id: 9, payload: i === 9 ? true : false },\n                { id: 10, payload: i === 10 ? true : false },\n                { id: 11, payload: i === 11 ? true : false },\n                { id: 12, payload: i === 12 ? true : false }\n            ]\n        ];\n    }\n    else {\n        // stop controller\n        context.set ( \"step\", null );\n        return getStopMessages ( \"finished\" );\n    }\n\n}\n\nif ( msg.topic == \"recipe\" ) {\n    context.set ( \"recipe\", msg.payload );\n    return getStopMessages ();\n}\nelse if ( msg.topic == \"start\" ) {\n    context.set ( \"step\", 0 );\n    return getStepMessages ( 0 );\n}\nelse if ( msg.topic == \"stop\" ) {\n    context.set ( \"step\", null );\n    return getStopMessages ();\n}\nelse if ( msg.topic == \"next\" ) {\n    var step = context.get ( \"step\" );\n    if ( step ) return getStepMessages ( step );\n}\n",
     "outputs": "2",
     "noerr": 0,
     "x": 540,
@@ -6589,11 +6619,11 @@
     "id": "ec4de4e8.3e35a8",
     "type": "mqtt in",
     "z": "f7610a0.d8198f8",
-    "name": "fermenter",
+    "name": "boiler",
     "topic": "nodes@home/sensor/ds18b20/fermenter/value/voltage",
     "qos": "0",
     "broker": "f093b8cc.ff2b58",
-    "x": 94,
+    "x": 84,
     "y": 1140,
     "wires": [
       [
@@ -6655,12 +6685,12 @@
     "type": "ui_gauge",
     "z": "f7610a0.d8198f8",
     "name": "voltage",
-    "group": "7c483f48.dca68",
+    "group": "8455d317.fd8ec",
     "order": 2,
     "width": 0,
     "height": 0,
     "gtype": "gage",
-    "title": "Akku Gärfass",
+    "title": "",
     "label": "V",
     "format": "{{value | number:2}}",
     "min": "3.0",
@@ -6681,11 +6711,11 @@
     "type": "ui_chart",
     "z": "f7610a0.d8198f8",
     "name": "chart",
-    "group": "7c483f48.dca68",
+    "group": "8455d317.fd8ec",
     "order": 1,
     "width": 0,
     "height": 0,
-    "label": "Spannungsverlauf Gärfass",
+    "label": "",
     "chartType": "line",
     "legend": "false",
     "xformat": "dd HH:mm",
@@ -6723,23 +6753,23 @@
     "type": "ui_gauge",
     "z": "f7610a0.d8198f8",
     "name": "temperature",
-    "group": "7c25d4b3.83714c",
+    "group": "dd05ddf5.dd4e",
     "order": 2,
     "width": 0,
     "height": 0,
     "gtype": "gage",
-    "title": "Abkühlung",
+    "title": "",
     "label": "°C",
     "format": "{{value | number:1}}",
     "min": 0,
     "max": "90",
     "colors": [
       "#0000ff",
-      "#ff00ff",
+      "#ffff00",
       "#ca3838"
     ],
-    "seg1": "20",
-    "seg2": "55",
+    "seg1": "0",
+    "seg2": "78",
     "x": 555,
     "y": 1329,
     "wires": []
@@ -6752,7 +6782,7 @@
     "rules": [
       {
         "t": "move",
-        "p": "payload.value",
+        "p": "payload.temperature1",
         "pt": "msg",
         "to": "payload",
         "tot": "msg"
@@ -6789,7 +6819,8 @@
     "y": 1329,
     "wires": [
       [
-        "938e5a41.54e2c8"
+        "938e5a41.54e2c8",
+        "716eb635.423a38"
       ]
     ]
   },
@@ -6798,7 +6829,7 @@
     "type": "mqtt in",
     "z": "f7610a0.d8198f8",
     "name": "mqtt",
-    "topic": "nodes@home/sensor/ds18b20/fermenter/value/temperature",
+    "topic": "nodes@home/sensor/ds18b20/brewery/value/temperature",
     "qos": "0",
     "broker": "f093b8cc.ff2b58",
     "x": 84,
@@ -6934,7 +6965,7 @@
     "width": 0,
     "height": 0,
     "gtype": "gage",
-    "title": "Akku Spindel",
+    "title": "",
     "label": "V",
     "format": "{{value | number:2}}",
     "min": "3.0",
@@ -6959,7 +6990,7 @@
     "order": 3,
     "width": 0,
     "height": 0,
-    "label": "Spannungsverlauf Spindel",
+    "label": "",
     "chartType": "line",
     "legend": "false",
     "xformat": "dd HH:mm",
@@ -6996,9 +7027,9 @@
     "id": "aa3aa937.0d8648",
     "type": "comment",
     "z": "f7610a0.d8198f8",
-    "name": "Temperatur Gärfass",
+    "name": "Temperatur Nachguss",
     "info": "",
-    "x": 124,
+    "x": 134,
     "y": 1288,
     "wires": []
   },
@@ -7007,11 +7038,11 @@
     "type": "ui_chart",
     "z": "f7610a0.d8198f8",
     "name": "chart",
-    "group": "7c25d4b3.83714c",
+    "group": "dd05ddf5.dd4e",
     "order": 1,
     "width": 0,
     "height": 0,
-    "label": "Abkühlung",
+    "label": "",
     "chartType": "line",
     "legend": "false",
     "xformat": "dd HH:mm",
@@ -7054,7 +7085,7 @@
     "width": 0,
     "height": 0,
     "gtype": "gage",
-    "title": "Gärung",
+    "title": "",
     "label": "°C",
     "format": "{{value | number:1}}",
     "min": "15",
@@ -7067,7 +7098,7 @@
     "seg1": "23",
     "seg2": "27",
     "x": 558,
-    "y": 1440,
+    "y": 1513,
     "wires": []
   },
   {
@@ -7097,7 +7128,7 @@
     "to": "",
     "reg": false,
     "x": 399,
-    "y": 1440,
+    "y": 1513,
     "wires": [
       [
         "1ea4b7f7.09f168",
@@ -7112,7 +7143,7 @@
     "name": "",
     "pretty": false,
     "x": 257,
-    "y": 1440,
+    "y": 1513,
     "wires": [
       [
         "1b87cc75.fb8954"
@@ -7128,7 +7159,7 @@
     "qos": "0",
     "broker": "f093b8cc.ff2b58",
     "x": 87,
-    "y": 1440,
+    "y": 1513,
     "wires": [
       [
         "230a8c33.8660f4"
@@ -7142,7 +7173,7 @@
     "name": "Temperatur Spindel",
     "info": "",
     "x": 127,
-    "y": 1399,
+    "y": 1472,
     "wires": []
   },
   {
@@ -7154,7 +7185,7 @@
     "order": 3,
     "width": 0,
     "height": 0,
-    "label": "Gärung",
+    "label": "",
     "chartType": "line",
     "legend": "false",
     "xformat": "dd HH:mm",
@@ -7181,7 +7212,7 @@
     ],
     "useOldStyle": false,
     "x": 539,
-    "y": 1401,
+    "y": 1474,
     "wires": [
       [],
       []
@@ -7197,7 +7228,7 @@
     "width": 0,
     "height": 0,
     "gtype": "gage",
-    "title": "Neigung",
+    "title": "",
     "label": "°",
     "format": "{{value | number:1}}",
     "min": "0",
@@ -7210,7 +7241,7 @@
     "seg1": "",
     "seg2": "",
     "x": 534,
-    "y": 1540,
+    "y": 1613,
     "wires": []
   },
   {
@@ -7220,7 +7251,7 @@
     "name": "",
     "pretty": false,
     "x": 253,
-    "y": 1540,
+    "y": 1613,
     "wires": [
       [
         "c93b7db6.ae678"
@@ -7236,7 +7267,7 @@
     "qos": "0",
     "broker": "f093b8cc.ff2b58",
     "x": 83,
-    "y": 1540,
+    "y": 1613,
     "wires": [
       [
         "b9e35d4b.366ce"
@@ -7250,7 +7281,7 @@
     "name": "Neigung Spindel",
     "info": "",
     "x": 113,
-    "y": 1499,
+    "y": 1572,
     "wires": []
   },
   {
@@ -7262,7 +7293,7 @@
     "order": 1,
     "width": 0,
     "height": 0,
-    "label": "Gärungsverlauf",
+    "label": "",
     "chartType": "line",
     "legend": "true",
     "xformat": "dd HH:mm",
@@ -7289,7 +7320,7 @@
     ],
     "useOldStyle": false,
     "x": 535,
-    "y": 1501,
+    "y": 1574,
     "wires": [
       [],
       []
@@ -7304,7 +7335,7 @@
     "outputs": 1,
     "noerr": 0,
     "x": 394,
-    "y": 1540,
+    "y": 1613,
     "wires": [
       [
         "3a250fcd.08e1c",
@@ -7340,7 +7371,8 @@
         "bd633fae.93d23",
         "2369051b.879bda",
         "eddcfb86.5952f8",
-        "3f11ea5.1c0a316"
+        "3f11ea5.1c0a316",
+        "7452d2b8.79471c"
       ]
     ]
   },
@@ -7391,7 +7423,8 @@
         "1ea4b7f7.09f168",
         "4ee50ea3.b0c85",
         "6233e147.25b4a",
-        "f736c86b.2b4dc8"
+        "f736c86b.2b4dc8",
+        "155e3154.1a82cf"
       ]
     ]
   },
@@ -7505,7 +7538,7 @@
     "retain": "true",
     "broker": "f093b8cc.ff2b58",
     "x": 544,
-    "y": 1620,
+    "y": 1693,
     "wires": []
   },
   {
@@ -7535,7 +7568,7 @@
     "to": "",
     "reg": false,
     "x": 289,
-    "y": 1621,
+    "y": 1694,
     "wires": [
       [
         "2f303b07.bd86b4"
@@ -7549,7 +7582,7 @@
     "name": "",
     "pretty": false,
     "x": 417,
-    "y": 1620,
+    "y": 1693,
     "wires": [
       [
         "176b455d.51b0fb"
@@ -9220,6 +9253,109 @@
     "layout": "row-left",
     "x": 990,
     "y": 2123,
+    "wires": []
+  },
+  {
+    "id": "716eb635.423a38",
+    "type": "change",
+    "z": "f7610a0.d8198f8",
+    "name": "get value",
+    "rules": [
+      {
+        "t": "move",
+        "p": "payload.temperature2",
+        "pt": "msg",
+        "to": "payload",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "value",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 400,
+    "y": 1420,
+    "wires": [
+      [
+        "155e3154.1a82cf",
+        "7452d2b8.79471c"
+      ]
+    ]
+  },
+  {
+    "id": "7452d2b8.79471c",
+    "type": "ui_chart",
+    "z": "f7610a0.d8198f8",
+    "name": "chart",
+    "group": "f5c64a1d.91b058",
+    "order": 1,
+    "width": 0,
+    "height": 0,
+    "label": "",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "dd HH:mm",
+    "interpolate": "linear",
+    "nodata": "---",
+    "dot": false,
+    "ymin": "0",
+    "ymax": "90",
+    "removeOlder": "1",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "86400",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#8080ff",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "useOldStyle": false,
+    "x": 540,
+    "y": 1381,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "155e3154.1a82cf",
+    "type": "ui_gauge",
+    "z": "f7610a0.d8198f8",
+    "name": "temperature",
+    "group": "f5c64a1d.91b058",
+    "order": 2,
+    "width": 0,
+    "height": 0,
+    "gtype": "gage",
+    "title": "",
+    "label": "°C",
+    "format": "{{value | number:1}}",
+    "min": 0,
+    "max": "90",
+    "colors": [
+      "#0000ff",
+      "#ffffff",
+      "#ca3838"
+    ],
+    "seg1": "0",
+    "seg2": "55",
+    "x": 559,
+    "y": 1420,
     "wires": []
   }
 ]
