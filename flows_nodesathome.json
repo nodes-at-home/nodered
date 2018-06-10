@@ -6583,139 +6583,6 @@
     ]
   },
   {
-    "id": "ec4de4e8.3e35a8",
-    "type": "mqtt in",
-    "z": "f7610a0.d8198f8",
-    "name": "boiler",
-    "topic": "nodes@home/sensor/ds18b20/fermenter/value/voltage",
-    "qos": "0",
-    "broker": "f093b8cc.ff2b58",
-    "x": 84,
-    "y": 1140,
-    "wires": [
-      [
-        "80d0506b.64a53"
-      ]
-    ]
-  },
-  {
-    "id": "80d0506b.64a53",
-    "type": "json",
-    "z": "f7610a0.d8198f8",
-    "name": "",
-    "pretty": false,
-    "x": 253,
-    "y": 1140,
-    "wires": [
-      [
-        "25a40ce0.e3fe24"
-      ]
-    ]
-  },
-  {
-    "id": "25a40ce0.e3fe24",
-    "type": "change",
-    "z": "f7610a0.d8198f8",
-    "name": "get value",
-    "rules": [
-      {
-        "t": "set",
-        "p": "payload",
-        "pt": "msg",
-        "to": "payload.value / 1000",
-        "tot": "jsonata"
-      },
-      {
-        "t": "set",
-        "p": "topic",
-        "pt": "msg",
-        "to": "value",
-        "tot": "str"
-      }
-    ],
-    "action": "",
-    "property": "",
-    "from": "",
-    "to": "",
-    "reg": false,
-    "x": 396,
-    "y": 1140,
-    "wires": [
-      [
-        "f736c86b.2b4dc8",
-        "3f11ea5.1c0a316"
-      ]
-    ]
-  },
-  {
-    "id": "f736c86b.2b4dc8",
-    "type": "ui_gauge",
-    "z": "f7610a0.d8198f8",
-    "name": "voltage",
-    "group": "8455d317.fd8ec",
-    "order": 2,
-    "width": 0,
-    "height": 0,
-    "gtype": "gage",
-    "title": "",
-    "label": "V",
-    "format": "{{value | number:2}}",
-    "min": "3.0",
-    "max": "4.5",
-    "colors": [
-      "#ff0000",
-      "#ffff00",
-      "#008000"
-    ],
-    "seg1": "3.6",
-    "seg2": "3.8",
-    "x": 543,
-    "y": 1140,
-    "wires": []
-  },
-  {
-    "id": "3f11ea5.1c0a316",
-    "type": "ui_chart",
-    "z": "f7610a0.d8198f8",
-    "name": "chart",
-    "group": "8455d317.fd8ec",
-    "order": 1,
-    "width": 0,
-    "height": 0,
-    "label": "",
-    "chartType": "line",
-    "legend": "false",
-    "xformat": "dd HH:mm",
-    "interpolate": "linear",
-    "nodata": "---",
-    "dot": false,
-    "ymin": "3.0",
-    "ymax": "4.5",
-    "removeOlder": "1",
-    "removeOlderPoints": "",
-    "removeOlderUnit": "86400",
-    "cutout": 0,
-    "useOneColor": false,
-    "colors": [
-      "#8080ff",
-      "#aec7e8",
-      "#ff7f0e",
-      "#2ca02c",
-      "#98df8a",
-      "#d62728",
-      "#ff9896",
-      "#9467bd",
-      "#c5b0d5"
-    ],
-    "useOldStyle": false,
-    "x": 533,
-    "y": 1100,
-    "wires": [
-      [],
-      []
-    ]
-  },
-  {
     "id": "4ee50ea3.b0c85",
     "type": "ui_gauge",
     "z": "f7610a0.d8198f8",
@@ -7288,8 +7155,8 @@
         "bd633fae.93d23",
         "2369051b.879bda",
         "eddcfb86.5952f8",
-        "3f11ea5.1c0a316",
-        "7452d2b8.79471c"
+        "7452d2b8.79471c",
+        "3f11ea5.1c0a316"
       ]
     ]
   },
@@ -7340,8 +7207,8 @@
         "1ea4b7f7.09f168",
         "4ee50ea3.b0c85",
         "6233e147.25b4a",
-        "f736c86b.2b4dc8",
-        "155e3154.1a82cf"
+        "155e3154.1a82cf",
+        "f736c86b.2b4dc8"
       ]
     ]
   },
@@ -9297,6 +9164,139 @@
     "wires": [
       [
         "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "3f11ea5.1c0a316",
+    "type": "ui_chart",
+    "z": "f7610a0.d8198f8",
+    "name": "chart",
+    "group": "8455d317.fd8ec",
+    "order": 1,
+    "width": 0,
+    "height": 0,
+    "label": "",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "dd HH:mm",
+    "interpolate": "linear",
+    "nodata": "---",
+    "dot": false,
+    "ymin": "3.0",
+    "ymax": "4.5",
+    "removeOlder": "1",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "86400",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#8080ff",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "useOldStyle": false,
+    "x": 533,
+    "y": 1100,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "f736c86b.2b4dc8",
+    "type": "ui_gauge",
+    "z": "f7610a0.d8198f8",
+    "name": "voltage",
+    "group": "8455d317.fd8ec",
+    "order": 2,
+    "width": 0,
+    "height": 0,
+    "gtype": "gage",
+    "title": "",
+    "label": "V",
+    "format": "{{value | number:2}}",
+    "min": "3.0",
+    "max": "4.5",
+    "colors": [
+      "#ff0000",
+      "#ffff00",
+      "#008000"
+    ],
+    "seg1": "3.6",
+    "seg2": "3.8",
+    "x": 543,
+    "y": 1140,
+    "wires": []
+  },
+  {
+    "id": "25a40ce0.e3fe24",
+    "type": "change",
+    "z": "f7610a0.d8198f8",
+    "name": "get value",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload.value / 1000",
+        "tot": "jsonata"
+      },
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "value",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 396,
+    "y": 1140,
+    "wires": [
+      [
+        "f736c86b.2b4dc8",
+        "3f11ea5.1c0a316"
+      ]
+    ]
+  },
+  {
+    "id": "80d0506b.64a53",
+    "type": "json",
+    "z": "f7610a0.d8198f8",
+    "name": "",
+    "pretty": false,
+    "x": 253,
+    "y": 1140,
+    "wires": [
+      [
+        "25a40ce0.e3fe24"
+      ]
+    ]
+  },
+  {
+    "id": "ec4de4e8.3e35a8",
+    "type": "mqtt in",
+    "z": "f7610a0.d8198f8",
+    "name": "boiler",
+    "topic": "nodes@home/sensor/ds18b20/brewery/value/voltage",
+    "qos": "0",
+    "broker": "f093b8cc.ff2b58",
+    "x": 84,
+    "y": 1140,
+    "wires": [
+      [
+        "80d0506b.64a53"
       ]
     ]
   }
