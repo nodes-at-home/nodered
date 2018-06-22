@@ -48,6 +48,13 @@
     "info": ""
   },
   {
+    "id": "6df5d2ea.45922c",
+    "type": "tab",
+    "label": "pool",
+    "disabled": false,
+    "info": ""
+  },
+  {
     "id": "87853f2c.dd34d",
     "type": "tab",
     "label": "config lua nodes",
@@ -319,7 +326,7 @@
     "z": "",
     "name": "Brauerei",
     "icon": "fa-beer",
-    "order": 4
+    "order": 5
   },
   {
     "id": "9f5822ca.ea672",
@@ -349,7 +356,7 @@
     "z": "",
     "name": "Gärspindel",
     "icon": "dashboard",
-    "order": 6
+    "order": 7
   },
   {
     "id": "7c483f48.dca68",
@@ -445,7 +452,7 @@
     "z": "",
     "name": "Nachguss",
     "icon": "dashboard",
-    "order": 5
+    "order": 6
   },
   {
     "id": "dd05ddf5.dd4e",
@@ -474,6 +481,44 @@
     "name": "Temperatur 2 (weiß)",
     "tab": "f5c1d8d5.e934a8",
     "order": 2,
+    "disp": true,
+    "width": "10"
+  },
+  {
+    "id": "33d343b9.d5d19c",
+    "type": "ui_tab",
+    "z": "",
+    "name": "Pool",
+    "icon": "dashboard",
+    "order": 4
+  },
+  {
+    "id": "fbcffb98.f83bc8",
+    "type": "ui_group",
+    "z": "",
+    "name": "Temperatur",
+    "tab": "33d343b9.d5d19c",
+    "order": 2,
+    "disp": true,
+    "width": "10"
+  },
+  {
+    "id": "a1307cc6.60973",
+    "type": "ui_group",
+    "z": "",
+    "name": "Spannungsversorgung",
+    "tab": "33d343b9.d5d19c",
+    "order": 3,
+    "disp": true,
+    "width": "6"
+  },
+  {
+    "id": "3cfa5faf.0300a",
+    "type": "ui_group",
+    "z": "",
+    "name": "Verlauf",
+    "tab": "33d343b9.d5d19c",
+    "order": 1,
     "disp": true,
     "width": "10"
   },
@@ -9299,5 +9344,459 @@
         "80d0506b.64a53"
       ]
     ]
+  },
+  {
+    "id": "f011c448.9eb0e8",
+    "type": "comment",
+    "z": "6df5d2ea.45922c",
+    "name": "Akkuüberwachung",
+    "info": "",
+    "x": 130,
+    "y": 60,
+    "wires": []
+  },
+  {
+    "id": "e254af83.64f9f",
+    "type": "inject",
+    "z": "6df5d2ea.45922c",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 128,
+    "y": 120,
+    "wires": [
+      [
+        "548c26b5.c78a98",
+        "f3a2afb.2a09d5"
+      ]
+    ]
+  },
+  {
+    "id": "548c26b5.c78a98",
+    "type": "change",
+    "z": "6df5d2ea.45922c",
+    "name": "blank",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "[]",
+        "tot": "json"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 270,
+    "y": 120,
+    "wires": [
+      [
+        "80314546.9e1778",
+        "8d87bd80.6d539"
+      ]
+    ]
+  },
+  {
+    "id": "f3a2afb.2a09d5",
+    "type": "change",
+    "z": "6df5d2ea.45922c",
+    "name": "value = 0",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "0",
+        "tot": "num"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 280,
+    "y": 160,
+    "wires": [
+      [
+        "8e9d270d.044b18",
+        "b2e78bb5.a1fc68",
+        "de48fd63.6a4d2"
+      ]
+    ]
+  },
+  {
+    "id": "191cd54e.10a7db",
+    "type": "mqtt in",
+    "z": "6df5d2ea.45922c",
+    "name": "pool",
+    "topic": "nodes@home/sensor/ds18b20/pool/value/voltage",
+    "qos": "0",
+    "broker": "f093b8cc.ff2b58",
+    "x": 90,
+    "y": 200,
+    "wires": [
+      [
+        "a496c8cd.bcebe8"
+      ]
+    ]
+  },
+  {
+    "id": "a496c8cd.bcebe8",
+    "type": "json",
+    "z": "6df5d2ea.45922c",
+    "name": "",
+    "pretty": false,
+    "x": 259,
+    "y": 200,
+    "wires": [
+      [
+        "62a26a77.96e024"
+      ]
+    ]
+  },
+  {
+    "id": "62a26a77.96e024",
+    "type": "change",
+    "z": "6df5d2ea.45922c",
+    "name": "get value",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload.value / 1000",
+        "tot": "jsonata"
+      },
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "value",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 402,
+    "y": 200,
+    "wires": [
+      [
+        "b2e78bb5.a1fc68",
+        "8d87bd80.6d539"
+      ]
+    ]
+  },
+  {
+    "id": "b2e78bb5.a1fc68",
+    "type": "ui_gauge",
+    "z": "6df5d2ea.45922c",
+    "name": "voltage",
+    "group": "a1307cc6.60973",
+    "order": 2,
+    "width": 0,
+    "height": 0,
+    "gtype": "gage",
+    "title": "",
+    "label": "V",
+    "format": "{{value | number:2}}",
+    "min": "3.0",
+    "max": "4.5",
+    "colors": [
+      "#ff0000",
+      "#ffff00",
+      "#008000"
+    ],
+    "seg1": "3.6",
+    "seg2": "3.8",
+    "x": 549,
+    "y": 200,
+    "wires": []
+  },
+  {
+    "id": "8d87bd80.6d539",
+    "type": "ui_chart",
+    "z": "6df5d2ea.45922c",
+    "name": "chart",
+    "group": "a1307cc6.60973",
+    "order": 1,
+    "width": 0,
+    "height": 0,
+    "label": "",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "dd HH:mm",
+    "interpolate": "linear",
+    "nodata": "---",
+    "dot": false,
+    "ymin": "3.0",
+    "ymax": "4.5",
+    "removeOlder": "2",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "604800",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#8080ff",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "useOldStyle": false,
+    "x": 539,
+    "y": 160,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "61bcfaec.f39a14",
+    "type": "comment",
+    "z": "6df5d2ea.45922c",
+    "name": "Temperatur",
+    "info": "",
+    "x": 110,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "5619d308.ecb0ec",
+    "type": "mqtt in",
+    "z": "6df5d2ea.45922c",
+    "name": "pool",
+    "topic": "nodes@home/sensor/ds18b20/pool/value/temperature",
+    "qos": "0",
+    "broker": "f093b8cc.ff2b58",
+    "x": 90,
+    "y": 321,
+    "wires": [
+      [
+        "590b84f7.09701c"
+      ]
+    ]
+  },
+  {
+    "id": "590b84f7.09701c",
+    "type": "json",
+    "z": "6df5d2ea.45922c",
+    "name": "",
+    "pretty": false,
+    "x": 260,
+    "y": 321,
+    "wires": [
+      [
+        "6b588acb.5bfb04"
+      ]
+    ]
+  },
+  {
+    "id": "6b588acb.5bfb04",
+    "type": "change",
+    "z": "6df5d2ea.45922c",
+    "name": "get value",
+    "rules": [
+      {
+        "t": "move",
+        "p": "payload.value",
+        "pt": "msg",
+        "to": "payload",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "pool",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 402,
+    "y": 321,
+    "wires": [
+      [
+        "8e9d270d.044b18",
+        "80314546.9e1778"
+      ]
+    ]
+  },
+  {
+    "id": "8e9d270d.044b18",
+    "type": "ui_gauge",
+    "z": "6df5d2ea.45922c",
+    "name": "temperature",
+    "group": "fbcffb98.f83bc8",
+    "order": 1,
+    "width": 0,
+    "height": 0,
+    "gtype": "gage",
+    "title": "Pool",
+    "label": "°C",
+    "format": "{{value | number:1}}",
+    "min": "10",
+    "max": "35",
+    "colors": [
+      "#0080ff",
+      "#ff8000",
+      "#ff0000"
+    ],
+    "seg1": "20",
+    "seg2": "26",
+    "x": 561,
+    "y": 321,
+    "wires": []
+  },
+  {
+    "id": "80314546.9e1778",
+    "type": "ui_chart",
+    "z": "6df5d2ea.45922c",
+    "name": "chart",
+    "group": "3cfa5faf.0300a",
+    "order": 1,
+    "width": 0,
+    "height": 0,
+    "label": "",
+    "chartType": "line",
+    "legend": "true",
+    "xformat": "dd HH:mm",
+    "interpolate": "linear",
+    "nodata": "---",
+    "dot": false,
+    "ymin": "10",
+    "ymax": "35",
+    "removeOlder": "2",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "604800",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#8080ff",
+      "#ff8000",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "useOldStyle": false,
+    "x": 542,
+    "y": 282,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "189e420d.076aee",
+    "type": "mqtt in",
+    "z": "6df5d2ea.45922c",
+    "name": "outdoor",
+    "topic": "nodes@home/sensor/DHT22/terrace/value/temperature",
+    "qos": "0",
+    "broker": "f093b8cc.ff2b58",
+    "x": 90,
+    "y": 380,
+    "wires": [
+      [
+        "dd039cb5.6f8da"
+      ]
+    ]
+  },
+  {
+    "id": "dd039cb5.6f8da",
+    "type": "json",
+    "z": "6df5d2ea.45922c",
+    "name": "",
+    "pretty": false,
+    "x": 260,
+    "y": 380,
+    "wires": [
+      [
+        "fd32a166.e6b13"
+      ]
+    ]
+  },
+  {
+    "id": "fd32a166.e6b13",
+    "type": "change",
+    "z": "6df5d2ea.45922c",
+    "name": "get value",
+    "rules": [
+      {
+        "t": "move",
+        "p": "payload.value",
+        "pt": "msg",
+        "to": "payload",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "outdoor",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 402,
+    "y": 380,
+    "wires": [
+      [
+        "de48fd63.6a4d2",
+        "80314546.9e1778"
+      ]
+    ]
+  },
+  {
+    "id": "de48fd63.6a4d2",
+    "type": "ui_gauge",
+    "z": "6df5d2ea.45922c",
+    "name": "temperature",
+    "group": "fbcffb98.f83bc8",
+    "order": 2,
+    "width": 0,
+    "height": 0,
+    "gtype": "gage",
+    "title": "Außen",
+    "label": "°C",
+    "format": "{{value | number:1}}",
+    "min": "10",
+    "max": "35",
+    "colors": [
+      "#0080ff",
+      "#ff8000",
+      "#ff0000"
+    ],
+    "seg1": "20",
+    "seg2": "26",
+    "x": 564,
+    "y": 380,
+    "wires": []
   }
 ]
