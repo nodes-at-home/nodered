@@ -1390,7 +1390,7 @@
     "payloadType": "date",
     "topic": "light/xmastree/dining",
     "x": 420,
-    "y": 880,
+    "y": 920,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -1415,7 +1415,7 @@
     "payloadType": "date",
     "topic": "sensor/button/indoor",
     "x": 420,
-    "y": 920,
+    "y": 960,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -1440,7 +1440,7 @@
     "payloadType": "date",
     "topic": "sensor/button/garage",
     "x": 420,
-    "y": 959,
+    "y": 999,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -1465,7 +1465,7 @@
     "payloadType": "date",
     "topic": "sensor/button/pool",
     "x": 410,
-    "y": 997,
+    "y": 1037,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -2516,7 +2516,7 @@
     "payloadType": "date",
     "topic": "switch/sonoff/brewery",
     "x": 420,
-    "y": 1040,
+    "y": 1080,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -3638,8 +3638,7 @@
     "y": 440,
     "wires": [
       [
-        "ef5abae7.872d08",
-        "80b7d557.0e2ad8"
+        "ef5abae7.872d08"
       ]
     ]
   },
@@ -3780,10 +3779,15 @@
         "t": "eq",
         "v": "control/ssr/brewery",
         "vt": "str"
+      },
+      {
+        "t": "eq",
+        "v": "display/pixel/kitchen",
+        "vt": "str"
       }
     ],
     "checkall": "true",
-    "outputs": 26,
+    "outputs": 27,
     "x": 570,
     "y": 440,
     "wires": [
@@ -3864,6 +3868,9 @@
       ],
       [
         "e4862060.d7295"
+      ],
+      [
+        "310eb7fc.17ad08"
       ]
     ]
   },
@@ -3896,9 +3903,9 @@
     "name": "",
     "label": "sensor/ds18b20/brewery",
     "group": "4759591f.23c438",
-    "order": 6,
-    "width": 0,
-    "height": 0,
+    "order": 11,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -3946,9 +3953,9 @@
     "name": "",
     "label": "sensor/DHT22/terrace",
     "group": "eec5fbfe.9e9ef8",
-    "order": 3,
-    "width": 0,
-    "height": 0,
+    "order": 5,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -3996,9 +4003,9 @@
     "name": "",
     "label": "sensor/DHT22/roof",
     "group": "eec5fbfe.9e9ef8",
-    "order": 4,
-    "width": 0,
-    "height": 0,
+    "order": 7,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4046,9 +4053,9 @@
     "name": "",
     "label": "sensor/DHT22/lounge",
     "group": "eec5fbfe.9e9ef8",
-    "order": 2,
-    "width": 0,
-    "height": 0,
+    "order": 3,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4096,9 +4103,9 @@
     "name": "",
     "label": "sensor/ds18b20/pool",
     "group": "eec5fbfe.9e9ef8",
-    "order": 5,
-    "width": 0,
-    "height": 0,
+    "order": 9,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4116,18 +4123,6 @@
     "wires": [
       []
     ]
-  },
-  {
-    "id": "80b7d557.0e2ad8",
-    "type": "debug",
-    "z": "8e2c5c11.fae26",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "true",
-    "x": 372,
-    "y": 200,
-    "wires": []
   },
   {
     "id": "776380d0.f764c",
@@ -4159,8 +4154,8 @@
     "label": "switch/rfhub/lounge",
     "group": "eec5fbfe.9e9ef8",
     "order": 1,
-    "width": 0,
-    "height": 0,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4208,9 +4203,9 @@
     "name": "",
     "label": "cover/relay/garage",
     "group": "eec5fbfe.9e9ef8",
-    "order": 6,
-    "width": 0,
-    "height": 0,
+    "order": 11,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4258,9 +4253,9 @@
     "name": "",
     "label": "switch/sonoff/garage",
     "group": "eec5fbfe.9e9ef8",
-    "order": 8,
-    "width": 0,
-    "height": 0,
+    "order": 15,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4308,9 +4303,9 @@
     "name": "",
     "label": "switch/sonoff/utilityroom",
     "group": "eec5fbfe.9e9ef8",
-    "order": 7,
-    "width": 0,
-    "height": 0,
+    "order": 13,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4336,9 +4331,9 @@
     "name": "",
     "label": "switch/relay/backyard",
     "group": "eec5fbfe.9e9ef8",
-    "order": 10,
-    "width": 0,
-    "height": 0,
+    "order": 19,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4409,8 +4404,8 @@
     "label": "light/xmastree/dining",
     "group": "4759591f.23c438",
     "order": 1,
-    "width": 0,
-    "height": 0,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4457,9 +4452,9 @@
     "name": "",
     "label": "sensor/button/indoor",
     "group": "4759591f.23c438",
-    "order": 2,
-    "width": 0,
-    "height": 0,
+    "order": 3,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4506,9 +4501,9 @@
     "name": "",
     "label": "sensor/button/garage",
     "group": "4759591f.23c438",
-    "order": 3,
-    "width": 0,
-    "height": 0,
+    "order": 5,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4555,9 +4550,9 @@
     "name": "",
     "label": "sensor/button/pool",
     "group": "4759591f.23c438",
-    "order": 4,
-    "width": 0,
-    "height": 0,
+    "order": 7,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4605,9 +4600,9 @@
     "name": "",
     "label": "switch/sonoff/brewery",
     "group": "4759591f.23c438",
-    "order": 5,
-    "width": 0,
-    "height": 0,
+    "order": 9,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4656,8 +4651,8 @@
     "label": "switch/sonoff/pool",
     "group": "3156ce3a.ed9862",
     "order": 1,
-    "width": 0,
-    "height": 0,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4705,9 +4700,9 @@
     "name": "",
     "label": "switch/relay/dining1",
     "group": "3156ce3a.ed9862",
-    "order": 4,
-    "width": 0,
-    "height": 0,
+    "order": 7,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4755,9 +4750,9 @@
     "name": "",
     "label": "switch/relay/dining2",
     "group": "3156ce3a.ed9862",
-    "order": 5,
-    "width": 0,
-    "height": 0,
+    "order": 9,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4805,9 +4800,9 @@
     "name": "",
     "label": "switch/sonoff/yardgate",
     "group": "eec5fbfe.9e9ef8",
-    "order": 11,
-    "width": 0,
-    "height": 0,
+    "order": 21,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4855,9 +4850,9 @@
     "name": "",
     "label": "switch/sonoff/gallery",
     "group": "3156ce3a.ed9862",
-    "order": 2,
-    "width": 0,
-    "height": 0,
+    "order": 3,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4905,9 +4900,9 @@
     "name": "",
     "label": "switch/sonoff/location4",
     "group": "3156ce3a.ed9862",
-    "order": 3,
-    "width": 0,
-    "height": 0,
+    "order": 5,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -4955,9 +4950,9 @@
     "name": "",
     "label": "switch/sonoff/terrace",
     "group": "eec5fbfe.9e9ef8",
-    "order": 9,
-    "width": 0,
-    "height": 0,
+    "order": 17,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -6297,9 +6292,9 @@
     "name": "",
     "label": "sensor/gesture/kitchen",
     "group": "3156ce3a.ed9862",
-    "order": 6,
-    "width": 0,
-    "height": 0,
+    "order": 11,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -6436,7 +6431,7 @@
     "name": "Nodes 3",
     "info": "",
     "x": 360,
-    "y": 840,
+    "y": 880,
     "wires": []
   },
   {
@@ -6468,9 +6463,9 @@
     "name": "",
     "label": "light/sonoff/kitchen",
     "group": "3156ce3a.ed9862",
-    "order": 7,
-    "width": 0,
-    "height": 0,
+    "order": 13,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -7286,9 +7281,9 @@
     "name": "",
     "label": "sensor/spindle/fermenter",
     "group": "4759591f.23c438",
-    "order": 7,
-    "width": 0,
-    "height": 0,
+    "order": 13,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -7325,7 +7320,7 @@
     "payloadType": "date",
     "topic": "sensor/ds18b20/brewery",
     "x": 430,
-    "y": 1080,
+    "y": 1120,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -7350,7 +7345,7 @@
     "payloadType": "date",
     "topic": "sensor/spindle/fermenter",
     "x": 430,
-    "y": 1160,
+    "y": 1200,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -7459,9 +7454,9 @@
     "name": "",
     "label": "control/ssr/brewery",
     "group": "4759591f.23c438",
-    "order": 8,
-    "width": 0,
-    "height": 0,
+    "order": 15,
+    "width": "5",
+    "height": "1",
     "passthru": false,
     "decouple": "true",
     "topic": "",
@@ -9205,7 +9200,7 @@
     "payloadType": "date",
     "topic": "control/ssr/brewery",
     "x": 420,
-    "y": 1120,
+    "y": 1160,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -9798,5 +9793,820 @@
     "x": 564,
     "y": 380,
     "wires": []
+  },
+  {
+    "id": "bbf89a33.56c808",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset switch/rfhub/lounge",
+    "group": "eec5fbfe.9e9ef8",
+    "order": 2,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "switch/rfhub/lounge",
+    "x": 150,
+    "y": 600,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "b6bc8fd1.c46ec",
+    "type": "change",
+    "z": "8e2c5c11.fae26",
+    "name": "",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "x",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "\"nodes@home/\" & msg.topic & \"/service/restart\"",
+        "tot": "jsonata"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 580,
+    "y": 1320,
+    "wires": [
+      [
+        "a449b27c.aa853"
+      ]
+    ]
+  },
+  {
+    "id": "85fee4f3.339ef8",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset sensor/DHT22/lounge",
+    "group": "eec5fbfe.9e9ef8",
+    "order": 4,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "sensor/DHT22/lounge",
+    "x": 160,
+    "y": 640,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "8ed97eec.12f92",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset sensor/DHT22/terrace",
+    "group": "eec5fbfe.9e9ef8",
+    "order": 6,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "sensor/DHT22/terrace",
+    "x": 160,
+    "y": 680,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "1d155966.9c8b57",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset sensor/DHT22/roof",
+    "group": "eec5fbfe.9e9ef8",
+    "order": 8,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "sensor/DHT22/roof",
+    "x": 150,
+    "y": 720,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "521205d5.acdfac",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset sensor/ds18b20/pool",
+    "group": "eec5fbfe.9e9ef8",
+    "order": 10,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "sensor/ds18b20/pool",
+    "x": 160,
+    "y": 760,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "ffd15c33.6bbac",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset cover/relay/garage",
+    "group": "eec5fbfe.9e9ef8",
+    "order": 12,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "cover/relay/garage",
+    "x": 150,
+    "y": 800,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "b133bbe9.884ea8",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset switch/sonoff/utilityroom",
+    "group": "eec5fbfe.9e9ef8",
+    "order": 14,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "switch/sonoff/utilityroom",
+    "x": 160,
+    "y": 840,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "183d5628.b7a3fa",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset switch/sonoff/garage",
+    "group": "eec5fbfe.9e9ef8",
+    "order": 16,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "switch/sonoff/garage",
+    "x": 150,
+    "y": 880,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "506711c5.8423e",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset switch/sonoff/terrace",
+    "group": "eec5fbfe.9e9ef8",
+    "order": 18,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "switch/sonoff/terrace",
+    "x": 150,
+    "y": 920,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "24437165.25f40e",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset switch/relay/backyard",
+    "group": "eec5fbfe.9e9ef8",
+    "order": 20,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "switch/relay/backyard",
+    "x": 160,
+    "y": 960,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "42951f1e.84afc",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset switch/sonoff/yardgate",
+    "group": "eec5fbfe.9e9ef8",
+    "order": 22,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "switch/sonoff/yardgate",
+    "x": 160,
+    "y": 1000,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "20135623.2f71ca",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset switch/sonoff/pool",
+    "group": "3156ce3a.ed9862",
+    "order": 2,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "switch/sonoff/pool",
+    "x": 150,
+    "y": 1060,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "87d603a5.1adff",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset light/sonoff/kitchen",
+    "group": "3156ce3a.ed9862",
+    "order": 14,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "light/sonoff/kitchen",
+    "x": 150,
+    "y": 1300,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "b95930a4.1d4ee",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset sensor/gesture/kitchen",
+    "group": "3156ce3a.ed9862",
+    "order": 12,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "sensor/gesture/kitchen",
+    "x": 160,
+    "y": 1260,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "254be1fa.4e55ee",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset switch/relay/dining2",
+    "group": "3156ce3a.ed9862",
+    "order": 10,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "switch/relay/dining2",
+    "x": 150,
+    "y": 1220,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "b1b17696.a16548",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset switch/relay/dining1",
+    "group": "3156ce3a.ed9862",
+    "order": 8,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "switch/relay/dining1",
+    "x": 150,
+    "y": 1180,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "2c343fc7.6ad8a",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset switch/sonoff/location4",
+    "group": "3156ce3a.ed9862",
+    "order": 6,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "switch/sonoff/location4",
+    "x": 160,
+    "y": 1140,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "b5072a88.4fdbe8",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset switch/sonoff/gallery",
+    "group": "3156ce3a.ed9862",
+    "order": 4,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "switch/sonoff/gallery",
+    "x": 150,
+    "y": 1100,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "aefaf592.4006c8",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset light/xmastree/dining",
+    "group": "4759591f.23c438",
+    "order": 2,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "light/xmastree/dining",
+    "x": 150,
+    "y": 1400,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "d0c43351.97c4b",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset sensor/button/indoor",
+    "group": "4759591f.23c438",
+    "order": 4,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "sensor/button/indoor",
+    "x": 150,
+    "y": 1440,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "a24cd71c.6e46d8",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset sensor/button/garage",
+    "group": "4759591f.23c438",
+    "order": 6,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "sensor/button/garage",
+    "x": 160,
+    "y": 1480,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "30a3f111.524c3e",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset sensor/button/pool",
+    "group": "4759591f.23c438",
+    "order": 8,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "sensor/button/pool",
+    "x": 150,
+    "y": 1520,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "f7065f4c.5001",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset switch/sonoff/brewery",
+    "group": "4759591f.23c438",
+    "order": 10,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "switch/sonoff/brewery",
+    "x": 160,
+    "y": 1560,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "4a8fab90.ec4844",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset sensor/ds18b20/brewery",
+    "group": "4759591f.23c438",
+    "order": 12,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "sensor/ds18b20/brewery",
+    "x": 170,
+    "y": 1600,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "afb87a09.935b48",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset sensor/spindle/fermenter",
+    "group": "4759591f.23c438",
+    "order": 14,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "sensor/spindle/fermenter",
+    "x": 170,
+    "y": 1640,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "c61588db.943618",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset control/ssr/brewery",
+    "group": "4759591f.23c438",
+    "order": 16,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "control/ssr/brewery",
+    "x": 150,
+    "y": 1680,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "47c0741b.af496c",
+    "type": "ui_toast",
+    "z": "8e2c5c11.fae26",
+    "position": "dialog",
+    "displayTime": "3",
+    "highlight": "",
+    "outputs": 1,
+    "ok": "OK",
+    "cancel": "",
+    "topic": "",
+    "name": "",
+    "x": 850,
+    "y": 1400,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "310eb7fc.17ad08",
+    "type": "trigger",
+    "z": "8e2c5c11.fae26",
+    "op1": "1",
+    "op2": "0",
+    "op1type": "str",
+    "op2type": "str",
+    "duration": "25",
+    "extend": true,
+    "units": "min",
+    "reset": "",
+    "name": "",
+    "x": 800,
+    "y": 1080,
+    "wires": [
+      [
+        "bc8620c8.9249f",
+        "f1399c8c.93ab8"
+      ]
+    ]
+  },
+  {
+    "id": "bc8620c8.9249f",
+    "type": "ui_switch",
+    "z": "8e2c5c11.fae26",
+    "name": "",
+    "label": "display/pixel/kitchen",
+    "group": "3156ce3a.ed9862",
+    "order": 15,
+    "width": "5",
+    "height": "1",
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "1",
+    "onvalueType": "str",
+    "onicon": "done",
+    "oncolor": "green",
+    "offvalue": "0",
+    "offvalueType": "str",
+    "officon": "error_outline",
+    "offcolor": "red",
+    "x": 1010,
+    "y": 1080,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "830b932c.8ac1c",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset display/pixel/kitchen",
+    "group": "3156ce3a.ed9862",
+    "order": 16,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "display/pixel/kitchen",
+    "x": 150,
+    "y": 1340,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "a449b27c.aa853",
+    "type": "mqtt out",
+    "z": "8e2c5c11.fae26",
+    "name": "",
+    "topic": "",
+    "qos": "0",
+    "retain": "false",
+    "broker": "f093b8cc.ff2b58",
+    "x": 750,
+    "y": 1320,
+    "wires": []
+  },
+  {
+    "id": "63fbd124.f57c",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update display/pixel/kitchen",
+    "group": "c39c0138.5637",
+    "order": 8,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "label": "display/pixel/kitchen",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "sensor/gesture/kitchen",
+    "x": 420,
+    "y": 840,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
   }
 ]
