@@ -86,19 +86,13 @@
     "compatmode": false,
     "keepalive": "60",
     "cleansession": true,
-    "willTopic": "",
-    "willQos": "0",
-    "willPayload": "",
     "birthTopic": "",
     "birthQos": "0",
     "birthRetain": "false",
-    "birthPayload": ""
-  },
-  {
-    "id": "62d0e3d3.dcb47c",
-    "type": "google-credentials",
-    "z": "",
-    "displayName": "Andreas Jungierek"
+    "birthPayload": "",
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": ""
   },
   {
     "id": "899805d0.4345c8",
@@ -399,12 +393,12 @@
     "compatmode": true,
     "keepalive": "60",
     "cleansession": true,
-    "willTopic": "",
-    "willQos": "0",
-    "willPayload": "",
     "birthTopic": "",
     "birthQos": "0",
-    "birthPayload": ""
+    "birthPayload": "",
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": ""
   },
   {
     "id": "a3020470.5bcbd8",
@@ -521,6 +515,12 @@
     "order": 1,
     "disp": true,
     "width": "10"
+  },
+  {
+    "id": "4ee7c8.1a6a1838",
+    "type": "google-credentials",
+    "z": "",
+    "displayName": "Andreas Jungierek"
   },
   {
     "id": "1f55c701.4fff39",
@@ -827,9 +827,10 @@
     "id": "bf288de6.bb763",
     "type": "google calendar",
     "z": "c9cf8bbb.029148",
-    "google": "62d0e3d3.dcb47c",
+    "google": "4ee7c8.1a6a1838",
     "name": "Abfallkalender",
     "calendar": "Abfallkalender",
+    "ongoing": false,
     "x": 421,
     "y": 480,
     "wires": [
@@ -3784,10 +3785,16 @@
         "t": "eq",
         "v": "display/pixel/kitchen",
         "vt": "str"
+      },
+      {
+        "t": "eq",
+        "v": "meter/electricity/utilityroom",
+        "vt": "str"
       }
     ],
     "checkall": "true",
-    "outputs": 27,
+    "repair": false,
+    "outputs": 28,
     "x": 570,
     "y": 440,
     "wires": [
@@ -3871,6 +3878,9 @@
       ],
       [
         "310eb7fc.17ad08"
+      ],
+      [
+        "5c16cf6d.d558c"
       ]
     ]
   },
@@ -6140,7 +6150,7 @@
     "checkall": "true",
     "outputs": 1,
     "x": 830,
-    "y": 1197,
+    "y": 1240,
     "wires": [
       [
         "bf07b832.b1d128"
@@ -6156,7 +6166,7 @@
     "console": "false",
     "complete": "true",
     "x": 1090,
-    "y": 1257,
+    "y": 1300,
     "wires": []
   },
   {
@@ -6171,7 +6181,7 @@
     "crontab": "",
     "once": false,
     "x": 670,
-    "y": 1197,
+    "y": 1240,
     "wires": [
       [
         "f1399c8c.93ab8"
@@ -6188,7 +6198,7 @@
     "url": "",
     "tls": "",
     "x": 1100,
-    "y": 1197,
+    "y": 1240,
     "wires": [
       []
     ]
@@ -6220,7 +6230,7 @@
     "to": "",
     "reg": false,
     "x": 950,
-    "y": 1197,
+    "y": 1240,
     "wires": [
       [
         "15a66c63.568814",
@@ -6235,7 +6245,7 @@
     "name": "send msg to simplepush if trigger is outtimed",
     "info": "",
     "x": 950,
-    "y": 1157,
+    "y": 1200,
     "wires": []
   },
   {
@@ -7433,10 +7443,11 @@
     "op2": "0",
     "op1type": "str",
     "op2type": "str",
-    "duration": "25",
+    "duration": "20",
     "extend": true,
     "units": "min",
     "reset": "",
+    "bytopic": "all",
     "name": "",
     "x": 799,
     "y": 1040,
@@ -7597,7 +7608,7 @@
     "gtype": "gage",
     "title": " Aktuell",
     "label": "W",
-    "format": "{{value | number:-1}}",
+    "format": "{{value }}",
     "min": 0,
     "max": "8000",
     "colors": [
@@ -7636,7 +7647,7 @@
         "t": "set",
         "p": "payload",
         "pt": "msg",
-        "to": "payload.power",
+        "to": "$round ( payload.power, -1 )",
         "tot": "jsonata"
       },
       {
@@ -7687,7 +7698,7 @@
         "t": "set",
         "p": "payload",
         "pt": "msg",
-        "to": "payload.electricity / 1000",
+        "to": "$round ( payload.electricity / 1000, 2 )",
         "tot": "jsonata"
       }
     ],
@@ -7715,7 +7726,7 @@
     "height": "3",
     "name": "",
     "label": "Zählerstand",
-    "format": "<font size=\"+5\"> {{ msg.payload | number:2 }} kWh </font>",
+    "format": "<font size=\"+5\"> {{ msg.payload}} kWh </font>",
     "layout": "col-center",
     "x": 610,
     "y": 240,
@@ -7821,7 +7832,7 @@
     "height": "1",
     "passthru": true,
     "topic": "",
-    "format": "{{value | number:2}}",
+    "format": "{{value}}",
     "min": "44114",
     "max": "100000",
     "step": "0.01",
@@ -10296,7 +10307,7 @@
     "payloadType": "str",
     "topic": "light/xmastree/dining",
     "x": 150,
-    "y": 1400,
+    "y": 1440,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10321,7 +10332,7 @@
     "payloadType": "str",
     "topic": "sensor/button/indoor",
     "x": 150,
-    "y": 1440,
+    "y": 1480,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10346,7 +10357,7 @@
     "payloadType": "str",
     "topic": "sensor/button/garage",
     "x": 160,
-    "y": 1480,
+    "y": 1520,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10371,7 +10382,7 @@
     "payloadType": "str",
     "topic": "sensor/button/pool",
     "x": 150,
-    "y": 1520,
+    "y": 1560,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10396,7 +10407,7 @@
     "payloadType": "str",
     "topic": "switch/sonoff/brewery",
     "x": 160,
-    "y": 1560,
+    "y": 1600,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10421,7 +10432,7 @@
     "payloadType": "str",
     "topic": "sensor/ds18b20/brewery",
     "x": 170,
-    "y": 1600,
+    "y": 1640,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10446,7 +10457,7 @@
     "payloadType": "str",
     "topic": "sensor/spindle/fermenter",
     "x": 170,
-    "y": 1640,
+    "y": 1680,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10471,7 +10482,7 @@
     "payloadType": "str",
     "topic": "control/ssr/brewery",
     "x": 150,
-    "y": 1680,
+    "y": 1720,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10504,10 +10515,11 @@
     "op2": "0",
     "op1type": "str",
     "op2type": "str",
-    "duration": "25",
+    "duration": "20",
     "extend": true,
     "units": "min",
     "reset": "",
+    "bytopic": "all",
     "name": "",
     "x": 800,
     "y": 1080,
@@ -10606,6 +10618,82 @@
     "wires": [
       [
         "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "5c16cf6d.d558c",
+    "type": "trigger",
+    "z": "8e2c5c11.fae26",
+    "op1": "1",
+    "op2": "0",
+    "op1type": "str",
+    "op2type": "str",
+    "duration": "20",
+    "extend": true,
+    "units": "min",
+    "reset": "",
+    "bytopic": "all",
+    "name": "",
+    "x": 803,
+    "y": 1120,
+    "wires": [
+      [
+        "fcd06b5e.24b1a8",
+        "f1399c8c.93ab8"
+      ]
+    ]
+  },
+  {
+    "id": "fcd06b5e.24b1a8",
+    "type": "ui_switch",
+    "z": "8e2c5c11.fae26",
+    "name": "",
+    "label": "meter/electricity/utilityroom",
+    "group": "3156ce3a.ed9862",
+    "order": 17,
+    "width": "5",
+    "height": "1",
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "1",
+    "onvalueType": "str",
+    "onicon": "done",
+    "oncolor": "green",
+    "offvalue": "0",
+    "offvalueType": "str",
+    "officon": "error_outline",
+    "offcolor": "red",
+    "x": 1033,
+    "y": 1120,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "73cd5df9.bad9f4",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset meter/electricity/utilityroom",
+    "group": "3156ce3a.ed9862",
+    "order": 18,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "meter/electricity/utilityroom",
+    "x": 170,
+    "y": 1380,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
       ]
     ]
   }
