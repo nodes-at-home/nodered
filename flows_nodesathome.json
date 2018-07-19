@@ -1300,7 +1300,10 @@
         "a2528b01.80cda8",
         "bd16e16f.9a17b",
         "c1f32206.0a9d1",
-        "62197c5a.e4cf94"
+        "62197c5a.e4cf94",
+        "63fbd124.f57c",
+        "940467a.8b33698",
+        "a5bbcab1.3e7988"
       ]
     ]
   },
@@ -1391,7 +1394,7 @@
     "payloadType": "date",
     "topic": "light/xmastree/dining",
     "x": 420,
-    "y": 920,
+    "y": 1000,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -1416,7 +1419,7 @@
     "payloadType": "date",
     "topic": "sensor/button/indoor",
     "x": 420,
-    "y": 960,
+    "y": 1040,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -1441,7 +1444,7 @@
     "payloadType": "date",
     "topic": "sensor/button/garage",
     "x": 420,
-    "y": 999,
+    "y": 1079,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -1466,7 +1469,7 @@
     "payloadType": "date",
     "topic": "sensor/button/pool",
     "x": 410,
-    "y": 1037,
+    "y": 1117,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -2517,7 +2520,7 @@
     "payloadType": "date",
     "topic": "switch/sonoff/brewery",
     "x": 420,
-    "y": 1080,
+    "y": 1160,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -3788,13 +3791,18 @@
       },
       {
         "t": "eq",
+        "v": "light/ws2812/terrace",
+        "vt": "str"
+      },
+      {
+        "t": "eq",
         "v": "meter/electricity/utilityroom",
         "vt": "str"
       }
     ],
     "checkall": "true",
     "repair": false,
-    "outputs": 28,
+    "outputs": 29,
     "x": 570,
     "y": 440,
     "wires": [
@@ -3881,6 +3889,9 @@
       ],
       [
         "5c16cf6d.d558c"
+      ],
+      [
+        "950c56b9.178e18"
       ]
     ]
   },
@@ -6441,7 +6452,7 @@
     "name": "Nodes 3",
     "info": "",
     "x": 360,
-    "y": 880,
+    "y": 960,
     "wires": []
   },
   {
@@ -7330,7 +7341,7 @@
     "payloadType": "date",
     "topic": "sensor/ds18b20/brewery",
     "x": 430,
-    "y": 1120,
+    "y": 1200,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -7355,7 +7366,7 @@
     "payloadType": "date",
     "topic": "sensor/spindle/fermenter",
     "x": 430,
-    "y": 1200,
+    "y": 1280,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -9211,7 +9222,7 @@
     "payloadType": "date",
     "topic": "control/ssr/brewery",
     "x": 420,
-    "y": 1160,
+    "y": 1240,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -10307,7 +10318,7 @@
     "payloadType": "str",
     "topic": "light/xmastree/dining",
     "x": 150,
-    "y": 1440,
+    "y": 1480,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10332,7 +10343,7 @@
     "payloadType": "str",
     "topic": "sensor/button/indoor",
     "x": 150,
-    "y": 1480,
+    "y": 1520,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10357,7 +10368,7 @@
     "payloadType": "str",
     "topic": "sensor/button/garage",
     "x": 160,
-    "y": 1520,
+    "y": 1560,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10382,7 +10393,7 @@
     "payloadType": "str",
     "topic": "sensor/button/pool",
     "x": 150,
-    "y": 1560,
+    "y": 1600,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10407,7 +10418,7 @@
     "payloadType": "str",
     "topic": "switch/sonoff/brewery",
     "x": 160,
-    "y": 1600,
+    "y": 1640,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10432,7 +10443,7 @@
     "payloadType": "str",
     "topic": "sensor/ds18b20/brewery",
     "x": 170,
-    "y": 1640,
+    "y": 1680,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10457,7 +10468,7 @@
     "payloadType": "str",
     "topic": "sensor/spindle/fermenter",
     "x": 170,
-    "y": 1680,
+    "y": 1720,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10482,7 +10493,7 @@
     "payloadType": "str",
     "topic": "control/ssr/brewery",
     "x": 150,
-    "y": 1720,
+    "y": 1760,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10649,7 +10660,7 @@
     "type": "ui_switch",
     "z": "8e2c5c11.fae26",
     "name": "",
-    "label": "meter/electricity/utilityroom",
+    "label": "light/ws2812/terrace",
     "group": "3156ce3a.ed9862",
     "order": 17,
     "width": "5",
@@ -10666,7 +10677,7 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1033,
+    "x": 1013,
     "y": 1120,
     "wires": [
       []
@@ -10678,7 +10689,7 @@
     "z": "8e2c5c11.fae26",
     "name": "reset meter/electricity/utilityroom",
     "group": "3156ce3a.ed9862",
-    "order": 18,
+    "order": 20,
     "width": "1",
     "height": "1",
     "passthru": false,
@@ -10690,6 +10701,131 @@
     "payloadType": "str",
     "topic": "meter/electricity/utilityroom",
     "x": 170,
+    "y": 1420,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "940467a.8b33698",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update light/ws2812/terrace",
+    "group": "c39c0138.5637",
+    "order": 8,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "label": "light/ws2812/terrace",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "light/ws2812/terrace",
+    "x": 420,
+    "y": 880,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "a5bbcab1.3e7988",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update meter/electricity/utilityroom",
+    "group": "c39c0138.5637",
+    "order": 8,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "label": "meter/electricity/utilityroom",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "meter/electricity/utilityroom",
+    "x": 440,
+    "y": 920,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "950c56b9.178e18",
+    "type": "trigger",
+    "z": "8e2c5c11.fae26",
+    "op1": "1",
+    "op2": "0",
+    "op1type": "str",
+    "op2type": "str",
+    "duration": "20",
+    "extend": true,
+    "units": "min",
+    "reset": "",
+    "bytopic": "all",
+    "name": "",
+    "x": 804,
+    "y": 1160,
+    "wires": [
+      [
+        "a4c0d1b7.c3785"
+      ]
+    ]
+  },
+  {
+    "id": "a4c0d1b7.c3785",
+    "type": "ui_switch",
+    "z": "8e2c5c11.fae26",
+    "name": "",
+    "label": "meter/electricity/utilityroom",
+    "group": "3156ce3a.ed9862",
+    "order": 19,
+    "width": "5",
+    "height": "1",
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "1",
+    "onvalueType": "str",
+    "onicon": "done",
+    "oncolor": "green",
+    "offvalue": "0",
+    "offvalueType": "str",
+    "officon": "error_outline",
+    "offcolor": "red",
+    "x": 1035,
+    "y": 1160,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "5c9d457a.12105c",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset light/ws2812/terrace",
+    "group": "3156ce3a.ed9862",
+    "order": 18,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "light/ws2812/terrace",
+    "x": 150,
     "y": 1380,
     "wires": [
       [
