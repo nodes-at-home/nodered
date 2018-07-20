@@ -3510,7 +3510,7 @@
     "type": "function",
     "z": "c9cf8bbb.029148",
     "name": "check time offset",
-    "func": "// junand 22.01.2017\n\nif ( !msg.payload ) return null;\n\nconst timezoneOffset = -new Date ().getTimezoneOffset ();\nconst offset = 10 * 60 * 1000 + timezoneOffset * 60 * 1000; // 10 min in ms + timezoneoffset\n\nvar result = [];\n\nconst now = new Date ().getTime ();\n\nfor ( var i = 0; i < msg.payload.length; i++ ) {\n    \n    var departure = msg.payload [i];\n    var date = new Date ( departure.date + \"T\" + departure.time );\n\n    if ( now + offset < date.getTime () ) {\n        result [result.length] = msg.payload [i];\n    }\n    \n}\n\nmsg.payload = result;\n\nreturn msg;",
+    "func": "// junand 22.01.2017\n\nif ( !msg.payload ) return null;\n\nconst timezoneOffset = -new Date ().getTimezoneOffset ();\nconst offset = 10 * 60 * 1000; // 10 min in ms\n\nvar result = [];\n\nconst now = new Date ().getTime ();\n\nfor ( var i = 0; i < msg.payload.length; i++ ) {\n    \n    var departure = msg.payload [i];\n    var date = new Date ( departure.date + \"T\" + departure.time );\n    \n    //node.warn ( \"departure: date=\" + departure.date + \" time=\" + departure.time );\n\n    if ( now + offset < date.getTime () ) {\n        result [result.length] = msg.payload [i];\n    }\n    \n}\n\nmsg.payload = result;\n\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
     "x": 712,
@@ -5933,11 +5933,11 @@
     "height": 0,
     "passthru": false,
     "topic": "hysteresis",
-    "format": "{{msg.hysteresis}}",
+    "format": "{{value}}",
     "min": 0,
     "max": "5",
     "step": "0.1",
-    "x": 420,
+    "x": 500,
     "y": 160,
     "wires": [
       [
@@ -8683,7 +8683,7 @@
         "128952eb.05b24d"
       ],
       [
-        "725733d2.a2e4fc"
+        "f89b1824.3c38f8"
       ]
     ]
   },
@@ -8695,7 +8695,7 @@
     "rules": [
       {
         "t": "set",
-        "p": "hysteresis",
+        "p": "payload",
         "pt": "msg",
         "to": "1",
         "tot": "num"
@@ -9674,8 +9674,8 @@
     "max": "35",
     "colors": [
       "#0080ff",
-      "#ff8000",
-      "#ff0000"
+      "#0080ff",
+      "#0080ff"
     ],
     "seg1": "20",
     "seg2": "26",
@@ -9806,9 +9806,9 @@
     "min": "10",
     "max": "35",
     "colors": [
-      "#0080ff",
       "#ff8000",
-      "#ff0000"
+      "#ff8000",
+      "#ff8000"
     ],
     "seg1": "20",
     "seg2": "26",
@@ -10776,7 +10776,8 @@
     "y": 1160,
     "wires": [
       [
-        "a4c0d1b7.c3785"
+        "a4c0d1b7.c3785",
+        "f1399c8c.93ab8"
       ]
     ]
   },
@@ -10830,6 +10831,33 @@
     "wires": [
       [
         "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "f89b1824.3c38f8",
+    "type": "change",
+    "z": "f7610a0.d8198f8",
+    "name": "set",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "hysteresis",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 310,
+    "y": 160,
+    "wires": [
+      [
+        "725733d2.a2e4fc"
       ]
     ]
   }
