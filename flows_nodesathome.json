@@ -1304,7 +1304,8 @@
         "63fbd124.f57c",
         "940467a.8b33698",
         "a5bbcab1.3e7988",
-        "9047d99d.43e178"
+        "9047d99d.43e178",
+        "4594d485.6d20fc"
       ]
     ]
   },
@@ -3804,11 +3805,16 @@
         "t": "eq",
         "v": "meter/electricity/utilityroom",
         "vt": "str"
+      },
+      {
+        "t": "eq",
+        "v": "switch/sonoff/bedroom",
+        "vt": "str"
       }
     ],
     "checkall": "true",
     "repair": false,
-    "outputs": 30,
+    "outputs": 31,
     "x": 570,
     "y": 440,
     "wires": [
@@ -3901,6 +3907,9 @@
       ],
       [
         "950c56b9.178e18"
+      ],
+      [
+        "9a24caeb.c42b58"
       ]
     ]
   },
@@ -10968,6 +10977,107 @@
     "wires": [
       [
         "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "4594d485.6d20fc",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update switch/sonoff/bedroom",
+    "group": "457a1e5.d114de",
+    "order": 6,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "label": "switch/sonoff/bedroom",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "sensor/spindle/fermenter",
+    "x": 430,
+    "y": 1360,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "9a24caeb.c42b58",
+    "type": "trigger",
+    "z": "8e2c5c11.fae26",
+    "op1": "1",
+    "op2": "0",
+    "op1type": "str",
+    "op2type": "str",
+    "duration": "20",
+    "extend": true,
+    "units": "min",
+    "reset": "",
+    "bytopic": "all",
+    "name": "",
+    "x": 810,
+    "y": 1240,
+    "wires": [
+      [
+        "692fb6.53cd704c",
+        "f1399c8c.93ab8"
+      ]
+    ]
+  },
+  {
+    "id": "692fb6.53cd704c",
+    "type": "ui_switch",
+    "z": "8e2c5c11.fae26",
+    "name": "",
+    "label": "switch/sonoff/bedroom",
+    "group": "4759591f.23c438",
+    "order": 17,
+    "width": "5",
+    "height": "1",
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "1",
+    "onvalueType": "str",
+    "onicon": "done",
+    "oncolor": "green",
+    "offvalue": "0",
+    "offvalueType": "str",
+    "officon": "error_outline",
+    "offcolor": "red",
+    "x": 1021,
+    "y": 1240,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "b2050856.362f28",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset switch/sonoff/bedroom",
+    "group": "4759591f.23c438",
+    "order": 18,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "switch/sonoff/bedroom",
+    "x": 160,
+    "y": 1840,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
       ]
     ]
   }
