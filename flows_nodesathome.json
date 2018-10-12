@@ -3810,11 +3810,16 @@
         "t": "eq",
         "v": "switch/sonoff/bedroom",
         "vt": "str"
+      },
+      {
+        "t": "eq",
+        "v": "sensor/ttp223/bedroom",
+        "vt": "str"
       }
     ],
     "checkall": "true",
     "repair": false,
-    "outputs": 31,
+    "outputs": 32,
     "x": 570,
     "y": 440,
     "wires": [
@@ -3910,6 +3915,9 @@
       ],
       [
         "9a24caeb.c42b58"
+      ],
+      [
+        "b6bfa67d.8b8ca8"
       ]
     ]
   },
@@ -11075,6 +11083,81 @@
     "topic": "switch/sonoff/bedroom",
     "x": 160,
     "y": 1840,
+    "wires": [
+      [
+        "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "b6bfa67d.8b8ca8",
+    "type": "trigger",
+    "z": "8e2c5c11.fae26",
+    "op1": "1",
+    "op2": "0",
+    "op1type": "str",
+    "op2type": "str",
+    "duration": "20",
+    "extend": true,
+    "units": "min",
+    "reset": "",
+    "bytopic": "all",
+    "name": "",
+    "x": 810,
+    "y": 1280,
+    "wires": [
+      [
+        "464adc74.9d5d34"
+      ]
+    ]
+  },
+  {
+    "id": "464adc74.9d5d34",
+    "type": "ui_switch",
+    "z": "8e2c5c11.fae26",
+    "name": "",
+    "label": "sensor/ttp223/bedroom",
+    "group": "4759591f.23c438",
+    "order": 19,
+    "width": "5",
+    "height": "1",
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "1",
+    "onvalueType": "str",
+    "onicon": "done",
+    "oncolor": "green",
+    "offvalue": "0",
+    "offvalueType": "str",
+    "officon": "error_outline",
+    "offcolor": "red",
+    "x": 1031,
+    "y": 1280,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "2cb45cfb.f91514",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset sensor/ttp223/bedroom",
+    "group": "4759591f.23c438",
+    "order": 20,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "sensor/ttp223/bedroom",
+    "x": 160,
+    "y": 1880,
     "wires": [
       [
         "b6bc8fd1.c46ec"
