@@ -1305,7 +1305,9 @@
         "940467a.8b33698",
         "a5bbcab1.3e7988",
         "9047d99d.43e178",
-        "4594d485.6d20fc"
+        "4594d485.6d20fc",
+        "b54e338f.fc485",
+        "fd97dd78.dae87"
       ]
     ]
   },
@@ -3815,11 +3817,16 @@
         "t": "eq",
         "v": "sensor/ttp223/bedroom",
         "vt": "str"
+      },
+      {
+        "t": "eq",
+        "v": "display/pixel/kitchen",
+        "vt": "str"
       }
     ],
     "checkall": "true",
     "repair": false,
-    "outputs": 32,
+    "outputs": 33,
     "x": 570,
     "y": 440,
     "wires": [
@@ -3918,6 +3925,9 @@
       ],
       [
         "b6bfa67d.8b8ca8"
+      ],
+      [
+        "febb2e65.39694"
       ]
     ]
   },
@@ -6187,7 +6197,7 @@
     "checkall": "true",
     "outputs": 1,
     "x": 810,
-    "y": 1380,
+    "y": 1425,
     "wires": [
       [
         "bf07b832.b1d128"
@@ -6203,7 +6213,7 @@
     "console": "false",
     "complete": "true",
     "x": 1070,
-    "y": 1440,
+    "y": 1485,
     "wires": []
   },
   {
@@ -6218,7 +6228,7 @@
     "crontab": "",
     "once": false,
     "x": 650,
-    "y": 1380,
+    "y": 1425,
     "wires": [
       [
         "f1399c8c.93ab8"
@@ -6235,7 +6245,7 @@
     "url": "",
     "tls": "",
     "x": 1080,
-    "y": 1380,
+    "y": 1425,
     "wires": [
       []
     ]
@@ -6267,7 +6277,7 @@
     "to": "",
     "reg": false,
     "x": 930,
-    "y": 1380,
+    "y": 1425,
     "wires": [
       [
         "15a66c63.568814",
@@ -6282,7 +6292,7 @@
     "name": "send msg to simplepush if trigger is outtimed",
     "info": "",
     "x": 930,
-    "y": 1340,
+    "y": 1385,
     "wires": []
   },
   {
@@ -11161,6 +11171,129 @@
     "wires": [
       [
         "b6bc8fd1.c46ec"
+      ]
+    ]
+  },
+  {
+    "id": "febb2e65.39694",
+    "type": "trigger",
+    "z": "8e2c5c11.fae26",
+    "op1": "1",
+    "op2": "0",
+    "op1type": "str",
+    "op2type": "str",
+    "duration": "20",
+    "extend": true,
+    "units": "min",
+    "reset": "",
+    "bytopic": "all",
+    "name": "",
+    "x": 810,
+    "y": 1320,
+    "wires": [
+      [
+        "c88dce5a.e9b42"
+      ]
+    ]
+  },
+  {
+    "id": "c88dce5a.e9b42",
+    "type": "ui_switch",
+    "z": "8e2c5c11.fae26",
+    "name": "",
+    "label": "display/pixel/kitchen",
+    "group": "4759591f.23c438",
+    "order": 21,
+    "width": "5",
+    "height": "1",
+    "passthru": false,
+    "decouple": "true",
+    "topic": "",
+    "style": "",
+    "onvalue": "1",
+    "onvalueType": "str",
+    "onicon": "done",
+    "oncolor": "green",
+    "offvalue": "0",
+    "offvalueType": "str",
+    "officon": "error_outline",
+    "offcolor": "red",
+    "x": 1021,
+    "y": 1320,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "b61d9180.f6528",
+    "type": "ui_button",
+    "z": "8e2c5c11.fae26",
+    "name": "reset display/pixel/kitchen",
+    "group": "4759591f.23c438",
+    "order": 22,
+    "width": "1",
+    "height": "1",
+    "passthru": false,
+    "label": "",
+    "color": "#00ABEC",
+    "bgcolor": "white",
+    "icon": "refresh",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "display/pixel/kitchen",
+    "x": 150,
+    "y": 1920,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "b54e338f.fc485",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update sensor/ttp223/bedroom",
+    "group": "457a1e5.d114de",
+    "order": 6,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "label": "sensor/ttp223/bedroom",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "sensor/ttp223/bedroom",
+    "x": 430,
+    "y": 1400,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
+      ]
+    ]
+  },
+  {
+    "id": "fd97dd78.dae87",
+    "type": "ui_button",
+    "z": "37197cb5.c49ee4",
+    "name": "update display/pixel/kitchen",
+    "group": "457a1e5.d114de",
+    "order": 6,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "label": "display/pixel/kitchen",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "",
+    "payloadType": "date",
+    "topic": "display/pixel/kitchen",
+    "x": 420,
+    "y": 1440,
+    "wires": [
+      [
+        "6ed6dc87.f74a94"
       ]
     ]
   }
