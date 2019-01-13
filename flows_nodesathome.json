@@ -3824,16 +3824,11 @@
         "t": "eq",
         "v": "switch/sonoff/xmastree",
         "vt": "str"
-      },
-      {
-        "t": "eq",
-        "v": "switch/sonoff/location1",
-        "vt": "str"
       }
     ],
     "checkall": "true",
     "repair": false,
-    "outputs": 34,
+    "outputs": 33,
     "x": 570,
     "y": 440,
     "wires": [
@@ -3935,9 +3930,6 @@
       ],
       [
         "febb2e65.39694"
-      ],
-      [
-        "e180ace4.10bbd"
       ]
     ]
   },
@@ -4170,7 +4162,7 @@
     "name": "",
     "label": "sensor/ds18b20/pool",
     "group": "3156ce3a.ed9862",
-    "order": 11,
+    "order": 17,
     "width": "5",
     "height": "1",
     "passthru": false,
@@ -4717,7 +4709,7 @@
     "name": "",
     "label": "switch/sonoff/pool",
     "group": "3156ce3a.ed9862",
-    "order": 9,
+    "order": 15,
     "width": "5",
     "height": "1",
     "passthru": false,
@@ -4917,7 +4909,7 @@
     "name": "",
     "label": "switch/sonoff/gallery",
     "group": "3156ce3a.ed9862",
-    "order": 7,
+    "order": 9,
     "width": "5",
     "height": "1",
     "passthru": false,
@@ -4967,7 +4959,7 @@
     "name": "",
     "label": "switch/sonoff/location4",
     "group": "3156ce3a.ed9862",
-    "order": 17,
+    "order": 19,
     "width": "5",
     "height": "1",
     "passthru": false,
@@ -10002,7 +9994,7 @@
     "z": "8e2c5c11.fae26",
     "name": "reset sensor/ds18b20/pool",
     "group": "3156ce3a.ed9862",
-    "order": 12,
+    "order": 18,
     "width": "1",
     "height": "1",
     "passthru": false,
@@ -10177,7 +10169,7 @@
     "z": "8e2c5c11.fae26",
     "name": "reset switch/sonoff/pool",
     "group": "3156ce3a.ed9862",
-    "order": 10,
+    "order": 16,
     "width": "1",
     "height": "1",
     "passthru": false,
@@ -10302,7 +10294,7 @@
     "z": "8e2c5c11.fae26",
     "name": "reset switch/sonoff/location4",
     "group": "3156ce3a.ed9862",
-    "order": 18,
+    "order": 20,
     "width": "1",
     "height": "1",
     "passthru": false,
@@ -10327,7 +10319,7 @@
     "z": "8e2c5c11.fae26",
     "name": "reset switch/sonoff/gallery",
     "group": "3156ce3a.ed9862",
-    "order": 8,
+    "order": 10,
     "width": "1",
     "height": "1",
     "passthru": false,
@@ -10594,7 +10586,7 @@
     "name": "",
     "label": "display/pixel/kitchen",
     "group": "3156ce3a.ed9862",
-    "order": 19,
+    "order": 13,
     "width": "5",
     "height": "1",
     "passthru": false,
@@ -10621,7 +10613,7 @@
     "z": "8e2c5c11.fae26",
     "name": "reset display/pixel/kitchen",
     "group": "3156ce3a.ed9862",
-    "order": 20,
+    "order": 14,
     "width": "1",
     "height": "1",
     "passthru": false,
@@ -10735,7 +10727,7 @@
     "z": "8e2c5c11.fae26",
     "name": "reset meter/electricity/utilityroom",
     "group": "3156ce3a.ed9862",
-    "order": 26,
+    "order": 12,
     "width": "1",
     "height": "1",
     "passthru": false,
@@ -10834,7 +10826,7 @@
     "name": "",
     "label": "meter/electricity/utilityroom",
     "group": "3156ce3a.ed9862",
-    "order": 25,
+    "order": 11,
     "width": "5",
     "height": "1",
     "passthru": false,
@@ -11215,7 +11207,7 @@
     "name": "",
     "label": "switch/sonoff/xmastree",
     "group": "3156ce3a.ed9862",
-    "order": 13,
+    "order": 7,
     "width": "5",
     "height": "1",
     "passthru": false,
@@ -11242,7 +11234,7 @@
     "z": "8e2c5c11.fae26",
     "name": "reset switch/sonoff/xmastree",
     "group": "3156ce3a.ed9862",
-    "order": 14,
+    "order": 8,
     "width": "1",
     "height": "1",
     "passthru": false,
@@ -11308,82 +11300,6 @@
     "wires": [
       [
         "6ed6dc87.f74a94"
-      ]
-    ]
-  },
-  {
-    "id": "e180ace4.10bbd",
-    "type": "trigger",
-    "z": "8e2c5c11.fae26",
-    "op1": "1",
-    "op2": "0",
-    "op1type": "str",
-    "op2type": "str",
-    "duration": "20",
-    "extend": true,
-    "units": "min",
-    "reset": "",
-    "bytopic": "all",
-    "name": "",
-    "x": 810,
-    "y": 1360,
-    "wires": [
-      [
-        "a3b737cb.962e78",
-        "f1399c8c.93ab8"
-      ]
-    ]
-  },
-  {
-    "id": "a3b737cb.962e78",
-    "type": "ui_switch",
-    "z": "8e2c5c11.fae26",
-    "name": "",
-    "label": "switch/sonoff/location1",
-    "group": "3156ce3a.ed9862",
-    "order": 15,
-    "width": "5",
-    "height": "1",
-    "passthru": false,
-    "decouple": "true",
-    "topic": "",
-    "style": "",
-    "onvalue": "1",
-    "onvalueType": "str",
-    "onicon": "done",
-    "oncolor": "green",
-    "offvalue": "0",
-    "offvalueType": "str",
-    "officon": "error_outline",
-    "offcolor": "red",
-    "x": 1021,
-    "y": 1360,
-    "wires": [
-      []
-    ]
-  },
-  {
-    "id": "5d5d63fb.39820c",
-    "type": "ui_button",
-    "z": "8e2c5c11.fae26",
-    "name": "reset switch/sonoff/location1",
-    "group": "3156ce3a.ed9862",
-    "order": 16,
-    "width": "1",
-    "height": "1",
-    "passthru": false,
-    "label": "",
-    "color": "#00ABEC",
-    "bgcolor": "white",
-    "icon": "refresh",
-    "payload": "",
-    "payloadType": "str",
-    "topic": "switch/sonoff/location1",
-    "x": 160,
-    "y": 1960,
-    "wires": [
-      [
-        "b6bc8fd1.c46ec"
       ]
     ]
   }
