@@ -3841,7 +3841,7 @@
       },
       {
         "t": "eq",
-        "v": "switch/sonoff/xmastree",
+        "v": "switch/sonoff/gallery1",
         "vt": "str"
       }
     ],
@@ -11224,7 +11224,7 @@
     "type": "ui_switch",
     "z": "8e2c5c11.fae26",
     "name": "",
-    "label": "switch/sonoff/xmastree",
+    "label": "switch/sonoff/gallery1",
     "group": "3156ce3a.ed9862",
     "order": 7,
     "width": "5",
@@ -11251,7 +11251,7 @@
     "id": "b61d9180.f6528",
     "type": "ui_button",
     "z": "8e2c5c11.fae26",
-    "name": "reset switch/sonoff/xmastree",
+    "name": "reset switch/sonoff/gallery1",
     "group": "3156ce3a.ed9862",
     "order": 8,
     "width": "1",
@@ -11263,7 +11263,7 @@
     "icon": "refresh",
     "payload": "",
     "payloadType": "str",
-    "topic": "switch/sonoff/xmastree",
+    "topic": "switch/sonoff/gallery1",
     "x": 160,
     "y": 1920,
     "wires": [
