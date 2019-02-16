@@ -548,7 +548,7 @@
     "name": "get weather forecast",
     "info": "",
     "x": 150,
-    "y": 160,
+    "y": 260,
     "wires": []
   },
   {
@@ -558,7 +558,7 @@
     "name": "way to work",
     "info": "",
     "x": 130,
-    "y": 689,
+    "y": 680,
     "wires": []
   },
   {
@@ -574,7 +574,7 @@
     "once": false,
     "onceDelay": "",
     "x": 180,
-    "y": 205,
+    "y": 300,
     "wires": [
       [
         "68cb162e.e560f8"
@@ -592,8 +592,8 @@
     "city": "Zepernick",
     "country": "Germany",
     "language": "de",
-    "x": 380,
-    "y": 205,
+    "x": 360,
+    "y": 300,
     "wires": [
       [
         "e9051825.eccda8"
@@ -608,8 +608,8 @@
     "func": "// junand 15.01.2017\n// convert open weather forecast to pixel node message structure\n//\n// the payload is the 5 day forecast from open weather, with every 3 hor forecast\n// msg.payload [0] -> now\n// msg.payload [1] -> +3h\n// ...\n// msg.payload [40] -> ...\n\nfunction temperatureMessage ( day, min, max ) {\n    return day + \" \" + min + \"°C bis \" + max + \"°C\";\n}\n\nfunction descriptionMessage ( day, description ) {\n//    return day + \" \" + description;\n    return day + \" \" + description.charAt ( 0 ).toLowerCase () + description.slice ( 1 );\n}\n\n// calculate min/max temp\nvar per3h = msg.payload;\nvar todayDate = per3h [0].dt_txt.split ( \" \" ) [0];\nvar tomorrowDate = per3h [8].dt_txt.split ( \" \" ) [0]; // next day\n\nvar todayMinTemp = 999;\nvar todayMaxTemp = -999;\nvar tomorrowMinTemp = 999;\nvar tomorrowMaxTemp = -999;\n\nfor ( var i = 0; i < 16; i++ ) { // check only the first two day\n    var dt = per3h [i].dt_txt.split ( \" \" );\n    if ( dt [0] === todayDate ) {\n        if ( per3h [i].main.temp_min < todayMinTemp ) todayMinTemp = per3h [i].main.temp_min;\n        if ( per3h [i].main.temp_max > todayMaxTemp ) todayMaxTemp = per3h [i].main.temp_max;\n    }\n    else if ( dt [0] === tomorrowDate ) {\n        if ( per3h [i].main.temp_min < tomorrowMinTemp ) tomorrowMinTemp = per3h [i].main.temp_min;\n        if ( per3h [i].main.temp_max > tomorrowMaxTemp ) tomorrowMaxTemp = per3h [i].main.temp_max;\n    }\n}\n\nvar messages = {\n/*    display: {\n        duration: 5\n    }, */\n    messages: [ \n        { line:2, text: temperatureMessage ( \"heute\", todayMinTemp, todayMaxTemp ) },\n        { line:3, text: descriptionMessage ( \"heute\", msg.payload [0].weather [0].description ) },\n        { line:4, text: temperatureMessage ( \"morgen\", tomorrowMinTemp, tomorrowMaxTemp ) },\n        { line:5, text: descriptionMessage ( \"morgen\", msg.payload [8].weather [0].description ) }\n    ] \n};\n\nmsg.payload = messages; // preserve msg attributes!!!\n\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
-    "x": 550,
-    "y": 205,
+    "x": 510,
+    "y": 300,
     "wires": [
       [
         "21eb0961.7dd8c6"
@@ -628,7 +628,7 @@
     "crontab": "01 22 * * *",
     "once": false,
     "x": 150,
-    "y": 340,
+    "y": 360,
     "wires": [
       [
         "2ef5c432.c6dd0c"
@@ -654,11 +654,11 @@
     "from": "",
     "to": "",
     "reg": false,
-    "x": 434,
-    "y": 340,
+    "x": 980,
+    "y": 360,
     "wires": [
       [
-        "dac14d24.d9643"
+        "a89f51a1.a0746"
       ]
     ]
   },
@@ -671,8 +671,8 @@
     "appendNewline": true,
     "createDir": true,
     "overwriteFile": "false",
-    "x": 1070,
-    "y": 600,
+    "x": 610,
+    "y": 160,
     "wires": []
   },
   {
@@ -684,8 +684,8 @@
     "qos": "0",
     "retain": "true",
     "broker": "f093b8cc.ff2b58",
-    "x": 989,
-    "y": 383,
+    "x": 320,
+    "y": 80,
     "wires": []
   },
   {
@@ -698,12 +698,11 @@
     "format": "handlebars",
     "syntax": "mustache",
     "template": "{{{timestamp_date}}}: [{{{topic}}}] {{{payload}}}",
-    "x": 900,
-    "y": 600,
+    "x": 460,
+    "y": 160,
     "wires": [
       [
-        "a3681291.5bfe3",
-        "affa4182.63128"
+        "a3681291.5bfe3"
       ]
     ]
   },
@@ -712,25 +711,13 @@
     "type": "json",
     "z": "c9cf8bbb.029148",
     "name": "",
-    "x": 1010,
-    "y": 520,
+    "x": 330,
+    "y": 160,
     "wires": [
       [
         "daaf94f6.ad46c8"
       ]
     ]
-  },
-  {
-    "id": "affa4182.63128",
-    "type": "debug",
-    "z": "c9cf8bbb.029148",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "false",
-    "x": 1071,
-    "y": 660,
-    "wires": []
   },
   {
     "id": "5ae2eae3.4b5914",
@@ -740,39 +727,11 @@
     "func": "// junand 15.01.2017\n\nvar dt = new Date ();\nmsg.timestamp_date = dt;\nmsg.timestamp = +dt;\nmsg.timestamp_parts = {\n\t'month':\tdt.getMonth() + 1,\n\t'day':\t\tdt.getDate(),\n\t'year':\t\tdt.getFullYear(),\n\t'hours':\tdt.getHours(),\n\t'mins':\t\tdt.getMinutes(),\n\t'msecs':\tdt.getMilliseconds()\n}\n\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
-    "x": 870,
-    "y": 520,
+    "x": 190,
+    "y": 160,
     "wires": [
       [
         "c5c075da.61ef98"
-      ]
-    ]
-  },
-  {
-    "id": "dac14d24.d9643",
-    "type": "change",
-    "z": "c9cf8bbb.029148",
-    "name": "input",
-    "rules": [
-      {
-        "t": "set",
-        "p": "payload",
-        "pt": "msg",
-        "to": "payload",
-        "tot": "msg"
-      }
-    ],
-    "action": "",
-    "property": "",
-    "from": "",
-    "to": "",
-    "reg": false,
-    "x": 670,
-    "y": 424,
-    "wires": [
-      [
-        "5ae2eae3.4b5914",
-        "1d09515.f0434af"
       ]
     ]
   },
@@ -783,7 +742,7 @@
     "name": "calendar, daily 05:00 .. 20:00",
     "info": "",
     "x": 180,
-    "y": 418,
+    "y": 440,
     "wires": []
   },
   {
@@ -798,7 +757,7 @@
     "crontab": "*/15 5-19 * * *",
     "once": false,
     "x": 130,
-    "y": 478,
+    "y": 480,
     "wires": [
       [
         "bf288de6.bb763"
@@ -816,8 +775,8 @@
     "repeat": "",
     "crontab": "*/15 5-19 * * *",
     "once": false,
-    "x": 139,
-    "y": 525,
+    "x": 140,
+    "y": 520,
     "wires": [
       [
         "bf288de6.bb763"
@@ -835,8 +794,8 @@
     "repeat": "",
     "crontab": "*/15 5-19 * * *",
     "once": false,
-    "x": 159,
-    "y": 571,
+    "x": 160,
+    "y": 560,
     "wires": [
       [
         "bf288de6.bb763"
@@ -851,12 +810,11 @@
     "name": "Abfallkalender",
     "calendar": "Abfallkalender",
     "ongoing": false,
-    "x": 421,
-    "y": 480,
+    "x": 420,
+    "y": 540,
     "wires": [
       [
-        "8569385c.b137d8",
-        "dae739c5.9d2108"
+        "8569385c.b137d8"
       ]
     ]
   },
@@ -868,11 +826,11 @@
     "func": "// junand 16.01.2017\n\nconst now = +new Date ();\nconst start = Date.parse ( msg.payload.start );\nconst diff = now - start;\nconst oneDay = 1 * 24 * 60 * 60 * 1000; \n\nvar titleMap = [];\ntitleMap [\"Müll\"] = 6;\ntitleMap [\"Papier\"] = 7;\ntitleMap [\"Gelber Sack\"] = 8;\ntitleMap [\"Biotonne\"] = 9;\n\nvar s = null;\nif ( Math.abs ( diff ) < oneDay ) {\n    if ( diff < 0 ) {\n        s = \"morgen\";\n    }\n    else {\n        s = \"heute\";\n    }\n    s += \" ist \" + msg.payload.title;\n}\n\nvar messages;\n\nif ( s === null ) {\n    messages = { messages: [{ line: titleMap [msg.payload.title], clear: true } ]};\n}\nelse {\n    messages = { messages: [{ line: titleMap [msg.payload.title], text: s } ]};\n}\n\nmsg.payload = messages; // preserve msg attributes!!!\n\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
-    "x": 450,
-    "y": 560,
+    "x": 590,
+    "y": 540,
     "wires": [
       [
-        "dac14d24.d9643"
+        "7b7d8aa9.c0aaf4"
       ]
     ]
   },
@@ -931,7 +889,7 @@
     "type": "comment",
     "z": "c9cf8bbb.029148",
     "name": "text lines",
-    "info": " 0: Außentemperatur\n 1: Innentemperatur\n 2: temperatures today\n 3: weather today\n 4: temperatures tomorrow\n 5: weather tommorow\n 6: calendar \"Müll\"\n 7: calendar \"Papier\"\n 8: calendar \"Gelber Sack\"\n 9: calendar \"Biotonne\"\n10: way to work andreas\n11: way to work undine\n12: Pooltemperatur\n13: S-Bahn Abfahrt 1\n14: S-Bahn Abfahrt 2\n15: current weather Brisbane\n16: ...\n17: ...\n18: ...\n19: ...",
+    "info": " 0: Außentemperatur\n 1: Innentemperatur\n 2: temperatures today\n 3: weather today\n 4: temperatures tomorrow\n 5: weather tommorow\n 6: calendar \"Müll\"\n 7: calendar \"Papier\"\n 8: calendar \"Gelber Sack\"\n 9: calendar \"Biotonne\"\n10: way to work andreas\n11: way to work undine\n12: Pooltemperatur\n13: S-Bahn Abfahrt 1\n14: S-Bahn Abfahrt 2\n15: Bus 893\n16: current weather in holiday location\n17: ...\n18: ...\n19: ...",
     "x": 920,
     "y": 132,
     "wires": []
@@ -955,8 +913,8 @@
     "arrival_time": "",
     "transit_mode": "",
     "transit_routing_preferences": "",
-    "x": 410,
-    "y": 729,
+    "x": 390,
+    "y": 720,
     "wires": [
       [
         "2196ea7d.8d5416"
@@ -975,7 +933,7 @@
     "crontab": "*/10 5-6 * * 1",
     "once": false,
     "x": 170,
-    "y": 729,
+    "y": 720,
     "wires": [
       [
         "5baf8e28.4ab6e"
@@ -990,11 +948,11 @@
     "func": "// junand 20.01.2017\n\nfunction durationText ( secs ) {\n    \n    const min = Math.floor ( secs / 60 );\n    const hour = Math.floor ( min / 60 );\n    \n    var result = \"\";\n    if ( hour > 0 ) result += hour + \"h \";\n    result += min % 60 + \"min\"\n    \n    return result;\n    \n}\n\nif ( msg.payload.status != \"OK\" ) return null;\n\nvar line = 10;\nvar s = \"H: \";\nif ( msg.topic.endsWith ( \"undine\" ) ) {\n    line = 11;\n    s = \"Arbeitsweg \"\n}\n\nconst leg = msg.payload.routes [0].legs [0];\nif ( leg.duration_in_traffic !== undefined ) {\n    s += durationText ( leg.duration_in_traffic.value ) + \" statt \";\n}\ns += durationText ( leg.duration.value );\n//    s += \" für \" + leg.distance.text;\n\nmsg.payload = { messages: [{ line: line, text: s } ]};\n\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
-    "x": 690,
-    "y": 729,
+    "x": 610,
+    "y": 760,
     "wires": [
       [
-        "dac14d24.d9643"
+        "f859864a.ddee78"
       ]
     ]
   },
@@ -1020,7 +978,7 @@
     "crontab": "*/10 5-6 * * 1,2,3,4",
     "once": false,
     "x": 180,
-    "y": 820,
+    "y": 760,
     "wires": [
       [
         "533ef34c.8cc27c"
@@ -1046,8 +1004,8 @@
     "arrival_time": "",
     "transit_mode": "",
     "transit_routing_preferences": "",
-    "x": 420,
-    "y": 820,
+    "x": 400,
+    "y": 760,
     "wires": [
       [
         "2196ea7d.8d5416"
@@ -1066,7 +1024,7 @@
     "crontab": "01 07 * * *",
     "once": false,
     "x": 150,
-    "y": 770,
+    "y": 800,
     "wires": [
       [
         "c4a28517.adb098"
@@ -1092,11 +1050,11 @@
     "from": "",
     "to": "",
     "reg": false,
-    "x": 402,
-    "y": 771,
+    "x": 380,
+    "y": 800,
     "wires": [
       [
-        "dac14d24.d9643"
+        "f859864a.ddee78"
       ]
     ]
   },
@@ -1619,34 +1577,6 @@
     ]
   },
   {
-    "id": "c0adca5b.c61708",
-    "type": "mqtt in",
-    "z": "c9cf8bbb.029148",
-    "name": "mqtt: nodes@home/display/pixel/kitchen",
-    "topic": "nodes@home/display/pixel/kitchen",
-    "qos": "0",
-    "broker": "f093b8cc.ff2b58",
-    "x": 220,
-    "y": 60,
-    "wires": [
-      [
-        "e78e3d0b.8fb5e"
-      ]
-    ]
-  },
-  {
-    "id": "e78e3d0b.8fb5e",
-    "type": "debug",
-    "z": "c9cf8bbb.029148",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "true",
-    "x": 520,
-    "y": 60,
-    "wires": []
-  },
-  {
     "id": "211f63a7.dc441c",
     "type": "ui_toast",
     "z": "37197cb5.c49ee4",
@@ -1701,11 +1631,11 @@
     "from": "",
     "to": "",
     "reg": false,
-    "x": 770,
-    "y": 258,
+    "x": 1010,
+    "y": 280,
     "wires": [
       [
-        "dac14d24.d9643"
+        "a89f51a1.a0746"
       ]
     ]
   },
@@ -1730,8 +1660,8 @@
     ],
     "checkall": "true",
     "outputs": 2,
-    "x": 545,
-    "y": 278,
+    "x": 810,
+    "y": 300,
     "wires": [
       [
         "92cf44af.967a78"
@@ -1781,11 +1711,11 @@
     "from": "",
     "to": "",
     "reg": false,
-    "x": 780,
-    "y": 298,
+    "x": 1020,
+    "y": 320,
     "wires": [
       [
-        "dac14d24.d9643"
+        "a89f51a1.a0746"
       ]
     ]
   },
@@ -1797,8 +1727,8 @@
     "func": "// junand 22.01.2017\n\nconst now = new Date ();\nmsg.time = { hour: now.getHours (), minute: now.getMinutes () };\n\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
-    "x": 385,
-    "y": 278,
+    "x": 670,
+    "y": 300,
     "wires": [
       [
         "59246a57.41cb74"
@@ -3032,8 +2962,8 @@
     "repeat": "",
     "crontab": "*/15 5-19 * * *",
     "once": false,
-    "x": 149,
-    "y": 619,
+    "x": 150,
+    "y": 600,
     "wires": [
       [
         "bf288de6.bb763"
@@ -3180,8 +3110,8 @@
     "z": "c9cf8bbb.029148",
     "name": "log file",
     "info": "",
-    "x": 853,
-    "y": 474,
+    "x": 113,
+    "y": 114,
     "wires": []
   },
   {
@@ -3196,7 +3126,7 @@
     "crontab": "01 07 * * *",
     "once": false,
     "x": 150,
-    "y": 859.9999389648438,
+    "y": 840,
     "wires": [
       [
         "4aa5a06e.69c21"
@@ -3222,11 +3152,11 @@
     "from": "",
     "to": "",
     "reg": false,
-    "x": 404.9999694824219,
-    "y": 859.9999389648438,
+    "x": 380,
+    "y": 840,
     "wires": [
       [
-        "dac14d24.d9643"
+        "f859864a.ddee78"
       ]
     ]
   },
@@ -3234,150 +3164,10 @@
     "id": "e39c1e58.f0ccc",
     "type": "comment",
     "z": "c9cf8bbb.029148",
-    "name": "S-Bahn Departures",
+    "name": "Departures",
     "info": "",
-    "x": 150,
+    "x": 120,
     "y": 920,
-    "wires": []
-  },
-  {
-    "id": "373330d7.26d42",
-    "type": "inject",
-    "z": "c9cf8bbb.029148",
-    "name": "every 10 min",
-    "topic": "nodes@home/display/pixel/kitchen/message/traffic/sbahn",
-    "payload": "",
-    "payloadType": "date",
-    "repeat": "600",
-    "crontab": "",
-    "once": false,
-    "x": 160,
-    "y": 960,
-    "wires": [
-      [
-        "9657b353.0b17c"
-      ]
-    ]
-  },
-  {
-    "id": "9657b353.0b17c",
-    "type": "function",
-    "z": "c9cf8bbb.029148",
-    "name": "VBB ReST Request",
-    "func": "// junand 13.06.2017\n// Fahrplandaten mit freundlicher Genehmigung des VBB\n\nif ( msg.topic == \"vbb_access_id\" ) {\n    var s = msg.payload.substr ( 0, msg.payload.length - 1 );\n    flow.set ( \"vbb_access_id\", s );\n    node.status ( \n        { \n            fill: \"blue\", \n            shape: \"dot\", \n            text: s\n        } \n    );    \n    return null;\n}\n\nvar access_id = flow.get ( \"vbb_access_id\" );\nif ( access_id === null ) return null;\n\n// test\n//var base_url = \"http://demo.hafas.de/openapi/vbb-proxy\";\n// prod\nvar base_url = \"http://fahrinfo.vbb.de/restproxy\";\n\nvar service = \"departureBoard\";\nvar extId = \"extId=009350162\";\nvar id = \"id=A=1@X=13514302@Y=52649065@\";\n\nvar stationId = id;\n\nvar msg = {\n    \"method\" : \"GET\",\n    \"url\" : base_url + \"/\" + service + \"?accessId=\" + access_id + \"&format=json&\" + stationId\n};\n \nreturn msg;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 452,
-    "y": 960,
-    "wires": [
-      [
-        "d63fd4e6.1ba838"
-      ]
-    ]
-  },
-  {
-    "id": "d63fd4e6.1ba838",
-    "type": "http request",
-    "z": "c9cf8bbb.029148",
-    "name": "",
-    "method": "use",
-    "ret": "txt",
-    "url": "",
-    "tls": "",
-    "x": 650,
-    "y": 960,
-    "wires": [
-      [
-        "ebfbdb39.545218"
-      ]
-    ]
-  },
-  {
-    "id": "ebfbdb39.545218",
-    "type": "json",
-    "z": "c9cf8bbb.029148",
-    "name": "",
-    "x": 803,
-    "y": 960,
-    "wires": [
-      [
-        "8a7accb0.053d3"
-      ]
-    ]
-  },
-  {
-    "id": "a29ec0b1.326ca",
-    "type": "change",
-    "z": "c9cf8bbb.029148",
-    "name": "pixel message",
-    "rules": [
-      {
-        "t": "set",
-        "p": "topic",
-        "pt": "msg",
-        "to": "nodes@home/display/pixel/kitchen/message/traffic/sbahn",
-        "tot": "str"
-      },
-      {
-        "t": "set",
-        "p": "payload_new.messages[0].line",
-        "pt": "msg",
-        "to": "13",
-        "tot": "num"
-      },
-      {
-        "t": "set",
-        "p": "payload_new.messages[1].line",
-        "pt": "msg",
-        "to": "14",
-        "tot": "num"
-      },
-      {
-        "t": "set",
-        "p": "payload_new.messages[0].text",
-        "pt": "msg",
-        "to": "\"um \" & msg.payload[0].time & \" nach \" & msg.payload[0].direction",
-        "tot": "jsonata"
-      },
-      {
-        "t": "set",
-        "p": "payload_new.messages[1].text",
-        "pt": "msg",
-        "to": "\"um \" & msg.payload[1].time & \" nach \" & msg.payload[1].direction",
-        "tot": "jsonata"
-      },
-      {
-        "t": "move",
-        "p": "payload_new",
-        "pt": "msg",
-        "to": "payload",
-        "tot": "msg"
-      }
-    ],
-    "action": "",
-    "property": "",
-    "from": "",
-    "to": "",
-    "reg": false,
-    "x": 925,
-    "y": 880,
-    "wires": [
-      [
-        "dac14d24.d9643",
-        "b4e8de8d.e4c62"
-      ]
-    ]
-  },
-  {
-    "id": "b4e8de8d.e4c62",
-    "type": "debug",
-    "z": "c9cf8bbb.029148",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "true",
-    "x": 1107,
-    "y": 880,
     "wires": []
   },
   {
@@ -3410,14 +3200,15 @@
     "id": "dd45aa8e.25e4d8",
     "type": "file in",
     "z": "c9cf8bbb.029148",
-    "name": "",
+    "name": "id file",
     "filename": "/home/pi/.node-red/vbb_access_id.txt",
     "format": "utf8",
-    "x": 328,
-    "y": 1020,
+    "sendError": true,
+    "x": 290,
+    "y": 1060,
     "wires": [
       [
-        "9657b353.0b17c"
+        "e3958f75.28249"
       ]
     ]
   },
@@ -3426,14 +3217,15 @@
     "type": "inject",
     "z": "c9cf8bbb.029148",
     "name": "",
-    "topic": "vbb_access_id",
+    "topic": "",
     "payload": "",
     "payloadType": "date",
     "repeat": "",
     "crontab": "",
     "once": true,
-    "x": 188,
-    "y": 1082,
+    "onceDelay": "",
+    "x": 150,
+    "y": 1060,
     "wires": [
       [
         "dd45aa8e.25e4d8"
@@ -3483,7 +3275,7 @@
     "id": "4d4d9c14.97f994",
     "type": "change",
     "z": "c9cf8bbb.029148",
-    "name": "",
+    "name": "pixel message",
     "rules": [
       {
         "t": "move",
@@ -3496,7 +3288,7 @@
         "t": "set",
         "p": "payload.messages[0].line",
         "pt": "msg",
-        "to": "15",
+        "to": "16",
         "tot": "num"
       },
       {
@@ -3512,11 +3304,11 @@
     "from": "",
     "to": "",
     "reg": false,
-    "x": 520,
+    "x": 500,
     "y": 1180,
     "wires": [
       [
-        "dac14d24.d9643"
+        "f446ce97.9881a"
       ]
     ]
   },
@@ -3524,79 +3316,10 @@
     "id": "ca5f15fc.4351a8",
     "type": "comment",
     "z": "c9cf8bbb.029148",
-    "name": "Current Weather in Fiss",
+    "name": "Current Weather in Holiday Location",
     "info": "",
-    "x": 160,
+    "x": 200,
     "y": 1140,
-    "wires": []
-  },
-  {
-    "id": "ac7b56da.a31378",
-    "type": "function",
-    "z": "c9cf8bbb.029148",
-    "name": "check time offset",
-    "func": "// junand 22.01.2017\n\nif ( !msg.payload ) return null;\n\nconst timezoneOffset = -new Date ().getTimezoneOffset ();\nconst offset = 10 * 60 * 1000; // 10 min in ms\n\nvar result = [];\n\nconst now = new Date ().getTime ();\n\nfor ( var i = 0; i < msg.payload.length; i++ ) {\n    \n    var departure = msg.payload [i];\n    var date = new Date ( departure.date + \"T\" + departure.time );\n    \n    //node.warn ( \"departure: date=\" + departure.date + \" time=\" + departure.time );\n\n    if ( now + offset < date.getTime () ) {\n        result [result.length] = msg.payload [i];\n    }\n    \n}\n\nmsg.payload = result;\n\nreturn msg;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 712,
-    "y": 880,
-    "wires": [
-      [
-        "a29ec0b1.326ca",
-        "94b65b6b.b6c158"
-      ]
-    ]
-  },
-  {
-    "id": "8a7accb0.053d3",
-    "type": "change",
-    "z": "c9cf8bbb.029148",
-    "name": "select",
-    "rules": [
-      {
-        "t": "set",
-        "p": "payload",
-        "pt": "msg",
-        "to": "msg.payload.Departure[Product.operatorCode='DBS']",
-        "tot": "jsonata"
-      }
-    ],
-    "action": "",
-    "property": "",
-    "from": "",
-    "to": "",
-    "reg": false,
-    "x": 930,
-    "y": 960,
-    "wires": [
-      [
-        "42dec873.7bee78",
-        "ac7b56da.a31378"
-      ]
-    ]
-  },
-  {
-    "id": "42dec873.7bee78",
-    "type": "debug",
-    "z": "c9cf8bbb.029148",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "true",
-    "x": 940,
-    "y": 1040,
-    "wires": []
-  },
-  {
-    "id": "94b65b6b.b6c158",
-    "type": "debug",
-    "z": "c9cf8bbb.029148",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "true",
-    "x": 840,
-    "y": 820,
     "wires": []
   },
   {
@@ -6113,7 +5836,7 @@
     "z": "c9cf8bbb.029148",
     "name": "Rework open weather",
     "info": "- call every 3h\n- compute for every whole day min/max temp",
-    "x": 770,
+    "x": 740,
     "y": 40,
     "wires": []
   },
@@ -7490,18 +7213,6 @@
         "176b455d.51b0fb"
       ]
     ]
-  },
-  {
-    "id": "dae739c5.9d2108",
-    "type": "debug",
-    "z": "c9cf8bbb.029148",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "true",
-    "x": 400,
-    "y": 420,
-    "wires": []
   },
   {
     "id": "e4862060.d7295",
@@ -11765,6 +11476,450 @@
     "wires": [
       [
         "f7e5e987.a11838"
+      ]
+    ]
+  },
+  {
+    "id": "8c22d895.8a3258",
+    "type": "function",
+    "z": "c9cf8bbb.029148",
+    "name": "status",
+    "func": "node.status ( \n    { \n        fill: \"blue\", \n        shape: \"dot\", \n        text: msg.payload \n    } \n);\n\nreturn null;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 530,
+    "y": 1060,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "e3958f75.28249",
+    "type": "change",
+    "z": "c9cf8bbb.029148",
+    "name": "set id",
+    "rules": [
+      {
+        "t": "set",
+        "p": "vbb_access_id",
+        "pt": "flow",
+        "to": "$substring(msg.payload,0,$length(msg.payload)-1)",
+        "tot": "jsonata"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 410,
+    "y": 1060,
+    "wires": [
+      [
+        "8c22d895.8a3258"
+      ]
+    ]
+  },
+  {
+    "id": "98522da6.643e5",
+    "type": "inject",
+    "z": "c9cf8bbb.029148",
+    "name": "S-Röntgental (every 10 min)",
+    "topic": "",
+    "payload": "A=1@X=13514302@Y=52649065@",
+    "payloadType": "str",
+    "repeat": "600",
+    "crontab": "",
+    "once": true,
+    "onceDelay": "",
+    "x": 200,
+    "y": 960,
+    "wires": [
+      [
+        "e54ef2b7.71ac1"
+      ]
+    ]
+  },
+  {
+    "id": "4504b41d.59d69c",
+    "type": "http request",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "method": "GET",
+    "ret": "obj",
+    "url": "",
+    "tls": "",
+    "x": 550,
+    "y": 960,
+    "wires": [
+      [
+        "834f84bc.af97e8",
+        "ba2be87f.dfe078"
+      ]
+    ]
+  },
+  {
+    "id": "834f84bc.af97e8",
+    "type": "change",
+    "z": "c9cf8bbb.029148",
+    "name": "select DBS",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "msg.payload.Departure[Product.operatorCode='DBS']",
+        "tot": "jsonata"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 730,
+    "y": 960,
+    "wires": [
+      [
+        "ed565456.4cb988"
+      ]
+    ]
+  },
+  {
+    "id": "ed565456.4cb988",
+    "type": "function",
+    "z": "c9cf8bbb.029148",
+    "name": "check time offset",
+    "func": "// junand 22.01.2017\n\nif ( !msg.payload ) return null;\n\nvar result = [];\n\n//const threshhold = new Date ().getTime () + 10 * 60 * 1000 + 60 * 60 * 1000;\nconst threshhold = new Date ().getTime () + 10 * 60 * 1000;\n\nfor ( var i = 0; i < msg.payload.length; i++ ) {\n    \n    var departure = msg.payload [i];\n    var date = new Date ( departure.date + \"T\" + departure.time );\n    \n    //node.warn ( \"departure: date=\" + departure.date + \" time=\" + departure.time );\n    //node.warn ( \"thr=\" + new Date ( threshhold ) + \" d=\" + date );\n\n    if ( threshhold < date.getTime () ) {\n        result [result.length] = msg.payload [i];\n    }\n    \n}\n\nmsg.payload = result;\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 910,
+    "y": 960,
+    "wires": [
+      [
+        "69b445a6.528ffc"
+      ]
+    ]
+  },
+  {
+    "id": "69b445a6.528ffc",
+    "type": "change",
+    "z": "c9cf8bbb.029148",
+    "name": "pixel message",
+    "rules": [
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "nodes@home/display/pixel/kitchen/message/traffic/sbahn",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "payload_new.messages[0].line",
+        "pt": "msg",
+        "to": "13",
+        "tot": "num"
+      },
+      {
+        "t": "set",
+        "p": "payload_new.messages[0].text",
+        "pt": "msg",
+        "to": "( msg.payload[0].name & \" um \" & msg.payload[0].time & \" nach \" & msg.payload[0].direction ) ~> $trim ()",
+        "tot": "jsonata"
+      },
+      {
+        "t": "set",
+        "p": "payload_new.messages[1].line",
+        "pt": "msg",
+        "to": "14",
+        "tot": "num"
+      },
+      {
+        "t": "set",
+        "p": "payload_new.messages[1].text",
+        "pt": "msg",
+        "to": "(msg.payload[1].name & \" um \" & msg.payload[1].time & \" nach \" & msg.payload[1].direction) ~> $trim ()",
+        "tot": "jsonata"
+      },
+      {
+        "t": "move",
+        "p": "payload_new",
+        "pt": "msg",
+        "to": "payload",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 1100,
+    "y": 960,
+    "wires": [
+      [
+        "9ed62c96.78bbc"
+      ]
+    ]
+  },
+  {
+    "id": "e54ef2b7.71ac1",
+    "type": "change",
+    "z": "c9cf8bbb.029148",
+    "name": "set url",
+    "rules": [
+      {
+        "t": "set",
+        "p": "url",
+        "pt": "msg",
+        "to": "\"https://fahrinfo.vbb.de/restproxy/departureBoard?format=json&accessId=\" & $flowContext(\"vbb_access_id\") & \"&id=\" & payload",
+        "tot": "jsonata"
+      },
+      {
+        "t": "delete",
+        "p": "payload",
+        "pt": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 410,
+    "y": 960,
+    "wires": [
+      [
+        "4504b41d.59d69c"
+      ]
+    ]
+  },
+  {
+    "id": "1f77a85b.b23468",
+    "type": "inject",
+    "z": "c9cf8bbb.029148",
+    "name": "Bus 893 (every 10 min)",
+    "topic": "",
+    "payload": "A=1@O=Zepernick, Inntaler Str.@X=13534150@Y=52648319@U=86@L=900350173@B=1@V=3.9,@p=1544015948@",
+    "payloadType": "str",
+    "repeat": "600",
+    "crontab": "",
+    "once": true,
+    "onceDelay": 0.1,
+    "x": 190,
+    "y": 1000,
+    "wires": [
+      [
+        "e54ef2b7.71ac1"
+      ]
+    ]
+  },
+  {
+    "id": "ba2be87f.dfe078",
+    "type": "change",
+    "z": "c9cf8bbb.029148",
+    "name": "select BBG",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "msg.payload[].Departure[Product.operatorCode='BBG' and Product.line='893' and $contains(direction,'S Buch') and stop='Zepernick, Inntaler Str.']",
+        "tot": "jsonata"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 730,
+    "y": 1000,
+    "wires": [
+      [
+        "e52e178b.44a868"
+      ]
+    ]
+  },
+  {
+    "id": "e52e178b.44a868",
+    "type": "function",
+    "z": "c9cf8bbb.029148",
+    "name": "check time offset",
+    "func": "// junand 22.01.2017\n\nif ( !msg.payload ) return null;\n\nvar result = [];\n\nconst threshhold = new Date ().getTime () + 10 * 60 * 1000;\n\nfor ( var i = 0; i < msg.payload.length; i++ ) {\n    \n    var departure = msg.payload [i];\n    var date = new Date ( departure.date + \"T\" + departure.time );\n    \n    //node.warn ( \"departure: date=\" + departure.date + \" time=\" + departure.time );\n    //node.warn ( \"thr=\" + new Date ( threshhold ) + \" d=\" + date );\n\n    if ( threshhold < date.getTime () ) {\n        result [result.length] = msg.payload [i];\n    }\n    \n}\n\nmsg.payload = result;\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 910,
+    "y": 1000,
+    "wires": [
+      [
+        "8de33fba.fda9d"
+      ]
+    ]
+  },
+  {
+    "id": "8de33fba.fda9d",
+    "type": "change",
+    "z": "c9cf8bbb.029148",
+    "name": "pixel message",
+    "rules": [
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "nodes@home/display/pixel/kitchen/message/traffic/bus",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "payload_new.messages[0].line",
+        "pt": "msg",
+        "to": "15",
+        "tot": "num"
+      },
+      {
+        "t": "set",
+        "p": "payload_new.messages[0].text",
+        "pt": "msg",
+        "to": "msg.payload[0].name & \"um \" & msg.payload[0].time & \" nach \" & msg.payload[0].direction",
+        "tot": "jsonata"
+      },
+      {
+        "t": "move",
+        "p": "payload_new",
+        "pt": "msg",
+        "to": "payload",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 1100,
+    "y": 1000,
+    "wires": [
+      [
+        "9ed62c96.78bbc"
+      ]
+    ]
+  },
+  {
+    "id": "a89f51a1.a0746",
+    "type": "link out",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "links": [
+      "424b6bd.468cb94",
+      "c029cd0a.008a9"
+    ],
+    "x": 1235,
+    "y": 320,
+    "wires": []
+  },
+  {
+    "id": "424b6bd.468cb94",
+    "type": "link in",
+    "z": "c9cf8bbb.029148",
+    "name": "input mqtt",
+    "links": [
+      "7b7d8aa9.c0aaf4",
+      "8d31c4d1.457928",
+      "9ed62c96.78bbc",
+      "a89f51a1.a0746",
+      "f446ce97.9881a",
+      "f859864a.ddee78"
+    ],
+    "x": 75,
+    "y": 80,
+    "wires": [
+      [
+        "1d09515.f0434af"
+      ]
+    ]
+  },
+  {
+    "id": "f859864a.ddee78",
+    "type": "link out",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "links": [
+      "424b6bd.468cb94",
+      "c029cd0a.008a9"
+    ],
+    "x": 735,
+    "y": 800,
+    "wires": []
+  },
+  {
+    "id": "f446ce97.9881a",
+    "type": "link out",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "links": [
+      "424b6bd.468cb94",
+      "c029cd0a.008a9"
+    ],
+    "x": 615,
+    "y": 1180,
+    "wires": []
+  },
+  {
+    "id": "9ed62c96.78bbc",
+    "type": "link out",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "links": [
+      "424b6bd.468cb94",
+      "c029cd0a.008a9"
+    ],
+    "x": 1255,
+    "y": 980,
+    "wires": []
+  },
+  {
+    "id": "7b7d8aa9.c0aaf4",
+    "type": "link out",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "links": [
+      "424b6bd.468cb94",
+      "c029cd0a.008a9"
+    ],
+    "x": 695,
+    "y": 540,
+    "wires": []
+  },
+  {
+    "id": "c93298ba.db2098",
+    "type": "comment",
+    "z": "c9cf8bbb.029148",
+    "name": "mqtt messages",
+    "info": "",
+    "x": 140,
+    "y": 40,
+    "wires": []
+  },
+  {
+    "id": "c029cd0a.008a9",
+    "type": "link in",
+    "z": "c9cf8bbb.029148",
+    "name": "input logfile",
+    "links": [
+      "7b7d8aa9.c0aaf4",
+      "8d31c4d1.457928",
+      "9ed62c96.78bbc",
+      "a89f51a1.a0746",
+      "f446ce97.9881a",
+      "f859864a.ddee78"
+    ],
+    "x": 75,
+    "y": 160,
+    "wires": [
+      [
+        "5ae2eae3.4b5914"
       ]
     ]
   }
