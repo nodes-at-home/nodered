@@ -758,7 +758,8 @@
     "payloadType": "str",
     "repeat": "",
     "crontab": "*/15 5-19 * * *",
-    "once": false,
+    "once": true,
+    "onceDelay": "60",
     "x": 130,
     "y": 480,
     "wires": [
@@ -777,7 +778,8 @@
     "payloadType": "str",
     "repeat": "",
     "crontab": "*/15 5-19 * * *",
-    "once": false,
+    "once": true,
+    "onceDelay": "120",
     "x": 140,
     "y": 520,
     "wires": [
@@ -796,7 +798,8 @@
     "payloadType": "str",
     "repeat": "",
     "crontab": "*/15 5-19 * * *",
-    "once": false,
+    "once": true,
+    "onceDelay": "180",
     "x": 160,
     "y": 560,
     "wires": [
@@ -2964,7 +2967,8 @@
     "payloadType": "str",
     "repeat": "",
     "crontab": "*/15 5-19 * * *",
-    "once": false,
+    "once": true,
+    "onceDelay": "240",
     "x": 150,
     "y": 600,
     "wires": [
