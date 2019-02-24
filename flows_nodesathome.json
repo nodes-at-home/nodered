@@ -11741,7 +11741,6 @@
     "wires": [
       [
         "e52e178b.44a868",
-        "ff2af441.7cf5e8",
         "fd16c39f.e0359"
       ]
     ]
@@ -11758,7 +11757,6 @@
     "y": 1000,
     "wires": [
       [
-        "83430691.6faf08",
         "8de33fba.fda9d"
       ]
     ]
@@ -11803,8 +11801,8 @@
     "from": "",
     "to": "",
     "reg": false,
-    "x": 1160,
-    "y": 1020,
+    "x": 1100,
+    "y": 1000,
     "wires": [
       [
         "9ed62c96.78bbc"
@@ -13302,20 +13300,6 @@
     ]
   },
   {
-    "id": "83430691.6faf08",
-    "type": "debug",
-    "z": "c9cf8bbb.029148",
-    "name": "",
-    "active": true,
-    "tosidebar": true,
-    "console": false,
-    "tostatus": false,
-    "complete": "true",
-    "x": 1110,
-    "y": 1080,
-    "wires": []
-  },
-  {
     "id": "fd16c39f.e0359",
     "type": "switch",
     "z": "c9cf8bbb.029148",
@@ -13330,8 +13314,8 @@
     "checkall": "true",
     "repair": false,
     "outputs": 1,
-    "x": 920,
-    "y": 1140,
+    "x": 950,
+    "y": 1040,
     "wires": [
       [
         "2320e9b8.b3f026"
@@ -13365,41 +13349,12 @@
     "to": "",
     "reg": false,
     "x": 1100,
-    "y": 1160,
+    "y": 1040,
     "wires": [
       [
-        "9ed62c96.78bbc",
-        "3eb81e40.a30dc2"
+        "9ed62c96.78bbc"
       ]
     ]
-  },
-  {
-    "id": "ff2af441.7cf5e8",
-    "type": "debug",
-    "z": "c9cf8bbb.029148",
-    "name": "",
-    "active": true,
-    "tosidebar": true,
-    "console": false,
-    "tostatus": false,
-    "complete": "true",
-    "x": 880,
-    "y": 1240,
-    "wires": []
-  },
-  {
-    "id": "3eb81e40.a30dc2",
-    "type": "debug",
-    "z": "c9cf8bbb.029148",
-    "name": "",
-    "active": true,
-    "tosidebar": true,
-    "console": false,
-    "tostatus": false,
-    "complete": "false",
-    "x": 1180,
-    "y": 1280,
-    "wires": []
   },
   {
     "id": "8d0686b9.503b28",
