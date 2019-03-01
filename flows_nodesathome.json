@@ -676,7 +676,9 @@
     "overwriteFile": "false",
     "x": 610,
     "y": 160,
-    "wires": []
+    "wires": [
+      []
+    ]
   },
   {
     "id": "1d09515.f0434af",
@@ -2063,7 +2065,9 @@
     "overwriteFile": "false",
     "x": 1010,
     "y": 436,
-    "wires": []
+    "wires": [
+      []
+    ]
   },
   {
     "id": "32bacd9f.c1ac52",
@@ -2942,7 +2946,9 @@
     "overwriteFile": "true",
     "x": 1021,
     "y": 487,
-    "wires": []
+    "wires": [
+      []
+    ]
   },
   {
     "id": "68930ea9.92c66",
@@ -3027,7 +3033,9 @@
     "overwriteFile": "false",
     "x": 1010,
     "y": 598,
-    "wires": []
+    "wires": [
+      []
+    ]
   },
   {
     "id": "9ac38e3f.03705",
@@ -3201,7 +3209,9 @@
     "overwriteFile": "true",
     "x": 1030,
     "y": 335,
-    "wires": []
+    "wires": [
+      []
+    ]
   },
   {
     "id": "dd45aa8e.25e4d8",
@@ -13432,7 +13442,8 @@
     "name": "onoff trigger",
     "links": [
       "686644ad.6f27fc",
-      "d020750c.975588"
+      "d020750c.975588",
+      "eb5af1ed.6181d"
     ],
     "x": 1295,
     "y": 420,
@@ -13442,7 +13453,7 @@
     "id": "d020750c.975588",
     "type": "link in",
     "z": "8e2c5c11.fae26",
-    "name": "restart telnet input",
+    "name": "manual restart telnet input",
     "links": [
       "36e0dc01.361524"
     ],
@@ -13664,7 +13675,9 @@
     "overwriteFile": "false",
     "x": 1740,
     "y": 3120,
-    "wires": []
+    "wires": [
+      []
+    ]
   },
   {
     "id": "b734ecd8.bb71",
@@ -13751,6 +13764,47 @@
     "y": 1940,
     "wires": [
       []
+    ]
+  },
+  {
+    "id": "eb5af1ed.6181d",
+    "type": "link in",
+    "z": "8e2c5c11.fae26",
+    "name": "automatic restart telnet input",
+    "links": [
+      "36e0dc01.361524"
+    ],
+    "x": 1115,
+    "y": 2840,
+    "wires": [
+      [
+        "4d40eb53.434b74"
+      ]
+    ]
+  },
+  {
+    "id": "4d40eb53.434b74",
+    "type": "switch",
+    "z": "8e2c5c11.fae26",
+    "name": "?off",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "0",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 1210,
+    "y": 2840,
+    "wires": [
+      [
+        "e59e4935.4a4238"
+      ]
     ]
   }
 ]
