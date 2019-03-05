@@ -825,7 +825,7 @@
     "google": "4ee7c8.1a6a1838",
     "name": "Abfallkalender",
     "calendar": "Abfallkalender",
-    "ongoing": false,
+    "ongoing": true,
     "x": 420,
     "y": 540,
     "wires": [
@@ -905,7 +905,7 @@
     "type": "comment",
     "z": "c9cf8bbb.029148",
     "name": "text lines",
-    "info": " 0: Außentemperatur\n 1: Innentemperatur\n 2: temperatures today\n 3: weather today\n 4: temperatures tomorrow\n 5: weather tommorow\n 6: calendar \"Müll\"\n 7: calendar \"Papier\"\n 8: calendar \"Gelber Sack\"\n 9: calendar \"Biotonne\"\n10: way to work andreas\n11: way to work undine\n12: Pooltemperatur\n13: S-Bahn Abfahrt 1\n14: S-Bahn Abfahrt 2\n15: Bus 893\n16: current weather in holiday location\n17: ...\n18: ...\n19: ...",
+    "info": " 0: Außentemperatur\n 1: Innentemperatur\n 2: temperatures today\n 3: weather today\n 4: temperatures tomorrow\n 5: weather tommorow\n 6: calendar \"Müll\"\n 7: calendar \"Papier\"\n 8: calendar \"Gelber Sack\"\n 9: calendar \"Biotonne\"\n10: way to work andreas\n11: way to work undine\n12: Pooltemperatur\n13: S-Bahn Abfahrt 1\n14: S-Bahn Abfahrt 2\n15: Bus 893\n16: current weather in holiday location\n17: saying of the day\n18: ...\n19: ...",
     "x": 920,
     "y": 132,
     "wires": []
@@ -11860,7 +11860,8 @@
       "9ed62c96.78bbc",
       "a89f51a1.a0746",
       "f446ce97.9881a",
-      "f859864a.ddee78"
+      "f859864a.ddee78",
+      "e7c6094d.8fb398"
     ],
     "x": 75,
     "y": 80,
@@ -11943,7 +11944,8 @@
       "9ed62c96.78bbc",
       "a89f51a1.a0746",
       "f446ce97.9881a",
-      "f859864a.ddee78"
+      "f859864a.ddee78",
+      "e7c6094d.8fb398"
     ],
     "x": 75,
     "y": 160,
@@ -13845,5 +13847,158 @@
         "6ed6dc87.f74a94"
       ]
     ]
+  },
+  {
+    "id": "c292dc06.0518e",
+    "type": "comment",
+    "z": "c9cf8bbb.029148",
+    "name": "saying of the day",
+    "info": "",
+    "x": 140,
+    "y": 1240,
+    "wires": []
+  },
+  {
+    "id": "d8eee578.999dc8",
+    "type": "inject",
+    "z": "c9cf8bbb.029148",
+    "name": "Daily 5:00",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "00 05 * * *",
+    "once": false,
+    "onceDelay": "",
+    "x": 150,
+    "y": 1280,
+    "wires": [
+      [
+        "57e93e23.3c74f"
+      ]
+    ]
+  },
+  {
+    "id": "57e93e23.3c74f",
+    "type": "http request",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "method": "GET",
+    "ret": "txt",
+    "url": "https://www.spruch-des-tages.org",
+    "tls": "",
+    "x": 310,
+    "y": 1280,
+    "wires": [
+      [
+        "332b2179.26503e"
+      ]
+    ]
+  },
+  {
+    "id": "332b2179.26503e",
+    "type": "html",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "property": "",
+    "outproperty": "",
+    "tag": ".h2",
+    "ret": "text",
+    "as": "multi",
+    "x": 450,
+    "y": 1280,
+    "wires": [
+      [
+        "5c7ed672.1d77a8"
+      ]
+    ]
+  },
+  {
+    "id": "5c7ed672.1d77a8",
+    "type": "change",
+    "z": "c9cf8bbb.029148",
+    "name": "trim",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "$trim ( payload )",
+        "tot": "jsonata"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 570,
+    "y": 1280,
+    "wires": [
+      [
+        "5d77bcc8.90d964"
+      ]
+    ]
+  },
+  {
+    "id": "5d77bcc8.90d964",
+    "type": "change",
+    "z": "c9cf8bbb.029148",
+    "name": "pixel message",
+    "rules": [
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "nodes@home/display/pixel/kitchen/message/saying",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "payload_new.messages[0].line",
+        "pt": "msg",
+        "to": "17",
+        "tot": "num"
+      },
+      {
+        "t": "set",
+        "p": "payload_new.messages[0].text",
+        "pt": "msg",
+        "to": "payload",
+        "tot": "msg"
+      },
+      {
+        "t": "move",
+        "p": "payload_new",
+        "pt": "msg",
+        "to": "payload",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 720,
+    "y": 1280,
+    "wires": [
+      [
+        "e7c6094d.8fb398"
+      ]
+    ]
+  },
+  {
+    "id": "e7c6094d.8fb398",
+    "type": "link out",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "links": [
+      "424b6bd.468cb94",
+      "c029cd0a.008a9"
+    ],
+    "x": 835,
+    "y": 1280,
+    "wires": []
   }
 ]
