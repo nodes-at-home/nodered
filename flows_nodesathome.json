@@ -17,26 +17,23 @@
     "info": ""
   },
   {
-    "id": "fc8ae83a.bd2f98",
+    "id": "67442bb3.903494",
     "type": "tab",
-    "label": "debug lua nodes"
+    "label": "node config",
+    "disabled": false,
+    "info": ""
   },
   {
-    "id": "a09e2385.86b3b",
+    "id": "fc8ae83a.bd2f98",
     "type": "tab",
-    "label": "watch mqtt topics"
+    "label": "node services",
+    "disabled": false,
+    "info": ""
   },
   {
     "id": "f7610a0.d8198f8",
     "type": "tab",
     "label": "brewery",
-    "disabled": false,
-    "info": ""
-  },
-  {
-    "id": "65bfe802.954608",
-    "type": "tab",
-    "label": "ambient",
     "disabled": false,
     "info": ""
   },
@@ -55,13 +52,6 @@
     "info": ""
   },
   {
-    "id": "67442bb3.903494",
-    "type": "tab",
-    "label": "node config",
-    "disabled": false,
-    "info": ""
-  },
-  {
     "id": "87853f2c.dd34d",
     "type": "tab",
     "label": "config lua nodes",
@@ -72,13 +62,6 @@
     "id": "e9aab946.903ab8",
     "type": "tab",
     "label": "test config",
-    "disabled": true,
-    "info": ""
-  },
-  {
-    "id": "399a3bf2.52cdb4",
-    "type": "tab",
-    "label": "monitor nodes",
     "disabled": true,
     "info": ""
   },
@@ -1934,26 +1917,13 @@
     "newline": "###",
     "topic": "",
     "base64": false,
-    "x": 220,
-    "y": 216,
+    "x": 100,
+    "y": 120,
     "wires": [
       [
-        "44ab1bb9.2b1cd4",
         "1f6c1953.c84e17"
       ]
     ]
-  },
-  {
-    "id": "44ab1bb9.2b1cd4",
-    "type": "debug",
-    "z": "fc8ae83a.bd2f98",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "true",
-    "x": 470,
-    "y": 216,
-    "wires": []
   },
   {
     "id": "97dd4d6c.e32c3",
@@ -1966,8 +1936,8 @@
     "repeat": "",
     "crontab": "",
     "once": false,
-    "x": 170,
-    "y": 316,
+    "x": 150,
+    "y": 220,
     "wires": [
       [
         "1f6c1953.c84e17"
@@ -1978,7 +1948,7 @@
     "id": "1f6c1953.c84e17",
     "type": "change",
     "z": "fc8ae83a.bd2f98",
-    "name": "",
+    "name": "extract",
     "rules": [
       {
         "t": "set",
@@ -2007,25 +1977,13 @@
     "from": "",
     "to": "",
     "reg": false,
-    "x": 438,
-    "y": 316,
+    "x": 270,
+    "y": 120,
     "wires": [
       [
         "cffac716.aac658"
       ]
     ]
-  },
-  {
-    "id": "3b09d52d.26ae1a",
-    "type": "debug",
-    "z": "fc8ae83a.bd2f98",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "true",
-    "x": 830,
-    "y": 316,
-    "wires": []
   },
   {
     "id": "cffac716.aac658",
@@ -2035,11 +1993,10 @@
     "func": "// junand 15.01.2017\n\nvar dt = new Date ();\nmsg.timestamp_date = dt;\nmsg.timestamp = +dt;\nmsg.timestamp_parts = {\n\t'month':\tdt.getMonth() + 1,\n\t'day':\t\tdt.getDate(),\n\t'year':\t\tdt.getFullYear(),\n\t'hours':\tdt.getHours(),\n\t'mins':\t\tdt.getMinutes(),\n\t'msecs':\tdt.getMilliseconds()\n}\n\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
-    "x": 630,
-    "y": 316,
+    "x": 490,
+    "y": 120,
     "wires": [
       [
-        "3b09d52d.26ae1a",
         "98291db9.1054d"
       ]
     ]
@@ -2054,11 +2011,10 @@
     "format": "handlebars",
     "syntax": "mustache",
     "template": "{{{timestamp_date}}}: {{{payload}}}",
-    "x": 820,
-    "y": 376,
+    "x": 660,
+    "y": 120,
     "wires": [
       [
-        "32bacd9f.c1ac52",
         "b5c67af7.3fdbc8"
       ]
     ]
@@ -2072,31 +2028,19 @@
     "appendNewline": true,
     "createDir": true,
     "overwriteFile": "false",
-    "x": 1010,
-    "y": 436,
+    "x": 830,
+    "y": 120,
     "wires": [
       []
     ]
   },
   {
-    "id": "32bacd9f.c1ac52",
-    "type": "debug",
-    "z": "fc8ae83a.bd2f98",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "false",
-    "x": 1010,
-    "y": 376,
-    "wires": []
-  },
-  {
     "id": "57139689.f8bd18",
     "type": "comment",
     "z": "fc8ae83a.bd2f98",
-    "name": "receive log messages from esp8266 nodes",
+    "name": "receive log messages",
     "info": "",
-    "x": 210,
+    "x": 140,
     "y": 80,
     "wires": []
   },
@@ -2106,8 +2050,8 @@
     "z": "fc8ae83a.bd2f98",
     "name": "Test",
     "info": "",
-    "x": 100,
-    "y": 276,
+    "x": 90,
+    "y": 180,
     "wires": []
   },
   {
@@ -2183,106 +2127,6 @@
         "e1608a19.a43898"
       ]
     ]
-  },
-  {
-    "id": "b89b5199.9db02",
-    "type": "mqtt in",
-    "z": "a09e2385.86b3b",
-    "name": "mqtt: # [prod]",
-    "topic": "#",
-    "qos": "0",
-    "broker": "f093b8cc.ff2b58",
-    "x": 130,
-    "y": 260,
-    "wires": [
-      [
-        "66af373f.8f6ab8"
-      ]
-    ]
-  },
-  {
-    "id": "b6cc55f2.310688",
-    "type": "debug",
-    "z": "a09e2385.86b3b",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "true",
-    "x": 407,
-    "y": 140,
-    "wires": []
-  },
-  {
-    "id": "f43c0223.f99c2",
-    "type": "websocket out",
-    "z": "a09e2385.86b3b",
-    "name": "",
-    "server": "6ced38ac.829508",
-    "client": "",
-    "x": 730,
-    "y": 260,
-    "wires": []
-  },
-  {
-    "id": "bed97701.a778b8",
-    "type": "websocket in",
-    "z": "a09e2385.86b3b",
-    "name": "",
-    "server": "6ced38ac.829508",
-    "client": "",
-    "x": 170,
-    "y": 140,
-    "wires": [
-      [
-        "b6cc55f2.310688"
-      ]
-    ]
-  },
-  {
-    "id": "438104f3.61c9dc",
-    "type": "debug",
-    "z": "a09e2385.86b3b",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "false",
-    "x": 725,
-    "y": 200,
-    "wires": []
-  },
-  {
-    "id": "66af373f.8f6ab8",
-    "type": "delay",
-    "z": "a09e2385.86b3b",
-    "name": "",
-    "pauseType": "delay",
-    "timeout": "15",
-    "timeoutUnits": "seconds",
-    "rate": "100",
-    "nbRateUnits": "20",
-    "rateUnits": "second",
-    "randomFirst": "1",
-    "randomLast": "5",
-    "randomUnits": "seconds",
-    "drop": false,
-    "x": 375,
-    "y": 260,
-    "wires": [
-      [
-        "f43c0223.f99c2",
-        "438104f3.61c9dc"
-      ]
-    ]
-  },
-  {
-    "id": "a2c7aa25.625838",
-    "type": "comment",
-    "z": "a09e2385.86b3b",
-    "name": "file:///C:/Users/andre/Documents/GIT/d3-MQTT-Topic-Tree/mqtt_topic_tree.html",
-    "info": "",
-    "x": 898,
-    "y": 322,
-    "wires": []
   },
   {
     "id": "284c9d28.623c62",
@@ -2777,204 +2621,6 @@
     ]
   },
   {
-    "id": "ecea8778.4eb0d8",
-    "type": "inject",
-    "z": "399a3bf2.52cdb4",
-    "name": "every 15 min",
-    "topic": "",
-    "payload": "",
-    "payloadType": "date",
-    "repeat": "900",
-    "crontab": "",
-    "once": false,
-    "x": 120,
-    "y": 486,
-    "wires": [
-      [
-        "13763df7.78cdf2"
-      ]
-    ]
-  },
-  {
-    "id": "9be52cb7.6c17b",
-    "type": "comment",
-    "z": "399a3bf2.52cdb4",
-    "name": "collect nodes@home/.../value/voltage",
-    "info": "",
-    "x": 190,
-    "y": 40,
-    "wires": []
-  },
-  {
-    "id": "82500ab2.42f758",
-    "type": "comment",
-    "z": "399a3bf2.52cdb4",
-    "name": "check last voltage message",
-    "info": "",
-    "x": 161,
-    "y": 435,
-    "wires": []
-  },
-  {
-    "id": "b10cf739.4f4f78",
-    "type": "mqtt in",
-    "z": "399a3bf2.52cdb4",
-    "name": "",
-    "topic": "nodes@home/+/+/+/value/voltage",
-    "qos": "0",
-    "broker": "f093b8cc.ff2b58",
-    "x": 180,
-    "y": 100,
-    "wires": [
-      [
-        "125adae4.17e155"
-      ]
-    ]
-  },
-  {
-    "id": "57ac7d3d.d3c6f4",
-    "type": "debug",
-    "z": "399a3bf2.52cdb4",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "true",
-    "x": 630,
-    "y": 100,
-    "wires": []
-  },
-  {
-    "id": "5fc05d1b.df2be4",
-    "type": "function",
-    "z": "399a3bf2.52cdb4",
-    "name": "store topic+time",
-    "func": "// store current timestamp under node topic\n\n// reset topics array\nif ( msg.topic == \"reset\" ) {\n    flow.set ( \"topics\", [] );\n    return null;\n}\nelse if ( msg.topic == \"exception_topics\" ) {\n    flow.set ( \"exception_topics\", msg.payload );\n    return null;\n}\n\n// 1. check for array existence\nvar topics = flow.get ( \"topics\" );\nif ( topics === undefined ) {\n    topics = [];\n    flow.set ( \"topics\", topics );\n}\n\nvar store_topic_timestamp = true;\n\n// 2. lookup for exception topic\nvar exceptions = flow.get ( \"exception_topics\" );\nif ( exceptions !== undefined ) {\n    for ( i = 0; i < exceptions.length; i++ ) {\n        if ( msg.topic == exceptions [i] ) {\n            store_topic_timestamp = false;\n        }\n    }\n}\n\n// 3. lookup for topic\nvar found = topics.length;\nfor ( i = 0; i < topics.length; i++ ) {\n    if ( topics [i].topic == msg.topic) {\n        found = i;\n    }\n}\n    \nnode.log ( \"topic=\" + msg.topic );\nnode.log ( \"store=\" + store_topic_timestamp );\nnode.log ( \"found=\" + found );\n\n// 4. store/delete timestamp\nif ( store_topic_timestamp ) {\n    topics [found] = { topic: msg.topic, timestamp: msg.timestamp };\n}\nelse if ( found < topics.length ) {\n    topics.splice ( found, 1 );\n}\nflow.set ( \"topics\", topics );\n\n// 5. return topic array\nmsg.payload = topics;\n\nreturn msg;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 797,
-    "y": 227,
-    "wires": [
-      [
-        "a50939a3.2f4818"
-      ]
-    ]
-  },
-  {
-    "id": "125adae4.17e155",
-    "type": "function",
-    "z": "399a3bf2.52cdb4",
-    "name": "timestamp",
-    "func": "// junand 15.01.2017\n\nvar dt = new Date ();\nmsg.timestamp_date = dt;\nmsg.timestamp = +dt;\nmsg.timestamp_parts = {\n\t'month':\tdt.getMonth() + 1,\n\t'day':\t\tdt.getDate(),\n\t'year':\t\tdt.getFullYear(),\n\t'hours':\tdt.getHours(),\n\t'mins':\t\tdt.getMinutes(),\n\t'msecs':\tdt.getMilliseconds()\n}\n\nreturn msg;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 430,
-    "y": 100,
-    "wires": [
-      [
-        "5fc05d1b.df2be4",
-        "57ac7d3d.d3c6f4"
-      ]
-    ]
-  },
-  {
-    "id": "a50939a3.2f4818",
-    "type": "debug",
-    "z": "399a3bf2.52cdb4",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "true",
-    "x": 967,
-    "y": 227,
-    "wires": []
-  },
-  {
-    "id": "7649b292.9e09fc",
-    "type": "inject",
-    "z": "399a3bf2.52cdb4",
-    "name": "",
-    "topic": "reset",
-    "payload": "",
-    "payloadType": "date",
-    "repeat": "",
-    "crontab": "",
-    "once": false,
-    "x": 120,
-    "y": 227,
-    "wires": [
-      [
-        "5fc05d1b.df2be4"
-      ]
-    ]
-  },
-  {
-    "id": "50711692.8e31e8",
-    "type": "comment",
-    "z": "399a3bf2.52cdb4",
-    "name": "reset context",
-    "info": "",
-    "x": 111,
-    "y": 182,
-    "wires": []
-  },
-  {
-    "id": "13763df7.78cdf2",
-    "type": "function",
-    "z": "399a3bf2.52cdb4",
-    "name": "check timestamps",
-    "func": "// check timestamp table\n\nconst THRESHOLD = 30 * 60 * 1000; // ms\n\nvar current_timestamp = msg.payload;\nmsg.timestamp = msg.payload;\n\nvar topics = flow.get ( \"topics\" );\n\nvar result = [];\n\nfor ( i = 0; i < topics.length; i++ ) {\n    var delta =  current_timestamp - topics [i].timestamp;\n    if ( delta > THRESHOLD ) {\n        result [result.length] = { topic: topics [i].topic, ts: topics [i].timestamp };\n    }\n}\n\nif ( result.length > 0 ) {\n    msg.payload = result;\n}\nelse {\n    msg.payload = { msg: \"no nodes\" };\n}\n\nreturn msg;",
-    "outputs": "1",
-    "noerr": 0,
-    "x": 379,
-    "y": 486,
-    "wires": [
-      [
-        "f54ada42.c847f8",
-        "68930ea9.92c66"
-      ]
-    ]
-  },
-  {
-    "id": "f54ada42.c847f8",
-    "type": "debug",
-    "z": "399a3bf2.52cdb4",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "true",
-    "x": 560,
-    "y": 418,
-    "wires": []
-  },
-  {
-    "id": "8b80cb7b.66a918",
-    "type": "file",
-    "z": "399a3bf2.52cdb4",
-    "name": "",
-    "filename": "/home/pi/.node-red/log/silent_nodes.log",
-    "appendNewline": true,
-    "createDir": true,
-    "overwriteFile": "true",
-    "x": 1021,
-    "y": 487,
-    "wires": [
-      []
-    ]
-  },
-  {
-    "id": "68930ea9.92c66",
-    "type": "json",
-    "z": "399a3bf2.52cdb4",
-    "name": "",
-    "x": 598,
-    "y": 486,
-    "wires": [
-      [
-        "8b80cb7b.66a918"
-      ]
-    ]
-  },
-  {
     "id": "d087f102.60b",
     "type": "inject",
     "z": "c9cf8bbb.029148",
@@ -2993,142 +2639,6 @@
         "bf288de6.bb763"
       ]
     ]
-  },
-  {
-    "id": "2fdce7a2.3dc438",
-    "type": "mqtt in",
-    "z": "399a3bf2.52cdb4",
-    "name": "",
-    "topic": "nodes@home/+/+/+/value/error",
-    "qos": "0",
-    "broker": "f093b8cc.ff2b58",
-    "x": 170,
-    "y": 598,
-    "wires": [
-      [
-        "7e3cd8d.4f96628",
-        "9ac38e3f.03705"
-      ]
-    ]
-  },
-  {
-    "id": "36e848d0.532d48",
-    "type": "comment",
-    "z": "399a3bf2.52cdb4",
-    "name": "catch errror temp message",
-    "info": "",
-    "x": 150,
-    "y": 552,
-    "wires": []
-  },
-  {
-    "id": "7e3cd8d.4f96628",
-    "type": "debug",
-    "z": "399a3bf2.52cdb4",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "false",
-    "x": 540,
-    "y": 658,
-    "wires": []
-  },
-  {
-    "id": "f4ef1d74.875d2",
-    "type": "file",
-    "z": "399a3bf2.52cdb4",
-    "name": "",
-    "filename": "/home/pi/.node-red/log/temp_error.log",
-    "appendNewline": true,
-    "createDir": true,
-    "overwriteFile": "false",
-    "x": 1010,
-    "y": 598,
-    "wires": [
-      []
-    ]
-  },
-  {
-    "id": "9ac38e3f.03705",
-    "type": "function",
-    "z": "399a3bf2.52cdb4",
-    "name": "timestamp",
-    "func": "// junand 15.01.2017\n\nvar dt = new Date ();\nmsg.timestamp_date = dt;\nmsg.timestamp = +dt;\nmsg.timestamp_parts = {\n\t'month':\tdt.getMonth() + 1,\n\t'day':\t\tdt.getDate(),\n\t'year':\t\tdt.getFullYear(),\n\t'hours':\tdt.getHours(),\n\t'mins':\t\tdt.getMinutes(),\n\t'msecs':\tdt.getMilliseconds()\n}\n\nreturn msg;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 530,
-    "y": 598,
-    "wires": [
-      [
-        "e4c4fc42.6d2e7"
-      ]
-    ]
-  },
-  {
-    "id": "e4c4fc42.6d2e7",
-    "type": "template",
-    "z": "399a3bf2.52cdb4",
-    "name": "log line",
-    "field": "payload",
-    "fieldType": "msg",
-    "format": "handlebars",
-    "syntax": "mustache",
-    "template": "{{{timestamp_date}}}: [{{{topic}}}] {{{payload}}}",
-    "x": 740,
-    "y": 598,
-    "wires": [
-      [
-        "f4ef1d74.875d2"
-      ]
-    ]
-  },
-  {
-    "id": "2ea801ab.467cce",
-    "type": "template",
-    "z": "399a3bf2.52cdb4",
-    "name": "exception_topics",
-    "field": "payload",
-    "fieldType": "msg",
-    "format": "json",
-    "syntax": "plain",
-    "template": "[\n    \"nodes@home/switch/sonoff/location1/value/voltage\",\n    \"nodes@home/switch/sonoff/location4/value/voltage\",\n    \"nodes@home/sensor/DHT11/test/value/voltage\",\n    \"nodes@home/sensor/button/no1/value/voltage\",\n    \"nodes@home/sensor/button/no3/value/voltage\",\n    \"nodes@home/sensor/button/garage/value/voltage\",\n    \"nodes@home/sensor/button/indoor/value/voltage\",\n    \"nodes@home/light/sonoff/kitchen/value/voltage\"\n]",
-    "x": 413,
-    "y": 335,
-    "wires": [
-      [
-        "3f10e43e.9df55c",
-        "e9ccb23d.132a2"
-      ]
-    ]
-  },
-  {
-    "id": "5722014f.a9c94",
-    "type": "inject",
-    "z": "399a3bf2.52cdb4",
-    "name": "",
-    "topic": "exception_topics",
-    "payload": "",
-    "payloadType": "date",
-    "repeat": "",
-    "crontab": "",
-    "once": true,
-    "x": 160,
-    "y": 335,
-    "wires": [
-      [
-        "2ea801ab.467cce"
-      ]
-    ]
-  },
-  {
-    "id": "81331222.e0af4",
-    "type": "comment",
-    "z": "399a3bf2.52cdb4",
-    "name": "set exception_topics in flow context",
-    "info": "",
-    "x": 180,
-    "y": 290,
-    "wires": []
   },
   {
     "id": "79298d83.0fd384",
@@ -3195,34 +2705,6 @@
     "x": 120,
     "y": 920,
     "wires": []
-  },
-  {
-    "id": "3f10e43e.9df55c",
-    "type": "json",
-    "z": "399a3bf2.52cdb4",
-    "name": "",
-    "x": 610,
-    "y": 280,
-    "wires": [
-      [
-        "5fc05d1b.df2be4"
-      ]
-    ]
-  },
-  {
-    "id": "e9ccb23d.132a2",
-    "type": "file",
-    "z": "399a3bf2.52cdb4",
-    "name": "",
-    "filename": "/home/pi/.node-red/log/exception_nodes.log",
-    "appendNewline": true,
-    "createDir": true,
-    "overwriteFile": "true",
-    "x": 1030,
-    "y": 335,
-    "wires": [
-      []
-    ]
   },
   {
     "id": "dd45aa8e.25e4d8",
@@ -6164,72 +5646,6 @@
     "wires": [
       []
     ]
-  },
-  {
-    "id": "3cbd592a.4b97f6",
-    "type": "comment",
-    "z": "65bfe802.954608",
-    "name": "track ambient values from gesture node",
-    "info": "",
-    "x": 250,
-    "y": 80,
-    "wires": []
-  },
-  {
-    "id": "4246d070.f16f5",
-    "type": "mqtt in",
-    "z": "65bfe802.954608",
-    "name": "ambient",
-    "topic": "nodes@home/sensor/gesture/kitchen/value/ambient",
-    "qos": "0",
-    "broker": "f093b8cc.ff2b58",
-    "x": 150,
-    "y": 140,
-    "wires": [
-      [
-        "d816c80a.e7abd8"
-      ]
-    ]
-  },
-  {
-    "id": "d816c80a.e7abd8",
-    "type": "json",
-    "z": "65bfe802.954608",
-    "name": "",
-    "pretty": false,
-    "x": 290,
-    "y": 140,
-    "wires": [
-      [
-        "7a82cf50.9444f",
-        "911ab03c.dfc16"
-      ]
-    ]
-  },
-  {
-    "id": "911ab03c.dfc16",
-    "type": "debug",
-    "z": "65bfe802.954608",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "false",
-    "x": 630,
-    "y": 100,
-    "wires": []
-  },
-  {
-    "id": "7a82cf50.9444f",
-    "type": "influxdb out",
-    "z": "65bfe802.954608",
-    "influxdb": "9f5822ca.ea672",
-    "name": "influxdb",
-    "measurement": "clear",
-    "precision": "",
-    "retentionPolicy": "",
-    "x": 620,
-    "y": 140,
-    "wires": []
   },
   {
     "id": "a2528b01.80cda8",
@@ -15445,6 +14861,166 @@
     "info": "",
     "x": 110,
     "y": 3960,
+    "wires": []
+  },
+  {
+    "id": "14ed1f77.bf7501",
+    "type": "mqtt in",
+    "z": "fc8ae83a.bd2f98",
+    "name": "mqtt: # [prod]",
+    "topic": "#",
+    "qos": "0",
+    "broker": "f093b8cc.ff2b58",
+    "x": 110,
+    "y": 400,
+    "wires": [
+      [
+        "f04129d8.f50598"
+      ]
+    ]
+  },
+  {
+    "id": "3989863d.b4199a",
+    "type": "debug",
+    "z": "fc8ae83a.bd2f98",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "true",
+    "x": 350,
+    "y": 340,
+    "wires": []
+  },
+  {
+    "id": "36ff6238.00dc1e",
+    "type": "websocket out",
+    "z": "fc8ae83a.bd2f98",
+    "name": "",
+    "server": "6ced38ac.829508",
+    "client": "",
+    "x": 470,
+    "y": 400,
+    "wires": []
+  },
+  {
+    "id": "7bf61ce9.860884",
+    "type": "websocket in",
+    "z": "fc8ae83a.bd2f98",
+    "name": "",
+    "server": "6ced38ac.829508",
+    "client": "",
+    "x": 150,
+    "y": 340,
+    "wires": [
+      [
+        "3989863d.b4199a"
+      ]
+    ]
+  },
+  {
+    "id": "f04129d8.f50598",
+    "type": "delay",
+    "z": "fc8ae83a.bd2f98",
+    "name": "",
+    "pauseType": "delay",
+    "timeout": "5",
+    "timeoutUnits": "seconds",
+    "rate": "100",
+    "nbRateUnits": "20",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 260,
+    "y": 400,
+    "wires": [
+      [
+        "36ff6238.00dc1e"
+      ]
+    ]
+  },
+  {
+    "id": "eb6f60f9.ebc5b",
+    "type": "comment",
+    "z": "fc8ae83a.bd2f98",
+    "name": "send topics to websocket",
+    "info": "link:\nfile:///C:/Users/andre/Documents/GIT/d3-MQTT-Topic-Tree/mqtt_topic_tree.html",
+    "x": 730,
+    "y": 400,
+    "wires": []
+  },
+  {
+    "id": "3cecb250.4900ce",
+    "type": "comment",
+    "z": "fc8ae83a.bd2f98",
+    "name": "mqtt topics to websocket",
+    "info": "",
+    "x": 150,
+    "y": 300,
+    "wires": []
+  },
+  {
+    "id": "b87c149f.0eb098",
+    "type": "comment",
+    "z": "fc8ae83a.bd2f98",
+    "name": "track ambient values from gesture node",
+    "info": "",
+    "x": 190,
+    "y": 480,
+    "wires": []
+  },
+  {
+    "id": "8913d7cc.974948",
+    "type": "mqtt in",
+    "z": "fc8ae83a.bd2f98",
+    "name": "ambient",
+    "topic": "nodes@home/sensor/gesture/kitchen/value/ambient",
+    "qos": "0",
+    "broker": "f093b8cc.ff2b58",
+    "x": 90,
+    "y": 520,
+    "wires": [
+      [
+        "2251e827.5a15d8"
+      ]
+    ]
+  },
+  {
+    "id": "2251e827.5a15d8",
+    "type": "json",
+    "z": "fc8ae83a.bd2f98",
+    "name": "",
+    "pretty": false,
+    "x": 230,
+    "y": 520,
+    "wires": [
+      [
+        "b3b3faba.4b4b88"
+      ]
+    ]
+  },
+  {
+    "id": "b3b3faba.4b4b88",
+    "type": "influxdb out",
+    "z": "fc8ae83a.bd2f98",
+    "influxdb": "9f5822ca.ea672",
+    "name": "influxdb",
+    "measurement": "clear",
+    "precision": "",
+    "retentionPolicy": "",
+    "x": 380,
+    "y": 520,
+    "wires": []
+  },
+  {
+    "id": "c8e327bb.3762a8",
+    "type": "comment",
+    "z": "fc8ae83a.bd2f98",
+    "name": "listen to hello message",
+    "info": "",
+    "x": 720,
+    "y": 340,
     "wires": []
   }
 ]
