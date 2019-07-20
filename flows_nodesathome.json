@@ -66,25 +66,6 @@
     "info": ""
   },
   {
-    "id": "f093b8cc.ff2b58",
-    "type": "mqtt-broker",
-    "z": "",
-    "broker": "localhost",
-    "port": "1883",
-    "clientid": "",
-    "usetls": false,
-    "compatmode": false,
-    "keepalive": "60",
-    "cleansession": true,
-    "birthTopic": "",
-    "birthQos": "0",
-    "birthRetain": "false",
-    "birthPayload": "",
-    "willTopic": "",
-    "willQos": "0",
-    "willPayload": ""
-  },
-  {
     "id": "899805d0.4345c8",
     "type": "google-api-config",
     "z": ""
@@ -536,6 +517,28 @@
     "order": 3
   },
   {
+    "id": "7bc3dc1a.d27a94",
+    "type": "mqtt-broker",
+    "z": "",
+    "name": "",
+    "broker": "nodesathome1",
+    "port": "1883",
+    "clientid": "",
+    "usetls": false,
+    "compatmode": true,
+    "keepalive": "60",
+    "cleansession": true,
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthPayload": "",
+    "closeTopic": "",
+    "closeQos": "0",
+    "closePayload": "",
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": ""
+  },
+  {
     "id": "1f55c701.4fff39",
     "type": "comment",
     "z": "c9cf8bbb.029148",
@@ -679,7 +682,7 @@
     "topic": "",
     "qos": "0",
     "retain": "true",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 320,
     "y": 80,
     "wires": []
@@ -861,7 +864,7 @@
     "topic": "",
     "qos": "0",
     "retain": "true",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 1010,
     "y": 220,
     "wires": []
@@ -1887,7 +1890,7 @@
     "topic": "",
     "qos": "0",
     "retain": "false",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 850,
     "y": 540,
     "wires": []
@@ -2209,7 +2212,7 @@
     "topic": "",
     "qos": "0",
     "retain": "false",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 930,
     "y": 100,
     "wires": []
@@ -2839,7 +2842,7 @@
     "name": "",
     "topic": "nodes@home/+/+/+/value/voltage",
     "qos": "2",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 170,
     "y": 440,
     "wires": [
@@ -4379,7 +4382,7 @@
     "topic": "nodes@home/control/ssr/brewery/socket1",
     "qos": "0",
     "retain": "false",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 930,
     "y": 320,
     "wires": []
@@ -4438,6 +4441,7 @@
       "#c5b0d5"
     ],
     "useOldStyle": true,
+    "outputs": 2,
     "x": 930,
     "y": 380,
     "wires": [
@@ -5205,7 +5209,7 @@
     "name": "heater",
     "topic": "nodes@home/control/ssr/brewery/socket1/state",
     "qos": "0",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 110,
     "y": 231,
     "wires": [
@@ -5313,7 +5317,7 @@
     "name": "brew",
     "topic": "nodes@home/control/ssr/brewery/value/temperature",
     "qos": "1",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 110,
     "y": 402,
     "wires": [
@@ -5849,7 +5853,7 @@
     "name": "button",
     "topic": "nodes@home/sensor/button/pool/value/state",
     "qos": "1",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 110,
     "y": 760,
     "wires": [
@@ -5975,7 +5979,7 @@
     "name": "mqtt",
     "topic": "nodes@home/sensor/ds18b20/brewery/value/temperature",
     "qos": "0",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 84,
     "y": 1329,
     "wires": [
@@ -5991,7 +5995,7 @@
     "name": "spindle",
     "topic": "nodes@home/sensor/spindle/fermenter/value/voltage",
     "qos": "0",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 84,
     "y": 1220,
     "wires": [
@@ -6110,6 +6114,7 @@
       "#c5b0d5"
     ],
     "useOldStyle": false,
+    "outputs": 2,
     "x": 533,
     "y": 1180,
     "wires": [
@@ -6162,6 +6167,7 @@
       "#c5b0d5"
     ],
     "useOldStyle": false,
+    "outputs": 2,
     "x": 536,
     "y": 1290,
     "wires": [
@@ -6251,7 +6257,7 @@
     "name": "mqtt",
     "topic": "nodes@home/sensor/spindle/fermenter/value/temperature",
     "qos": "0",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 87,
     "y": 1513,
     "wires": [
@@ -6305,6 +6311,7 @@
       "#c5b0d5"
     ],
     "useOldStyle": false,
+    "outputs": 2,
     "x": 539,
     "y": 1474,
     "wires": [
@@ -6359,7 +6366,7 @@
     "name": "mqtt",
     "topic": "nodes@home/sensor/spindle/fermenter/value/acceleration",
     "qos": "0",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 83,
     "y": 1613,
     "wires": [
@@ -6413,6 +6420,7 @@
       "#c5b0d5"
     ],
     "useOldStyle": false,
+    "outputs": 2,
     "x": 535,
     "y": 1574,
     "wires": [
@@ -6631,7 +6639,7 @@
     "topic": "nodes@home/sensor/spindle/fermenter/value/tilt",
     "qos": "0",
     "retain": "true",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 544,
     "y": 1693,
     "wires": []
@@ -6753,7 +6761,7 @@
     "name": "stirrer",
     "topic": "nodes@home/control/ssr/brewery/socket2/state",
     "qos": "0",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 110,
     "y": 500,
     "wires": [
@@ -6799,7 +6807,7 @@
     "topic": "nodes@home/control/ssr/brewery/socket2",
     "qos": "0",
     "retain": "false",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 930,
     "y": 540,
     "wires": []
@@ -6821,7 +6829,7 @@
     "name": "counter",
     "topic": "nodes@home/meter/electricity/utilityroom/value/counter",
     "qos": "0",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 110,
     "y": 240,
     "wires": [
@@ -6837,7 +6845,7 @@
     "name": "power",
     "topic": "nodes@home/meter/electricity/utilityroom/value/power",
     "qos": "0",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 110,
     "y": 460,
     "wires": [
@@ -7017,6 +7025,7 @@
       "#c5b0d5"
     ],
     "useOldStyle": false,
+    "outputs": 2,
     "x": 600,
     "y": 500,
     "wires": [
@@ -7286,7 +7295,7 @@
     "topic": "nodes@home/meter/electricity/utilityroom/service/set",
     "qos": "0",
     "retain": "true",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 990,
     "y": 80,
     "wires": []
@@ -8410,6 +8419,7 @@
       "#c5b0d5"
     ],
     "useOldStyle": false,
+    "outputs": 2,
     "x": 540,
     "y": 1381,
     "wires": [
@@ -8503,6 +8513,7 @@
       "#c5b0d5"
     ],
     "useOldStyle": false,
+    "outputs": 2,
     "x": 533,
     "y": 1100,
     "wires": [
@@ -8592,7 +8603,7 @@
     "name": "boiler",
     "topic": "nodes@home/sensor/ds18b20/brewery/value/voltage",
     "qos": "0",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 84,
     "y": 1140,
     "wires": [
@@ -8695,7 +8706,7 @@
     "name": "pool",
     "topic": "nodes@home/sensor/ds18b20/pool/value/voltage",
     "qos": "0",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 90,
     "y": 200,
     "wires": [
@@ -8814,6 +8825,7 @@
       "#c5b0d5"
     ],
     "useOldStyle": false,
+    "outputs": 2,
     "x": 539,
     "y": 160,
     "wires": [
@@ -8838,7 +8850,7 @@
     "name": "pool",
     "topic": "nodes@home/sensor/ds18b20/pool/value/temperature",
     "qos": "0",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 90,
     "y": 321,
     "wires": [
@@ -8957,6 +8969,7 @@
       "#c5b0d5"
     ],
     "useOldStyle": false,
+    "outputs": 2,
     "x": 542,
     "y": 282,
     "wires": [
@@ -8971,7 +8984,7 @@
     "name": "outdoor",
     "topic": "nodes@home/sensor/DHT22/terrace/value/temperature",
     "qos": "0",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 90,
     "y": 380,
     "wires": [
@@ -9869,7 +9882,7 @@
     "topic": "",
     "qos": "0",
     "retain": "false",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 710,
     "y": 1580,
     "wires": []
@@ -10554,7 +10567,7 @@
     "name": "",
     "topic": "nodes@home/config/+/state",
     "qos": "0",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 160,
     "y": 60,
     "wires": [
@@ -13531,7 +13544,7 @@
     "name": "",
     "topic": "nodes@home/+/+/+/state/mqtt",
     "qos": "2",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 140,
     "y": 4000,
     "wires": [
@@ -14868,11 +14881,11 @@
     "id": "14ed1f77.bf7501",
     "type": "mqtt in",
     "z": "fc8ae83a.bd2f98",
-    "name": "mqtt: # [prod]",
+    "name": "",
     "topic": "#",
     "qos": "0",
-    "broker": "f093b8cc.ff2b58",
-    "x": 110,
+    "broker": "7bc3dc1a.d27a94",
+    "x": 90,
     "y": 400,
     "wires": [
       [
@@ -14978,7 +14991,7 @@
     "name": "ambient",
     "topic": "nodes@home/sensor/gesture/kitchen/value/ambient",
     "qos": "0",
-    "broker": "f093b8cc.ff2b58",
+    "broker": "7bc3dc1a.d27a94",
     "x": 90,
     "y": 520,
     "wires": [
