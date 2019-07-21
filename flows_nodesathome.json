@@ -10682,7 +10682,7 @@
     "format": "{{msg.payload.appCfg}}",
     "layout": "row-left",
     "x": 860,
-    "y": 820,
+    "y": 860,
     "wires": []
   },
   {
@@ -10714,7 +10714,7 @@
     "format": "{{msg.payload.mqtt.retain}}",
     "layout": "row-left",
     "x": 870,
-    "y": 580,
+    "y": 620,
     "wires": []
   },
   {
@@ -10730,7 +10730,7 @@
     "format": "{{msg.payload.trace.ip}}",
     "layout": "row-left",
     "x": 860,
-    "y": 620,
+    "y": 660,
     "wires": []
   },
   {
@@ -10809,7 +10809,8 @@
         "2e0e7348.03d82c",
         "5490feb9.2ab25",
         "cd4cbed5.62bb3",
-        "efe13914.3d8c48"
+        "efe13914.3d8c48",
+        "c9d14b28.aec988"
       ]
     ]
   },
@@ -10838,7 +10839,7 @@
     "format": "{{msg.payload.timer}}",
     "layout": "row-left",
     "x": 850,
-    "y": 780,
+    "y": 820,
     "wires": []
   },
   {
@@ -10923,7 +10924,7 @@
     "format": "{{msg.payload.mqtt.broker}}",
     "layout": "row-left",
     "x": 870,
-    "y": 500,
+    "y": 540,
     "wires": []
   },
   {
@@ -10939,7 +10940,7 @@
     "format": "{{msg.payload.mqtt.keepAliveTime}}",
     "layout": "row-left",
     "x": 890,
-    "y": 540,
+    "y": 580,
     "wires": []
   },
   {
@@ -10955,7 +10956,7 @@
     "format": "{{msg.payload.trace.port}}",
     "layout": "row-left",
     "x": 860,
-    "y": 660,
+    "y": 700,
     "wires": []
   },
   {
@@ -10971,7 +10972,7 @@
     "format": "{{msg.payload.trace.onUpdate}}",
     "layout": "row-left",
     "x": 880,
-    "y": 700,
+    "y": 740,
     "wires": []
   },
   {
@@ -10987,7 +10988,7 @@
     "format": "{{msg.payload.trace.onStartup}}",
     "layout": "row-left",
     "x": 880,
-    "y": 740,
+    "y": 780,
     "wires": []
   },
   {
@@ -15035,6 +15036,22 @@
     "info": "",
     "x": 720,
     "y": 340,
+    "wires": []
+  },
+  {
+    "id": "c9d14b28.aec988",
+    "type": "ui_text",
+    "z": "67442bb3.903494",
+    "group": "5de7d7da.a53e18",
+    "order": 8,
+    "width": "20",
+    "height": "1",
+    "name": "",
+    "label": "wifi rssi",
+    "format": "{{msg.payload.wifi.rssi}}",
+    "layout": "row-left",
+    "x": 860,
+    "y": 500,
     "wires": []
   }
 ]
