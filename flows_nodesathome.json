@@ -1604,29 +1604,29 @@
         "t": "set",
         "p": "payload.messages[0].enabled",
         "pt": "msg",
-        "to": "true",
-        "tot": "bool"
+        "to": "on",
+        "tot": "str"
       },
       {
         "t": "set",
         "p": "payload.messages[1].enabled",
         "pt": "msg",
-        "to": "true",
-        "tot": "bool"
+        "to": "on",
+        "tot": "str"
       },
       {
         "t": "set",
         "p": "payload.messages[2].enabled",
         "pt": "msg",
-        "to": "false",
-        "tot": "bool"
+        "to": "off",
+        "tot": "str"
       },
       {
         "t": "set",
         "p": "payload.messages[3].enabled",
         "pt": "msg",
-        "to": "false",
-        "tot": "bool"
+        "to": "off",
+        "tot": "str"
       }
     ],
     "action": "",
@@ -1684,29 +1684,29 @@
         "t": "set",
         "p": "payload.messages[0].enabled",
         "pt": "msg",
-        "to": "false",
-        "tot": "bool"
+        "to": "off",
+        "tot": "str"
       },
       {
         "t": "set",
         "p": "payload.messages[1].enabled",
         "pt": "msg",
-        "to": "false",
-        "tot": "bool"
+        "to": "off",
+        "tot": "str"
       },
       {
         "t": "set",
         "p": "payload.messages[2].enabled",
         "pt": "msg",
-        "to": "true",
-        "tot": "bool"
+        "to": "on",
+        "tot": "str"
       },
       {
         "t": "set",
         "p": "payload.messages[3].enabled",
         "pt": "msg",
-        "to": "true",
-        "tot": "bool"
+        "to": "on",
+        "tot": "str"
       }
     ],
     "action": "",
@@ -15052,6 +15052,36 @@
     "layout": "row-left",
     "x": 860,
     "y": 500,
+    "wires": []
+  },
+  {
+    "id": "88ca7e76.652af",
+    "type": "catch",
+    "z": "c9cf8bbb.029148",
+    "name": "google calendar",
+    "scope": [
+      "bf288de6.bb763"
+    ],
+    "x": 820,
+    "y": 620,
+    "wires": [
+      [
+        "88c1f505.f5bd68"
+      ]
+    ]
+  },
+  {
+    "id": "88c1f505.f5bd68",
+    "type": "debug",
+    "z": "c9cf8bbb.029148",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "x": 970,
+    "y": 620,
     "wires": []
   }
 ]
