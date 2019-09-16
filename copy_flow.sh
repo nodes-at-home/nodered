@@ -1,3 +1,3 @@
 #!/bin/bash
 
-jq '.' < ~/.node-red/flows_nodesathome.json > flows_nodesathome.json
+jq '.' < ~/docker/nodered/flows.json > flows_nodesathome.json
