@@ -481,12 +481,6 @@
     "width": "10"
   },
   {
-    "id": "4ee7c8.1a6a1838",
-    "type": "google-credentials",
-    "z": "",
-    "displayName": "Andreas Jungierek"
-  },
-  {
     "id": "d4a7808d.ee6f9",
     "type": "ui_group",
     "z": "",
@@ -537,6 +531,12 @@
     "willTopic": "",
     "willQos": "0",
     "willPayload": ""
+  },
+  {
+    "id": "6e66383c.a2a358",
+    "type": "google-credentials",
+    "z": "",
+    "displayName": "Andreas Jungierek"
   },
   {
     "id": "1f55c701.4fff39",
@@ -664,7 +664,7 @@
     "type": "file",
     "z": "c9cf8bbb.029148",
     "name": "pixelnode.log",
-    "filename": "/home/pi/.node-red/log/pixelnode.log",
+    "filename": "/data/log/pixelnode.log",
     "appendNewline": true,
     "createDir": true,
     "overwriteFile": "false",
@@ -801,22 +801,6 @@
     "wires": [
       [
         "bf288de6.bb763"
-      ]
-    ]
-  },
-  {
-    "id": "bf288de6.bb763",
-    "type": "google calendar",
-    "z": "c9cf8bbb.029148",
-    "google": "4ee7c8.1a6a1838",
-    "name": "Abfallkalender",
-    "calendar": "Abfallkalender",
-    "ongoing": true,
-    "x": 420,
-    "y": 540,
-    "wires": [
-      [
-        "8569385c.b137d8"
       ]
     ]
   },
@@ -1465,13 +1449,14 @@
     "id": "1bd2a942.86bc77",
     "type": "exec",
     "z": "37197cb5.c49ee4",
-    "command": "ls /home/pi/luanodes_ota/*",
+    "command": "ls /data/luanodes_ota/*",
     "addpay": false,
     "append": "",
     "useSpawn": "",
     "timer": "",
+    "oldrc": false,
     "name": "",
-    "x": 1020,
+    "x": 1000,
     "y": 900,
     "wires": [
       [
@@ -1971,7 +1956,7 @@
         "t": "set",
         "p": "filename",
         "pt": "msg",
-        "to": "\"/home/pi/.node-red/log/node_\" & msg.chipid & \".log\"",
+        "to": "\"/data/log/node_\" & msg.chipid & \".log\"",
         "tot": "jsonata"
       }
     ],
@@ -2714,7 +2699,7 @@
     "type": "file in",
     "z": "c9cf8bbb.029148",
     "name": "id file",
-    "filename": "/home/pi/.node-red/vbb_access_id.txt",
+    "filename": "/data/vbb_access_id.txt",
     "format": "utf8",
     "sendError": true,
     "x": 290,
@@ -5190,7 +5175,7 @@
     "type": "file in",
     "z": "f7610a0.d8198f8",
     "name": "ring,mp3",
-    "filename": "/home/pi/.node-red//ring.mp3",
+    "filename": "/data/mp3/ring.mp3",
     "format": "",
     "chunk": false,
     "sendError": true,
@@ -5443,7 +5428,7 @@
     "type": "file in",
     "z": "f7610a0.d8198f8",
     "name": "tweet.mp3",
-    "filename": "/home/pi/.node-red//tweet.mp3",
+    "filename": "/data/mp3/tweet.mp3",
     "format": "",
     "chunk": false,
     "sendError": true,
@@ -5460,7 +5445,7 @@
     "type": "file in",
     "z": "f7610a0.d8198f8",
     "name": "tweet2x.mp3",
-    "filename": "/home/pi/.node-red/tweet2x.mp3",
+    "filename": "/data/mp3/tweet2x.mp3",
     "format": "",
     "chunk": false,
     "sendError": true,
@@ -7479,14 +7464,14 @@
     "id": "935ea4f7.e1b5d8",
     "type": "exec",
     "z": "f7610a0.d8198f8",
-    "command": "ls /home/pi/.node-red/recipes",
+    "command": "ls /data/recipes",
     "addpay": false,
     "append": "",
     "useSpawn": "false",
     "timer": "",
     "oldrc": false,
     "name": "ls",
-    "x": 230,
+    "x": 229,
     "y": 848,
     "wires": [
       [
@@ -7555,7 +7540,7 @@
     "type": "function",
     "z": "f7610a0.d8198f8",
     "name": "options",
-    "func": "// junand 15.04.2018\n\n// 1) create array of files\nvar s = msg.payload;\nvar files = s.substring ( 0, s.length - 1 ).split ( \"\\n\" );\n//node.warn ( \"files=\" + files );\n\n// 2) dropdown list\nvar l = [];\nfor ( var i = 0; i < files.length; i++ ) {\n    var f = files [i];\n    if ( f.startsWith ( \"recipe_\" ) && f.endsWith ( \".json\" ) ) {\n        var l1 = \"recipe_\".length;\n        var l2 = \".json\".length;\n        var option = f.substring ( l1, f.length - l2 );\n        //node.warn ( \"option=\" + option );\n        //l [i] = { option: f };\n        l [i] = {};\n        l[i] [option] = \"/home/pi/.node-red/recipes/\" + f;\n    }\n}\n//return { options: files };\nreturn { options: l };",
+    "func": "// junand 15.04.2018\n\n// 1) create array of files\nvar s = msg.payload;\nvar files = s.substring ( 0, s.length - 1 ).split ( \"\\n\" );\n//node.warn ( \"files=\" + files );\n\n// 2) dropdown list\nvar l = [];\nfor ( var i = 0; i < files.length; i++ ) {\n    var f = files [i];\n    if ( f.startsWith ( \"recipe_\" ) && f.endsWith ( \".json\" ) ) {\n        var l1 = \"recipe_\".length;\n        var l2 = \".json\".length;\n        var option = f.substring ( l1, f.length - l2 );\n        //node.warn ( \"option=\" + option );\n        //l [i] = { option: f };\n        l [i] = {};\n        l[i] [option] = \"/data/recipes/\" + f;\n    }\n}\n//return { options: files };\nreturn { options: l };",
     "outputs": 1,
     "noerr": 0,
     "x": 360,
@@ -11214,7 +11199,7 @@
     "from": "",
     "to": "",
     "reg": false,
-    "x": 410,
+    "x": 390,
     "y": 960,
     "wires": [
       [
@@ -12943,7 +12928,7 @@
     "from": "",
     "to": "",
     "reg": false,
-    "x": 410,
+    "x": 390,
     "y": 1000,
     "wires": [
       [
@@ -13265,7 +13250,7 @@
     "type": "file in",
     "z": "8e2c5c11.fae26",
     "name": "id file",
-    "filename": "/home/pi/.node-red/simple_push_id.txt",
+    "filename": "/data/simple_push_id.txt",
     "format": "utf8",
     "sendError": true,
     "x": 750,
@@ -13419,13 +13404,16 @@
     "id": "57e93e23.3c74f",
     "type": "http request",
     "z": "c9cf8bbb.029148",
-    "name": "",
+    "name": "http",
     "method": "GET",
     "ret": "txt",
+    "paytoqs": false,
     "url": "https://www.spruch-des-tages.org",
     "tls": "",
-    "x": 310,
-    "y": 1280,
+    "proxy": "",
+    "authType": "",
+    "x": 314.0000114440918,
+    "y": 1280.000057220459,
     "wires": [
       [
         "332b2179.26503e"
@@ -15083,5 +15071,21 @@
     "x": 970,
     "y": 620,
     "wires": []
+  },
+  {
+    "id": "bf288de6.bb763",
+    "type": "google calendar",
+    "z": "c9cf8bbb.029148",
+    "google": "6e66383c.a2a358",
+    "name": "Abfallkalender",
+    "calendar": "Abfallkalender",
+    "ongoing": true,
+    "x": 420,
+    "y": 540,
+    "wires": [
+      [
+        "8569385c.b137d8"
+      ]
+    ]
   }
 ]
