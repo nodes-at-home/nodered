@@ -539,6 +539,18 @@
     "displayName": "Andreas Jungierek"
   },
   {
+    "id": "382f38a5.a21be8",
+    "type": "influxdb",
+    "z": "",
+    "hostname": "influxdb",
+    "port": "8086",
+    "protocol": "http",
+    "database": "rssi",
+    "name": "",
+    "usetls": false,
+    "tls": ""
+  },
+  {
     "id": "1f55c701.4fff39",
     "type": "comment",
     "z": "c9cf8bbb.029148",
@@ -14937,6 +14949,78 @@
     "wires": [
       [
         "1d816adb.69a065"
+      ]
+    ]
+  },
+  {
+    "id": "a0223f7f.e0607",
+    "type": "comment",
+    "z": "fc8ae83a.bd2f98",
+    "name": "track rssi values from all nodes",
+    "info": "",
+    "x": 170,
+    "y": 600,
+    "wires": []
+  },
+  {
+    "id": "aaceafe4.2b6e4",
+    "type": "mqtt in",
+    "z": "fc8ae83a.bd2f98",
+    "name": "",
+    "topic": "nodes@home/rssi/#",
+    "qos": "2",
+    "datatype": "auto",
+    "broker": "7bc3dc1a.d27a94",
+    "x": 130,
+    "y": 640,
+    "wires": [
+      [
+        "8332262c.de3608"
+      ]
+    ]
+  },
+  {
+    "id": "3fcc775b.1b8608",
+    "type": "influxdb out",
+    "z": "fc8ae83a.bd2f98",
+    "influxdb": "382f38a5.a21be8",
+    "name": "",
+    "measurement": "dBm",
+    "precision": "",
+    "retentionPolicy": "",
+    "x": 600,
+    "y": 640,
+    "wires": []
+  },
+  {
+    "id": "8332262c.de3608",
+    "type": "json",
+    "z": "fc8ae83a.bd2f98",
+    "name": "",
+    "property": "payload",
+    "action": "",
+    "pretty": false,
+    "x": 290,
+    "y": 640,
+    "wires": [
+      [
+        "daca9ccc.8e5d2"
+      ]
+    ]
+  },
+  {
+    "id": "daca9ccc.8e5d2",
+    "type": "function",
+    "z": "fc8ae83a.bd2f98",
+    "name": "apname",
+    "func": "var ap = [];\nap [ \"c8:0e:14:66:e0:e1\" ] = \"mauzi\";\nap [ \"cc:ce:1e:e2:dd:5b\" ] = \"draguran\";\nap [ \"f0:b0:14:e1:92:a5\" ] = \"meltan\";\n\nvar result = \"\";\nif ( msg.payload.apmac ) {\n    result = ap [msg.payload.apmac];\n}\nmsg.payload.apname = result;\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 420,
+    "y": 640,
+    "wires": [
+      [
+        "3fcc775b.1b8608"
       ]
     ]
   }
