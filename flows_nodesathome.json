@@ -1258,7 +1258,6 @@
         "259966f6.052b6a",
         "2e32edbd.c81332",
         "1111b8ca.abcf47",
-        "fa776777.dc3d08",
         "ea4ab4e3.57dc68",
         "30628acc.5130e6",
         "a2528b01.80cda8",
@@ -1363,7 +1362,7 @@
     "payloadType": "date",
     "topic": "light/xmastree/dining",
     "x": 420,
-    "y": 1440,
+    "y": 1400,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -1388,7 +1387,7 @@
     "payloadType": "date",
     "topic": "sensor/button/indoor",
     "x": 420,
-    "y": 1200,
+    "y": 1160,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -1413,7 +1412,7 @@
     "payloadType": "date",
     "topic": "sensor/button/garage",
     "x": 420,
-    "y": 1239,
+    "y": 1199,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -1438,7 +1437,7 @@
     "payloadType": "date",
     "topic": "sensor/button/pool",
     "x": 410,
-    "y": 1277,
+    "y": 1237,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -2537,46 +2536,22 @@
     "id": "1111b8ca.abcf47",
     "type": "ui_button",
     "z": "37197cb5.c49ee4",
-    "name": "update switch/sonoff/gallery",
+    "name": "update light/sonoff/corridor",
     "group": "c39c0138.5637",
     "order": 5,
     "width": 0,
     "height": 0,
     "passthru": true,
-    "label": "switch/sonoff/gallery",
+    "label": "light/sonoff/corridor",
+    "tooltip": "",
     "color": "",
     "bgcolor": "",
     "icon": "",
     "payload": "",
     "payloadType": "date",
-    "topic": "switch/sonoff/gallery",
+    "topic": "light/sonoff/corridor",
     "x": 420,
     "y": 840,
-    "wires": [
-      [
-        "6ed6dc87.f74a94"
-      ]
-    ]
-  },
-  {
-    "id": "fa776777.dc3d08",
-    "type": "ui_button",
-    "z": "37197cb5.c49ee4",
-    "name": "update switch/sonoff/location4",
-    "group": "c39c0138.5637",
-    "order": 10,
-    "width": 0,
-    "height": 0,
-    "passthru": true,
-    "label": "switch/sonoff/location4",
-    "color": "",
-    "bgcolor": "",
-    "icon": "",
-    "payload": "",
-    "payloadType": "date",
-    "topic": "switch/sonoff/location4",
-    "x": 430,
-    "y": 1040,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -2957,7 +2932,7 @@
       },
       {
         "t": "eq",
-        "v": "sensor/button/indoor",
+        "v": "light/sonoff/corridor",
         "vt": "str"
       },
       {
@@ -2997,12 +2972,7 @@
       },
       {
         "t": "eq",
-        "v": "switch/sonoff/gallery",
-        "vt": "str"
-      },
-      {
-        "t": "eq",
-        "v": "switch/sonoff/location4",
+        "v": "switch/sonoff/corridor",
         "vt": "str"
       },
       {
@@ -3073,7 +3043,7 @@
     ],
     "checkall": "true",
     "repair": false,
-    "outputs": 34,
+    "outputs": 33,
     "x": 570,
     "y": 440,
     "wires": [
@@ -3138,9 +3108,6 @@
         "9fcdb7df.576458"
       ],
       [
-        "d7103ff6.2f411"
-      ],
-      [
         "1a9a4c68.211884"
       ],
       [
@@ -3194,8 +3161,8 @@
     "units": "min",
     "reset": "",
     "name": "",
-    "x": 798,
-    "y": 880,
+    "x": 800,
+    "y": 840,
     "wires": [
       [
         "f8817a0.bc2f188",
@@ -3226,8 +3193,8 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1018,
-    "y": 880,
+    "x": 1020,
+    "y": 840,
     "wires": [
       []
     ]
@@ -4178,7 +4145,7 @@
     "type": "ui_switch",
     "z": "8e2c5c11.fae26",
     "name": "",
-    "label": "switch/sonoff/gallery",
+    "label": "light/sonoff/corridor",
     "tooltip": "watchdog state",
     "group": "3156ce3a.ed9862",
     "order": 17,
@@ -4196,59 +4163,8 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1008,
+    "x": 998,
     "y": 800,
-    "wires": [
-      []
-    ]
-  },
-  {
-    "id": "d7103ff6.2f411",
-    "type": "trigger",
-    "z": "8e2c5c11.fae26",
-    "op1": "1",
-    "op2": "0",
-    "op1type": "str",
-    "op2type": "str",
-    "duration": "20",
-    "extend": true,
-    "units": "min",
-    "reset": "",
-    "name": "",
-    "x": 798,
-    "y": 840,
-    "wires": [
-      [
-        "4827f00d.03286",
-        "36e0dc01.361524"
-      ]
-    ]
-  },
-  {
-    "id": "4827f00d.03286",
-    "type": "ui_switch",
-    "z": "8e2c5c11.fae26",
-    "name": "",
-    "label": "switch/sonoff/location4",
-    "tooltip": "watchdog state",
-    "group": "3156ce3a.ed9862",
-    "order": 37,
-    "width": "5",
-    "height": "1",
-    "passthru": false,
-    "decouple": "true",
-    "topic": "",
-    "style": "",
-    "onvalue": "1",
-    "onvalueType": "str",
-    "onicon": "done",
-    "oncolor": "green",
-    "offvalue": "0",
-    "offvalueType": "str",
-    "officon": "error_outline",
-    "offcolor": "red",
-    "x": 1008,
-    "y": 840,
     "wires": [
       []
     ]
@@ -5599,8 +5515,8 @@
     "units": "min",
     "reset": "",
     "name": "",
-    "x": 799,
-    "y": 920,
+    "x": 801,
+    "y": 880,
     "wires": [
       [
         "89703dc8.54a22",
@@ -5631,8 +5547,8 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1009,
-    "y": 920,
+    "x": 1011,
+    "y": 880,
     "wires": [
       []
     ]
@@ -5689,7 +5605,7 @@
     "name": "Nodes 3",
     "info": "",
     "x": 360,
-    "y": 1160,
+    "y": 1120,
     "wires": []
   },
   {
@@ -5705,8 +5621,8 @@
     "units": "min",
     "reset": "",
     "name": "",
-    "x": 799,
-    "y": 960,
+    "x": 801,
+    "y": 920,
     "wires": [
       [
         "eb8de577.4ee5f8",
@@ -5737,8 +5653,8 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 999,
-    "y": 960,
+    "x": 1001,
+    "y": 920,
     "wires": [
       []
     ]
@@ -6528,8 +6444,8 @@
     "units": "min",
     "reset": "",
     "name": "",
-    "x": 799,
-    "y": 1000,
+    "x": 801,
+    "y": 960,
     "wires": [
       [
         "60f50c66.f8b834",
@@ -6560,8 +6476,8 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1019,
-    "y": 1000,
+    "x": 1021,
+    "y": 960,
     "wires": [
       []
     ]
@@ -6584,7 +6500,7 @@
     "payloadType": "date",
     "topic": "sensor/ds18b20/brewery",
     "x": 430,
-    "y": 1320,
+    "y": 1280,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -6609,7 +6525,7 @@
     "payloadType": "date",
     "topic": "sensor/spindle/fermenter",
     "x": 430,
-    "y": 1360,
+    "y": 1320,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -6691,8 +6607,8 @@
     "reset": "",
     "bytopic": "all",
     "name": "",
-    "x": 799,
-    "y": 1040,
+    "x": 801,
+    "y": 1000,
     "wires": [
       [
         "4e10d3f2.f6e7cc",
@@ -6723,8 +6639,8 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 999,
-    "y": 1040,
+    "x": 1001,
+    "y": 1000,
     "wires": [
       []
     ]
@@ -8456,7 +8372,7 @@
     "payloadType": "date",
     "topic": "control/ssr/brewery",
     "x": 420,
-    "y": 1400,
+    "y": 1360,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -9418,7 +9334,7 @@
     "payloadType": "str",
     "topic": "light/sonoff/kitchen",
     "x": 150,
-    "y": 1300,
+    "y": 1260,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -9444,7 +9360,7 @@
     "payloadType": "str",
     "topic": "sensor/gesture/kitchen",
     "x": 160,
-    "y": 1260,
+    "y": 1220,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -9470,7 +9386,7 @@
     "payloadType": "str",
     "topic": "switch/relay/dining2",
     "x": 150,
-    "y": 1220,
+    "y": 1180,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -9496,32 +9412,6 @@
     "payloadType": "str",
     "topic": "switch/relay/dining1",
     "x": 150,
-    "y": 1180,
-    "wires": [
-      [
-        "b6bc8fd1.c46ec"
-      ]
-    ]
-  },
-  {
-    "id": "2c343fc7.6ad8a",
-    "type": "ui_button",
-    "z": "8e2c5c11.fae26",
-    "name": "reset switch/sonoff/location4",
-    "group": "3156ce3a.ed9862",
-    "order": 38,
-    "width": "1",
-    "height": "1",
-    "passthru": false,
-    "label": "",
-    "tooltip": "restart via mqtt",
-    "color": "#00ABEC",
-    "bgcolor": "white",
-    "icon": "refresh",
-    "payload": "",
-    "payloadType": "str",
-    "topic": "switch/sonoff/location4",
-    "x": 160,
     "y": 1140,
     "wires": [
       [
@@ -9533,7 +9423,7 @@
     "id": "b5072a88.4fdbe8",
     "type": "ui_button",
     "z": "8e2c5c11.fae26",
-    "name": "reset switch/sonoff/gallery",
+    "name": "reset light/sonoff/corridor",
     "group": "3156ce3a.ed9862",
     "order": 18,
     "width": "1",
@@ -9546,7 +9436,7 @@
     "icon": "refresh",
     "payload": "",
     "payloadType": "str",
-    "topic": "switch/sonoff/gallery",
+    "topic": "light/sonoff/corridor",
     "x": 150,
     "y": 1100,
     "wires": [
@@ -9574,7 +9464,7 @@
     "payloadType": "str",
     "topic": "light/xmastree/dining",
     "x": 150,
-    "y": 1520,
+    "y": 1480,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -9600,7 +9490,7 @@
     "payloadType": "str",
     "topic": "sensor/button/indoor",
     "x": 150,
-    "y": 1560,
+    "y": 1520,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -9626,7 +9516,7 @@
     "payloadType": "str",
     "topic": "sensor/button/garage",
     "x": 160,
-    "y": 1600,
+    "y": 1560,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -9652,7 +9542,7 @@
     "payloadType": "str",
     "topic": "sensor/button/pool",
     "x": 150,
-    "y": 1640,
+    "y": 1600,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -9678,7 +9568,7 @@
     "payloadType": "str",
     "topic": "switch/sonoff/k8200",
     "x": 150,
-    "y": 1680,
+    "y": 1640,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -9704,7 +9594,7 @@
     "payloadType": "str",
     "topic": "sensor/ds18b20/brewery",
     "x": 170,
-    "y": 1720,
+    "y": 1680,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -9730,7 +9620,7 @@
     "payloadType": "str",
     "topic": "sensor/spindle/fermenter",
     "x": 170,
-    "y": 1760,
+    "y": 1720,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -9756,7 +9646,7 @@
     "payloadType": "str",
     "topic": "control/ssr/brewery",
     "x": 150,
-    "y": 1800,
+    "y": 1760,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -9795,8 +9685,8 @@
     "reset": "",
     "bytopic": "all",
     "name": "",
-    "x": 800,
-    "y": 1080,
+    "x": 802,
+    "y": 1040,
     "wires": [
       [
         "bc8620c8.9249f",
@@ -9827,8 +9717,8 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1010,
-    "y": 1080,
+    "x": 1012,
+    "y": 1040,
     "wires": [
       []
     ]
@@ -9852,7 +9742,7 @@
     "payloadType": "str",
     "topic": "display/pixel/kitchen",
     "x": 150,
-    "y": 1340,
+    "y": 1300,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -9912,8 +9802,8 @@
     "reset": "",
     "bytopic": "all",
     "name": "",
-    "x": 803,
-    "y": 1120,
+    "x": 805,
+    "y": 1080,
     "wires": [
       [
         "fcd06b5e.24b1a8",
@@ -9944,8 +9834,8 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1013,
-    "y": 1120,
+    "x": 1015,
+    "y": 1080,
     "wires": [
       []
     ]
@@ -9969,7 +9859,7 @@
     "payloadType": "str",
     "topic": "meter/electricity/utilityroom",
     "x": 170,
-    "y": 1460,
+    "y": 1420,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -9994,7 +9884,7 @@
     "payloadType": "date",
     "topic": "light/ws2812/terrace",
     "x": 420,
-    "y": 1080,
+    "y": 1040,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -10040,8 +9930,8 @@
     "reset": "",
     "bytopic": "all",
     "name": "",
-    "x": 805,
-    "y": 1200,
+    "x": 807,
+    "y": 1160,
     "wires": [
       [
         "a4c0d1b7.c3785",
@@ -10072,8 +9962,8 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1036,
-    "y": 1200,
+    "x": 1038,
+    "y": 1160,
     "wires": [
       []
     ]
@@ -10097,7 +9987,7 @@
     "payloadType": "str",
     "topic": "light/ws2812/terrace1",
     "x": 160,
-    "y": 1380,
+    "y": 1340,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10150,7 +10040,7 @@
     "payloadType": "str",
     "topic": "light/ws2812/terrace2",
     "x": 160,
-    "y": 1420,
+    "y": 1380,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10171,8 +10061,8 @@
     "reset": "",
     "bytopic": "all",
     "name": "",
-    "x": 803,
-    "y": 1160,
+    "x": 805,
+    "y": 1120,
     "wires": [
       [
         "e148e11f.00246",
@@ -10203,8 +10093,8 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1013,
-    "y": 1160,
+    "x": 1015,
+    "y": 1120,
     "wires": [
       []
     ]
@@ -10227,7 +10117,7 @@
     "payloadType": "date",
     "topic": "light/ws2812/terrace",
     "x": 420,
-    "y": 1120,
+    "y": 1080,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -10274,8 +10164,8 @@
     "reset": "",
     "bytopic": "all",
     "name": "",
-    "x": 810,
-    "y": 1240,
+    "x": 812,
+    "y": 1200,
     "wires": [
       [
         "692fb6.53cd704c",
@@ -10306,8 +10196,8 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1021,
-    "y": 1240,
+    "x": 1023,
+    "y": 1200,
     "wires": [
       []
     ]
@@ -10331,7 +10221,7 @@
     "payloadType": "str",
     "topic": "switch/sonoff/bedroom",
     "x": 160,
-    "y": 1840,
+    "y": 1800,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10352,8 +10242,8 @@
     "reset": "",
     "bytopic": "all",
     "name": "",
-    "x": 810,
-    "y": 1280,
+    "x": 812,
+    "y": 1240,
     "wires": [
       [
         "464adc74.9d5d34",
@@ -10384,8 +10274,8 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1031,
-    "y": 1280,
+    "x": 1033,
+    "y": 1240,
     "wires": [
       []
     ]
@@ -10409,7 +10299,7 @@
     "payloadType": "str",
     "topic": "sensor/ttp223/bedroom",
     "x": 160,
-    "y": 1880,
+    "y": 1840,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10430,8 +10320,8 @@
     "reset": "",
     "bytopic": "all",
     "name": "",
-    "x": 810,
-    "y": 1320,
+    "x": 812,
+    "y": 1280,
     "wires": [
       [
         "c88dce5a.e9b42",
@@ -10462,8 +10352,8 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1021,
-    "y": 1320,
+    "x": 1023,
+    "y": 1280,
     "wires": [
       []
     ]
@@ -10487,7 +10377,7 @@
     "payloadType": "str",
     "topic": "switch/sonoff/gallery1",
     "x": 160,
-    "y": 1920,
+    "y": 1880,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -10538,7 +10428,7 @@
     "payloadType": "date",
     "topic": "sensor/gesture/test",
     "x": 420,
-    "y": 1480,
+    "y": 1440,
     "wires": [
       [
         "6ed6dc87.f74a94"
@@ -11797,7 +11687,7 @@
     "payloadType": "str",
     "topic": "light/sonoff/kitchen",
     "x": 590,
-    "y": 2760,
+    "y": 2720,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -11823,7 +11713,7 @@
     "payloadType": "str",
     "topic": "sensor/gesture/kitchen",
     "x": 610,
-    "y": 2720,
+    "y": 2680,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -11849,7 +11739,7 @@
     "payloadType": "str",
     "topic": "switch/relay/dining2",
     "x": 600,
-    "y": 2680,
+    "y": 2640,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -11875,32 +11765,6 @@
     "payloadType": "str",
     "topic": "switch/relay/dining1",
     "x": 600,
-    "y": 2640,
-    "wires": [
-      [
-        "e59e4935.4a4238"
-      ]
-    ]
-  },
-  {
-    "id": "50c00655.b1ad28",
-    "type": "ui_button",
-    "z": "8e2c5c11.fae26",
-    "name": "restart switch/sonoff/location4",
-    "group": "3156ce3a.ed9862",
-    "order": 39,
-    "width": "1",
-    "height": "1",
-    "passthru": false,
-    "label": "",
-    "tooltip": "restart via telnet",
-    "color": "#00ABEC",
-    "bgcolor": "white",
-    "icon": "play_arrow",
-    "payload": "",
-    "payloadType": "str",
-    "topic": "switch/sonoff/location4",
-    "x": 610,
     "y": 2600,
     "wires": [
       [
@@ -11912,7 +11776,7 @@
     "id": "a9a3efe7.41807",
     "type": "ui_button",
     "z": "8e2c5c11.fae26",
-    "name": "restart switch/sonoff/gallery",
+    "name": "restart light/sonoff/corridor",
     "group": "3156ce3a.ed9862",
     "order": 19,
     "width": "1",
@@ -11925,8 +11789,8 @@
     "icon": "play_arrow",
     "payload": "",
     "payloadType": "str",
-    "topic": "switch/sonoff/gallery",
-    "x": 600,
+    "topic": "light/sonoff/corridor",
+    "x": 590,
     "y": 2560,
     "wires": [
       [
@@ -11953,7 +11817,7 @@
     "payloadType": "str",
     "topic": "light/xmastree/dining",
     "x": 600,
-    "y": 2980,
+    "y": 2940,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -11979,7 +11843,7 @@
     "payloadType": "str",
     "topic": "sensor/button/indoor",
     "x": 600,
-    "y": 3020,
+    "y": 2980,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -12005,7 +11869,7 @@
     "payloadType": "str",
     "topic": "sensor/button/garage",
     "x": 600,
-    "y": 3060,
+    "y": 3020,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -12031,7 +11895,7 @@
     "payloadType": "str",
     "topic": "sensor/button/pool",
     "x": 590,
-    "y": 3100,
+    "y": 3060,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -12057,7 +11921,7 @@
     "payloadType": "str",
     "topic": "switch/sonoff/k8200",
     "x": 600,
-    "y": 3140,
+    "y": 3100,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -12083,7 +11947,7 @@
     "payloadType": "str",
     "topic": "sensor/ds18b20/brewery",
     "x": 610,
-    "y": 3180,
+    "y": 3140,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -12109,7 +11973,7 @@
     "payloadType": "str",
     "topic": "sensor/spindle/fermenter",
     "x": 610,
-    "y": 3220,
+    "y": 3180,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -12135,7 +11999,7 @@
     "payloadType": "str",
     "topic": "control/ssr/brewery",
     "x": 590,
-    "y": 3260,
+    "y": 3220,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -12161,7 +12025,7 @@
     "payloadType": "str",
     "topic": "display/pixel/kitchen",
     "x": 600,
-    "y": 2800,
+    "y": 2760,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -12187,7 +12051,7 @@
     "payloadType": "str",
     "topic": "meter/electricity/utilityroom",
     "x": 620,
-    "y": 2920,
+    "y": 2880,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -12213,7 +12077,7 @@
     "payloadType": "str",
     "topic": "light/ws2812/terrace1",
     "x": 600,
-    "y": 2840,
+    "y": 2800,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -12239,7 +12103,7 @@
     "payloadType": "str",
     "topic": "light/ws2812/terrace2",
     "x": 600,
-    "y": 2880,
+    "y": 2840,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -12265,7 +12129,7 @@
     "payloadType": "str",
     "topic": "switch/sonoff/bedroom",
     "x": 600,
-    "y": 3300,
+    "y": 3260,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -12291,7 +12155,7 @@
     "payloadType": "str",
     "topic": "sensor/ttp223/bedroom",
     "x": 610,
-    "y": 3340,
+    "y": 3300,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -12317,7 +12181,7 @@
     "payloadType": "str",
     "topic": "switch/sonoff/gallery1",
     "x": 600,
-    "y": 3380,
+    "y": 3340,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -12358,8 +12222,8 @@
     "reset": "",
     "bytopic": "all",
     "name": "",
-    "x": 810,
-    "y": 1360,
+    "x": 812,
+    "y": 1320,
     "wires": [
       [
         "f1f23507.afc3d8",
@@ -12390,8 +12254,8 @@
     "offvalueType": "str",
     "officon": "error_outline",
     "offcolor": "red",
-    "x": 1011,
-    "y": 1360,
+    "x": 1013,
+    "y": 1320,
     "wires": [
       []
     ]
@@ -12415,7 +12279,7 @@
     "payloadType": "str",
     "topic": "sensor/gesture/test",
     "x": 150,
-    "y": 1960,
+    "y": 1920,
     "wires": [
       [
         "b6bc8fd1.c46ec"
@@ -12441,7 +12305,7 @@
     "payloadType": "str",
     "topic": "sensor/gesture/test",
     "x": 590,
-    "y": 3420,
+    "y": 3380,
     "wires": [
       [
         "e59e4935.4a4238"
@@ -12602,12 +12466,7 @@
       },
       {
         "t": "eq",
-        "v": "switch/sonoff/gallery",
-        "vt": "str"
-      },
-      {
-        "t": "eq",
-        "v": "switch/sonoff/location4",
+        "v": "light/sonoff/corridor",
         "vt": "str"
       },
       {
@@ -12713,7 +12572,7 @@
     ],
     "checkall": "true",
     "repair": false,
-    "outputs": 34,
+    "outputs": 33,
     "x": 310,
     "y": 2540,
     "wires": [
@@ -12755,9 +12614,6 @@
       ],
       [
         "a9a3efe7.41807"
-      ],
-      [
-        "50c00655.b1ad28"
       ],
       [
         "a1656fd.650d99"
@@ -13687,12 +13543,7 @@
       },
       {
         "t": "eq",
-        "v": "switch/sonoff/gallery",
-        "vt": "str"
-      },
-      {
-        "t": "eq",
-        "v": "switch/sonoff/location4",
+        "v": "light/sonoff/corridor",
         "vt": "str"
       },
       {
@@ -13763,7 +13614,7 @@
     ],
     "checkall": "true",
     "repair": false,
-    "outputs": 34,
+    "outputs": 33,
     "x": 550,
     "y": 4000,
     "wires": [
@@ -13826,9 +13677,6 @@
       ],
       [
         "d529f7b2.e523f8"
-      ],
-      [
-        "8eee2995.d9b2e8"
       ],
       [
         "f9297945.e3ebc8"
@@ -14426,7 +14274,7 @@
     "id": "d529f7b2.e523f8",
     "type": "ui_switch",
     "z": "8e2c5c11.fae26",
-    "name": "mqtt switch/sonoff/gallery",
+    "name": "mqtt light/sonoff/corridor",
     "label": "",
     "tooltip": "mqtt connection state",
     "group": "3156ce3a.ed9862",
@@ -14447,35 +14295,6 @@
     "offcolor": "red",
     "x": 998,
     "y": 4360,
-    "wires": [
-      []
-    ]
-  },
-  {
-    "id": "8eee2995.d9b2e8",
-    "type": "ui_switch",
-    "z": "8e2c5c11.fae26",
-    "name": "mqtt switch/sonoff/location4",
-    "label": "",
-    "tooltip": "mqtt connection state",
-    "group": "3156ce3a.ed9862",
-    "order": 40,
-    "width": "1",
-    "height": "1",
-    "passthru": false,
-    "decouple": "true",
-    "topic": "",
-    "style": "",
-    "onvalue": "online",
-    "onvalueType": "str",
-    "onicon": "done",
-    "oncolor": "green",
-    "offvalue": "offline",
-    "offvalueType": "str",
-    "officon": "error_outline",
-    "offcolor": "red",
-    "x": 1008,
-    "y": 4400,
     "wires": [
       []
     ]
@@ -14504,7 +14323,7 @@
     "officon": "error_outline",
     "offcolor": "red",
     "x": 1018,
-    "y": 4440,
+    "y": 4400,
     "wires": [
       []
     ]
@@ -14533,7 +14352,7 @@
     "officon": "error_outline",
     "offcolor": "red",
     "x": 1009,
-    "y": 4480,
+    "y": 4440,
     "wires": [
       []
     ]
@@ -14562,7 +14381,7 @@
     "officon": "error_outline",
     "offcolor": "red",
     "x": 999,
-    "y": 4520,
+    "y": 4480,
     "wires": [
       []
     ]
@@ -14591,7 +14410,7 @@
     "officon": "error_outline",
     "offcolor": "red",
     "x": 1019,
-    "y": 4560,
+    "y": 4520,
     "wires": [
       []
     ]
@@ -14620,7 +14439,7 @@
     "officon": "error_outline",
     "offcolor": "red",
     "x": 999,
-    "y": 4600,
+    "y": 4560,
     "wires": [
       []
     ]
@@ -14649,7 +14468,7 @@
     "officon": "error_outline",
     "offcolor": "red",
     "x": 1000,
-    "y": 4640,
+    "y": 4600,
     "wires": [
       []
     ]
@@ -14678,7 +14497,7 @@
     "officon": "error_outline",
     "offcolor": "red",
     "x": 1013,
-    "y": 4680,
+    "y": 4640,
     "wires": [
       []
     ]
@@ -14707,7 +14526,7 @@
     "officon": "error_outline",
     "offcolor": "red",
     "x": 1013,
-    "y": 4720,
+    "y": 4680,
     "wires": [
       []
     ]
@@ -14736,7 +14555,7 @@
     "officon": "error_outline",
     "offcolor": "red",
     "x": 1026,
-    "y": 4760,
+    "y": 4720,
     "wires": [
       []
     ]
@@ -14765,7 +14584,7 @@
     "officon": "error_outline",
     "offcolor": "red",
     "x": 1021,
-    "y": 4800,
+    "y": 4760,
     "wires": [
       []
     ]
@@ -14794,7 +14613,7 @@
     "officon": "error_outline",
     "offcolor": "red",
     "x": 1021,
-    "y": 4840,
+    "y": 4800,
     "wires": [
       []
     ]
@@ -14823,7 +14642,7 @@
     "officon": "error_outline",
     "offcolor": "red",
     "x": 1021,
-    "y": 4880,
+    "y": 4840,
     "wires": [
       []
     ]
@@ -14852,7 +14671,7 @@
     "officon": "error_outline",
     "offcolor": "red",
     "x": 1011,
-    "y": 4920,
+    "y": 4880,
     "wires": [
       []
     ]
