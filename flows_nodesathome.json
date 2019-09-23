@@ -10667,7 +10667,7 @@
     "format": "{{msg.payload.appCfg}}",
     "layout": "row-left",
     "x": 860,
-    "y": 860,
+    "y": 900,
     "wires": []
   },
   {
@@ -10699,7 +10699,7 @@
     "format": "{{msg.payload.mqtt.retain}}",
     "layout": "row-left",
     "x": 870,
-    "y": 620,
+    "y": 660,
     "wires": []
   },
   {
@@ -10715,7 +10715,7 @@
     "format": "{{msg.payload.trace.ip}}",
     "layout": "row-left",
     "x": 860,
-    "y": 660,
+    "y": 700,
     "wires": []
   },
   {
@@ -10795,7 +10795,8 @@
         "5490feb9.2ab25",
         "cd4cbed5.62bb3",
         "efe13914.3d8c48",
-        "c9d14b28.aec988"
+        "c9d14b28.aec988",
+        "5199defb.ec465"
       ]
     ]
   },
@@ -10824,7 +10825,7 @@
     "format": "{{msg.payload.timer}}",
     "layout": "row-left",
     "x": 850,
-    "y": 820,
+    "y": 860,
     "wires": []
   },
   {
@@ -10909,7 +10910,7 @@
     "format": "{{msg.payload.mqtt.broker}}",
     "layout": "row-left",
     "x": 870,
-    "y": 540,
+    "y": 580,
     "wires": []
   },
   {
@@ -10925,7 +10926,7 @@
     "format": "{{msg.payload.mqtt.keepAliveTime}}",
     "layout": "row-left",
     "x": 890,
-    "y": 580,
+    "y": 620,
     "wires": []
   },
   {
@@ -10941,7 +10942,7 @@
     "format": "{{msg.payload.trace.port}}",
     "layout": "row-left",
     "x": 860,
-    "y": 700,
+    "y": 740,
     "wires": []
   },
   {
@@ -10957,7 +10958,7 @@
     "format": "{{msg.payload.trace.onUpdate}}",
     "layout": "row-left",
     "x": 880,
-    "y": 740,
+    "y": 780,
     "wires": []
   },
   {
@@ -10973,7 +10974,7 @@
     "format": "{{msg.payload.trace.onStartup}}",
     "layout": "row-left",
     "x": 880,
-    "y": 780,
+    "y": 820,
     "wires": []
   },
   {
@@ -15085,6 +15086,38 @@
     "wires": [
       [
         "8569385c.b137d8"
+      ]
+    ]
+  },
+  {
+    "id": "1d816adb.69a065",
+    "type": "ui_text",
+    "z": "67442bb3.903494",
+    "group": "5de7d7da.a53e18",
+    "order": 8,
+    "width": "20",
+    "height": "1",
+    "name": "",
+    "label": "wifi access point",
+    "format": "{{msg.payload}}",
+    "layout": "row-left",
+    "x": 1040,
+    "y": 540,
+    "wires": []
+  },
+  {
+    "id": "5199defb.ec465",
+    "type": "function",
+    "z": "67442bb3.903494",
+    "name": "ap_name",
+    "func": "\nvar ap = [];\nap [ \"c8:0e:14:66:e0:e1\" ] = \"mauzi\";\nap [ \"cc:ce:1e:e2:dd:5b\" ] = \"draguran\";\nap [ \"f0:b0:14:e1:92:a5\" ] = \"meltan\";\n\nvar result = \"\";\nif ( msg.payload.wifi.apmac ) {\n    result = ap [msg.payload.wifi.apmac];\n}\nmsg.payload = result;\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 860,
+    "y": 540,
+    "wires": [
+      [
+        "1d816adb.69a065"
       ]
     ]
   }
