@@ -2984,7 +2984,7 @@
       },
       {
         "t": "eq",
-        "v": "switch/sonoff/corridor",
+        "v": "light/sonoff/corridor",
         "vt": "str"
       },
       {
