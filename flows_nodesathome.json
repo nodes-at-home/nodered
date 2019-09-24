@@ -2944,7 +2944,7 @@
       },
       {
         "t": "eq",
-        "v": "light/sonoff/corridor",
+        "v": "sensor/button/indoor",
         "vt": "str"
       },
       {
