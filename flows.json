@@ -11088,7 +11088,7 @@
                 "t": "set",
                 "p": "url",
                 "pt": "msg",
-                "to": "\"https://fahrinfo.vbb.de/restproxy/departureBoard?format=json&accessId=\" & $flowContext(\"vbb_access_id\") & \"&id=\" & payload",
+                "to": "\"https://fahrinfo.vbb.de/restproxy/2.4/departureBoard?format=json&accessId=\" & $flowContext(\"vbb_access_id\") & \"&id=\" & payload",
                 "tot": "jsonata"
             },
             {
@@ -12783,7 +12783,7 @@
                 "t": "set",
                 "p": "url",
                 "pt": "msg",
-                "to": "\"https://fahrinfo.vbb.de/restproxy/departureBoard?format=json&accessId=\" & $flowContext(\"vbb_access_id\") & \"&id=\" & payload",
+                "to": "\"https://fahrinfo.vbb.de/restproxy/2.4/departureBoard?format=json&accessId=\" & $flowContext(\"vbb_access_id\") & \"&id=\" & payload",
                 "tot": "jsonata"
             },
             {
@@ -14941,7 +14941,7 @@
         "type": "function",
         "z": "67442bb3.903494",
         "name": "ap_name",
-        "func": "\nvar ap = [];\nap [ \"c8:0e:14:66:e0:e1\" ] = \"mauzi\";\nap [ \"cc:ce:1e:e2:dd:5b\" ] = \"draguran\";\nap [ \"f0:b0:14:e1:92:a5\" ] = \"meltan\";\n\nvar result = \"\";\nif ( msg.payload.wifi.apmac ) {\n    result = ap [msg.payload.wifi.apmac];\n}\nmsg.payload = result;\n\nreturn msg;",
+        "func": "\nvar ap = [];\nap [ \"c8:0e:14:66:e0:e1\" ] = \"mauzi\";\nap [ \"cc:ce:1e:e2:dd:5b\" ] = \"draguran\";\nap [ \"f0:b0:14:e1:92:a5\" ] = \"meltan\";\n\nvar result = \"\";\nif ( msg.payload.wifi && msg.payload.wifi.apmac ) {\n    result = ap [msg.payload.wifi.apmac];\n}\nmsg.payload = result;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 860,
