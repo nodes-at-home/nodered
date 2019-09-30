@@ -14988,7 +14988,7 @@
         "measurement": "dBm",
         "precision": "",
         "retentionPolicy": "",
-        "x": 600,
+        "x": 620,
         "y": 640,
         "wires": []
     },
@@ -15012,11 +15012,11 @@
         "id": "daca9ccc.8e5d2",
         "type": "function",
         "z": "fc8ae83a.bd2f98",
-        "name": "apname",
-        "func": "var ap = [];\nap [ \"c8:0e:14:66:e0:e1\" ] = \"mauzi\";\nap [ \"cc:ce:1e:e2:dd:5b\" ] = \"draguran\";\nap [ \"f0:b0:14:e1:92:a5\" ] = \"meltan\";\n\nvar result = \"\";\nif ( msg.payload.apmac ) {\n    result = ap [msg.payload.apmac];\n}\nmsg.payload.apname = result;\n\nreturn msg;",
+        "name": "fields+tags",
+        "func": "var ap = [];\nap [ \"c8:0e:14:66:e0:e1\" ] = \"mauzi\";\nap [ \"cc:ce:1e:e2:dd:5b\" ] = \"draguran\";\nap [ \"f0:b0:14:e1:92:a5\" ] = \"meltan\";\n\nvar name = \"\";\nif ( msg.payload.apmac ) {\n    name = ap [msg.payload.apmac];\n}\n\nvar result = [\n    // fields\n    {\n        value: msg.payload.value,\n        unit: msg.payload.unit,\n        apmac: msg.payload.apmac\n    },\n    // tags\n    {\n        apname: name,\n        chipid: msg.payload.chipid,\n        topic: msg.payload.topic.slice ( 11 )\n    }\n];\n\nmsg.payload = result;\n\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 420,
+        "x": 430,
         "y": 640,
         "wires": [
             [
