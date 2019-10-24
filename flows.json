@@ -3053,11 +3053,16 @@
                 "t": "eq",
                 "v": "sensor/gesture/test",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "display/pitouch/corridor",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 33,
+        "outputs": 34,
         "x": 570,
         "y": 440,
         "wires": [
@@ -3159,6 +3164,9 @@
             ],
             [
                 "18ba4489.7371ab"
+            ],
+            [
+                "ab67c34c.04f02"
             ]
         ]
     },
@@ -12582,11 +12590,16 @@
                 "t": "eq",
                 "v": "sensor/gesture/test",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "display/pitouch/corridor",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 33,
+        "outputs": 34,
         "x": 310,
         "y": 2540,
         "wires": [
@@ -12688,6 +12701,9 @@
             ],
             [
                 "59e887d.f332978"
+            ],
+            [
+                "16b0884d.4bb698"
             ]
         ]
     },
@@ -12831,7 +12847,8 @@
         "name": "send message",
         "links": [
             "36e0dc01.361524",
-            "45517f7d.b95e6"
+            "45517f7d.b95e6",
+            "729afff.40124"
         ],
         "x": 555,
         "y": 1820,
@@ -12862,7 +12879,8 @@
         "name": "manual restart telnet input",
         "links": [
             "36e0dc01.361524",
-            "45517f7d.b95e6"
+            "45517f7d.b95e6",
+            "729afff.40124"
         ],
         "x": 55,
         "y": 2540,
@@ -13180,7 +13198,8 @@
         "name": "automatic restart telnet input",
         "links": [
             "36e0dc01.361524",
-            "45517f7d.b95e6"
+            "45517f7d.b95e6",
+            "729afff.40124"
         ],
         "x": 1115,
         "y": 2840,
@@ -13624,11 +13643,16 @@
                 "t": "eq",
                 "v": "sensor/gesture/test",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "display/pitouch/corridor",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 33,
+        "outputs": 34,
         "x": 550,
         "y": 4000,
         "wires": [
@@ -13730,6 +13754,9 @@
             ],
             [
                 "8ae0b6e6.0a68e8"
+            ],
+            [
+                "8709230.4c885e"
             ]
         ]
     },
@@ -15024,6 +15051,139 @@
             [
                 "3fcc775b.1b8608"
             ]
+        ]
+    },
+    {
+        "id": "ab67c34c.04f02",
+        "type": "trigger",
+        "z": "8e2c5c11.fae26",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "20",
+        "extend": true,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "name": "",
+        "x": 820,
+        "y": 1360,
+        "wires": [
+            [
+                "e1605b6d.9b3238",
+                "36e0dc01.361524"
+            ]
+        ]
+    },
+    {
+        "id": "e1605b6d.9b3238",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "label": "display/pitouch/corridor",
+        "tooltip": "watchdog state",
+        "group": "4759591f.23c438",
+        "order": 33,
+        "width": "5",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 1041,
+        "y": 1360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fffd9cd5.8a24b",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "reset display/pitouch/corridor",
+        "group": "4759591f.23c438",
+        "order": 34,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via mqtt",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "icon": "refresh",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "display/pitouch/corridor",
+        "x": 160,
+        "y": 1960,
+        "wires": [
+            [
+                "b6bc8fd1.c46ec"
+            ]
+        ]
+    },
+    {
+        "id": "16b0884d.4bb698",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "restart display/pitouch/corridor",
+        "group": "4759591f.23c438",
+        "order": 35,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via telnet",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "icon": "play_arrow",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "display/pitouch/corridor",
+        "x": 610,
+        "y": 3420,
+        "wires": [
+            [
+                "e59e4935.4a4238"
+            ]
+        ]
+    },
+    {
+        "id": "8709230.4c885e",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "mqtt display/pitouch/corridor",
+        "label": "",
+        "tooltip": "mqtt connection state",
+        "group": "4759591f.23c438",
+        "order": 36,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "online",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "offline",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 1020,
+        "y": 4920,
+        "wires": [
+            []
         ]
     }
 ]
