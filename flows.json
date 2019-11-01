@@ -14839,8 +14839,9 @@
         "type": "mqtt in",
         "z": "fc8ae83a.bd2f98",
         "name": "ambient",
-        "topic": "nodes@home/sensor/gesture/kitchen/value/ambient",
+        "topic": "nodes@home/+/+/+/value/ambient",
         "qos": "0",
+        "datatype": "auto",
         "broker": "7bc3dc1a.d27a94",
         "x": 90,
         "y": 520,
@@ -14860,7 +14861,7 @@
         "y": 520,
         "wires": [
             [
-                "b3b3faba.4b4b88"
+                "ecff253f.886598"
             ]
         ]
     },
@@ -14870,10 +14871,10 @@
         "z": "fc8ae83a.bd2f98",
         "influxdb": "9f5822ca.ea672",
         "name": "influxdb",
-        "measurement": "clear",
+        "measurement": "light",
         "precision": "",
         "retentionPolicy": "",
-        "x": 380,
+        "x": 560,
         "y": 520,
         "wires": []
     },
@@ -15185,5 +15186,52 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "ecff253f.886598",
+        "type": "change",
+        "z": "fc8ae83a.bd2f98",
+        "name": "set topic",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.topic",
+                "pt": "msg",
+                "to": "topic",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload.unit",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 520,
+        "wires": [
+            [
+                "b3b3faba.4b4b88",
+                "3591b980.e0ffb6"
+            ]
+        ]
+    },
+    {
+        "id": "3591b980.e0ffb6",
+        "type": "debug",
+        "z": "fc8ae83a.bd2f98",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 760,
+        "y": 500,
+        "wires": []
     }
 ]
