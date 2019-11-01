@@ -15215,23 +15215,8 @@
         "y": 520,
         "wires": [
             [
-                "b3b3faba.4b4b88",
-                "3591b980.e0ffb6"
+                "b3b3faba.4b4b88"
             ]
         ]
-    },
-    {
-        "id": "3591b980.e0ffb6",
-        "type": "debug",
-        "z": "fc8ae83a.bd2f98",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 760,
-        "y": 500,
-        "wires": []
     }
 ]
