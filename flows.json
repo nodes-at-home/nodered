@@ -8862,8 +8862,8 @@
         "cutout": 0,
         "useOneColor": false,
         "colors": [
-            "#0000ff",
             "#ff8000",
+            "#0000ff",
             "#ff7f0e",
             "#2ca02c",
             "#98df8a",
@@ -8873,11 +8873,10 @@
             "#c5b0d5"
         ],
         "useOldStyle": false,
-        "outputs": 2,
+        "outputs": 1,
         "x": 542,
         "y": 282,
         "wires": [
-            [],
             []
         ]
     },
