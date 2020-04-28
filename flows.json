@@ -31,13 +31,6 @@
         "info": ""
     },
     {
-        "id": "f7610a0.d8198f8",
-        "type": "tab",
-        "label": "brewery",
-        "disabled": false,
-        "info": ""
-    },
-    {
         "id": "813e7ecf.e5fd7",
         "type": "tab",
         "label": "consumption",
@@ -49,6 +42,13 @@
         "type": "tab",
         "label": "pool",
         "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "f7610a0.d8198f8",
+        "type": "tab",
+        "label": "brewery",
+        "disabled": true,
         "info": ""
     },
     {
@@ -14765,7 +14765,7 @@
         "id": "f04129d8.f50598",
         "type": "delay",
         "z": "fc8ae83a.bd2f98",
-        "name": "",
+        "name": "delay",
         "pauseType": "delay",
         "timeout": "5",
         "timeoutUnits": "seconds",
@@ -14776,7 +14776,7 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 260,
+        "x": 230,
         "y": 400,
         "wires": [
             [
