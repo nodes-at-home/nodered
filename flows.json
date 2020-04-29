@@ -45,6 +45,13 @@
         "info": ""
     },
     {
+        "id": "b7ca9f06.440d9",
+        "type": "tab",
+        "label": "brew spindle",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "f7610a0.d8198f8",
         "type": "tab",
         "label": "brewery",
@@ -15393,6 +15400,579 @@
         ],
         "x": 535,
         "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "fd8274cf.7ec268",
+        "type": "mqtt in",
+        "z": "b7ca9f06.440d9",
+        "name": "spindle",
+        "topic": "nodes@home/sensor/spindle/fermenter/value/voltage",
+        "qos": "0",
+        "broker": "7bc3dc1a.d27a94",
+        "x": 90,
+        "y": 480,
+        "wires": [
+            [
+                "1aa6804f.12804"
+            ]
+        ]
+    },
+    {
+        "id": "1aa6804f.12804",
+        "type": "json",
+        "z": "b7ca9f06.440d9",
+        "name": "",
+        "pretty": false,
+        "x": 270,
+        "y": 480,
+        "wires": [
+            [
+                "570fe360.ffb8fc"
+            ]
+        ]
+    },
+    {
+        "id": "570fe360.ffb8fc",
+        "type": "change",
+        "z": "b7ca9f06.440d9",
+        "name": "get value",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.value / 1000",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "value",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 480,
+        "wires": [
+            [
+                "e74e7555.e712f8",
+                "153df63.22ceb0a"
+            ]
+        ]
+    },
+    {
+        "id": "e74e7555.e712f8",
+        "type": "ui_gauge",
+        "z": "b7ca9f06.440d9",
+        "name": "voltage",
+        "group": "7c483f48.dca68",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "",
+        "label": "V",
+        "format": "{{value | number:2}}",
+        "min": "3.0",
+        "max": "4.5",
+        "colors": [
+            "#ff0000",
+            "#ffff00",
+            "#008000"
+        ],
+        "seg1": "3.6",
+        "seg2": "3.8",
+        "x": 580,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "153df63.22ceb0a",
+        "type": "ui_chart",
+        "z": "b7ca9f06.440d9",
+        "name": "chart",
+        "group": "7c483f48.dca68",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd HH:mm",
+        "interpolate": "linear",
+        "nodata": "---",
+        "dot": false,
+        "ymin": "3.0",
+        "ymax": "4.5",
+        "removeOlder": "2",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#8080ff",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 2,
+        "x": 570,
+        "y": 440,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "49b2570.0cf03a8",
+        "type": "ui_gauge",
+        "z": "b7ca9f06.440d9",
+        "name": "temperature",
+        "group": "7c25d4b3.83714c",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "",
+        "label": "°C",
+        "format": "{{value | number:1}}",
+        "min": "15",
+        "max": "35",
+        "colors": [
+            "#ffff00",
+            "#80ff80",
+            "#ffff00"
+        ],
+        "seg1": "23",
+        "seg2": "27",
+        "x": 590,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "19bd5fe0.4919c",
+        "type": "change",
+        "z": "b7ca9f06.440d9",
+        "name": "get value",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.value",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "value",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 220,
+        "wires": [
+            [
+                "49b2570.0cf03a8",
+                "3cefc81a.7506f8"
+            ]
+        ]
+    },
+    {
+        "id": "4405b8b3.039368",
+        "type": "json",
+        "z": "b7ca9f06.440d9",
+        "name": "",
+        "pretty": false,
+        "x": 270,
+        "y": 220,
+        "wires": [
+            [
+                "19bd5fe0.4919c"
+            ]
+        ]
+    },
+    {
+        "id": "8c0a71a3.d9659",
+        "type": "mqtt in",
+        "z": "b7ca9f06.440d9",
+        "name": "temperature",
+        "topic": "nodes@home/sensor/spindle/fermenter/value/temperature",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "7bc3dc1a.d27a94",
+        "x": 110,
+        "y": 220,
+        "wires": [
+            [
+                "4405b8b3.039368"
+            ]
+        ]
+    },
+    {
+        "id": "bc3d5ae8.a9b258",
+        "type": "comment",
+        "z": "b7ca9f06.440d9",
+        "name": "Temperatur",
+        "info": "",
+        "x": 110,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "3cefc81a.7506f8",
+        "type": "ui_chart",
+        "z": "b7ca9f06.440d9",
+        "name": "chart",
+        "group": "7c25d4b3.83714c",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd HH:mm",
+        "interpolate": "linear",
+        "nodata": "---",
+        "dot": false,
+        "ymin": "15",
+        "ymax": "35",
+        "removeOlder": "2",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#8080ff",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 2,
+        "x": 570,
+        "y": 180,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "e784c2ce.c49bf",
+        "type": "ui_gauge",
+        "z": "b7ca9f06.440d9",
+        "name": "tilt",
+        "group": "ff05a58d.b32e78",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "",
+        "label": "°",
+        "format": "{{value | number:1}}",
+        "min": "-90",
+        "max": "90",
+        "colors": [
+            "#ff8000",
+            "#ff8000",
+            "#ff8000"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 570,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "ac49c2ee.9901a",
+        "type": "json",
+        "z": "b7ca9f06.440d9",
+        "name": "",
+        "pretty": false,
+        "x": 270,
+        "y": 320,
+        "wires": [
+            [
+                "fdf6d913.304408"
+            ]
+        ]
+    },
+    {
+        "id": "c8b05307.323d8",
+        "type": "mqtt in",
+        "z": "b7ca9f06.440d9",
+        "name": "tilt values",
+        "topic": "nodes@home/sensor/spindle/fermenter/value/acceleration",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "7bc3dc1a.d27a94",
+        "x": 100,
+        "y": 320,
+        "wires": [
+            [
+                "ac49c2ee.9901a"
+            ]
+        ]
+    },
+    {
+        "id": "e0b79308.bba9c",
+        "type": "comment",
+        "z": "b7ca9f06.440d9",
+        "name": "Neigung",
+        "info": "",
+        "x": 100,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "94d66d7a.0e9c2",
+        "type": "ui_chart",
+        "z": "b7ca9f06.440d9",
+        "name": "chart",
+        "group": "ff05a58d.b32e78",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "dd HH:mm",
+        "interpolate": "linear",
+        "nodata": "---",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "90",
+        "removeOlder": "2",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#8080ff",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 2,
+        "x": 570,
+        "y": 280,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "fdf6d913.304408",
+        "type": "function",
+        "z": "b7ca9f06.440d9",
+        "name": "calc",
+        "func": "// junand 27.11.2017\n\nvar s = msg.payload; // samples\n\n// float pitch = (atan2(_ay, sqrt(_ax * _ax + _az * _az))) * 180.0 / M_PI;\n// float roll = (atan2(_ax, sqrt(_ay * _ay + _az * _az))) * 180.0 / M_PI;\n// return sqrt(pitch * pitch + roll * roll);\n\nvar tilts = [];\n\nfor ( var i = 0; i < s.length; i++ ) {\n    var ax = s [i].a.x;\n    var ay = s [i].a.y;\n    var az = s [i].a.z;\n    //node.warn ( \"ax=\" + ax + \" ay=\" + ay + \" az=\" + az + \" t=\" + s [i].t );\n    var pitch = Math.atan2 ( az, Math.sqrt ( ax*ax + ay*ay ) );\n    var roll  = Math.atan2 ( ax, Math.sqrt ( az*az + ay*ay ) );\n    var tilt = Math.sqrt ( pitch*pitch + roll*roll );\n    //node.warn ( \"pitch=\" + pitch + \" roll=\" + roll + \" tilt=\" + tilt );\n    var t = 180.0 / Math.PI * tilt;\n    //node.warn ( \"tilt=\" + t + \"°\" );\n    tilts [tilts.length] = t;\n}\n\nvar avgTilt = 0;\nfor ( var i = 0; i < tilts.length; i++ ) {\n    avgTilt += tilts [i];\n}\navgTilt /= tilts.length;\n//node.warn ( \"tilt=\" + avgTilt + \"°\" );\n\nmsg.payload = avgTilt.toFixed ( 2 );\nmsg.topic = \"Neigung\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 320,
+        "wires": [
+            [
+                "e784c2ce.c49bf",
+                "94d66d7a.0e9c2",
+                "7fcf2966.84e228"
+            ]
+        ]
+    },
+    {
+        "id": "313bceb1.056112",
+        "type": "mqtt out",
+        "z": "b7ca9f06.440d9",
+        "name": "tilt",
+        "topic": "nodes@home/sensor/spindle/fermenter/value/tilt",
+        "qos": "0",
+        "retain": "true",
+        "broker": "7bc3dc1a.d27a94",
+        "x": 570,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "7fcf2966.84e228",
+        "type": "change",
+        "z": "b7ca9f06.440d9",
+        "name": "value",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.value",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.unit",
+                "pt": "msg",
+                "to": "°",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 380,
+        "wires": [
+            [
+                "98459fad.ca789"
+            ]
+        ]
+    },
+    {
+        "id": "98459fad.ca789",
+        "type": "json",
+        "z": "b7ca9f06.440d9",
+        "name": "",
+        "pretty": false,
+        "x": 450,
+        "y": 380,
+        "wires": [
+            [
+                "313bceb1.056112"
+            ]
+        ]
+    },
+    {
+        "id": "537d3b6a.9c7f44",
+        "type": "ui_button",
+        "z": "b7ca9f06.440d9",
+        "name": "",
+        "group": "7c483f48.dca68",
+        "order": 56,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Reset",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 90,
+        "y": 100,
+        "wires": [
+            [
+                "f2769472.aa33d8",
+                "caa4eed7.937df"
+            ]
+        ]
+    },
+    {
+        "id": "f2769472.aa33d8",
+        "type": "change",
+        "z": "b7ca9f06.440d9",
+        "name": "blank",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[]",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 100,
+        "wires": [
+            [
+                "3cefc81a.7506f8",
+                "94d66d7a.0e9c2",
+                "153df63.22ceb0a"
+            ]
+        ]
+    },
+    {
+        "id": "caa4eed7.937df",
+        "type": "change",
+        "z": "b7ca9f06.440d9",
+        "name": "value = 0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 140,
+        "wires": [
+            [
+                "49b2570.0cf03a8",
+                "e784c2ce.c49bf",
+                "e74e7555.e712f8"
+            ]
+        ]
+    },
+    {
+        "id": "4462c0fa.1ce94",
+        "type": "comment",
+        "z": "b7ca9f06.440d9",
+        "name": "Spindel",
+        "info": "",
+        "x": 90,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "140c9136.81e43f",
+        "type": "comment",
+        "z": "b7ca9f06.440d9",
+        "name": "Akkuüberwachung",
+        "info": "",
+        "x": 130,
+        "y": 440,
         "wires": []
     }
 ]
