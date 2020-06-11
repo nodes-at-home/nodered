@@ -1922,11 +1922,11 @@
         "name": "",
         "server": "server",
         "host": "",
-        "port": "10001",
+        "port": "10002",
         "datamode": "stream",
         "datatype": "utf8",
         "newline": "###",
-        "topic": "",
+        "topic": "10002",
         "base64": false,
         "x": 100,
         "y": 120,
@@ -2026,7 +2026,8 @@
         "y": 120,
         "wires": [
             [
-                "b5c67af7.3fdbc8"
+                "b5c67af7.3fdbc8",
+                "e91305b4.2b1238"
             ]
         ]
     },
@@ -2052,7 +2053,7 @@
         "name": "receive log messages",
         "info": "",
         "x": 140,
-        "y": 80,
+        "y": 40,
         "wires": []
     },
     {
@@ -15974,5 +15975,40 @@
         "x": 130,
         "y": 440,
         "wires": []
+    },
+    {
+        "id": "e91305b4.2b1238",
+        "type": "debug",
+        "z": "fc8ae83a.bd2f98",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 840,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "40c14b06.4089d4",
+        "type": "tcp in",
+        "z": "fc8ae83a.bd2f98",
+        "name": "",
+        "server": "server",
+        "host": "",
+        "port": "10001",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "###",
+        "topic": "10001",
+        "base64": false,
+        "x": 100,
+        "y": 80,
+        "wires": [
+            [
+                "1f6c1953.c84e17"
+            ]
+        ]
     }
 ]
