@@ -4,3 +4,4 @@ node_modules/
 settings.js
 .config.json
 *.backup
+.npm/

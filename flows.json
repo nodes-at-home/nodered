@@ -45,6 +45,13 @@
         "info": ""
     },
     {
+        "id": "307a9852.abfec8",
+        "type": "tab",
+        "label": "pbx",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "b7ca9f06.440d9",
         "type": "tab",
         "label": "brew spindle",
@@ -561,6 +568,37 @@
         "name": "",
         "usetls": false,
         "tls": ""
+    },
+    {
+        "id": "78b675c7.c40cbc",
+        "type": "ui_group",
+        "z": "",
+        "name": "Asterisk",
+        "tab": "7d9bb14a.88f6c",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "a02ee1d2.24219",
+        "type": "ui_group",
+        "z": "",
+        "name": "Devices",
+        "tab": "7d9bb14a.88f6c",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "7d9bb14a.88f6c",
+        "type": "ui_tab",
+        "z": "",
+        "name": "PiPBX",
+        "icon": "stars",
+        "disabled": false,
+        "hidden": false
     },
     {
         "id": "1f55c701.4fff39",
@@ -16009,6 +16047,642 @@
         "wires": [
             [
                 "1f6c1953.c84e17"
+            ]
+        ]
+    },
+    {
+        "id": "a29afefe.bce64",
+        "type": "debug",
+        "z": "307a9852.abfec8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 590,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "7f51f141.2250c",
+        "type": "inject",
+        "z": "307a9852.abfec8",
+        "name": "",
+        "topic": "",
+        "payload": "{ \"action\": \"status\" }",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 190,
+        "y": 160,
+        "wires": [
+            [
+                "d99ca140.bdca1"
+            ]
+        ]
+    },
+    {
+        "id": "686dfb7.94f7004",
+        "type": "debug",
+        "z": "307a9852.abfec8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 770,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "16925b93.fa0354",
+        "type": "ui_switch",
+        "z": "307a9852.abfec8",
+        "name": "",
+        "label": "Online",
+        "tooltip": "",
+        "group": "78b675c7.c40cbc",
+        "order": 0,
+        "width": "5",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 1150,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "324bfbfb.588154",
+        "type": "ui_switch",
+        "z": "307a9852.abfec8",
+        "name": "",
+        "label": "iPhoneX",
+        "tooltip": "",
+        "group": "a02ee1d2.24219",
+        "order": 2,
+        "width": "5",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "Connect",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "Disconnect",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 1160,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d88eef33.49",
+        "type": "ui_switch",
+        "z": "307a9852.abfec8",
+        "name": "",
+        "label": "XperiaXZ3",
+        "tooltip": "",
+        "group": "a02ee1d2.24219",
+        "order": 3,
+        "width": "5",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "Connect",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "Disconnect",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 1170,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3bf40695.049e4a",
+        "type": "switch",
+        "z": "307a9852.abfec8",
+        "name": "",
+        "property": "payload.event",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "FullyBooted",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Shutdown",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "MobileStatus",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "PeerStatus",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 650,
+        "y": 180,
+        "wires": [
+            [
+                "c31d97e4.d2cd58"
+            ],
+            [
+                "7a804d18.b73ea4"
+            ],
+            [
+                "316e93a4.f6a8cc"
+            ],
+            [
+                "2a925554.92b29a"
+            ]
+        ]
+    },
+    {
+        "id": "316e93a4.f6a8cc",
+        "type": "switch",
+        "z": "307a9852.abfec8",
+        "name": "?device",
+        "property": "payload.device",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "iPhoneX",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "XperiaXZ3",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 860,
+        "y": 200,
+        "wires": [
+            [
+                "6609c079.ddb3f"
+            ],
+            [
+                "c0622ad.307b8d8"
+            ]
+        ]
+    },
+    {
+        "id": "6b76dcc4.6d2284",
+        "type": "ui_switch",
+        "z": "307a9852.abfec8",
+        "name": "",
+        "label": "FritzBox",
+        "tooltip": "",
+        "group": "a02ee1d2.24219",
+        "order": 1,
+        "width": "5",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 1180,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c0622ad.307b8d8",
+        "type": "change",
+        "z": "307a9852.abfec8",
+        "name": "mv status",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.status",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1020,
+        "y": 220,
+        "wires": [
+            [
+                "d88eef33.49"
+            ]
+        ]
+    },
+    {
+        "id": "5c70cf.591dbf3",
+        "type": "inject",
+        "z": "307a9852.abfec8",
+        "name": "Test iPhonX on",
+        "topic": "",
+        "payload": "{\"event\":\"MobileStatus\",\"privilege\":\"system,all\",\"status\":\"Connect\",\"device\":\"iPhoneX\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 160,
+        "y": 860,
+        "wires": [
+            [
+                "f91c12b6.45237"
+            ]
+        ]
+    },
+    {
+        "id": "2ff6f448.29491c",
+        "type": "inject",
+        "z": "307a9852.abfec8",
+        "name": "Test iPhonX off",
+        "topic": "",
+        "payload": "{\"event\":\"MobileStatus\",\"privilege\":\"system,all\",\"status\":\"Disconnect\",\"device\":\"iPhoneX\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 160,
+        "y": 900,
+        "wires": [
+            [
+                "f91c12b6.45237"
+            ]
+        ]
+    },
+    {
+        "id": "bfed4520.cfbf98",
+        "type": "inject",
+        "z": "307a9852.abfec8",
+        "name": "Test XperiaXZ3 on",
+        "topic": "",
+        "payload": "{\"event\":\"MobileStatus\",\"privilege\":\"system,all\",\"status\":\"Connect\",\"device\":\"XperiaXZ3\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 170,
+        "y": 960,
+        "wires": [
+            [
+                "f91c12b6.45237"
+            ]
+        ]
+    },
+    {
+        "id": "e54576ea.d7d9d8",
+        "type": "inject",
+        "z": "307a9852.abfec8",
+        "name": "Test XperiaXZ3 off",
+        "topic": "",
+        "payload": "{\"event\":\"MobileStatus\",\"privilege\":\"system,all\",\"status\":\"Disconnect\",\"device\":\"XperiaXZ3\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 170,
+        "y": 1000,
+        "wires": [
+            [
+                "f91c12b6.45237"
+            ]
+        ]
+    },
+    {
+        "id": "6609c079.ddb3f",
+        "type": "change",
+        "z": "307a9852.abfec8",
+        "name": "mv status",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.status",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1020,
+        "y": 180,
+        "wires": [
+            [
+                "324bfbfb.588154"
+            ]
+        ]
+    },
+    {
+        "id": "2a925554.92b29a",
+        "type": "switch",
+        "z": "307a9852.abfec8",
+        "name": "?peer",
+        "property": "payload.peer",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "SIP/FritzBox",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 850,
+        "y": 300,
+        "wires": [
+            [
+                "4fd05e07.480a7"
+            ]
+        ]
+    },
+    {
+        "id": "4fd05e07.480a7",
+        "type": "change",
+        "z": "307a9852.abfec8",
+        "name": "mv status",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload.peerstatus = \"Registered\" ? \"1\" : \"0\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1020,
+        "y": 300,
+        "wires": [
+            [
+                "6b76dcc4.6d2284"
+            ]
+        ]
+    },
+    {
+        "id": "4d204c4.1ba83b4",
+        "type": "inject",
+        "z": "307a9852.abfec8",
+        "name": "Test shutdown",
+        "topic": "",
+        "payload": "{\"event\":\"Shutdown\",\"privilege\":\"system,all\",\"shutdown\":\"Cleanly\",\"restart\":\"False\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 150,
+        "y": 700,
+        "wires": [
+            [
+                "f91c12b6.45237"
+            ]
+        ]
+    },
+    {
+        "id": "35857efd.d87df2",
+        "type": "inject",
+        "z": "307a9852.abfec8",
+        "name": "Test booted",
+        "topic": "",
+        "payload": "{\"event\":\"FullyBooted\",\"privilege\":\"system,all\",\"uptime\":\"1616\",\"lastreload\":\"1616\",\"status\":\"Fully Booted\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 150,
+        "y": 660,
+        "wires": [
+            [
+                "f91c12b6.45237"
+            ]
+        ]
+    },
+    {
+        "id": "c31d97e4.d2cd58",
+        "type": "change",
+        "z": "307a9852.abfec8",
+        "name": "set 1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 80,
+        "wires": [
+            [
+                "16925b93.fa0354"
+            ]
+        ]
+    },
+    {
+        "id": "7a804d18.b73ea4",
+        "type": "change",
+        "z": "307a9852.abfec8",
+        "name": "set 0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 120,
+        "wires": [
+            [
+                "16925b93.fa0354"
+            ]
+        ]
+    },
+    {
+        "id": "e630eebf.74a03",
+        "type": "inject",
+        "z": "307a9852.abfec8",
+        "name": "Test FritzBox registered",
+        "topic": "",
+        "payload": "{\"event\":\"PeerStatus\",\"privilege\":\"system,all\",\"channeltype\":\"SIP\",\"peer\":\"SIP/FritzBox\",\"peerstatus\":\"Registered\",\"address\":\"192.168.2.1:5060\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 180,
+        "y": 760,
+        "wires": [
+            [
+                "f91c12b6.45237"
+            ]
+        ]
+    },
+    {
+        "id": "b167b65b.fd4f78",
+        "type": "inject",
+        "z": "307a9852.abfec8",
+        "name": "Test FritzBox unregistered",
+        "topic": "",
+        "payload": "{\"event\":\"PeerStatus\",\"privilege\":\"system,all\",\"channeltype\":\"SIP\",\"peer\":\"SIP/FritzBox\",\"peerstatus\":\"Xegistered\",\"address\":\"192.168.2.1:5060\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 190,
+        "y": 800,
+        "wires": [
+            [
+                "f91c12b6.45237"
+            ]
+        ]
+    },
+    {
+        "id": "66b1ae64.67085",
+        "type": "comment",
+        "z": "307a9852.abfec8",
+        "name": "pipbx is listening to all events",
+        "info": "",
+        "x": 460,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "c4b2f227.0450e",
+        "type": "link in",
+        "z": "307a9852.abfec8",
+        "name": "test",
+        "links": [
+            "f91c12b6.45237"
+        ],
+        "x": 160,
+        "y": 420,
+        "wires": [
+            [
+                "3bf40695.049e4a"
+            ]
+        ]
+    },
+    {
+        "id": "f91c12b6.45237",
+        "type": "link out",
+        "z": "307a9852.abfec8",
+        "name": "test",
+        "links": [
+            "c4b2f227.0450e"
+        ],
+        "x": 495,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "41dbc74.6266538",
+        "type": "comment",
+        "z": "307a9852.abfec8",
+        "name": "Asterisk Manager Events for Test",
+        "info": "",
+        "x": 220,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "d99ca140.bdca1",
+        "type": "Asterisk-AMI",
+        "z": "307a9852.abfec8",
+        "name": "pipbx",
+        "ip": "pipbx",
+        "port": "5038",
+        "user": "",
+        "events": "on",
+        "x": 390,
+        "y": 160,
+        "wires": [
+            [
+                "a29afefe.bce64"
+            ],
+            [
+                "686dfb7.94f7004",
+                "3bf40695.049e4a"
             ]
         ]
     }
