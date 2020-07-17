@@ -11031,9 +11031,13 @@
         "z": "c9cf8bbb.029148",
         "name": "",
         "method": "GET",
-        "ret": "obj",
+        "ret": "txt",
+        "paytoqs": "ignore",
         "url": "",
         "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
         "x": 550,
         "y": 960,
         "wires": [
@@ -11065,7 +11069,8 @@
         "y": 960,
         "wires": [
             [
-                "ed565456.4cb988"
+                "ed565456.4cb988",
+                "38199b9b.599744"
             ]
         ]
     },
@@ -11267,7 +11272,7 @@
                 "t": "set",
                 "p": "payload_new.messages[0].text",
                 "pt": "msg",
-                "to": "msg.payload[0].name & \"um \" & msg.payload[0].time & \" nach \" & msg.payload[0].direction",
+                "to": "msg.payload[0].name & \" um \" & msg.payload[0].time & \" nach \" & msg.payload[0].direction",
                 "tot": "jsonata"
             },
             {
@@ -16717,6 +16722,63 @@
             [
                 "686dfb7.94f7004",
                 "3bf40695.049e4a"
+            ]
+        ]
+    },
+    {
+        "id": "38199b9b.599744",
+        "type": "switch",
+        "z": "c9cf8bbb.029148",
+        "name": "?null",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 950,
+        "y": 920,
+        "wires": [
+            [
+                "20d47223.f165be"
+            ]
+        ]
+    },
+    {
+        "id": "20d47223.f165be",
+        "type": "change",
+        "z": "c9cf8bbb.029148",
+        "name": "clear messages",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "nodes@home/display/pixel/kitchen/message/traffic/sbahn",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"messages\":[{\"line\":13,\"text\":\"Kein S-Bahn-Verkehr!\"},{\"line\":14,\"clear\":true}]}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1100,
+        "y": 920,
+        "wires": [
+            [
+                "9ed62c96.78bbc"
             ]
         ]
     }
