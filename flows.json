@@ -3060,7 +3060,7 @@
             },
             {
                 "t": "eq",
-                "v": "control/ssr/brewery",
+                "v": "sensor/DHT22/office",
                 "vt": "str"
             },
             {
@@ -6695,7 +6695,7 @@
         "type": "ui_switch",
         "z": "8e2c5c11.fae26",
         "name": "",
-        "label": "control/ssr/brewery",
+        "label": "sensor/DHT22/office",
         "tooltip": "watchdog state",
         "group": "4759591f.23c438",
         "order": 21,
@@ -6713,7 +6713,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1001,
+        "x": 1011,
         "y": 1000,
         "wires": [
             []
@@ -9705,7 +9705,7 @@
         "id": "c61588db.943618",
         "type": "ui_button",
         "z": "8e2c5c11.fae26",
-        "name": "reset control/ssr/brewery",
+        "name": "reset sensor/DHT22/office",
         "group": "4759591f.23c438",
         "order": 22,
         "width": "1",
@@ -9718,7 +9718,7 @@
         "icon": "refresh",
         "payload": "",
         "payloadType": "str",
-        "topic": "control/ssr/brewery",
+        "topic": "sensor/DHT22/office",
         "x": 150,
         "y": 1760,
         "wires": [
@@ -12070,7 +12070,7 @@
         "id": "d21f5dc3.f95ad",
         "type": "ui_button",
         "z": "8e2c5c11.fae26",
-        "name": "restart control/ssr/brewery",
+        "name": "restart sensor/DHT22/office",
         "group": "4759591f.23c438",
         "order": 23,
         "width": "1",
@@ -12083,8 +12083,8 @@
         "icon": "play_arrow",
         "payload": "",
         "payloadType": "str",
-        "topic": "control/ssr/brewery",
-        "x": 590,
+        "topic": "sensor/DHT22/office",
+        "x": 600,
         "y": 3220,
         "wires": [
             [
@@ -13666,7 +13666,7 @@
             },
             {
                 "t": "eq",
-                "v": "control/ssr/brewery",
+                "v": "sensor/DHT22/office",
                 "vt": "str"
             },
             {
@@ -14525,7 +14525,7 @@
         "id": "b8ce9e0f.09f0b",
         "type": "ui_switch",
         "z": "8e2c5c11.fae26",
-        "name": "mqtt control/ssr/brewery",
+        "name": "mqtt sensor/DHT22/office",
         "label": "",
         "tooltip": "mqtt connection state",
         "group": "4759591f.23c438",
