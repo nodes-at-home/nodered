@@ -11031,7 +11031,7 @@
         "z": "c9cf8bbb.029148",
         "name": "",
         "method": "GET",
-        "ret": "txt",
+        "ret": "obj",
         "paytoqs": "ignore",
         "url": "",
         "tls": "",
