@@ -81,13 +81,11 @@
     },
     {
         "id": "899805d0.4345c8",
-        "type": "google-api-config",
-        "z": ""
+        "type": "google-api-config"
     },
     {
         "id": "cffdbc2a.4ba77",
         "type": "ui_tab",
-        "z": "",
         "name": "Node Update",
         "icon": "dashboard",
         "order": 2,
@@ -193,7 +191,6 @@
     {
         "id": "1af04f91.de5e1",
         "type": "ui_group",
-        "z": "",
         "name": "Nodes 1",
         "tab": "cffdbc2a.4ba77",
         "order": 2,
@@ -203,7 +200,6 @@
     {
         "id": "68f8422e.2c21dc",
         "type": "ui_group",
-        "z": "",
         "name": "Files",
         "tab": "cffdbc2a.4ba77",
         "order": 1,
@@ -213,14 +209,12 @@
     {
         "id": "6ced38ac.829508",
         "type": "websocket-listener",
-        "z": "",
         "path": "/mqtt_to_websocket",
         "wholemsg": "true"
     },
     {
         "id": "c39c0138.5637",
         "type": "ui_group",
-        "z": "",
         "name": "Nodes 2",
         "tab": "cffdbc2a.4ba77",
         "order": 3,
@@ -230,7 +224,6 @@
     {
         "id": "4053cb3b.f891e4",
         "type": "ui_tab",
-        "z": "",
         "name": "Node States",
         "icon": "dashboard",
         "order": 1
@@ -238,7 +231,6 @@
     {
         "id": "eec5fbfe.9e9ef8",
         "type": "ui_group",
-        "z": "",
         "name": "Nodes 1",
         "tab": "4053cb3b.f891e4",
         "order": 1,
@@ -249,7 +241,6 @@
     {
         "id": "3156ce3a.ed9862",
         "type": "ui_group",
-        "z": "",
         "name": "Nodes 2",
         "tab": "4053cb3b.f891e4",
         "order": 2,
@@ -260,7 +251,6 @@
     {
         "id": "4759591f.23c438",
         "type": "ui_group",
-        "z": "",
         "name": "Nodes 3",
         "tab": "4053cb3b.f891e4",
         "order": 3,
@@ -271,7 +261,6 @@
     {
         "id": "165a13ba.7f27ec",
         "type": "ui_group",
-        "z": "",
         "name": "Temperatur",
         "tab": "eb63d2fd.5cd68",
         "order": 2,
@@ -282,7 +271,6 @@
     {
         "id": "e1a7eb0b.d543f8",
         "type": "ui_group",
-        "z": "",
         "name": "Steuerung",
         "tab": "eb63d2fd.5cd68",
         "order": 1,
@@ -292,7 +280,6 @@
     {
         "id": "903ce37b.b2576",
         "type": "ui_group",
-        "z": "",
         "name": "Rezept",
         "tab": "eb63d2fd.5cd68",
         "order": 3,
@@ -303,7 +290,6 @@
     {
         "id": "1a9412b.dfe4aed",
         "type": "influxdb",
-        "z": "",
         "hostname": "influxdb",
         "port": "8086",
         "protocol": "http",
@@ -315,7 +301,6 @@
     {
         "id": "eb63d2fd.5cd68",
         "type": "ui_tab",
-        "z": "",
         "name": "Brauerei",
         "icon": "fa-beer",
         "order": 6
@@ -323,7 +308,6 @@
     {
         "id": "9f5822ca.ea672",
         "type": "influxdb",
-        "z": "",
         "hostname": "influxdb",
         "port": "8086",
         "protocol": "http",
@@ -335,7 +319,6 @@
     {
         "id": "457a1e5.d114de",
         "type": "ui_group",
-        "z": "",
         "name": "Nodes 3",
         "tab": "cffdbc2a.4ba77",
         "order": 4,
@@ -345,7 +328,6 @@
     {
         "id": "b12a4a7f.ebf3c8",
         "type": "ui_tab",
-        "z": "",
         "name": "Gärspindel",
         "icon": "dashboard",
         "order": 8
@@ -353,7 +335,6 @@
     {
         "id": "7c483f48.dca68",
         "type": "ui_group",
-        "z": "",
         "name": "Akkuspannung",
         "tab": "b12a4a7f.ebf3c8",
         "order": 3,
@@ -363,7 +344,6 @@
     {
         "id": "7c25d4b3.83714c",
         "type": "ui_group",
-        "z": "",
         "name": "Temperatur",
         "tab": "b12a4a7f.ebf3c8",
         "order": 1,
@@ -373,7 +353,6 @@
     {
         "id": "ff05a58d.b32e78",
         "type": "ui_group",
-        "z": "",
         "name": "Spindelneigung",
         "tab": "b12a4a7f.ebf3c8",
         "order": 2,
@@ -383,7 +362,6 @@
     {
         "id": "a3020470.5bcbd8",
         "type": "ui_group",
-        "z": "",
         "name": "Strom",
         "tab": "f34c6870.38cee8",
         "order": 1,
@@ -393,7 +371,6 @@
     {
         "id": "f34c6870.38cee8",
         "type": "ui_tab",
-        "z": "",
         "name": "Hausverbrauch",
         "icon": "dashboard",
         "order": 4
@@ -401,7 +378,6 @@
     {
         "id": "18da7961.ac8f27",
         "type": "influxdb",
-        "z": "",
         "hostname": "influxdb",
         "port": "8086",
         "protocol": "http",
@@ -413,7 +389,6 @@
     {
         "id": "be1d2242.fd0f2",
         "type": "ui_group",
-        "z": "",
         "name": "Ticker",
         "tab": "eb63d2fd.5cd68",
         "order": 4,
@@ -424,7 +399,6 @@
     {
         "id": "f5c1d8d5.e934a8",
         "type": "ui_tab",
-        "z": "",
         "name": "Nachguss",
         "icon": "dashboard",
         "order": 7
@@ -432,7 +406,6 @@
     {
         "id": "dd05ddf5.dd4e",
         "type": "ui_group",
-        "z": "",
         "name": "Temperatur 1 (weiß)",
         "tab": "f5c1d8d5.e934a8",
         "order": 1,
@@ -443,7 +416,6 @@
     {
         "id": "8455d317.fd8ec",
         "type": "ui_group",
-        "z": "",
         "name": "Spannungsversorgung",
         "tab": "f5c1d8d5.e934a8",
         "order": 3,
@@ -453,7 +425,6 @@
     {
         "id": "f5c64a1d.91b058",
         "type": "ui_group",
-        "z": "",
         "name": "Temperatur 2 (gelb)",
         "tab": "f5c1d8d5.e934a8",
         "order": 2,
@@ -464,7 +435,6 @@
     {
         "id": "33d343b9.d5d19c",
         "type": "ui_tab",
-        "z": "",
         "name": "Pool",
         "icon": "dashboard",
         "order": 5
@@ -472,7 +442,6 @@
     {
         "id": "fbcffb98.f83bc8",
         "type": "ui_group",
-        "z": "",
         "name": "Temperatur",
         "tab": "33d343b9.d5d19c",
         "order": 2,
@@ -482,7 +451,6 @@
     {
         "id": "a1307cc6.60973",
         "type": "ui_group",
-        "z": "",
         "name": "Spannungsversorgung",
         "tab": "33d343b9.d5d19c",
         "order": 3,
@@ -492,7 +460,6 @@
     {
         "id": "3cfa5faf.0300a",
         "type": "ui_group",
-        "z": "",
         "name": "Verlauf",
         "tab": "33d343b9.d5d19c",
         "order": 1,
@@ -502,7 +469,6 @@
     {
         "id": "d4a7808d.ee6f9",
         "type": "ui_group",
-        "z": "",
         "name": "chipid",
         "tab": "abd18845.7765b8",
         "order": 1,
@@ -513,7 +479,6 @@
     {
         "id": "5de7d7da.a53e18",
         "type": "ui_group",
-        "z": "",
         "name": "config",
         "tab": "abd18845.7765b8",
         "order": 2,
@@ -524,7 +489,6 @@
     {
         "id": "abd18845.7765b8",
         "type": "ui_tab",
-        "z": "",
         "name": "Node Config",
         "icon": "dashboard",
         "order": 3
@@ -532,7 +496,6 @@
     {
         "id": "7bc3dc1a.d27a94",
         "type": "mqtt-broker",
-        "z": "",
         "name": "",
         "broker": "mosquitto",
         "port": "1883",
@@ -554,13 +517,11 @@
     {
         "id": "6e66383c.a2a358",
         "type": "google-credentials",
-        "z": "",
         "displayName": "Andreas Jungierek"
     },
     {
         "id": "382f38a5.a21be8",
         "type": "influxdb",
-        "z": "",
         "hostname": "influxdb",
         "port": "8086",
         "protocol": "http",
@@ -572,7 +533,6 @@
     {
         "id": "78b675c7.c40cbc",
         "type": "ui_group",
-        "z": "",
         "name": "Asterisk",
         "tab": "7d9bb14a.88f6c",
         "order": 1,
@@ -583,7 +543,6 @@
     {
         "id": "a02ee1d2.24219",
         "type": "ui_group",
-        "z": "",
         "name": "Devices",
         "tab": "7d9bb14a.88f6c",
         "order": 2,
@@ -594,7 +553,6 @@
     {
         "id": "7d9bb14a.88f6c",
         "type": "ui_tab",
-        "z": "",
         "name": "PiPBX",
         "icon": "stars",
         "disabled": false,
@@ -1333,7 +1291,10 @@
                 "4594d485.6d20fc",
                 "b54e338f.fc485",
                 "fd97dd78.dae87",
-                "fb324b28.cd46f8"
+                "fb324b28.cd46f8",
+                "b471fca5.c4e5e",
+                "2151f88.9057d08",
+                "49e5f244.8e72bc"
             ]
         ]
     },
@@ -1424,7 +1385,7 @@
         "payloadType": "date",
         "topic": "light/xmastree/dining",
         "x": 420,
-        "y": 1400,
+        "y": 1520,
         "wires": [
             [
                 "6ed6dc87.f74a94"
@@ -1449,7 +1410,7 @@
         "payloadType": "date",
         "topic": "sensor/button/indoor",
         "x": 420,
-        "y": 1160,
+        "y": 1280,
         "wires": [
             [
                 "6ed6dc87.f74a94"
@@ -1474,7 +1435,7 @@
         "payloadType": "date",
         "topic": "sensor/button/garage",
         "x": 420,
-        "y": 1199,
+        "y": 1319,
         "wires": [
             [
                 "6ed6dc87.f74a94"
@@ -1499,7 +1460,7 @@
         "payloadType": "date",
         "topic": "sensor/button/pool",
         "x": 410,
-        "y": 1237,
+        "y": 1357,
         "wires": [
             [
                 "6ed6dc87.f74a94"
@@ -3107,11 +3068,26 @@
                 "t": "eq",
                 "v": "display/pitouch/corridor",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "switch/shelly/roof",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "switch/shelly/bath",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "switch/shelly/shower",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 34,
+        "outputs": 37,
         "x": 570,
         "y": 440,
         "wires": [
@@ -3216,6 +3192,15 @@
             ],
             [
                 "ab67c34c.04f02"
+            ],
+            [
+                "5ca0c895.f69648"
+            ],
+            [
+                "d1c6cae7.5306f8"
+            ],
+            [
+                "40abcf71.d1a33"
             ]
         ]
     },
@@ -5699,7 +5684,7 @@
         "name": "Nodes 3",
         "info": "",
         "x": 360,
-        "y": 1120,
+        "y": 1240,
         "wires": []
     },
     {
@@ -6573,7 +6558,7 @@
         "payloadType": "date",
         "topic": "sensor/ds18b20/brewery",
         "x": 430,
-        "y": 1280,
+        "y": 1400,
         "wires": [
             [
                 "6ed6dc87.f74a94"
@@ -6598,7 +6583,7 @@
         "payloadType": "date",
         "topic": "sensor/spindle/fermenter",
         "x": 430,
-        "y": 1320,
+        "y": 1440,
         "wires": [
             [
                 "6ed6dc87.f74a94"
@@ -8447,7 +8432,7 @@
         "payloadType": "date",
         "topic": "control/ssr/brewery",
         "x": 420,
-        "y": 1360,
+        "y": 1480,
         "wires": [
             [
                 "6ed6dc87.f74a94"
@@ -9538,7 +9523,7 @@
         "payloadType": "str",
         "topic": "light/xmastree/dining",
         "x": 150,
-        "y": 1480,
+        "y": 1600,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -9564,7 +9549,7 @@
         "payloadType": "str",
         "topic": "sensor/button/indoor",
         "x": 150,
-        "y": 1520,
+        "y": 1640,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -9590,7 +9575,7 @@
         "payloadType": "str",
         "topic": "sensor/button/garage",
         "x": 160,
-        "y": 1560,
+        "y": 1680,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -9616,7 +9601,7 @@
         "payloadType": "str",
         "topic": "sensor/button/pool",
         "x": 150,
-        "y": 1600,
+        "y": 1720,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -9642,7 +9627,7 @@
         "payloadType": "str",
         "topic": "switch/sonoff/k8200",
         "x": 150,
-        "y": 1640,
+        "y": 1760,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -9668,7 +9653,7 @@
         "payloadType": "str",
         "topic": "sensor/ds18b20/brewery",
         "x": 170,
-        "y": 1680,
+        "y": 1800,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -9694,7 +9679,7 @@
         "payloadType": "str",
         "topic": "sensor/spindle/fermenter",
         "x": 170,
-        "y": 1720,
+        "y": 1840,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -9720,7 +9705,7 @@
         "payloadType": "str",
         "topic": "sensor/DHT22/office",
         "x": 150,
-        "y": 1760,
+        "y": 1880,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -9895,7 +9880,7 @@
         "label": "light/ws2812/terrace1",
         "tooltip": "watchdog state",
         "group": "3156ce3a.ed9862",
-        "order": 41,
+        "order": 37,
         "width": "5",
         "height": "1",
         "passthru": false,
@@ -10051,7 +10036,7 @@
         "z": "8e2c5c11.fae26",
         "name": "reset light/ws2812/terrace1",
         "group": "3156ce3a.ed9862",
-        "order": 42,
+        "order": 38,
         "width": "1",
         "height": "1",
         "passthru": false,
@@ -10104,7 +10089,7 @@
         "z": "8e2c5c11.fae26",
         "name": "reset light/ws2812/terrace2",
         "group": "3156ce3a.ed9862",
-        "order": 46,
+        "order": 42,
         "width": "1",
         "height": "1",
         "passthru": false,
@@ -10156,7 +10141,7 @@
         "label": "light/ws2812/terrace2",
         "tooltip": "watchdog state",
         "group": "3156ce3a.ed9862",
-        "order": 45,
+        "order": 41,
         "width": "5",
         "height": "1",
         "passthru": false,
@@ -10300,7 +10285,7 @@
         "payloadType": "str",
         "topic": "switch/sonoff/bedroom",
         "x": 160,
-        "y": 1800,
+        "y": 1920,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -10379,7 +10364,7 @@
         "payloadType": "str",
         "topic": "sensor/ttp223/bedroom",
         "x": 160,
-        "y": 1840,
+        "y": 1960,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -10458,7 +10443,7 @@
         "payloadType": "str",
         "topic": "switch/sonoff/gallery1",
         "x": 160,
-        "y": 1880,
+        "y": 2000,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -10509,7 +10494,7 @@
         "payloadType": "date",
         "topic": "sensor/gesture/test",
         "x": 420,
-        "y": 1440,
+        "y": 1560,
         "wires": [
             [
                 "6ed6dc87.f74a94"
@@ -11903,7 +11888,7 @@
         "payloadType": "str",
         "topic": "light/xmastree/dining",
         "x": 600,
-        "y": 2940,
+        "y": 3060,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -11929,7 +11914,7 @@
         "payloadType": "str",
         "topic": "sensor/button/indoor",
         "x": 600,
-        "y": 2980,
+        "y": 3100,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -11955,7 +11940,7 @@
         "payloadType": "str",
         "topic": "sensor/button/garage",
         "x": 600,
-        "y": 3020,
+        "y": 3140,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -11981,7 +11966,7 @@
         "payloadType": "str",
         "topic": "sensor/button/pool",
         "x": 590,
-        "y": 3060,
+        "y": 3180,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -12007,7 +11992,7 @@
         "payloadType": "str",
         "topic": "switch/sonoff/k8200",
         "x": 600,
-        "y": 3100,
+        "y": 3220,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -12033,7 +12018,7 @@
         "payloadType": "str",
         "topic": "sensor/ds18b20/brewery",
         "x": 610,
-        "y": 3140,
+        "y": 3260,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -12059,7 +12044,7 @@
         "payloadType": "str",
         "topic": "sensor/spindle/fermenter",
         "x": 610,
-        "y": 3180,
+        "y": 3300,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -12085,7 +12070,7 @@
         "payloadType": "str",
         "topic": "sensor/DHT22/office",
         "x": 600,
-        "y": 3220,
+        "y": 3340,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -12150,7 +12135,7 @@
         "z": "8e2c5c11.fae26",
         "name": "restart light/ws2812/terrace1",
         "group": "3156ce3a.ed9862",
-        "order": 43,
+        "order": 39,
         "width": "1",
         "height": "1",
         "passthru": false,
@@ -12176,7 +12161,7 @@
         "z": "8e2c5c11.fae26",
         "name": "restart light/ws2812/terrace2",
         "group": "3156ce3a.ed9862",
-        "order": 47,
+        "order": 43,
         "width": "1",
         "height": "1",
         "passthru": false,
@@ -12215,7 +12200,7 @@
         "payloadType": "str",
         "topic": "switch/sonoff/bedroom",
         "x": 600,
-        "y": 3260,
+        "y": 3380,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -12241,7 +12226,7 @@
         "payloadType": "str",
         "topic": "sensor/ttp223/bedroom",
         "x": 610,
-        "y": 3300,
+        "y": 3420,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -12267,7 +12252,7 @@
         "payloadType": "str",
         "topic": "switch/sonoff/gallery1",
         "x": 600,
-        "y": 3340,
+        "y": 3460,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -12366,7 +12351,7 @@
         "payloadType": "str",
         "topic": "sensor/gesture/test",
         "x": 150,
-        "y": 1920,
+        "y": 2040,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -12392,7 +12377,7 @@
         "payloadType": "str",
         "topic": "sensor/gesture/test",
         "x": 590,
-        "y": 3380,
+        "y": 3500,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -12408,7 +12393,7 @@
         "fieldType": "msg",
         "format": "json",
         "syntax": "mustache",
-        "template": "[\n    { \"topic\":\"switch/rfhub/lounge\",            \"ip\": \"192.168.2.20\"},\n    { \"topic\":\"sensor/ttp223/bedroom\",          \"ip\": \"192.168.2.21\"},\n    { \"topic\":\"sensor/DHT22/roof\",              \"ip\": \"192.168.2.22\"},\n    { \"topic\":\"sensor/DHT22/terrace\",           \"ip\": \"192.168.2.23\"},\n    { \"topic\":\"cover/relay/garage\",             \"ip\": \"192.168.2.25\"},\n    { \"topic\":\"switch/sonoff/utilityroom\",      \"ip\": \"192.168.2.26\"},\n    { \"topic\":\"switch/sonoff/garage\",           \"ip\": \"192.168.2.27\"},\n    { \"topic\":\"switch/relay/dining1\",           \"ip\": \"192.168.2.28\"},\n    { \"topic\":\"switch/relay/backyard\",          \"ip\": \"192.168.2.29\"},\n    { \"topic\":\"switch/relay/dining2\",           \"ip\": \"192.168.2.30\"},\n    { \"topic\":\"light/xmastree/dining\",          \"ip\": \"192.168.2.31\"},\n    { \"topic\":\"sensor/button/indoor\",           \"ip\": \"192.168.2.32\"},\n    { \"topic\":\"sensor/button/garage\",           \"ip\": \"192.168.2.33\"},\n    { \"topic\":\"sensor/button/pool\",             \"ip\": \"192.168.2.34\"},\n    { \"topic\":\"sensor/DHT22/lounge\",            \"ip\": \"192.168.2.35\"},\n    { \"topic\":\"switch/sonoff/brewery\",          \"ip\": \"192.168.2.36\"},\n    { \"topic\":\"switch/sonoff/pool\",             \"ip\": \"192.168.2.37\"},\n    { \"topic\":\"switch/sonoff/terrace\",          \"ip\": \"192.168.2.38\"},\n    { \"topic\":\"switch/sonoff/yardgate\",         \"ip\": \"192.168.2.39\"},\n    { \"topic\":\"switch/sonoff/gallery\",          \"ip\": \"192.168.2.40\"},\n    { \"topic\":\"switch/sonoff/location4\",        \"ip\": \"192.168.2.41\"},\n    { \"topic\":\"light/sonoff/kitchen\",           \"ip\": \"192.168.2.42\"},\n    { \"topic\":\"sensor/gesture/kitchen\",         \"ip\": \"192.168.2.43\"},\n    { \"topic\":\"sensor/ds18b20/pool\",            \"ip\": \"192.168.2.44\"},\n    { \"topic\":\"sensor/ds18b20/brewery\",         \"ip\": \"192.168.2.45\"},\n    { \"topic\":\"sensor/spinlde/fermenter\",       \"ip\": \"192.168.2.46\"},\n    { \"topic\":\"control/ssr/brewery\",            \"ip\": \"192.168.2.47\"},\n    { \"topic\":\"meter/electricity/utilityroom\",  \"ip\": \"192.168.2.48\"},\n    { \"topic\":\"display/pixel/kitchen\",          \"ip\": \"192.168.2.49\"},\n    { \"topic\":\"light/ws2812/terrace1\",          \"ip\": \"192.168.2.50\"},\n    { \"topic\":\"light/ws1812/terrace2\",          \"ip\": \"192.168.2.51\"},\n    { \"topic\":\"switch/sonoff/bedroom\",          \"ip\": \"192.168.2.52\"},\n    { \"topic\":\"switch/sonoff/gallery1\",         \"ip\": \"192.168.2.53\"},\n    { \"topic\":\"switch/sonoff/k8200\",            \"ip\": \"192.168.2.54\"},\n    { \"topic\":\"sensor/gesture/test\",            \"ip\": \"192.168.2.55\"}\n]\n",
+        "template": "[\n    { \"topic\":\"switch/rfhub/lounge\",            \"ip\": \"192.168.2.20\"},\n    { \"topic\":\"sensor/ttp223/bedroom\",          \"ip\": \"192.168.2.21\"},\n    { \"topic\":\"sensor/DHT22/roof\",              \"ip\": \"192.168.2.22\"},\n    { \"topic\":\"sensor/DHT22/terrace\",           \"ip\": \"192.168.2.23\"},\n    { \"topic\":\"cover/relay/garage\",             \"ip\": \"192.168.2.25\"},\n    { \"topic\":\"switch/sonoff/utilityroom\",      \"ip\": \"192.168.2.26\"},\n    { \"topic\":\"switch/sonoff/garage\",           \"ip\": \"192.168.2.27\"},\n    { \"topic\":\"switch/relay/dining1\",           \"ip\": \"192.168.2.28\"},\n    { \"topic\":\"switch/relay/backyard\",          \"ip\": \"192.168.2.29\"},\n    { \"topic\":\"switch/relay/dining2\",           \"ip\": \"192.168.2.30\"},\n    { \"topic\":\"light/xmastree/dining\",          \"ip\": \"192.168.2.31\"},\n    { \"topic\":\"sensor/button/indoor\",           \"ip\": \"192.168.2.32\"},\n    { \"topic\":\"sensor/button/garage\",           \"ip\": \"192.168.2.33\"},\n    { \"topic\":\"sensor/button/pool\",             \"ip\": \"192.168.2.34\"},\n    { \"topic\":\"sensor/DHT22/lounge\",            \"ip\": \"192.168.2.35\"},\n    { \"topic\":\"switch/sonoff/dining \",          \"ip\": \"192.168.2.36\"},\n    { \"topic\":\"switch/sonoff/pool\",             \"ip\": \"192.168.2.37\"},\n    { \"topic\":\"switch/sonoff/terrace\",          \"ip\": \"192.168.2.38\"},\n    { \"topic\":\"switch/sonoff/yardgate\",         \"ip\": \"192.168.2.39\"},\n    { \"topic\":\"switch/sonoff/corridor\",         \"ip\": \"192.168.2.40\"},\n    { \"topic\":\"x\",                              \"ip\": \"192.168.2.41\"},\n    { \"topic\":\"light/sonoff/kitchen\",           \"ip\": \"192.168.2.42\"},\n    { \"topic\":\"sensor/gesture/kitchen\",         \"ip\": \"192.168.2.43\"},\n    { \"topic\":\"sensor/ds18b20/pool\",            \"ip\": \"192.168.2.44\"},\n    { \"topic\":\"sensor/ds18b20/brewery\",         \"ip\": \"192.168.2.45\"},\n    { \"topic\":\"sensor/spinlde/fermenter\",       \"ip\": \"192.168.2.46\"},\n    { \"topic\":\"sensor/temp/office\",             \"ip\": \"192.168.2.47\"},\n    { \"topic\":\"meter/electricity/utilityroom\",  \"ip\": \"192.168.2.48\"},\n    { \"topic\":\"display/pixel/kitchen\",          \"ip\": \"192.168.2.49\"},\n    { \"topic\":\"light/ws2812/terrace1\",          \"ip\": \"192.168.2.50\"},\n    { \"topic\":\"light/ws1812/terrace2\",          \"ip\": \"192.168.2.51\"},\n    { \"topic\":\"switch/sonoff/bedroom\",          \"ip\": \"192.168.2.52\"},\n    { \"topic\":\"switch/sonoff/gallery1\",         \"ip\": \"192.168.2.53\"},\n    { \"topic\":\"switch/sonoff/k8200\",            \"ip\": \"192.168.2.54\"},\n    { \"topic\":\"sensor/gesture/test\",            \"ip\": \"192.168.2.55\"},\n    { \"topic\":\"switch/shelly/roof\",             \"ip\": \"192.168.2.56\"},\n    { \"topic\":\"switch/shelly/bath\",             \"ip\": \"192.168.2.57\"},\n    { \"topic\":\"switch/shelly/shower\",           \"ip\": \"192.168.2.58\"}\n]\n",
         "output": "json",
         "x": 1260,
         "y": 3220,
@@ -12475,8 +12460,8 @@
         "topic": "sensor/gesture/test",
         "payload": "",
         "payloadType": "date",
-        "x": 640,
-        "y": 3520,
+        "x": 900,
+        "y": 3400,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -12598,6 +12583,21 @@
             },
             {
                 "t": "eq",
+                "v": "switch/shelly/roof",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "switch/shelly/bath",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "switch/shelly/shower",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
                 "v": "light/xmastree/dining",
                 "vt": "str"
             },
@@ -12664,7 +12664,7 @@
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 34,
+        "outputs": 37,
         "x": 310,
         "y": 2540,
         "wires": [
@@ -12730,6 +12730,15 @@
             ],
             [
                 "aba07b5d.8aeda8"
+            ],
+            [
+                "d46b7471.3e2a08"
+            ],
+            [
+                "19a1001b.8b253"
+            ],
+            [
+                "9b81e9cd.5f2b68"
             ],
             [
                 "cdb28669.d473f8"
@@ -13713,11 +13722,26 @@
                 "t": "eq",
                 "v": "display/pitouch/corridor",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "switch/shelly/roof",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "switch/shelly/bath",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "switch/shelly/shower",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 34,
+        "outputs": 37,
         "x": 550,
         "y": 4000,
         "wires": [
@@ -13822,6 +13846,15 @@
             ],
             [
                 "8709230.4c885e"
+            ],
+            [
+                "6e31e10.85e062"
+            ],
+            [
+                "cc8f0f27.d7a84"
+            ],
+            [
+                "e5652acd.647ae8"
             ]
         ]
     },
@@ -13848,8 +13881,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
-        "y": 3600,
+        "x": 970,
+        "y": 3500,
         "wires": [
             []
         ]
@@ -13877,8 +13910,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1008,
-        "y": 3640,
+        "x": 980,
+        "y": 3540,
         "wires": [
             []
         ]
@@ -13906,8 +13939,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1008,
-        "y": 3680,
+        "x": 980,
+        "y": 3580,
         "wires": [
             []
         ]
@@ -13935,8 +13968,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
-        "y": 3720,
+        "x": 970,
+        "y": 3620,
         "wires": [
             []
         ]
@@ -13964,8 +13997,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
-        "y": 3760,
+        "x": 970,
+        "y": 3660,
         "wires": [
             []
         ]
@@ -13993,8 +14026,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
-        "y": 3800,
+        "x": 970,
+        "y": 3700,
         "wires": [
             []
         ]
@@ -14022,8 +14055,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1008,
-        "y": 3840,
+        "x": 980,
+        "y": 3740,
         "wires": [
             []
         ]
@@ -14051,8 +14084,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
-        "y": 3880,
+        "x": 970,
+        "y": 3780,
         "wires": [
             []
         ]
@@ -14080,8 +14113,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
-        "y": 3920,
+        "x": 970,
+        "y": 3820,
         "wires": [
             []
         ]
@@ -14109,8 +14142,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1008,
-        "y": 3960,
+        "x": 980,
+        "y": 3860,
         "wires": [
             []
         ]
@@ -14138,8 +14171,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
-        "y": 4000,
+        "x": 970,
+        "y": 3900,
         "wires": [
             []
         ]
@@ -14167,8 +14200,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
-        "y": 4040,
+        "x": 970,
+        "y": 3940,
         "wires": [
             []
         ]
@@ -14196,8 +14229,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
-        "y": 4080,
+        "x": 970,
+        "y": 3980,
         "wires": [
             []
         ]
@@ -14225,8 +14258,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
-        "y": 4120,
+        "x": 970,
+        "y": 4020,
         "wires": [
             []
         ]
@@ -14254,8 +14287,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
-        "y": 4160,
+        "x": 970,
+        "y": 4060,
         "wires": [
             []
         ]
@@ -14283,8 +14316,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 988,
-        "y": 4200,
+        "x": 960,
+        "y": 4100,
         "wires": [
             []
         ]
@@ -14312,8 +14345,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
-        "y": 4240,
+        "x": 970,
+        "y": 4140,
         "wires": [
             []
         ]
@@ -14341,8 +14374,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
-        "y": 4280,
+        "x": 970,
+        "y": 4180,
         "wires": [
             []
         ]
@@ -14370,8 +14403,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1008,
-        "y": 4320,
+        "x": 980,
+        "y": 4220,
         "wires": [
             []
         ]
@@ -14399,8 +14432,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
-        "y": 4360,
+        "x": 970,
+        "y": 4260,
         "wires": [
             []
         ]
@@ -14428,8 +14461,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1018,
-        "y": 4400,
+        "x": 990,
+        "y": 4300,
         "wires": [
             []
         ]
@@ -14457,8 +14490,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1009,
-        "y": 4440,
+        "x": 981,
+        "y": 4340,
         "wires": [
             []
         ]
@@ -14486,8 +14519,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 999,
-        "y": 4480,
+        "x": 971,
+        "y": 4380,
         "wires": [
             []
         ]
@@ -14515,8 +14548,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1019,
-        "y": 4520,
+        "x": 991,
+        "y": 4420,
         "wires": [
             []
         ]
@@ -14544,8 +14577,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 999,
-        "y": 4560,
+        "x": 971,
+        "y": 4460,
         "wires": [
             []
         ]
@@ -14573,8 +14606,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1000,
-        "y": 4600,
+        "x": 970,
+        "y": 4500,
         "wires": [
             []
         ]
@@ -14584,6 +14617,35 @@
         "type": "ui_switch",
         "z": "8e2c5c11.fae26",
         "name": "mqtt light/ws2812/terrace1",
+        "label": "",
+        "tooltip": "mqtt connection state",
+        "group": "3156ce3a.ed9862",
+        "order": 40,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "online",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "offline",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 980,
+        "y": 4540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1de9c0ba.f11d3f",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "mqtt light/ws2812/terrace2",
         "label": "",
         "tooltip": "mqtt connection state",
         "group": "3156ce3a.ed9862",
@@ -14602,37 +14664,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1013,
-        "y": 4640,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "1de9c0ba.f11d3f",
-        "type": "ui_switch",
-        "z": "8e2c5c11.fae26",
-        "name": "mqtt light/ws2812/terrace2",
-        "label": "",
-        "tooltip": "mqtt connection state",
-        "group": "3156ce3a.ed9862",
-        "order": 48,
-        "width": "1",
-        "height": "1",
-        "passthru": false,
-        "decouple": "true",
-        "topic": "",
-        "style": "",
-        "onvalue": "online",
-        "onvalueType": "str",
-        "onicon": "done",
-        "oncolor": "green",
-        "offvalue": "offline",
-        "offvalueType": "str",
-        "officon": "error_outline",
-        "offcolor": "red",
-        "x": 1013,
-        "y": 4680,
+        "x": 980,
+        "y": 4580,
         "wires": [
             []
         ]
@@ -14660,8 +14693,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1026,
-        "y": 4720,
+        "x": 990,
+        "y": 4620,
         "wires": [
             []
         ]
@@ -14689,8 +14722,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1021,
-        "y": 4760,
+        "x": 980,
+        "y": 4660,
         "wires": [
             []
         ]
@@ -14718,8 +14751,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1021,
-        "y": 4800,
+        "x": 980,
+        "y": 4700,
         "wires": [
             []
         ]
@@ -14747,8 +14780,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1021,
-        "y": 4840,
+        "x": 980,
+        "y": 4740,
         "wires": [
             []
         ]
@@ -14776,8 +14809,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1011,
-        "y": 4880,
+        "x": 970,
+        "y": 4780,
         "wires": [
             []
         ]
@@ -15191,7 +15224,7 @@
         "payloadType": "str",
         "topic": "display/pitouch/corridor",
         "x": 160,
-        "y": 1960,
+        "y": 2080,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -15217,7 +15250,7 @@
         "payloadType": "str",
         "topic": "display/pitouch/corridor",
         "x": 610,
-        "y": 3420,
+        "y": 3540,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -15247,8 +15280,8 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1020,
-        "y": 4920,
+        "x": 979,
+        "y": 4820,
         "wires": [
             []
         ]
@@ -16780,6 +16813,477 @@
             [
                 "9ed62c96.78bbc"
             ]
+        ]
+    },
+    {
+        "id": "5ca0c895.f69648",
+        "type": "trigger",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "20",
+        "extend": true,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "outputs": 1,
+        "x": 820,
+        "y": 1400,
+        "wires": [
+            [
+                "fef43584.2f81b8"
+            ]
+        ]
+    },
+    {
+        "id": "fef43584.2f81b8",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "label": "switch/shelly/roof",
+        "tooltip": "watchdog state",
+        "group": "3156ce3a.ed9862",
+        "order": 45,
+        "width": "5",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 1021,
+        "y": 1400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d1c6cae7.5306f8",
+        "type": "trigger",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "20",
+        "extend": true,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "outputs": 1,
+        "x": 820,
+        "y": 1440,
+        "wires": [
+            [
+                "29e45e0e.838922"
+            ]
+        ]
+    },
+    {
+        "id": "29e45e0e.838922",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "label": "switch/shelly/bath",
+        "tooltip": "watchdog state",
+        "group": "3156ce3a.ed9862",
+        "order": 49,
+        "width": "5",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 1021,
+        "y": 1440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "40abcf71.d1a33",
+        "type": "trigger",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "20",
+        "extend": true,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "outputs": 1,
+        "x": 820,
+        "y": 1480,
+        "wires": [
+            [
+                "b281ffb7.ea32f"
+            ]
+        ]
+    },
+    {
+        "id": "b281ffb7.ea32f",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "label": "switch/shelly/shower",
+        "tooltip": "watchdog state",
+        "group": "3156ce3a.ed9862",
+        "order": 53,
+        "width": "5",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 1031,
+        "y": 1480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a36c83f6.f7157",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "reset switch/shelly/roof",
+        "group": "3156ce3a.ed9862",
+        "order": 46,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via mqtt",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "icon": "refresh",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "switch/shelly/roof",
+        "x": 140,
+        "y": 1460,
+        "wires": [
+            [
+                "b6bc8fd1.c46ec"
+            ]
+        ]
+    },
+    {
+        "id": "a8cdee10.32c69",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "reset switch/shelly/bath",
+        "group": "3156ce3a.ed9862",
+        "order": 50,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via mqtt",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "icon": "refresh",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "switch/shelly/bath",
+        "x": 150,
+        "y": 1500,
+        "wires": [
+            [
+                "b6bc8fd1.c46ec"
+            ]
+        ]
+    },
+    {
+        "id": "d7fc38fa.a2a518",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "reset switch/shelly/shower",
+        "group": "3156ce3a.ed9862",
+        "order": 54,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via mqtt",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "icon": "refresh",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "switch/shelly/shower",
+        "x": 150,
+        "y": 1540,
+        "wires": [
+            [
+                "b6bc8fd1.c46ec"
+            ]
+        ]
+    },
+    {
+        "id": "d46b7471.3e2a08",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "restart switch/shelly/roof",
+        "group": "3156ce3a.ed9862",
+        "order": 47,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via telnet",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "icon": "play_arrow",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "switch/shelly/roof",
+        "x": 590,
+        "y": 2920,
+        "wires": [
+            [
+                "e59e4935.4a4238"
+            ]
+        ]
+    },
+    {
+        "id": "19a1001b.8b253",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "restart switch/shelly/bath",
+        "group": "3156ce3a.ed9862",
+        "order": 51,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via telnet",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "icon": "play_arrow",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "switch/shelly/bath",
+        "x": 590,
+        "y": 2960,
+        "wires": [
+            [
+                "e59e4935.4a4238"
+            ]
+        ]
+    },
+    {
+        "id": "9b81e9cd.5f2b68",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "restart switch/shelly/shower",
+        "group": "3156ce3a.ed9862",
+        "order": 55,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via telnet",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "icon": "play_arrow",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "switch/shelly/shower",
+        "x": 600,
+        "y": 3000,
+        "wires": [
+            [
+                "e59e4935.4a4238"
+            ]
+        ]
+    },
+    {
+        "id": "6e31e10.85e062",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "mqtt switch/shelly/roof",
+        "label": "",
+        "tooltip": "mqtt connection state",
+        "group": "3156ce3a.ed9862",
+        "order": 48,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "online",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "offline",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 960,
+        "y": 4860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cc8f0f27.d7a84",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "mqtt switch/shelly/bath",
+        "label": "",
+        "tooltip": "mqtt connection state",
+        "group": "3156ce3a.ed9862",
+        "order": 52,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "online",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "offline",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 960,
+        "y": 4900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e5652acd.647ae8",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "mqtt switch/shelly/shower",
+        "label": "",
+        "tooltip": "mqtt connection state",
+        "group": "3156ce3a.ed9862",
+        "order": 56,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "online",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "offline",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 970,
+        "y": 4940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b471fca5.c4e5e",
+        "type": "ui_button",
+        "z": "37197cb5.c49ee4",
+        "name": "update switch/shelly/roof",
+        "group": "c39c0138.5637",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "switch/shelly/roof",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "switch/shelly/roof",
+        "x": 410,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2151f88.9057d08",
+        "type": "ui_button",
+        "z": "37197cb5.c49ee4",
+        "name": "update switch/shelly/bath",
+        "group": "c39c0138.5637",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "switch/shelly/bath",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "switch/shelly/bath",
+        "x": 410,
+        "y": 1160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "49e5f244.8e72bc",
+        "type": "ui_button",
+        "z": "37197cb5.c49ee4",
+        "name": "update switch/shelly/shower",
+        "group": "c39c0138.5637",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "switch/shelly/shower",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "switch/shelly/shower",
+        "x": 420,
+        "y": 1200,
+        "wires": [
+            []
         ]
     }
 ]
