@@ -2,6 +2,6 @@ ids/
 log/
 node_modules/
 settings.js
-.config.json
+.config.*.json
 *.backup
 .npm/
