@@ -1294,7 +1294,8 @@
                 "fb324b28.cd46f8",
                 "b471fca5.c4e5e",
                 "2151f88.9057d08",
-                "49e5f244.8e72bc"
+                "49e5f244.8e72bc",
+                "fa478e9b.3b12e"
             ]
         ]
     },
@@ -3083,11 +3084,16 @@
                 "t": "eq",
                 "v": "switch/shelly/shower",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "switch/shelly/test",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 37,
+        "outputs": 38,
         "x": 570,
         "y": 440,
         "wires": [
@@ -3201,6 +3207,9 @@
             ],
             [
                 "40abcf71.d1a33"
+            ],
+            [
+                "79193725.bbcc38"
             ]
         ]
     },
@@ -10623,7 +10632,7 @@
         "format": "{{msg.payload.appCfg}}",
         "layout": "row-left",
         "x": 860,
-        "y": 900,
+        "y": 980,
         "wires": []
     },
     {
@@ -10639,7 +10648,7 @@
         "format": "{{msg.payload.wifi.netmask}}",
         "layout": "row-left",
         "x": 870,
-        "y": 460,
+        "y": 540,
         "wires": []
     },
     {
@@ -10655,7 +10664,7 @@
         "format": "{{msg.payload.mqtt.retain}}",
         "layout": "row-left",
         "x": 870,
-        "y": 660,
+        "y": 740,
         "wires": []
     },
     {
@@ -10671,7 +10680,7 @@
         "format": "{{msg.payload.trace.ip}}",
         "layout": "row-left",
         "x": 860,
-        "y": 700,
+        "y": 780,
         "wires": []
     },
     {
@@ -10752,7 +10761,9 @@
                 "cd4cbed5.62bb3",
                 "efe13914.3d8c48",
                 "c9d14b28.aec988",
-                "5199defb.ec465"
+                "5199defb.ec465",
+                "e854fdce.cefd6",
+                "8a1d0e4a.c058b"
             ]
         ]
     },
@@ -10781,7 +10792,7 @@
         "format": "{{msg.payload.timer}}",
         "layout": "row-left",
         "x": 850,
-        "y": 860,
+        "y": 940,
         "wires": []
     },
     {
@@ -10850,7 +10861,7 @@
         "format": "{{msg.payload.wifi.gateway}}",
         "layout": "row-left",
         "x": 870,
-        "y": 420,
+        "y": 500,
         "wires": []
     },
     {
@@ -10866,7 +10877,7 @@
         "format": "{{msg.payload.mqtt.broker}}",
         "layout": "row-left",
         "x": 870,
-        "y": 580,
+        "y": 660,
         "wires": []
     },
     {
@@ -10882,7 +10893,7 @@
         "format": "{{msg.payload.mqtt.keepAliveTime}}",
         "layout": "row-left",
         "x": 890,
-        "y": 620,
+        "y": 700,
         "wires": []
     },
     {
@@ -10898,7 +10909,7 @@
         "format": "{{msg.payload.trace.port}}",
         "layout": "row-left",
         "x": 860,
-        "y": 740,
+        "y": 820,
         "wires": []
     },
     {
@@ -10914,7 +10925,7 @@
         "format": "{{msg.payload.trace.onUpdate}}",
         "layout": "row-left",
         "x": 880,
-        "y": 780,
+        "y": 860,
         "wires": []
     },
     {
@@ -10930,7 +10941,7 @@
         "format": "{{msg.payload.trace.onStartup}}",
         "layout": "row-left",
         "x": 880,
-        "y": 820,
+        "y": 900,
         "wires": []
     },
     {
@@ -12658,13 +12669,18 @@
             },
             {
                 "t": "eq",
+                "v": "switch/shelly/test",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
                 "v": "display/pitouch/corridor",
                 "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 37,
+        "outputs": 38,
         "x": 310,
         "y": 2540,
         "wires": [
@@ -12775,6 +12791,9 @@
             ],
             [
                 "59e887d.f332978"
+            ],
+            [
+                "e1db88ba.d05138"
             ],
             [
                 "16b0884d.4bb698"
@@ -13737,11 +13756,16 @@
                 "t": "eq",
                 "v": "switch/shelly/shower",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "switch/shelly/test",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 37,
+        "outputs": 38,
         "x": 550,
         "y": 4000,
         "wires": [
@@ -13855,6 +13879,9 @@
             ],
             [
                 "e5652acd.647ae8"
+            ],
+            [
+                "a69f496.05e43b8"
             ]
         ]
     },
@@ -14999,7 +15026,7 @@
         "format": "{{msg.payload.wifi.rssi}}",
         "layout": "row-left",
         "x": 860,
-        "y": 500,
+        "y": 580,
         "wires": []
     },
     {
@@ -15061,7 +15088,7 @@
         "format": "{{msg.payload}}",
         "layout": "row-left",
         "x": 1040,
-        "y": 540,
+        "y": 620,
         "wires": []
     },
     {
@@ -15073,7 +15100,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 860,
-        "y": 540,
+        "y": 620,
         "wires": [
             [
                 "1d816adb.69a065"
@@ -15184,7 +15211,7 @@
         "label": "display/pitouch/corridor",
         "tooltip": "watchdog state",
         "group": "4759591f.23c438",
-        "order": 33,
+        "order": 38,
         "width": "5",
         "height": "1",
         "passthru": false,
@@ -15211,7 +15238,7 @@
         "z": "8e2c5c11.fae26",
         "name": "reset display/pitouch/corridor",
         "group": "4759591f.23c438",
-        "order": 34,
+        "order": 39,
         "width": "1",
         "height": "1",
         "passthru": false,
@@ -15224,7 +15251,7 @@
         "payloadType": "str",
         "topic": "display/pitouch/corridor",
         "x": 160,
-        "y": 2080,
+        "y": 2120,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -15237,7 +15264,7 @@
         "z": "8e2c5c11.fae26",
         "name": "restart display/pitouch/corridor",
         "group": "4759591f.23c438",
-        "order": 35,
+        "order": 40,
         "width": "1",
         "height": "1",
         "passthru": false,
@@ -15250,7 +15277,7 @@
         "payloadType": "str",
         "topic": "display/pitouch/corridor",
         "x": 610,
-        "y": 3540,
+        "y": 3580,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -15265,7 +15292,7 @@
         "label": "",
         "tooltip": "mqtt connection state",
         "group": "4759591f.23c438",
-        "order": 36,
+        "order": 41,
         "width": "1",
         "height": "1",
         "passthru": false,
@@ -17285,5 +17312,260 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "79193725.bbcc38",
+        "type": "trigger",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "20",
+        "extend": true,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "outputs": 1,
+        "x": 820,
+        "y": 1520,
+        "wires": [
+            [
+                "aea5373c.e368c8"
+            ]
+        ]
+    },
+    {
+        "id": "aea5373c.e368c8",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "label": "switch/shelly/test",
+        "tooltip": "watchdog state",
+        "group": "4759591f.23c438",
+        "order": 33,
+        "width": "5",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 1021,
+        "y": 1520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5ff2d63d.a06c08",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "reset switch/shelly/test",
+        "group": "4759591f.23c438",
+        "order": 34,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via mqtt",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "icon": "refresh",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "switch/shelly/test",
+        "x": 140,
+        "y": 2080,
+        "wires": [
+            [
+                "b6bc8fd1.c46ec"
+            ]
+        ]
+    },
+    {
+        "id": "e1db88ba.d05138",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "restart switch/shelly/test",
+        "group": "4759591f.23c438",
+        "order": 35,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via telnet",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "icon": "play_arrow",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "switch/shelly/test",
+        "x": 590,
+        "y": 3540,
+        "wires": [
+            [
+                "e59e4935.4a4238"
+            ]
+        ]
+    },
+    {
+        "id": "a69f496.05e43b8",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "mqtt switch/shelly/test",
+        "label": "",
+        "tooltip": "mqtt connection state",
+        "group": "4759591f.23c438",
+        "order": 36,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "online",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "offline",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 960,
+        "y": 4980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eddd5b1c.e13e28",
+        "type": "ui_text",
+        "z": "8e2c5c11.fae26",
+        "group": "4759591f.23c438",
+        "order": 37,
+        "width": "8",
+        "height": "1",
+        "name": "dummy line 1",
+        "label": "",
+        "format": "",
+        "layout": "row-spread",
+        "x": 210,
+        "y": 4440,
+        "wires": []
+    },
+    {
+        "id": "63297a0c.980e04",
+        "type": "ui_text",
+        "z": "8e2c5c11.fae26",
+        "group": "4759591f.23c438",
+        "order": 37,
+        "width": "8",
+        "height": "1",
+        "name": "dummy line 2",
+        "label": "",
+        "format": "",
+        "layout": "row-spread",
+        "x": 210,
+        "y": 4480,
+        "wires": []
+    },
+    {
+        "id": "da3e6456.03f2a8",
+        "type": "ui_text",
+        "z": "8e2c5c11.fae26",
+        "group": "4759591f.23c438",
+        "order": 37,
+        "width": "8",
+        "height": "1",
+        "name": "dummy line 3",
+        "label": "",
+        "format": "",
+        "layout": "row-spread",
+        "x": 210,
+        "y": 4520,
+        "wires": []
+    },
+    {
+        "id": "f4d7977a.2e7b28",
+        "type": "ui_text",
+        "z": "8e2c5c11.fae26",
+        "group": "4759591f.23c438",
+        "order": 37,
+        "width": "8",
+        "height": "1",
+        "name": "dummy line 4",
+        "label": "",
+        "format": "",
+        "layout": "row-spread",
+        "x": 210,
+        "y": 4560,
+        "wires": []
+    },
+    {
+        "id": "fa478e9b.3b12e",
+        "type": "ui_button",
+        "z": "37197cb5.c49ee4",
+        "name": "update switch/shelly/test",
+        "group": "457a1e5.d114de",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "switch/shelly/test",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "switch/shelly/test",
+        "x": 410,
+        "y": 1600,
+        "wires": [
+            [
+                "6ed6dc87.f74a94"
+            ]
+        ]
+    },
+    {
+        "id": "e854fdce.cefd6",
+        "type": "ui_text",
+        "z": "67442bb3.903494",
+        "group": "5de7d7da.a53e18",
+        "order": 6,
+        "width": "20",
+        "height": "1",
+        "name": "",
+        "label": "wifi mac",
+        "format": "{{msg.payload.wifi.apmac}}",
+        "layout": "row-left",
+        "x": 860,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "8a1d0e4a.c058b",
+        "type": "ui_text",
+        "z": "67442bb3.903494",
+        "group": "5de7d7da.a53e18",
+        "order": 6,
+        "width": "20",
+        "height": "1",
+        "name": "",
+        "label": "wifi dnsname",
+        "format": "{{msg.payload.wifi.dnsname}}",
+        "layout": "row-left",
+        "x": 870,
+        "y": 460,
+        "wires": []
     }
 ]
