@@ -2942,7 +2942,7 @@
             },
             {
                 "t": "eq",
-                "v": "switch/sonoff/terrace",
+                "v": "switch/shelly/terrace",
                 "vt": "str"
             },
             {
@@ -4282,7 +4282,7 @@
         "type": "ui_switch",
         "z": "8e2c5c11.fae26",
         "name": "",
-        "label": "switch/sonoff/terrace",
+        "label": "switch/shelly/terrace",
         "tooltip": "watchdog state",
         "group": "eec5fbfe.9e9ef8",
         "order": 29,
@@ -9283,7 +9283,7 @@
         "id": "506711c5.8423e",
         "type": "ui_button",
         "z": "8e2c5c11.fae26",
-        "name": "reset switch/sonoff/terrace",
+        "name": "reset switch/shelly/terrace",
         "group": "eec5fbfe.9e9ef8",
         "order": 30,
         "width": "1",
@@ -9296,7 +9296,7 @@
         "icon": "refresh",
         "payload": "",
         "payloadType": "str",
-        "topic": "switch/sonoff/terrace",
+        "topic": "switch/shelly/terrace",
         "x": 150,
         "y": 920,
         "wires": [
@@ -11650,7 +11650,7 @@
         "id": "a87f5370.abf3e",
         "type": "ui_button",
         "z": "8e2c5c11.fae26",
-        "name": "restart switch/sonoff/terrace",
+        "name": "restart switch/shelly/terrace",
         "group": "eec5fbfe.9e9ef8",
         "order": 31,
         "width": "1",
@@ -11663,7 +11663,7 @@
         "icon": "play_arrow",
         "payload": "",
         "payloadType": "str",
-        "topic": "switch/sonoff/terrace",
+        "topic": "switch/shelly/terrace",
         "x": 600,
         "y": 2380,
         "wires": [
@@ -12529,7 +12529,7 @@
             },
             {
                 "t": "eq",
-                "v": "switch/sonoff/terrace",
+                "v": "switch/shelly/terrace",
                 "vt": "str"
             },
             {
@@ -13614,7 +13614,7 @@
             },
             {
                 "t": "eq",
-                "v": "switch/sonoff/terrace",
+                "v": "switch/shelly/terrace",
                 "vt": "str"
             },
             {
@@ -14121,7 +14121,7 @@
         "id": "c3495849.12d788",
         "type": "ui_switch",
         "z": "8e2c5c11.fae26",
-        "name": "mqtt switch/sonoff/terrace",
+        "name": "mqtt switch/shelly/terrace",
         "label": "",
         "tooltip": "mqtt connection state",
         "group": "eec5fbfe.9e9ef8",
