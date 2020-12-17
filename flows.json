@@ -2439,8 +2439,11 @@
         "z": "37197cb5.c49ee4",
         "name": "",
         "active": false,
-        "console": "false",
+        "tosidebar": true,
+        "console": false,
         "complete": "true",
+        "statusVal": "",
+        "statusType": "auto",
         "x": 1070,
         "y": 320,
         "wires": []
@@ -17263,7 +17266,9 @@
         "x": 410,
         "y": 1120,
         "wires": [
-            []
+            [
+                "6ed6dc87.f74a94"
+            ]
         ]
     },
     {
@@ -17287,7 +17292,9 @@
         "x": 410,
         "y": 1160,
         "wires": [
-            []
+            [
+                "6ed6dc87.f74a94"
+            ]
         ]
     },
     {
@@ -17311,7 +17318,9 @@
         "x": 420,
         "y": 1200,
         "wires": [
-            []
+            [
+                "6ed6dc87.f74a94"
+            ]
         ]
     },
     {
