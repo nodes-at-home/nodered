@@ -469,7 +469,7 @@
     {
         "id": "d4a7808d.ee6f9",
         "type": "ui_group",
-        "name": "chipid",
+        "name": "select",
         "tab": "abd18845.7765b8",
         "order": 1,
         "disp": true,
@@ -1332,8 +1332,7 @@
                 "fb324b28.cd46f8",
                 "b471fca5.c4e5e",
                 "2151f88.9057d08",
-                "49e5f244.8e72bc",
-                "fa478e9b.3b12e"
+                "49e5f244.8e72bc"
             ]
         ]
     },
@@ -3103,7 +3102,7 @@
             },
             {
                 "t": "eq",
-                "v": "sensor/gesture/test",
+                "v": "light/led/corridor",
                 "vt": "str"
             },
             {
@@ -3125,16 +3124,11 @@
                 "t": "eq",
                 "v": "switch/shelly/shower",
                 "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "switch/shelly/test",
-                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 38,
+        "outputs": 37,
         "x": 570,
         "y": 440,
         "wires": [
@@ -3248,9 +3242,6 @@
             ],
             [
                 "40abcf71.d1a33"
-            ],
-            [
-                "79193725.bbcc38"
             ]
         ]
     },
@@ -7369,13 +7360,13 @@
         "id": "fd97dd78.dae87",
         "type": "ui_button",
         "z": "37197cb5.c49ee4",
-        "name": "update sensor/gesture/test",
+        "name": "update light/led/corridor",
         "group": "457a1e5.d114de",
         "order": 8,
         "width": 0,
         "height": 0,
         "passthru": true,
-        "label": "sensor/gesture/test",
+        "label": "light/led/corridor",
         "tooltip": "",
         "color": "",
         "bgcolor": "",
@@ -7383,7 +7374,7 @@
         "payload": "",
         "payloadType": "date",
         "topic": "sensor/gesture/test",
-        "x": 420,
+        "x": 410,
         "y": 1560,
         "wires": [
             [
@@ -7398,25 +7389,10 @@
         "name": "",
         "topic": "nodes@home/config/+/state",
         "qos": "0",
+        "datatype": "json",
         "broker": "7bc3dc1a.d27a94",
-        "x": 160,
-        "y": 60,
-        "wires": [
-            [
-                "aa04d4a6.c7a968"
-            ]
-        ]
-    },
-    {
-        "id": "aa04d4a6.c7a968",
-        "type": "json",
-        "z": "67442bb3.903494",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": false,
-        "x": 370,
-        "y": 60,
+        "x": 140,
+        "y": 180,
         "wires": [
             [
                 "9cebdfeb.e6c42"
@@ -7428,14 +7404,19 @@
         "type": "function",
         "z": "67442bb3.903494",
         "name": "config_store",
-        "func": "\nvar id = msg.payload.chipid;\n\nvar store = flow.get ( 'store' ) || {};\nstore [id] = msg.payload;\nflow.set ( 'store', store );\n\nvar result = [];\nfor ( var key in store ) {\n    result.push ( \"\" + key );\n}\n\nmsg.options = result;\nmsg.payload = null;\n\nreturn msg;",
-        "outputs": 1,
+        "func": " \nvar id = msg.payload.chipid;\n\nvar parts = msg.payload.topic.split ( '/' );\nvar topic = parts [1] + \"/\" + parts [2] + \"/\" + parts [3];\n\nvar store = flow.get ( 'store' );\nstore.id [id] = msg.payload;\nstore.topic [topic] = msg.payload;\nflow.set ( 'store', store );\n\nvar id_result = [];\nfor ( var key in store.id ) {\n    id_result.push ( \"\" + key );\n}\nvar topic_result = [];\nfor ( var key in store.topic ) {\n    topic_result.push ( \"\" + key );\n}\n\nreturn [\n    {payload: null, options: id_result}, \n    {payload: null, options: topic_result}\n];",
+        "outputs": 2,
         "noerr": 0,
-        "x": 510,
-        "y": 60,
+        "initialize": "// Code added here will be run once\n// whenever the node is deployed.\nflow.set ( 'store', { id: {}, topic: {} } );",
+        "finalize": "",
+        "x": 370,
+        "y": 180,
         "wires": [
             [
                 "3bf4b924.63cb76"
+            ],
+            [
+                "b9cd26f1.7aaf28"
             ]
         ]
     },
@@ -7443,14 +7424,16 @@
         "id": "3bf4b924.63cb76",
         "type": "ui_dropdown",
         "z": "67442bb3.903494",
-        "name": "",
-        "label": "",
+        "name": "chipid",
+        "label": "chipid",
+        "tooltip": "",
         "place": "Select option",
         "group": "d4a7808d.ee6f9",
-        "order": 0,
+        "order": 1,
         "width": 0,
         "height": 0,
-        "passthru": true,
+        "passthru": false,
+        "multiple": false,
         "options": [
             {
                 "label": "",
@@ -7460,8 +7443,8 @@
         ],
         "payload": "",
         "topic": "",
-        "x": 860,
-        "y": 60,
+        "x": 590,
+        "y": 151,
         "wires": [
             [
                 "b30f8828.6e6b38"
@@ -7473,14 +7456,19 @@
         "type": "function",
         "z": "67442bb3.903494",
         "name": "retrieve config",
-        "func": "\nvar id = msg.payload;\nvar store = flow.get ( 'store' ) || {};\nvar config = store [id];\n\n//node.warn ( \"id=\" + id + \" config=\" + config );\n\nif ( config !== undefined ) {\n    return { payload: config };\n}\n\n",
-        "outputs": 1,
+        "func": "\nvar id = msg.payload;\nvar store = flow.get ( 'store' );\nvar config = store.id [id];\n\n//node.warn ( \"id=\" + id + \" config=\" + config );\n\nif ( config !== undefined ) {\n\n    var parts = config.topic.split ( '/' );\n    var topic = parts [1] + \"/\" + parts [2] + \"/\" + parts [3];\n\n    return [{ payload: config }, { payload: topic }];\n\n    \n}\n\n",
+        "outputs": 2,
         "noerr": 0,
-        "x": 460,
-        "y": 320,
+        "initialize": "",
+        "finalize": "",
+        "x": 760,
+        "y": 151,
         "wires": [
             [
                 "707adce5.9214a4"
+            ],
+            [
+                "b9cd26f1.7aaf28"
             ]
         ]
     },
@@ -7489,15 +7477,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 1,
+        "order": 2,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "topic",
         "format": "{{msg.payload.topic}}",
         "layout": "row-left",
-        "x": 850,
-        "y": 180,
+        "x": 570,
+        "y": 440,
         "wires": []
     },
     {
@@ -7505,15 +7493,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 16,
+        "order": 22,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "appCfg",
         "format": "{{msg.payload.appCfg}}",
         "layout": "row-left",
-        "x": 860,
-        "y": 980,
+        "x": 580,
+        "y": 1240,
         "wires": []
     },
     {
@@ -7521,15 +7509,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 8,
+        "order": 11,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "wifi netmask",
         "format": "{{msg.payload.wifi.netmask}}",
         "layout": "row-left",
-        "x": 870,
-        "y": 540,
+        "x": 590,
+        "y": 800,
         "wires": []
     },
     {
@@ -7537,15 +7525,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 11,
+        "order": 16,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "mqtt retain",
         "format": "{{msg.payload.mqtt.retain}}",
         "layout": "row-left",
-        "x": 870,
-        "y": 740,
+        "x": 590,
+        "y": 1000,
         "wires": []
     },
     {
@@ -7553,15 +7541,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 12,
+        "order": 17,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "trace ip",
         "format": "{{msg.payload.trace.ip}}",
         "layout": "row-left",
-        "x": 860,
-        "y": 780,
+        "x": 580,
+        "y": 1040,
         "wires": []
     },
     {
@@ -7569,15 +7557,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 2,
+        "order": 3,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "version",
         "format": "{{msg.payload.version}}",
         "layout": "row-left",
-        "x": 860,
-        "y": 220,
+        "x": 580,
+        "y": 480,
         "wires": []
     },
     {
@@ -7585,15 +7573,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 3,
+        "order": 4,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "app",
         "format": "{{msg.payload.app}}",
         "layout": "row-left",
-        "x": 850,
-        "y": 260,
+        "x": 570,
+        "y": 520,
         "wires": []
     },
     {
@@ -7601,15 +7589,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 5,
+        "order": 6,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "comment",
         "format": "{{msg.payload.comment}}",
         "layout": "row-left",
-        "x": 860,
-        "y": 340,
+        "x": 580,
+        "y": 600,
         "wires": []
     },
     {
@@ -7620,8 +7608,8 @@
         "links": [
             "707adce5.9214a4"
         ],
-        "x": 695,
-        "y": 320,
+        "x": 415,
+        "y": 580,
         "wires": [
             [
                 "43ffcf96.c575c",
@@ -7644,7 +7632,8 @@
                 "c9d14b28.aec988",
                 "5199defb.ec465",
                 "e854fdce.cefd6",
-                "8a1d0e4a.c058b"
+                "8a1d0e4a.c058b",
+                "ef35afde.2e836"
             ]
         ]
     },
@@ -7656,8 +7645,8 @@
         "links": [
             "d2d36c1c.4b86d"
         ],
-        "x": 655,
-        "y": 320,
+        "x": 955,
+        "y": 180,
         "wires": []
     },
     {
@@ -7665,15 +7654,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 15,
+        "order": 21,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "timer",
         "format": "{{msg.payload.timer}}",
         "layout": "row-left",
-        "x": 850,
-        "y": 940,
+        "x": 570,
+        "y": 1200,
         "wires": []
     },
     {
@@ -7688,12 +7677,13 @@
         "topic": "",
         "payload": "{}",
         "payloadType": "json",
-        "x": 450,
-        "y": 180,
+        "x": 370,
+        "y": 60,
         "wires": [
             [
+                "3bf4b924.63cb76",
                 "707adce5.9214a4",
-                "3bf4b924.63cb76"
+                "b9cd26f1.7aaf28"
             ]
         ]
     },
@@ -7702,15 +7692,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 4,
+        "order": 5,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "lfs timestamp",
         "format": "{{msg.payload.lfsts}}",
         "layout": "row-left",
-        "x": 1030,
-        "y": 300,
+        "x": 750,
+        "y": 560,
         "wires": []
     },
     {
@@ -7718,15 +7708,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 6,
+        "order": 7,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "wifi ip",
         "format": "{{msg.payload.wifi.ip}}",
         "layout": "row-left",
-        "x": 850,
-        "y": 380,
+        "x": 570,
+        "y": 640,
         "wires": []
     },
     {
@@ -7734,15 +7724,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 7,
+        "order": 10,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "wifi gateway",
         "format": "{{msg.payload.wifi.gateway}}",
         "layout": "row-left",
-        "x": 870,
-        "y": 500,
+        "x": 590,
+        "y": 760,
         "wires": []
     },
     {
@@ -7750,15 +7740,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 9,
+        "order": 14,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "mqtt broker",
         "format": "{{msg.payload.mqtt.broker}}",
         "layout": "row-left",
-        "x": 870,
-        "y": 660,
+        "x": 590,
+        "y": 920,
         "wires": []
     },
     {
@@ -7766,15 +7756,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 10,
+        "order": 15,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "mqtt keepalivetime",
         "format": "{{msg.payload.mqtt.keepAliveTime}}",
         "layout": "row-left",
-        "x": 890,
-        "y": 700,
+        "x": 610,
+        "y": 960,
         "wires": []
     },
     {
@@ -7782,15 +7772,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 13,
+        "order": 18,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "trace port",
         "format": "{{msg.payload.trace.port}}",
         "layout": "row-left",
-        "x": 860,
-        "y": 820,
+        "x": 580,
+        "y": 1080,
         "wires": []
     },
     {
@@ -7798,15 +7788,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 14,
+        "order": 19,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "trace onupdate",
         "format": "{{msg.payload.trace.onUpdate}}",
         "layout": "row-left",
-        "x": 880,
-        "y": 860,
+        "x": 600,
+        "y": 1120,
         "wires": []
     },
     {
@@ -7814,15 +7804,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 14,
+        "order": 20,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "trace onstartup",
         "format": "{{msg.payload.trace.onStartup}}",
         "layout": "row-left",
-        "x": 880,
-        "y": 900,
+        "x": 600,
+        "y": 1160,
         "wires": []
     },
     {
@@ -7833,8 +7823,8 @@
         "func": "\nif ( msg.payload && msg.payload.lfsts ) {\n    \n    var timestamp = msg.payload.lfsts;\n    \n    var date = new Date ( timestamp * 1000 );\n    \n    var month = date.getMonth() + 1;\n    var day = date.getDate();\n    var hour = date.getHours();\n    var min = date.getMinutes();\n    var sec = date.getSeconds();\n    \n    month = (month < 10 ? \"0\" : \"\") + month;\n    day = (day < 10 ? \"0\" : \"\") + day;\n    hour = (hour < 10 ? \"0\" : \"\") + hour;\n    min = (min < 10 ? \"0\" : \"\") + min;\n    sec = (sec < 10 ? \"0\" : \"\") + sec;\n    \n    var s = day + \".\" + month + \".\" + date.getFullYear() + \"   \" + hour + \":\" + min + \":\" + sec;\n    \n    return { payload: { lfsts: timestamp + \" -> \" + s } };\n    \n}\nelse {\n    \n    return msg;\n    \n}",
         "outputs": 1,
         "noerr": 0,
-        "x": 860,
-        "y": 300,
+        "x": 580,
+        "y": 560,
         "wires": [
             [
                 "f7e5e987.a11838"
@@ -9212,7 +9202,7 @@
         "type": "ui_switch",
         "z": "8e2c5c11.fae26",
         "name": "",
-        "label": "sensor/gesture/test",
+        "label": "light/led/corridor",
         "tooltip": "watchdog state",
         "group": "4759591f.23c438",
         "order": 29,
@@ -9230,7 +9220,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1013,
+        "x": 1003,
         "y": 1320,
         "wires": [
             []
@@ -9240,7 +9230,7 @@
         "id": "1104d0f0.dd367f",
         "type": "ui_button",
         "z": "8e2c5c11.fae26",
-        "name": "reset sensor/gesture/test",
+        "name": "reset light/led/corridor",
         "group": "4759591f.23c438",
         "order": 30,
         "width": "1",
@@ -9253,8 +9243,8 @@
         "icon": "refresh",
         "payload": "",
         "payloadType": "str",
-        "topic": "sensor/gesture/test",
-        "x": 150,
+        "topic": "light/led/corridor/led",
+        "x": 140,
         "y": 2040,
         "wires": [
             [
@@ -9266,7 +9256,7 @@
         "id": "59e887d.f332978",
         "type": "ui_button",
         "z": "8e2c5c11.fae26",
-        "name": "restart sensor/gesture/test",
+        "name": "restart light/led/corridor",
         "group": "4759591f.23c438",
         "order": 31,
         "width": "1",
@@ -9279,8 +9269,8 @@
         "icon": "play_arrow",
         "payload": "",
         "payloadType": "str",
-        "topic": "sensor/gesture/test",
-        "x": 590,
+        "topic": "light/led/corridor",
+        "x": 580,
         "y": 3500,
         "wires": [
             [
@@ -9562,7 +9552,7 @@
             },
             {
                 "t": "eq",
-                "v": "switch/shelly/test",
+                "v": "light/led/corridor",
                 "vt": "str"
             },
             {
@@ -9685,9 +9675,7 @@
             [
                 "59e887d.f332978"
             ],
-            [
-                "e1db88ba.d05138"
-            ],
+            [],
             [
                 "16b0884d.4bb698"
             ]
@@ -10627,7 +10615,7 @@
             },
             {
                 "t": "eq",
-                "v": "sensor/gesture/test",
+                "v": "light/led/corridor",
                 "vt": "str"
             },
             {
@@ -10649,16 +10637,11 @@
                 "t": "eq",
                 "v": "switch/shelly/shower",
                 "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "switch/shelly/test",
-                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 38,
+        "outputs": 37,
         "x": 550,
         "y": 4000,
         "wires": [
@@ -10772,9 +10755,6 @@
             ],
             [
                 "e5652acd.647ae8"
-            ],
-            [
-                "a69f496.05e43b8"
             ]
         ]
     },
@@ -11710,7 +11690,7 @@
         "id": "8ae0b6e6.0a68e8",
         "type": "ui_switch",
         "z": "8e2c5c11.fae26",
-        "name": "mqtt sensor/gesture/test",
+        "name": "mqtt light/led/corridor",
         "label": "",
         "tooltip": "mqtt connection state",
         "group": "4759591f.23c438",
@@ -11729,7 +11709,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 970,
+        "x": 960,
         "y": 4780,
         "wires": [
             []
@@ -11911,15 +11891,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 8,
+        "order": 12,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "wifi rssi",
         "format": "{{msg.payload.wifi.rssi}}",
         "layout": "row-left",
-        "x": 860,
-        "y": 580,
+        "x": 580,
+        "y": 840,
         "wires": []
     },
     {
@@ -11973,15 +11953,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 8,
+        "order": 13,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "wifi access point",
         "format": "{{msg.payload}}",
         "layout": "row-left",
-        "x": 1040,
-        "y": 620,
+        "x": 760,
+        "y": 880,
         "wires": []
     },
     {
@@ -11992,8 +11972,8 @@
         "func": "\nvar ap = [];\nap [ \"c8:0e:14:66:e0:e1\" ] = \"mauzi\";\nap [ \"cc:ce:1e:e2:dd:5b\" ] = \"draguran\";\nap [ \"f0:b0:14:e1:92:a5\" ] = \"meltan\";\n\nvar result = \"\";\nif ( msg.payload.wifi && msg.payload.wifi.apmac ) {\n    result = ap [msg.payload.wifi.apmac];\n}\nmsg.payload = result;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 860,
-        "y": 620,
+        "x": 580,
+        "y": 880,
         "wires": [
             [
                 "1d816adb.69a065"
@@ -12144,7 +12124,7 @@
         "payloadType": "str",
         "topic": "display/pitouch/corridor",
         "x": 160,
-        "y": 2120,
+        "y": 2080,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -12170,7 +12150,7 @@
         "payloadType": "str",
         "topic": "display/pitouch/corridor",
         "x": 610,
-        "y": 3580,
+        "y": 3540,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -14017,139 +13997,6 @@
         ]
     },
     {
-        "id": "79193725.bbcc38",
-        "type": "trigger",
-        "z": "8e2c5c11.fae26",
-        "name": "",
-        "op1": "1",
-        "op2": "0",
-        "op1type": "str",
-        "op2type": "str",
-        "duration": "20",
-        "extend": true,
-        "units": "min",
-        "reset": "",
-        "bytopic": "all",
-        "outputs": 1,
-        "x": 820,
-        "y": 1520,
-        "wires": [
-            [
-                "aea5373c.e368c8"
-            ]
-        ]
-    },
-    {
-        "id": "aea5373c.e368c8",
-        "type": "ui_switch",
-        "z": "8e2c5c11.fae26",
-        "name": "",
-        "label": "switch/shelly/test",
-        "tooltip": "watchdog state",
-        "group": "4759591f.23c438",
-        "order": 33,
-        "width": "5",
-        "height": "1",
-        "passthru": false,
-        "decouple": "true",
-        "topic": "",
-        "style": "",
-        "onvalue": "1",
-        "onvalueType": "str",
-        "onicon": "done",
-        "oncolor": "green",
-        "offvalue": "0",
-        "offvalueType": "str",
-        "officon": "error_outline",
-        "offcolor": "red",
-        "x": 1021,
-        "y": 1520,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "5ff2d63d.a06c08",
-        "type": "ui_button",
-        "z": "8e2c5c11.fae26",
-        "name": "reset switch/shelly/test",
-        "group": "4759591f.23c438",
-        "order": 34,
-        "width": "1",
-        "height": "1",
-        "passthru": false,
-        "label": "",
-        "tooltip": "restart via mqtt",
-        "color": "#00ABEC",
-        "bgcolor": "white",
-        "icon": "refresh",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "switch/shelly/test",
-        "x": 140,
-        "y": 2080,
-        "wires": [
-            [
-                "b6bc8fd1.c46ec"
-            ]
-        ]
-    },
-    {
-        "id": "e1db88ba.d05138",
-        "type": "ui_button",
-        "z": "8e2c5c11.fae26",
-        "name": "restart switch/shelly/test",
-        "group": "4759591f.23c438",
-        "order": 35,
-        "width": "1",
-        "height": "1",
-        "passthru": false,
-        "label": "",
-        "tooltip": "restart via telnet",
-        "color": "#00ABEC",
-        "bgcolor": "white",
-        "icon": "play_arrow",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "switch/shelly/test",
-        "x": 590,
-        "y": 3540,
-        "wires": [
-            [
-                "e59e4935.4a4238"
-            ]
-        ]
-    },
-    {
-        "id": "a69f496.05e43b8",
-        "type": "ui_switch",
-        "z": "8e2c5c11.fae26",
-        "name": "mqtt switch/shelly/test",
-        "label": "",
-        "tooltip": "mqtt connection state",
-        "group": "4759591f.23c438",
-        "order": 36,
-        "width": "1",
-        "height": "1",
-        "passthru": false,
-        "decouple": "true",
-        "topic": "",
-        "style": "",
-        "onvalue": "online",
-        "onvalueType": "str",
-        "onicon": "done",
-        "oncolor": "green",
-        "offvalue": "offline",
-        "offvalueType": "str",
-        "officon": "error_outline",
-        "offcolor": "red",
-        "x": 960,
-        "y": 4980,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "eddd5b1c.e13e28",
         "type": "ui_text",
         "z": "8e2c5c11.fae26",
@@ -14214,45 +14061,19 @@
         "wires": []
     },
     {
-        "id": "fa478e9b.3b12e",
-        "type": "ui_button",
-        "z": "37197cb5.c49ee4",
-        "name": "update switch/shelly/test",
-        "group": "457a1e5.d114de",
-        "order": 12,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "label": "switch/shelly/test",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "date",
-        "topic": "switch/shelly/test",
-        "x": 410,
-        "y": 1600,
-        "wires": [
-            [
-                "6ed6dc87.f74a94"
-            ]
-        ]
-    },
-    {
         "id": "e854fdce.cefd6",
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 6,
+        "order": 8,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "wifi mac",
         "format": "{{msg.payload.wifi.apmac}}",
         "layout": "row-left",
-        "x": 860,
-        "y": 420,
+        "x": 580,
+        "y": 680,
         "wires": []
     },
     {
@@ -14260,15 +14081,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 6,
+        "order": 9,
         "width": "20",
         "height": "1",
         "name": "",
         "label": "wifi dnsname",
         "format": "{{msg.payload.wifi.dnsname}}",
         "layout": "row-left",
-        "x": 870,
-        "y": 460,
+        "x": 590,
+        "y": 720,
         "wires": []
     },
     {
@@ -15031,5 +14852,89 @@
                 "4b40a434.a11a5c"
             ]
         ]
+    },
+    {
+        "id": "1980eb8c.8206d4",
+        "type": "ui_text",
+        "z": "8e2c5c11.fae26",
+        "group": "4759591f.23c438",
+        "order": 37,
+        "width": "8",
+        "height": "1",
+        "name": "dummy line 5",
+        "label": "",
+        "format": "",
+        "layout": "row-spread",
+        "x": 210,
+        "y": 4600,
+        "wires": []
+    },
+    {
+        "id": "b9cd26f1.7aaf28",
+        "type": "ui_dropdown",
+        "z": "67442bb3.903494",
+        "name": "topic",
+        "label": "topic",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "d4a7808d.ee6f9",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 590,
+        "y": 211,
+        "wires": [
+            [
+                "1209f7b4.d266b8"
+            ]
+        ]
+    },
+    {
+        "id": "1209f7b4.d266b8",
+        "type": "function",
+        "z": "67442bb3.903494",
+        "name": "retrieve config",
+        "func": "\nvar topic = msg.payload;\nvar store = flow.get ( 'store' );\nvar config = store.topic [topic];\n\n//node.warn ( \"topic=\" + topic + \" config=\" + config );\n\nif ( config !== undefined ) {\n    return [{ payload: config }, { payload: config.chipid }];\n}\n\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 760,
+        "y": 211,
+        "wires": [
+            [
+                "707adce5.9214a4"
+            ],
+            [
+                "3bf4b924.63cb76"
+            ]
+        ]
+    },
+    {
+        "id": "ef35afde.2e836",
+        "type": "ui_text",
+        "z": "67442bb3.903494",
+        "group": "5de7d7da.a53e18",
+        "order": 1,
+        "width": "20",
+        "height": "1",
+        "name": "",
+        "label": "chipid",
+        "format": "{{msg.payload.chipid}}",
+        "layout": "row-left",
+        "x": 570,
+        "y": 400,
+        "wires": []
     }
 ]
