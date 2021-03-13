@@ -259,62 +259,11 @@
         "collapse": false
     },
     {
-        "id": "165a13ba.7f27ec",
-        "type": "ui_group",
-        "name": "Temperatur",
-        "tab": "eb63d2fd.5cd68",
-        "order": 2,
-        "disp": true,
-        "width": "8",
-        "collapse": false
-    },
-    {
-        "id": "e1a7eb0b.d543f8",
-        "type": "ui_group",
-        "name": "Steuerung",
-        "tab": "eb63d2fd.5cd68",
-        "order": 1,
-        "disp": true,
-        "width": "5"
-    },
-    {
-        "id": "903ce37b.b2576",
-        "type": "ui_group",
-        "name": "Rezept",
-        "tab": "eb63d2fd.5cd68",
-        "order": 3,
-        "disp": true,
-        "width": "12",
-        "collapse": false
-    },
-    {
-        "id": "1a9412b.dfe4aed",
-        "type": "influxdb",
-        "hostname": "influxdb",
-        "port": "8086",
-        "protocol": "http",
-        "database": "brewery",
-        "name": "",
-        "usetls": false,
-        "tls": ""
-    },
-    {
         "id": "eb63d2fd.5cd68",
         "type": "ui_tab",
         "name": "Brauerei",
         "icon": "fa-beer",
         "order": 6
-    },
-    {
-        "id": "9f5822ca.ea672",
-        "type": "influxdb",
-        "hostname": "influxdb",
-        "port": "8086",
-        "protocol": "http",
-        "database": "ambient",
-        "name": "",
-        "usetls": false,
-        "tls": ""
     },
     {
         "id": "457a1e5.d114de",
@@ -376,61 +325,11 @@
         "order": 4
     },
     {
-        "id": "18da7961.ac8f27",
-        "type": "influxdb",
-        "hostname": "influxdb",
-        "port": "8086",
-        "protocol": "http",
-        "database": "consumption",
-        "name": "",
-        "usetls": false,
-        "tls": ""
-    },
-    {
-        "id": "be1d2242.fd0f2",
-        "type": "ui_group",
-        "name": "Ticker",
-        "tab": "eb63d2fd.5cd68",
-        "order": 4,
-        "disp": false,
-        "width": "25",
-        "collapse": false
-    },
-    {
         "id": "f5c1d8d5.e934a8",
         "type": "ui_tab",
         "name": "Nachguss",
         "icon": "dashboard",
         "order": 7
-    },
-    {
-        "id": "dd05ddf5.dd4e",
-        "type": "ui_group",
-        "name": "Temperatur 1 (weiß)",
-        "tab": "f5c1d8d5.e934a8",
-        "order": 1,
-        "disp": true,
-        "width": "10",
-        "collapse": false
-    },
-    {
-        "id": "8455d317.fd8ec",
-        "type": "ui_group",
-        "name": "Spannungsversorgung",
-        "tab": "f5c1d8d5.e934a8",
-        "order": 3,
-        "disp": true,
-        "width": "6"
-    },
-    {
-        "id": "f5c64a1d.91b058",
-        "type": "ui_group",
-        "name": "Temperatur 2 (gelb)",
-        "tab": "f5c1d8d5.e934a8",
-        "order": 2,
-        "disp": true,
-        "width": "10",
-        "collapse": false
     },
     {
         "id": "33d343b9.d5d19c",
@@ -520,17 +419,6 @@
         "displayName": "Andreas Jungierek"
     },
     {
-        "id": "382f38a5.a21be8",
-        "type": "influxdb",
-        "hostname": "influxdb",
-        "port": "8086",
-        "protocol": "http",
-        "database": "rssi",
-        "name": "",
-        "usetls": false,
-        "tls": ""
-    },
-    {
         "id": "78b675c7.c40cbc",
         "type": "ui_group",
         "name": "Asterisk",
@@ -595,6 +483,20 @@
         "disp": true,
         "width": "6",
         "collapse": false
+    },
+    {
+        "id": "9314d202.2bbfd",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://influxdb:8086",
+        "rejectUnauthorized": false
     },
     {
         "id": "1f55c701.4fff39",
@@ -5304,11 +5206,16 @@
         "id": "b1e54d3.bfbb9b",
         "type": "influxdb out",
         "z": "813e7ecf.e5fd7",
-        "influxdb": "18da7961.ac8f27",
+        "influxdb": "9314d202.2bbfd",
         "name": "influxdb",
         "measurement": "",
         "precision": "",
         "retentionPolicy": "",
+        "database": "",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "nodesathome",
+        "bucket": "consumption",
         "x": 760,
         "y": 340,
         "wires": []
@@ -11867,12 +11774,17 @@
         "id": "b3b3faba.4b4b88",
         "type": "influxdb out",
         "z": "fc8ae83a.bd2f98",
-        "influxdb": "9f5822ca.ea672",
-        "name": "influxdb",
+        "influxdb": "9314d202.2bbfd",
+        "name": "",
         "measurement": "light",
         "precision": "",
         "retentionPolicy": "",
-        "x": 560,
+        "database": "",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "nodesathome",
+        "bucket": "ambient",
+        "x": 630,
         "y": 520,
         "wires": []
     },
@@ -12011,12 +11923,17 @@
         "id": "3fcc775b.1b8608",
         "type": "influxdb out",
         "z": "fc8ae83a.bd2f98",
-        "influxdb": "382f38a5.a21be8",
+        "influxdb": "9314d202.2bbfd",
         "name": "",
         "measurement": "dBm",
         "precision": "",
         "retentionPolicy": "",
-        "x": 620,
+        "database": "",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "nodesathome",
+        "bucket": "rssi",
+        "x": 650,
         "y": 640,
         "wires": []
     },
