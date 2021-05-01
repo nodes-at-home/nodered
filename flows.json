@@ -259,13 +259,6 @@
         "collapse": false
     },
     {
-        "id": "eb63d2fd.5cd68",
-        "type": "ui_tab",
-        "name": "Brauerei",
-        "icon": "fa-beer",
-        "order": 6
-    },
-    {
         "id": "457a1e5.d114de",
         "type": "ui_group",
         "name": "Nodes 3",
@@ -323,13 +316,6 @@
         "name": "Hausverbrauch",
         "icon": "dashboard",
         "order": 4
-    },
-    {
-        "id": "f5c1d8d5.e934a8",
-        "type": "ui_tab",
-        "name": "Nachguss",
-        "icon": "dashboard",
-        "order": 7
     },
     {
         "id": "33d343b9.d5d19c",
@@ -1234,7 +1220,10 @@
                 "fb324b28.cd46f8",
                 "b471fca5.c4e5e",
                 "2151f88.9057d08",
-                "49e5f244.8e72bc"
+                "49e5f244.8e72bc",
+                "be021831.146108",
+                "e7ff7e88.ff941",
+                "54f056df.a23e58"
             ]
         ]
     },
@@ -3026,12 +3015,27 @@
                 "t": "eq",
                 "v": "switch/shelly/shower",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "switch/relay/garden",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "sensor/soil/garden",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "sensor/rain/garden",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 37,
-        "x": 570,
+        "outputs": 40,
+        "x": 1050,
         "y": 440,
         "wires": [
             [
@@ -3144,6 +3148,15 @@
             ],
             [
                 "40abcf71.d1a33"
+            ],
+            [
+                "5698ed5.1a05a14"
+            ],
+            [
+                "982a21a0.dad7d"
+            ],
+            [
+                "6e071815.a27c18"
             ]
         ]
     },
@@ -3161,7 +3174,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 800,
+        "x": 1280,
         "y": 840,
         "wires": [
             [
@@ -3193,7 +3206,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1020,
+        "x": 1500,
         "y": 840,
         "wires": [
             []
@@ -3213,7 +3226,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 120,
         "wires": [
             [
@@ -3245,7 +3258,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1008,
+        "x": 1488,
         "y": 120,
         "wires": [
             []
@@ -3265,7 +3278,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 160,
         "wires": [
             [
@@ -3297,7 +3310,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
+        "x": 1478,
         "y": 160,
         "wires": [
             []
@@ -3317,7 +3330,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 80,
         "wires": [
             [
@@ -3349,7 +3362,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1008,
+        "x": 1488,
         "y": 80,
         "wires": [
             []
@@ -3370,7 +3383,7 @@
         "reset": "",
         "bytopic": "all",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 200,
         "wires": [
             [
@@ -3402,7 +3415,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1008,
+        "x": 1488,
         "y": 200,
         "wires": [
             []
@@ -3422,7 +3435,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 40,
         "wires": [
             [
@@ -3454,7 +3467,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
+        "x": 1478,
         "y": 40,
         "wires": [
             []
@@ -3474,7 +3487,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 240,
         "wires": [
             [
@@ -3506,7 +3519,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
+        "x": 1478,
         "y": 240,
         "wires": [
             []
@@ -3526,7 +3539,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 320,
         "wires": [
             [
@@ -3558,7 +3571,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1008,
+        "x": 1488,
         "y": 320,
         "wires": [
             []
@@ -3578,7 +3591,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 280,
         "wires": [
             [
@@ -3610,7 +3623,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1018,
+        "x": 1498,
         "y": 280,
         "wires": [
             []
@@ -3639,7 +3652,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1008,
+        "x": 1488,
         "y": 400,
         "wires": [
             []
@@ -3659,7 +3672,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 400,
         "wires": [
             [
@@ -3682,7 +3695,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 440,
         "wires": [
             [
@@ -3714,7 +3727,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1008,
+        "x": 1488,
         "y": 440,
         "wires": [
             []
@@ -3734,7 +3747,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 480,
         "wires": [
             [
@@ -3766,7 +3779,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1008,
+        "x": 1488,
         "y": 480,
         "wires": [
             []
@@ -3786,7 +3799,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 520,
         "wires": [
             [
@@ -3818,7 +3831,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1008,
+        "x": 1488,
         "y": 520,
         "wires": [
             []
@@ -3838,7 +3851,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 560,
         "wires": [
             [
@@ -3870,7 +3883,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
+        "x": 1478,
         "y": 560,
         "wires": [
             []
@@ -3890,7 +3903,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 600,
         "wires": [
             [
@@ -3922,7 +3935,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
+        "x": 1478,
         "y": 600,
         "wires": [
             []
@@ -3942,7 +3955,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 640,
         "wires": [
             [
@@ -3974,7 +3987,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
+        "x": 1478,
         "y": 640,
         "wires": [
             []
@@ -3994,7 +4007,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 680,
         "wires": [
             [
@@ -4026,7 +4039,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
+        "x": 1478,
         "y": 680,
         "wires": [
             []
@@ -4046,7 +4059,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 720,
         "wires": [
             [
@@ -4078,7 +4091,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
+        "x": 1478,
         "y": 720,
         "wires": [
             []
@@ -4098,7 +4111,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 760,
         "wires": [
             [
@@ -4130,7 +4143,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1008,
+        "x": 1488,
         "y": 760,
         "wires": [
             []
@@ -4150,7 +4163,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 800,
         "wires": [
             [
@@ -4182,7 +4195,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 998,
+        "x": 1478,
         "y": 800,
         "wires": [
             []
@@ -4202,7 +4215,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 798,
+        "x": 1278,
         "y": 360,
         "wires": [
             [
@@ -4234,7 +4247,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1008,
+        "x": 1488,
         "y": 360,
         "wires": [
             []
@@ -4267,8 +4280,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 750,
-        "y": 1820,
+        "x": 770,
+        "y": 1120,
         "wires": [
             [
                 "bf07b832.b1d128"
@@ -4287,8 +4300,8 @@
         "topic": "test/test",
         "payload": "0",
         "payloadType": "str",
-        "x": 600,
-        "y": 1880,
+        "x": 620,
+        "y": 1180,
         "wires": [
             [
                 "f1399c8c.93ab8"
@@ -4304,8 +4317,8 @@
         "ret": "txt",
         "url": "",
         "tls": "",
-        "x": 1020,
-        "y": 1820,
+        "x": 1040,
+        "y": 1120,
         "wires": [
             []
         ]
@@ -4336,8 +4349,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 870,
-        "y": 1820,
+        "x": 890,
+        "y": 1120,
         "wires": [
             [
                 "d5d988d5.0c43b8"
@@ -4350,8 +4363,8 @@
         "z": "8e2c5c11.fae26",
         "name": "send msg to simplepush if trigger is outtimed",
         "info": "",
-        "x": 710,
-        "y": 1780,
+        "x": 730,
+        "y": 1080,
         "wires": []
     },
     {
@@ -4393,7 +4406,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 801,
+        "x": 1281,
         "y": 880,
         "wires": [
             [
@@ -4425,7 +4438,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1011,
+        "x": 1491,
         "y": 880,
         "wires": [
             []
@@ -4500,7 +4513,7 @@
         "units": "min",
         "reset": "",
         "outputs": 1,
-        "x": 801,
+        "x": 1281,
         "y": 920,
         "wires": [
             [
@@ -4532,7 +4545,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1001,
+        "x": 1481,
         "y": 920,
         "wires": [
             []
@@ -4553,7 +4566,7 @@
         "reset": "",
         "bytopic": "all",
         "outputs": 1,
-        "x": 801,
+        "x": 1281,
         "y": 960,
         "wires": [
             [
@@ -4585,7 +4598,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1021,
+        "x": 1501,
         "y": 960,
         "wires": [
             []
@@ -4656,7 +4669,7 @@
         "reset": "",
         "bytopic": "all",
         "outputs": 1,
-        "x": 801,
+        "x": 1281,
         "y": 1000,
         "wires": [
             [
@@ -4688,7 +4701,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1011,
+        "x": 1491,
         "y": 1000,
         "wires": [
             []
@@ -4906,7 +4919,6 @@
             "#9467bd",
             "#c5b0d5"
         ],
-        "useOldStyle": false,
         "outputs": 2,
         "x": 600,
         "y": 500,
@@ -5600,7 +5612,6 @@
             "#9467bd",
             "#c5b0d5"
         ],
-        "useOldStyle": false,
         "outputs": 2,
         "x": 610,
         "y": 160,
@@ -5744,7 +5755,6 @@
             "#9467bd",
             "#c5b0d5"
         ],
-        "useOldStyle": false,
         "outputs": 1,
         "x": 613,
         "y": 282,
@@ -6560,7 +6570,7 @@
         "reset": "",
         "bytopic": "all",
         "outputs": 1,
-        "x": 802,
+        "x": 1282,
         "y": 1040,
         "wires": [
             [
@@ -6592,7 +6602,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1012,
+        "x": 1492,
         "y": 1040,
         "wires": [
             []
@@ -6678,7 +6688,7 @@
         "reset": "",
         "bytopic": "all",
         "outputs": 1,
-        "x": 805,
+        "x": 1285,
         "y": 1080,
         "wires": [
             [
@@ -6710,7 +6720,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1015,
+        "x": 1495,
         "y": 1080,
         "wires": [
             []
@@ -6753,12 +6763,13 @@
         "height": 0,
         "passthru": true,
         "label": "light/ws2812/terrace1",
+        "tooltip": "",
         "color": "",
         "bgcolor": "",
         "icon": "",
         "payload": "",
         "payloadType": "date",
-        "topic": "light/ws2812/terrace",
+        "topic": "light/ws2812/terrace1",
         "x": 420,
         "y": 1040,
         "wires": [
@@ -6807,7 +6818,7 @@
         "reset": "",
         "bytopic": "all",
         "outputs": 1,
-        "x": 807,
+        "x": 1287,
         "y": 1160,
         "wires": [
             [
@@ -6839,7 +6850,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1038,
+        "x": 1518,
         "y": 1160,
         "wires": [
             []
@@ -6912,7 +6923,7 @@
         "reset": "",
         "bytopic": "all",
         "outputs": 1,
-        "x": 805,
+        "x": 1285,
         "y": 1120,
         "wires": [
             [
@@ -6944,7 +6955,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1015,
+        "x": 1495,
         "y": 1120,
         "wires": [
             []
@@ -6961,12 +6972,13 @@
         "height": 0,
         "passthru": true,
         "label": "light/ws2812/terrace2",
+        "tooltip": "",
         "color": "",
         "bgcolor": "",
         "icon": "",
         "payload": "",
         "payloadType": "date",
-        "topic": "light/ws2812/terrace",
+        "topic": "light/ws2812/terrace2",
         "x": 420,
         "y": 1080,
         "wires": [
@@ -7016,7 +7028,7 @@
         "reset": "",
         "bytopic": "all",
         "outputs": 1,
-        "x": 812,
+        "x": 1292,
         "y": 1200,
         "wires": [
             [
@@ -7048,7 +7060,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1023,
+        "x": 1503,
         "y": 1200,
         "wires": [
             []
@@ -7095,7 +7107,7 @@
         "reset": "",
         "bytopic": "all",
         "outputs": 1,
-        "x": 812,
+        "x": 1292,
         "y": 1240,
         "wires": [
             [
@@ -7127,7 +7139,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1033,
+        "x": 1513,
         "y": 1240,
         "wires": [
             []
@@ -7174,7 +7186,7 @@
         "reset": "",
         "bytopic": "all",
         "outputs": 1,
-        "x": 812,
+        "x": 1292,
         "y": 1280,
         "wires": [
             [
@@ -7206,7 +7218,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1023,
+        "x": 1503,
         "y": 1280,
         "wires": [
             []
@@ -8220,8 +8232,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1150,
-        "y": 3040,
+        "x": 2070,
+        "y": 2720,
         "wires": [
             [
                 "1b78207c.716f7"
@@ -8246,8 +8258,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "switch/rfhub/lounge",
-        "x": 600,
-        "y": 2060,
+        "x": 1520,
+        "y": 1740,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8272,8 +8284,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "sensor/DHT22/lounge",
-        "x": 600,
-        "y": 2100,
+        "x": 1520,
+        "y": 1780,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8298,8 +8310,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "sensor/DHT22/terrace",
-        "x": 600,
-        "y": 2140,
+        "x": 1520,
+        "y": 1820,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8324,8 +8336,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "sensor/DHT22/roof",
-        "x": 590,
-        "y": 2180,
+        "x": 1510,
+        "y": 1860,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8350,8 +8362,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "sensor/ds18b20/pool",
-        "x": 600,
-        "y": 2220,
+        "x": 1520,
+        "y": 1900,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8376,8 +8388,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "cover/relay/garage",
-        "x": 590,
-        "y": 2260,
+        "x": 1510,
+        "y": 1940,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8402,8 +8414,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "switch/sonoff/utilityroom",
-        "x": 610,
-        "y": 2300,
+        "x": 1530,
+        "y": 1980,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8428,8 +8440,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "switch/sonoff/garage",
-        "x": 600,
-        "y": 2340,
+        "x": 1520,
+        "y": 2020,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8454,8 +8466,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "switch/shelly/terrace",
-        "x": 600,
-        "y": 2380,
+        "x": 1520,
+        "y": 2060,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8480,8 +8492,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "switch/relay/backyard",
-        "x": 600,
-        "y": 2420,
+        "x": 1520,
+        "y": 2100,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8506,8 +8518,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "switch/sonoff/yardgate",
-        "x": 600,
-        "y": 2460,
+        "x": 1520,
+        "y": 2140,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8532,8 +8544,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "switch/sonoff/pool",
-        "x": 590,
-        "y": 2520,
+        "x": 1510,
+        "y": 2200,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8558,8 +8570,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "light/sonoff/kitchen",
-        "x": 590,
-        "y": 2720,
+        "x": 1510,
+        "y": 2400,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8584,8 +8596,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "sensor/gesture/kitchen",
-        "x": 610,
-        "y": 2680,
+        "x": 1530,
+        "y": 2360,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8610,8 +8622,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "switch/relay/dining2",
-        "x": 600,
-        "y": 2640,
+        "x": 1520,
+        "y": 2320,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8636,8 +8648,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "switch/relay/dining1",
-        "x": 600,
-        "y": 2600,
+        "x": 1520,
+        "y": 2280,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8662,8 +8674,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "light/sonoff/corridor",
-        "x": 590,
-        "y": 2560,
+        "x": 1510,
+        "y": 2240,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8688,8 +8700,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "light/xmastree/dining",
-        "x": 600,
-        "y": 3060,
+        "x": 1520,
+        "y": 2740,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8714,8 +8726,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "sensor/button/indoor",
-        "x": 600,
-        "y": 3100,
+        "x": 1520,
+        "y": 2780,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8740,8 +8752,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "sensor/button/garage",
-        "x": 600,
-        "y": 3140,
+        "x": 1520,
+        "y": 2820,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8766,8 +8778,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "sensor/button/pool",
-        "x": 590,
-        "y": 3180,
+        "x": 1510,
+        "y": 2860,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8792,8 +8804,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "switch/sonoff/k8200",
-        "x": 600,
-        "y": 3220,
+        "x": 1520,
+        "y": 2900,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8818,8 +8830,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "sensor/ds18b20/brewery",
-        "x": 610,
-        "y": 3260,
+        "x": 1530,
+        "y": 2940,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8844,8 +8856,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "sensor/spindle/fermenter",
-        "x": 610,
-        "y": 3300,
+        "x": 1530,
+        "y": 2980,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8870,8 +8882,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "sensor/DHT22/office",
-        "x": 600,
-        "y": 3340,
+        "x": 1520,
+        "y": 3020,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8896,8 +8908,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "display/pixel/kitchen",
-        "x": 600,
-        "y": 2760,
+        "x": 1520,
+        "y": 2440,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8922,8 +8934,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "meter/electricity/utilityroom",
-        "x": 620,
-        "y": 2880,
+        "x": 1540,
+        "y": 2560,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8948,8 +8960,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "light/ws2812/terrace1",
-        "x": 600,
-        "y": 2800,
+        "x": 1520,
+        "y": 2480,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -8974,8 +8986,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "light/ws2812/terrace2",
-        "x": 600,
-        "y": 2840,
+        "x": 1520,
+        "y": 2520,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -9000,8 +9012,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "switch/sonoff/bedroom",
-        "x": 600,
-        "y": 3380,
+        "x": 1520,
+        "y": 3060,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -9026,8 +9038,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "sensor/ttp223/bedroom",
-        "x": 610,
-        "y": 3420,
+        "x": 1530,
+        "y": 3100,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -9052,8 +9064,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "switch/sonoff/gallery1",
-        "x": 600,
-        "y": 3460,
+        "x": 1520,
+        "y": 3140,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -9066,8 +9078,8 @@
         "z": "8e2c5c11.fae26",
         "name": "restart via telnet",
         "info": "",
-        "x": 520,
-        "y": 2020,
+        "x": 1440,
+        "y": 1700,
         "wires": []
     },
     {
@@ -9095,7 +9107,7 @@
         "reset": "",
         "bytopic": "all",
         "outputs": 1,
-        "x": 812,
+        "x": 1292,
         "y": 1320,
         "wires": [
             [
@@ -9127,7 +9139,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1003,
+        "x": 1483,
         "y": 1320,
         "wires": [
             []
@@ -9177,8 +9189,9 @@
         "payload": "",
         "payloadType": "str",
         "topic": "light/led/corridor",
-        "x": 580,
-        "y": 3500,
+        "topicType": "str",
+        "x": 1500,
+        "y": 3180,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -9194,10 +9207,10 @@
         "fieldType": "msg",
         "format": "json",
         "syntax": "mustache",
-        "template": "[\n    { \"topic\":\"switch/rfhub/lounge\",            \"ip\": \"192.168.2.20\"},\n    { \"topic\":\"sensor/ttp223/bedroom\",          \"ip\": \"192.168.2.21\"},\n    { \"topic\":\"sensor/DHT22/roof\",              \"ip\": \"192.168.2.22\"},\n    { \"topic\":\"sensor/DHT22/terrace\",           \"ip\": \"192.168.2.23\"},\n    { \"topic\":\"cover/relay/garage\",             \"ip\": \"192.168.2.25\"},\n    { \"topic\":\"switch/sonoff/utilityroom\",      \"ip\": \"192.168.2.26\"},\n    { \"topic\":\"switch/sonoff/garage\",           \"ip\": \"192.168.2.27\"},\n    { \"topic\":\"switch/relay/dining1\",           \"ip\": \"192.168.2.28\"},\n    { \"topic\":\"switch/relay/backyard\",          \"ip\": \"192.168.2.29\"},\n    { \"topic\":\"switch/relay/dining2\",           \"ip\": \"192.168.2.30\"},\n    { \"topic\":\"light/xmastree/dining\",          \"ip\": \"192.168.2.31\"},\n    { \"topic\":\"sensor/button/indoor\",           \"ip\": \"192.168.2.32\"},\n    { \"topic\":\"sensor/button/garage\",           \"ip\": \"192.168.2.33\"},\n    { \"topic\":\"sensor/button/pool\",             \"ip\": \"192.168.2.34\"},\n    { \"topic\":\"sensor/DHT22/lounge\",            \"ip\": \"192.168.2.35\"},\n    { \"topic\":\"switch/sonoff/dining \",          \"ip\": \"192.168.2.36\"},\n    { \"topic\":\"switch/sonoff/pool\",             \"ip\": \"192.168.2.37\"},\n    { \"topic\":\"switch/sonoff/terrace\",          \"ip\": \"192.168.2.38\"},\n    { \"topic\":\"switch/sonoff/yardgate\",         \"ip\": \"192.168.2.39\"},\n    { \"topic\":\"switch/sonoff/corridor\",         \"ip\": \"192.168.2.40\"},\n    { \"topic\":\"x\",                              \"ip\": \"192.168.2.41\"},\n    { \"topic\":\"light/sonoff/kitchen\",           \"ip\": \"192.168.2.42\"},\n    { \"topic\":\"sensor/gesture/kitchen\",         \"ip\": \"192.168.2.43\"},\n    { \"topic\":\"sensor/ds18b20/pool\",            \"ip\": \"192.168.2.44\"},\n    { \"topic\":\"sensor/ds18b20/brewery\",         \"ip\": \"192.168.2.45\"},\n    { \"topic\":\"sensor/spinlde/fermenter\",       \"ip\": \"192.168.2.46\"},\n    { \"topic\":\"sensor/temp/office\",             \"ip\": \"192.168.2.47\"},\n    { \"topic\":\"meter/electricity/utilityroom\",  \"ip\": \"192.168.2.48\"},\n    { \"topic\":\"display/pixel/kitchen\",          \"ip\": \"192.168.2.49\"},\n    { \"topic\":\"light/ws2812/terrace1\",          \"ip\": \"192.168.2.50\"},\n    { \"topic\":\"light/ws1812/terrace2\",          \"ip\": \"192.168.2.51\"},\n    { \"topic\":\"switch/sonoff/bedroom\",          \"ip\": \"192.168.2.52\"},\n    { \"topic\":\"switch/sonoff/gallery1\",         \"ip\": \"192.168.2.53\"},\n    { \"topic\":\"switch/sonoff/k8200\",            \"ip\": \"192.168.2.54\"},\n    { \"topic\":\"sensor/gesture/test\",            \"ip\": \"192.168.2.55\"},\n    { \"topic\":\"switch/shelly/roof\",             \"ip\": \"192.168.2.56\"},\n    { \"topic\":\"switch/shelly/bath\",             \"ip\": \"192.168.2.57\"},\n    { \"topic\":\"switch/shelly/shower\",           \"ip\": \"192.168.2.58\"}\n]\n",
+        "template": "[\n    { \"topic\":\"switch/rfhub/lounge\",            \"ip\": \"192.168.2.20\"},\n    { \"topic\":\"sensor/ttp223/bedroom\",          \"ip\": \"192.168.2.21\"},\n    { \"topic\":\"sensor/DHT22/roof\",              \"ip\": \"192.168.2.22\"},\n    { \"topic\":\"sensor/DHT22/terrace\",           \"ip\": \"192.168.2.23\"},\n    { \"topic\":\"cover/relay/garage\",             \"ip\": \"192.168.2.25\"},\n    { \"topic\":\"switch/sonoff/utilityroom\",      \"ip\": \"192.168.2.26\"},\n    { \"topic\":\"switch/sonoff/garage\",           \"ip\": \"192.168.2.27\"},\n    { \"topic\":\"switch/relay/dining1\",           \"ip\": \"192.168.2.28\"},\n    { \"topic\":\"switch/relay/backyard\",          \"ip\": \"192.168.2.29\"},\n    { \"topic\":\"switch/relay/dining2\",           \"ip\": \"192.168.2.30\"},\n    { \"topic\":\"light/xmastree/dining\",          \"ip\": \"192.168.2.31\"},\n    { \"topic\":\"sensor/button/indoor\",           \"ip\": \"192.168.2.32\"},\n    { \"topic\":\"sensor/button/garage\",           \"ip\": \"192.168.2.33\"},\n    { \"topic\":\"sensor/button/pool\",             \"ip\": \"192.168.2.34\"},\n    { \"topic\":\"sensor/DHT22/lounge\",            \"ip\": \"192.168.2.35\"},\n    { \"topic\":\"light/ws2812/xmasstar\",          \"ip\": \"192.168.2.36\"},\n    { \"topic\":\"switch/sonoff/pool\",             \"ip\": \"192.168.2.37\"},\n    { \"topic\":\"switch/relay/garden\",            \"ip\": \"192.168.2.38\"},\n    { \"topic\":\"switch/sonoff/yardgate\",         \"ip\": \"192.168.2.39\"},\n    { \"topic\":\"switch/sonoff/corridor\",         \"ip\": \"192.168.2.40\"},\n    { \"topic\":\"sensor/soil/garden\",             \"ip\": \"192.168.2.41\"},\n    { \"topic\":\"light/sonoff/kitchen\",           \"ip\": \"192.168.2.42\"},\n    { \"topic\":\"sensor/gesture/kitchen\",         \"ip\": \"192.168.2.43\"},\n    { \"topic\":\"sensor/ds18b20/pool\",            \"ip\": \"192.168.2.44\"},\n    { \"topic\":\"sensor/ds18b20/brewery\",         \"ip\": \"192.168.2.45\"},\n    { \"topic\":\"sensor/spinlde/fermenter\",       \"ip\": \"192.168.2.46\"},\n    { \"topic\":\"sensor/DHT22/office\",            \"ip\": \"192.168.2.47\"},\n    { \"topic\":\"meter/electricity/utilityroom\",  \"ip\": \"192.168.2.48\"},\n    { \"topic\":\"display/pixel/kitchen\",          \"ip\": \"192.168.2.49\"},\n    { \"topic\":\"light/ws2812/terrace1\",          \"ip\": \"192.168.2.50\"},\n    { \"topic\":\"light/ws1812/terrace2\",          \"ip\": \"192.168.2.51\"},\n    { \"topic\":\"switch/sonoff/bedroom\",          \"ip\": \"192.168.2.52\"},\n    { \"topic\":\"switch/sonoff/gallery1\",         \"ip\": \"192.168.2.53\"},\n    { \"topic\":\"switch/sonoff/k8200\",            \"ip\": \"192.168.2.54\"},\n    { \"topic\":\"sensor/gesture/test\",            \"ip\": \"192.168.2.55\"},\n    { \"topic\":\"switch/shelly/roof\",             \"ip\": \"192.168.2.56\"},\n    { \"topic\":\"switch/shelly/bath\",             \"ip\": \"192.168.2.57\"},\n    { \"topic\":\"switch/shelly/shower\",           \"ip\": \"192.168.2.58\"},\n    { \"topic\":\"switch/shelly/terrace\",          \"ip\": \"192.168.2.59\"},\n    { \"topic\":\"light/led/corridor\",             \"ip\": \"192.168.2.60\"},\n    { \"topic\":\"sensor/soil/garden\",             \"ip\": \"192.168.2.51\"},\n    { \"topic\":\"sensor/rain/garden\",             \"ip\": \"192.168.2.62\"}\n]\n",
         "output": "json",
-        "x": 1260,
-        "y": 3220,
+        "x": 2180,
+        "y": 2900,
         "wires": [
             [
                 "50112822.046438"
@@ -9216,8 +9229,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 1110,
-        "y": 3220,
+        "x": 2030,
+        "y": 2900,
         "wires": [
             [
                 "d2bbaccb.0cdc"
@@ -9243,8 +9256,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1390,
-        "y": 3220,
+        "x": 2310,
+        "y": 2900,
         "wires": [
             []
         ]
@@ -9261,8 +9274,8 @@
         "topic": "sensor/gesture/test",
         "payload": "",
         "payloadType": "date",
-        "x": 900,
-        "y": 3400,
+        "x": 1820,
+        "y": 3080,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -9464,15 +9477,30 @@
             },
             {
                 "t": "eq",
+                "v": "switch/relay/garden",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "sensor/soil/garden",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "sensor/rain/garden",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
                 "v": "display/pitouch/corridor",
                 "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 38,
-        "x": 310,
-        "y": 2540,
+        "outputs": 41,
+        "x": 1230,
+        "y": 2220,
         "wires": [
             [
                 "4e8da1ef.5bf54"
@@ -9584,6 +9612,15 @@
             ],
             [],
             [
+                "f43ae57.3fac618"
+            ],
+            [
+                "74c1f181.997d1"
+            ],
+            [
+                "29f208ad.683c98"
+            ],
+            [
                 "16b0884d.4bb698"
             ]
         ]
@@ -9607,8 +9644,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 169,
-        "y": 2540,
+        "x": 1089,
+        "y": 2220,
         "wires": [
             [
                 "9811f90a.978108"
@@ -9731,8 +9768,8 @@
             "45517f7d.b95e6",
             "729afff.40124"
         ],
-        "x": 555,
-        "y": 1820,
+        "x": 575,
+        "y": 1120,
         "wires": [
             [
                 "f1399c8c.93ab8"
@@ -9749,7 +9786,7 @@
             "d020750c.975588",
             "eb5af1ed.6181d"
         ],
-        "x": 1295,
+        "x": 1775,
         "y": 420,
         "wires": []
     },
@@ -9763,8 +9800,8 @@
             "45517f7d.b95e6",
             "729afff.40124"
         ],
-        "x": 55,
-        "y": 2540,
+        "x": 975,
+        "y": 2220,
         "wires": [
             [
                 "12fd95ee.e392ca"
@@ -9790,8 +9827,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1330,
-        "y": 3040,
+        "x": 2250,
+        "y": 2720,
         "wires": [
             [
                 "da40fe87.b517f"
@@ -9807,8 +9844,8 @@
         "out": "time",
         "splitc": "100",
         "name": "",
-        "x": 1490,
-        "y": 3040,
+        "x": 2410,
+        "y": 2720,
         "wires": [
             [
                 "1ffeb82.8cabb48",
@@ -9824,8 +9861,8 @@
         "func": "\nvar dt = new Date ();\nmsg.timestamp_date = dt;\nmsg.timestamp = +dt;\nmsg.timestamp_parts = {\n\t'month':\tdt.getMonth() + 1,\n\t'day':\t\tdt.getDate(),\n\t'year':\t\tdt.getFullYear(),\n\t'hours':\tdt.getHours(),\n\t'mins':\t\tdt.getMinutes(),\n\t'msecs':\tdt.getMilliseconds()\n}\n\nvar s = msg.payload.toString ();\nvar t = s.substring ( s.indexOf ( '\\n' ) + 1 ).split ( '\\t' );\n\nvar p = {};\np.rawcode = t [0];\np.bootreason = t [1];\nif ( p.bootreason == 2 && p.length == 8 ) {\n    p.exccause = p [2];\n    p.epc1 = p [3];\n    p.epc2 = p [4];\n    p.epc3 = p [5];\n    p.excvaddr = p [6];\n    p.depc = p [7];\n}\nmsg.payload = p;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1270,
-        "y": 3120,
+        "x": 2190,
+        "y": 2800,
         "wires": [
             [
                 "b92baeb3.3d52f",
@@ -9852,8 +9889,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1700,
-        "y": 3040,
+        "x": 2620,
+        "y": 2720,
         "wires": [
             [
                 "80ffc6f3.361d98"
@@ -9870,8 +9907,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 1570,
-        "y": 3400,
+        "x": 2490,
+        "y": 3080,
         "wires": []
     },
     {
@@ -9892,8 +9929,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1390,
-        "y": 3120,
+        "x": 2310,
+        "y": 2800,
         "wires": [
             [
                 "8640ee8c.db63b"
@@ -9912,8 +9949,8 @@
         "out": "time",
         "splitc": "100",
         "name": "",
-        "x": 1850,
-        "y": 3040,
+        "x": 2770,
+        "y": 2720,
         "wires": [
             []
         ]
@@ -9928,8 +9965,8 @@
         "format": "handlebars",
         "syntax": "mustache",
         "template": "{{{timestamp_date}}}: [{{{host}}}] {{{topic}}} restarted with rawcode={{{payload.rawcode}}} bootreason={{{payload.bootreason}}}",
-        "x": 1550,
-        "y": 3100,
+        "x": 2470,
+        "y": 2780,
         "wires": [
             [
                 "c749bc8e.7b26a",
@@ -9947,8 +9984,8 @@
         "format": "handlebars",
         "syntax": "mustache",
         "template": "{{{timestamp_date}}}: [{{{host}}}] {{{topic}}} restarted with rawcode={{{payload.rawcode}}} bootreason={{{payload.bootreason}}} exccause={{{payload.exccause}}} epc1={{{payload.epc1}}} epc2={{{payload.epc2}}} epc3={{{payload.epc3}}} excvaddr={{{payload.excvaddr}}} depc={{{payload.depc}}}",
-        "x": 1550,
-        "y": 3140,
+        "x": 2470,
+        "y": 2820,
         "wires": [
             [
                 "c749bc8e.7b26a",
@@ -9966,8 +10003,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 1810,
-        "y": 3360,
+        "x": 2730,
+        "y": 3040,
         "wires": []
     },
     {
@@ -9975,12 +10012,12 @@
         "type": "file",
         "z": "8e2c5c11.fae26",
         "name": "restart.log",
-        "filename": "/home/pi/.node-red/log/restart.log",
+        "filename": "/data/log/restart.log",
         "appendNewline": true,
         "createDir": true,
         "overwriteFile": "false",
-        "x": 1740,
-        "y": 3120,
+        "x": 2660,
+        "y": 2800,
         "wires": [
             []
         ]
@@ -9991,8 +10028,8 @@
         "z": "8e2c5c11.fae26",
         "name": "topic2ip tab",
         "info": "",
-        "x": 1110,
-        "y": 3180,
+        "x": 2030,
+        "y": 2860,
         "wires": []
     },
     {
@@ -10007,8 +10044,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 610,
-        "y": 1940,
+        "x": 630,
+        "y": 1240,
         "wires": [
             [
                 "d892a08.731916"
@@ -10023,8 +10060,8 @@
         "filename": "/data/ids/simple_push_id.txt",
         "format": "utf8",
         "sendError": true,
-        "x": 750,
-        "y": 1940,
+        "x": 770,
+        "y": 1240,
         "wires": [
             [
                 "9575ef08.405e6"
@@ -10050,8 +10087,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 870,
-        "y": 1940,
+        "x": 890,
+        "y": 1240,
         "wires": [
             [
                 "2aea1965.023656"
@@ -10066,8 +10103,8 @@
         "func": "node.status ( \n    { \n        fill: \"blue\", \n        shape: \"dot\", \n        text: msg.payload \n    } \n);\n\nreturn null;",
         "outputs": 1,
         "noerr": 0,
-        "x": 990,
-        "y": 1940,
+        "x": 1010,
+        "y": 1240,
         "wires": [
             []
         ]
@@ -10082,8 +10119,8 @@
             "45517f7d.b95e6",
             "729afff.40124"
         ],
-        "x": 1115,
-        "y": 2840,
+        "x": 2035,
+        "y": 2520,
         "wires": [
             [
                 "4d40eb53.434b74"
@@ -10107,8 +10144,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 1210,
-        "y": 2840,
+        "x": 2130,
+        "y": 2520,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -10306,7 +10343,7 @@
         "qos": "2",
         "broker": "7bc3dc1a.d27a94",
         "x": 140,
-        "y": 4000,
+        "y": 3260,
         "wires": [
             [
                 "e37661e4.f025e"
@@ -10345,7 +10382,7 @@
         "to": "",
         "reg": false,
         "x": 370,
-        "y": 4000,
+        "y": 3260,
         "wires": [
             [
                 "c5bb4c1f.2120e"
@@ -10544,13 +10581,28 @@
                 "t": "eq",
                 "v": "switch/shelly/shower",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "switch/relay/garden",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "sensor/soil/garden",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "sensor/rain/garden",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 37,
+        "outputs": 40,
         "x": 550,
-        "y": 4000,
+        "y": 3260,
         "wires": [
             [
                 "cecc2420.59d0c8"
@@ -10662,6 +10714,15 @@
             ],
             [
                 "e5652acd.647ae8"
+            ],
+            [
+                "87c94e7a.f98d2"
+            ],
+            [
+                "67d8353a.c0148c"
+            ],
+            [
+                "e15cdbcb.1c21b8"
             ]
         ]
     },
@@ -10689,7 +10750,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 970,
-        "y": 3500,
+        "y": 2760,
         "wires": [
             []
         ]
@@ -10718,7 +10779,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 980,
-        "y": 3540,
+        "y": 2800,
         "wires": [
             []
         ]
@@ -10747,7 +10808,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 980,
-        "y": 3580,
+        "y": 2840,
         "wires": [
             []
         ]
@@ -10776,7 +10837,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 970,
-        "y": 3620,
+        "y": 2880,
         "wires": [
             []
         ]
@@ -10805,7 +10866,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 970,
-        "y": 3660,
+        "y": 2920,
         "wires": [
             []
         ]
@@ -10834,7 +10895,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 970,
-        "y": 3700,
+        "y": 2960,
         "wires": [
             []
         ]
@@ -10863,7 +10924,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 980,
-        "y": 3740,
+        "y": 3000,
         "wires": [
             []
         ]
@@ -10892,7 +10953,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 970,
-        "y": 3780,
+        "y": 3040,
         "wires": [
             []
         ]
@@ -10921,7 +10982,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 970,
-        "y": 3820,
+        "y": 3080,
         "wires": [
             []
         ]
@@ -10950,7 +11011,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 980,
-        "y": 3860,
+        "y": 3120,
         "wires": [
             []
         ]
@@ -10979,7 +11040,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 970,
-        "y": 3900,
+        "y": 3160,
         "wires": [
             []
         ]
@@ -11008,7 +11069,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 970,
-        "y": 3940,
+        "y": 3200,
         "wires": [
             []
         ]
@@ -11037,7 +11098,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 970,
-        "y": 3980,
+        "y": 3240,
         "wires": [
             []
         ]
@@ -11066,7 +11127,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 970,
-        "y": 4020,
+        "y": 3280,
         "wires": [
             []
         ]
@@ -11095,7 +11156,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 970,
-        "y": 4060,
+        "y": 3320,
         "wires": [
             []
         ]
@@ -11124,7 +11185,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 960,
-        "y": 4100,
+        "y": 3360,
         "wires": [
             []
         ]
@@ -11153,7 +11214,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 970,
-        "y": 4140,
+        "y": 3400,
         "wires": [
             []
         ]
@@ -11182,7 +11243,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 970,
-        "y": 4180,
+        "y": 3440,
         "wires": [
             []
         ]
@@ -11211,7 +11272,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 980,
-        "y": 4220,
+        "y": 3480,
         "wires": [
             []
         ]
@@ -11240,7 +11301,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 970,
-        "y": 4260,
+        "y": 3520,
         "wires": [
             []
         ]
@@ -11269,7 +11330,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 990,
-        "y": 4300,
+        "y": 3560,
         "wires": [
             []
         ]
@@ -11298,7 +11359,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 981,
-        "y": 4340,
+        "y": 3600,
         "wires": [
             []
         ]
@@ -11327,7 +11388,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 971,
-        "y": 4380,
+        "y": 3640,
         "wires": [
             []
         ]
@@ -11356,7 +11417,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 991,
-        "y": 4420,
+        "y": 3680,
         "wires": [
             []
         ]
@@ -11385,7 +11446,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 971,
-        "y": 4460,
+        "y": 3720,
         "wires": [
             []
         ]
@@ -11414,7 +11475,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 970,
-        "y": 4500,
+        "y": 3760,
         "wires": [
             []
         ]
@@ -11443,7 +11504,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 980,
-        "y": 4540,
+        "y": 3800,
         "wires": [
             []
         ]
@@ -11472,7 +11533,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 980,
-        "y": 4580,
+        "y": 3840,
         "wires": [
             []
         ]
@@ -11501,7 +11562,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 990,
-        "y": 4620,
+        "y": 3880,
         "wires": [
             []
         ]
@@ -11530,7 +11591,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 980,
-        "y": 4660,
+        "y": 3920,
         "wires": [
             []
         ]
@@ -11559,7 +11620,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 980,
-        "y": 4700,
+        "y": 3960,
         "wires": [
             []
         ]
@@ -11588,7 +11649,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 980,
-        "y": 4740,
+        "y": 4000,
         "wires": [
             []
         ]
@@ -11617,7 +11678,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 960,
-        "y": 4780,
+        "y": 4040,
         "wires": [
             []
         ]
@@ -11629,7 +11690,7 @@
         "name": "watch mqtt last will",
         "info": "",
         "x": 110,
-        "y": 3960,
+        "y": 3220,
         "wires": []
     },
     {
@@ -11984,7 +12045,7 @@
         "reset": "",
         "bytopic": "all",
         "outputs": 1,
-        "x": 820,
+        "x": 1300,
         "y": 1360,
         "wires": [
             [
@@ -12001,7 +12062,7 @@
         "label": "display/pitouch/corridor",
         "tooltip": "watchdog state",
         "group": "4759591f.23c438",
-        "order": 38,
+        "order": 47,
         "width": "5",
         "height": "1",
         "passthru": false,
@@ -12016,7 +12077,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1041,
+        "x": 1521,
         "y": 1360,
         "wires": [
             []
@@ -12028,7 +12089,7 @@
         "z": "8e2c5c11.fae26",
         "name": "reset display/pitouch/corridor",
         "group": "4759591f.23c438",
-        "order": 39,
+        "order": 48,
         "width": "1",
         "height": "1",
         "passthru": false,
@@ -12041,7 +12102,7 @@
         "payloadType": "str",
         "topic": "display/pitouch/corridor",
         "x": 160,
-        "y": 2080,
+        "y": 2200,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -12054,7 +12115,7 @@
         "z": "8e2c5c11.fae26",
         "name": "restart display/pitouch/corridor",
         "group": "4759591f.23c438",
-        "order": 40,
+        "order": 49,
         "width": "1",
         "height": "1",
         "passthru": false,
@@ -12066,8 +12127,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "display/pitouch/corridor",
-        "x": 610,
-        "y": 3540,
+        "x": 1530,
+        "y": 3340,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -12082,7 +12143,7 @@
         "label": "",
         "tooltip": "mqtt connection state",
         "group": "4759591f.23c438",
-        "order": 41,
+        "order": 50,
         "width": "1",
         "height": "1",
         "passthru": false,
@@ -12098,7 +12159,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 979,
-        "y": 4820,
+        "y": 4080,
         "wires": [
             []
         ]
@@ -12260,7 +12321,6 @@
             "#9467bd",
             "#c5b0d5"
         ],
-        "useOldStyle": false,
         "outputs": 2,
         "x": 570,
         "y": 440,
@@ -12405,7 +12465,6 @@
             "#9467bd",
             "#c5b0d5"
         ],
-        "useOldStyle": false,
         "outputs": 2,
         "x": 570,
         "y": 180,
@@ -12515,7 +12574,6 @@
             "#9467bd",
             "#c5b0d5"
         ],
-        "useOldStyle": false,
         "outputs": 2,
         "x": 570,
         "y": 280,
@@ -13451,11 +13509,12 @@
         "reset": "",
         "bytopic": "all",
         "outputs": 1,
-        "x": 820,
+        "x": 1300,
         "y": 1400,
         "wires": [
             [
-                "fef43584.2f81b8"
+                "fef43584.2f81b8",
+                "36e0dc01.361524"
             ]
         ]
     },
@@ -13482,7 +13541,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1021,
+        "x": 1501,
         "y": 1400,
         "wires": [
             []
@@ -13503,11 +13562,12 @@
         "reset": "",
         "bytopic": "all",
         "outputs": 1,
-        "x": 820,
+        "x": 1300,
         "y": 1440,
         "wires": [
             [
-                "29e45e0e.838922"
+                "29e45e0e.838922",
+                "36e0dc01.361524"
             ]
         ]
     },
@@ -13534,7 +13594,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1021,
+        "x": 1501,
         "y": 1440,
         "wires": [
             []
@@ -13555,11 +13615,12 @@
         "reset": "",
         "bytopic": "all",
         "outputs": 1,
-        "x": 820,
+        "x": 1300,
         "y": 1480,
         "wires": [
             [
-                "b281ffb7.ea32f"
+                "b281ffb7.ea32f",
+                "36e0dc01.361524"
             ]
         ]
     },
@@ -13586,7 +13647,7 @@
         "offvalueType": "str",
         "officon": "error_outline",
         "offcolor": "red",
-        "x": 1031,
+        "x": 1511,
         "y": 1480,
         "wires": [
             []
@@ -13688,8 +13749,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "switch/shelly/roof",
-        "x": 590,
-        "y": 2920,
+        "x": 1510,
+        "y": 2600,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -13714,8 +13775,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "switch/shelly/bath",
-        "x": 590,
-        "y": 2960,
+        "x": 1510,
+        "y": 2640,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -13740,8 +13801,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "switch/shelly/shower",
-        "x": 600,
-        "y": 3000,
+        "x": 1520,
+        "y": 2680,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -13772,7 +13833,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 960,
-        "y": 4860,
+        "y": 4120,
         "wires": [
             []
         ]
@@ -13801,7 +13862,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 960,
-        "y": 4900,
+        "y": 4160,
         "wires": [
             []
         ]
@@ -13830,7 +13891,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 970,
-        "y": 4940,
+        "y": 4200,
         "wires": [
             []
         ]
@@ -13918,15 +13979,15 @@
         "type": "ui_text",
         "z": "8e2c5c11.fae26",
         "group": "4759591f.23c438",
-        "order": 37,
+        "order": 45,
         "width": "8",
         "height": "1",
         "name": "dummy line 1",
         "label": "",
         "format": "",
         "layout": "row-spread",
-        "x": 210,
-        "y": 4440,
+        "x": 650,
+        "y": 2360,
         "wires": []
     },
     {
@@ -13934,47 +13995,15 @@
         "type": "ui_text",
         "z": "8e2c5c11.fae26",
         "group": "4759591f.23c438",
-        "order": 37,
+        "order": 46,
         "width": "8",
         "height": "1",
         "name": "dummy line 2",
         "label": "",
         "format": "",
         "layout": "row-spread",
-        "x": 210,
-        "y": 4480,
-        "wires": []
-    },
-    {
-        "id": "da3e6456.03f2a8",
-        "type": "ui_text",
-        "z": "8e2c5c11.fae26",
-        "group": "4759591f.23c438",
-        "order": 37,
-        "width": "8",
-        "height": "1",
-        "name": "dummy line 3",
-        "label": "",
-        "format": "",
-        "layout": "row-spread",
-        "x": 210,
-        "y": 4520,
-        "wires": []
-    },
-    {
-        "id": "f4d7977a.2e7b28",
-        "type": "ui_text",
-        "z": "8e2c5c11.fae26",
-        "group": "4759591f.23c438",
-        "order": 37,
-        "width": "8",
-        "height": "1",
-        "name": "dummy line 4",
-        "label": "",
-        "format": "",
-        "layout": "row-spread",
-        "x": 210,
-        "y": 4560,
+        "x": 650,
+        "y": 2400,
         "wires": []
     },
     {
@@ -14125,7 +14154,6 @@
             "#9467bd",
             "#c5b0d5"
         ],
-        "useOldStyle": false,
         "outputs": 1,
         "x": 810,
         "y": 160,
@@ -14771,22 +14799,6 @@
         ]
     },
     {
-        "id": "1980eb8c.8206d4",
-        "type": "ui_text",
-        "z": "8e2c5c11.fae26",
-        "group": "4759591f.23c438",
-        "order": 37,
-        "width": "8",
-        "height": "1",
-        "name": "dummy line 5",
-        "label": "",
-        "format": "",
-        "layout": "row-spread",
-        "x": 210,
-        "y": 4600,
-        "wires": []
-    },
-    {
         "id": "b9cd26f1.7aaf28",
         "type": "ui_dropdown",
         "z": "67442bb3.903494",
@@ -14853,5 +14865,580 @@
         "x": 570,
         "y": 400,
         "wires": []
+    },
+    {
+        "id": "5698ed5.1a05a14",
+        "type": "trigger",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "20",
+        "extend": true,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "outputs": 1,
+        "x": 1300,
+        "y": 1520,
+        "wires": [
+            [
+                "4d7a0b94.ee4764",
+                "36e0dc01.361524"
+            ]
+        ]
+    },
+    {
+        "id": "4d7a0b94.ee4764",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "label": "switch/relay/garden",
+        "tooltip": "watchdog state",
+        "group": "4759591f.23c438",
+        "order": 33,
+        "width": "5",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 1501,
+        "y": 1520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "982a21a0.dad7d",
+        "type": "trigger",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "20",
+        "extend": true,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "outputs": 1,
+        "x": 1300,
+        "y": 1560,
+        "wires": [
+            [
+                "fca54a53.ed7088",
+                "36e0dc01.361524"
+            ]
+        ]
+    },
+    {
+        "id": "fca54a53.ed7088",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "label": "sensor/soil/garden",
+        "tooltip": "watchdog state",
+        "group": "4759591f.23c438",
+        "order": 37,
+        "width": "5",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 1501,
+        "y": 1560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6e071815.a27c18",
+        "type": "trigger",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "20",
+        "extend": true,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "outputs": 1,
+        "x": 1300,
+        "y": 1600,
+        "wires": [
+            [
+                "a0d0b065.44862",
+                "36e0dc01.361524"
+            ]
+        ]
+    },
+    {
+        "id": "a0d0b065.44862",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "label": "sensor/rain/garden",
+        "tooltip": "watchdog state",
+        "group": "4759591f.23c438",
+        "order": 41,
+        "width": "5",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 1501,
+        "y": 1600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3541fbc1.c92064",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "reset switch/relay/garden",
+        "group": "4759591f.23c438",
+        "order": 34,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via mqtt",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "icon": "refresh",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "switch/relay/garden",
+        "x": 150,
+        "y": 2080,
+        "wires": [
+            [
+                "b6bc8fd1.c46ec"
+            ]
+        ]
+    },
+    {
+        "id": "cd7712fe.d6439",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "reset sensor/soil/garden",
+        "group": "4759591f.23c438",
+        "order": 38,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via mqtt",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "icon": "refresh",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "sensor/soil/garden",
+        "x": 150,
+        "y": 2120,
+        "wires": [
+            [
+                "b6bc8fd1.c46ec"
+            ]
+        ]
+    },
+    {
+        "id": "26da786e.fd5d98",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "reset sensor/rain/garden",
+        "group": "4759591f.23c438",
+        "order": 42,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via mqtt",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "icon": "refresh",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "sensor/rain/garden",
+        "x": 150,
+        "y": 2160,
+        "wires": [
+            [
+                "b6bc8fd1.c46ec"
+            ]
+        ]
+    },
+    {
+        "id": "f43ae57.3fac618",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "restart switch/relay/garden",
+        "group": "4759591f.23c438",
+        "order": 35,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via telnet",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "icon": "play_arrow",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "switch/relay/garden",
+        "x": 1520,
+        "y": 3220,
+        "wires": [
+            [
+                "e59e4935.4a4238"
+            ]
+        ]
+    },
+    {
+        "id": "74c1f181.997d1",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "restart sensor/soil/garden",
+        "group": "4759591f.23c438",
+        "order": 39,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via telnet",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "icon": "play_arrow",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "sensor/soil/garden",
+        "x": 1510,
+        "y": 3260,
+        "wires": [
+            [
+                "e59e4935.4a4238"
+            ]
+        ]
+    },
+    {
+        "id": "29f208ad.683c98",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "restart sensor/rain/garden",
+        "group": "4759591f.23c438",
+        "order": 43,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via telnet",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "icon": "play_arrow",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "sensor/rain/garden",
+        "x": 1510,
+        "y": 3300,
+        "wires": [
+            [
+                "e59e4935.4a4238"
+            ]
+        ]
+    },
+    {
+        "id": "87c94e7a.f98d2",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "mqtt switch/relay/garden",
+        "label": "",
+        "tooltip": "mqtt connection state",
+        "group": "4759591f.23c438",
+        "order": 36,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "online",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "offline",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 970,
+        "y": 4240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "67d8353a.c0148c",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "mqtt sensor/soil/garden",
+        "label": "",
+        "tooltip": "mqtt connection state",
+        "group": "4759591f.23c438",
+        "order": 40,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "online",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "offline",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 970,
+        "y": 4280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e15cdbcb.1c21b8",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "mqtt sensor/rain/garden",
+        "label": "",
+        "tooltip": "mqtt connection state",
+        "group": "4759591f.23c438",
+        "order": 44,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "online",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "offline",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "x": 970,
+        "y": 4320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "be021831.146108",
+        "type": "ui_button",
+        "z": "37197cb5.c49ee4",
+        "name": "update switch/relay/garden",
+        "group": "457a1e5.d114de",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "light/led/corridor",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "switch/relay/garden",
+        "x": 420,
+        "y": 1600,
+        "wires": [
+            [
+                "6ed6dc87.f74a94"
+            ]
+        ]
+    },
+    {
+        "id": "e7ff7e88.ff941",
+        "type": "ui_button",
+        "z": "37197cb5.c49ee4",
+        "name": "update sensor/soil/garden",
+        "group": "457a1e5.d114de",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "light/led/corridor",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "sensor/soil/garden",
+        "x": 410,
+        "y": 1640,
+        "wires": [
+            [
+                "6ed6dc87.f74a94"
+            ]
+        ]
+    },
+    {
+        "id": "54f056df.a23e58",
+        "type": "ui_button",
+        "z": "37197cb5.c49ee4",
+        "name": "update sensor/rain/garden",
+        "group": "457a1e5.d114de",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "light/led/corridor",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "sensor/rain/garden",
+        "x": 410,
+        "y": 1680,
+        "wires": [
+            [
+                "6ed6dc87.f74a94"
+            ]
+        ]
+    },
+    {
+        "id": "71e4897b.b645f8",
+        "type": "inject",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1070,
+        "y": 1780,
+        "wires": [
+            [
+                "3b324b56.efcaa4"
+            ]
+        ]
+    },
+    {
+        "id": "3b324b56.efcaa4",
+        "type": "change",
+        "z": "8e2c5c11.fae26",
+        "name": "set enabled",
+        "rules": [
+            {
+                "t": "set",
+                "p": "enabled",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1250,
+        "y": 1780,
+        "wires": [
+            [
+                "4e8da1ef.5bf54",
+                "19d20bcb.9a26e4",
+                "1b25b55.caa824b",
+                "a237ed75.0d2bc",
+                "9f21f479.a90568",
+                "bb6a730d.3d7ee",
+                "f08963a9.95644",
+                "e0dc0156.9d8c7",
+                "a87f5370.abf3e",
+                "317646f4.78eb0a",
+                "8bd01a26.26b638",
+                "f6c1d898.d8f098",
+                "a9a3efe7.41807",
+                "a1656fd.650d99",
+                "70575b14.9566e4",
+                "476a61a.23d4ea",
+                "fe235f06.6722b",
+                "d7246323.32243",
+                "b7500f97.f102f",
+                "ea4b225.9aecbe",
+                "aba07b5d.8aeda8",
+                "d46b7471.3e2a08",
+                "19a1001b.8b253",
+                "9b81e9cd.5f2b68",
+                "cdb28669.d473f8",
+                "f170a72a.d28888",
+                "eae143ac.5c182",
+                "141b9c20.00cf34",
+                "d6c76850.a4c9c8",
+                "a74540cb.8c667",
+                "94bfb9ca.e693b8",
+                "d21f5dc3.f95ad",
+                "f8824482.f4c948",
+                "a63d4aa0.915108",
+                "b7e97fd2.f4d38",
+                "59e887d.f332978",
+                "f43ae57.3fac618",
+                "74c1f181.997d1",
+                "29f208ad.683c98",
+                "16b0884d.4bb698"
+            ]
+        ]
     }
 ]
