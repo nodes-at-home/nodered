@@ -7414,7 +7414,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 22,
+        "order": 23,
         "width": "20",
         "height": "1",
         "name": "",
@@ -7422,7 +7422,7 @@
         "format": "{{msg.payload.appCfg}}",
         "layout": "row-left",
         "x": 580,
-        "y": 1240,
+        "y": 1280,
         "wires": []
     },
     {
@@ -7430,7 +7430,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 11,
+        "order": 12,
         "width": "20",
         "height": "1",
         "name": "",
@@ -7438,7 +7438,7 @@
         "format": "{{msg.payload.wifi.netmask}}",
         "layout": "row-left",
         "x": 590,
-        "y": 800,
+        "y": 840,
         "wires": []
     },
     {
@@ -7446,7 +7446,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 16,
+        "order": 17,
         "width": "20",
         "height": "1",
         "name": "",
@@ -7454,7 +7454,7 @@
         "format": "{{msg.payload.mqtt.retain}}",
         "layout": "row-left",
         "x": 590,
-        "y": 1000,
+        "y": 1040,
         "wires": []
     },
     {
@@ -7462,7 +7462,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 17,
+        "order": 18,
         "width": "20",
         "height": "1",
         "name": "",
@@ -7470,7 +7470,7 @@
         "format": "{{msg.payload.trace.ip}}",
         "layout": "row-left",
         "x": 580,
-        "y": 1040,
+        "y": 1080,
         "wires": []
     },
     {
@@ -7478,7 +7478,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 3,
+        "order": 4,
         "width": "20",
         "height": "1",
         "name": "",
@@ -7486,7 +7486,7 @@
         "format": "{{msg.payload.version}}",
         "layout": "row-left",
         "x": 580,
-        "y": 480,
+        "y": 520,
         "wires": []
     },
     {
@@ -7494,7 +7494,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 4,
+        "order": 5,
         "width": "20",
         "height": "1",
         "name": "",
@@ -7502,7 +7502,7 @@
         "format": "{{msg.payload.app}}",
         "layout": "row-left",
         "x": 570,
-        "y": 520,
+        "y": 560,
         "wires": []
     },
     {
@@ -7510,7 +7510,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 6,
+        "order": 7,
         "width": "20",
         "height": "1",
         "name": "",
@@ -7518,7 +7518,7 @@
         "format": "{{msg.payload.comment}}",
         "layout": "row-left",
         "x": 580,
-        "y": 600,
+        "y": 640,
         "wires": []
     },
     {
@@ -7530,7 +7530,7 @@
             "707adce5.9214a4"
         ],
         "x": 415,
-        "y": 580,
+        "y": 620,
         "wires": [
             [
                 "43ffcf96.c575c",
@@ -7554,7 +7554,8 @@
                 "5199defb.ec465",
                 "e854fdce.cefd6",
                 "8a1d0e4a.c058b",
-                "ef35afde.2e836"
+                "ef35afde.2e836",
+                "36551f9c.2443a"
             ]
         ]
     },
@@ -7575,7 +7576,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 21,
+        "order": 22,
         "width": "20",
         "height": "1",
         "name": "",
@@ -7583,7 +7584,7 @@
         "format": "{{msg.payload.timer}}",
         "layout": "row-left",
         "x": 570,
-        "y": 1200,
+        "y": 1240,
         "wires": []
     },
     {
@@ -7613,7 +7614,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 5,
+        "order": 6,
         "width": "20",
         "height": "1",
         "name": "",
@@ -7621,7 +7622,7 @@
         "format": "{{msg.payload.lfsts}}",
         "layout": "row-left",
         "x": 750,
-        "y": 560,
+        "y": 600,
         "wires": []
     },
     {
@@ -7629,7 +7630,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 7,
+        "order": 8,
         "width": "20",
         "height": "1",
         "name": "",
@@ -7637,7 +7638,7 @@
         "format": "{{msg.payload.wifi.ip}}",
         "layout": "row-left",
         "x": 570,
-        "y": 640,
+        "y": 680,
         "wires": []
     },
     {
@@ -7645,7 +7646,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 10,
+        "order": 11,
         "width": "20",
         "height": "1",
         "name": "",
@@ -7653,7 +7654,7 @@
         "format": "{{msg.payload.wifi.gateway}}",
         "layout": "row-left",
         "x": 590,
-        "y": 760,
+        "y": 800,
         "wires": []
     },
     {
@@ -7661,7 +7662,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 14,
+        "order": 15,
         "width": "20",
         "height": "1",
         "name": "",
@@ -7669,7 +7670,7 @@
         "format": "{{msg.payload.mqtt.broker}}",
         "layout": "row-left",
         "x": 590,
-        "y": 920,
+        "y": 960,
         "wires": []
     },
     {
@@ -7677,7 +7678,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 15,
+        "order": 16,
         "width": "20",
         "height": "1",
         "name": "",
@@ -7685,7 +7686,7 @@
         "format": "{{msg.payload.mqtt.keepAliveTime}}",
         "layout": "row-left",
         "x": 610,
-        "y": 960,
+        "y": 1000,
         "wires": []
     },
     {
@@ -7693,7 +7694,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 18,
+        "order": 19,
         "width": "20",
         "height": "1",
         "name": "",
@@ -7701,7 +7702,7 @@
         "format": "{{msg.payload.trace.port}}",
         "layout": "row-left",
         "x": 580,
-        "y": 1080,
+        "y": 1120,
         "wires": []
     },
     {
@@ -7709,7 +7710,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 19,
+        "order": 20,
         "width": "20",
         "height": "1",
         "name": "",
@@ -7717,7 +7718,7 @@
         "format": "{{msg.payload.trace.onUpdate}}",
         "layout": "row-left",
         "x": 600,
-        "y": 1120,
+        "y": 1160,
         "wires": []
     },
     {
@@ -7725,7 +7726,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 20,
+        "order": 21,
         "width": "20",
         "height": "1",
         "name": "",
@@ -7733,7 +7734,7 @@
         "format": "{{msg.payload.trace.onStartup}}",
         "layout": "row-left",
         "x": 600,
-        "y": 1160,
+        "y": 1200,
         "wires": []
     },
     {
@@ -7745,7 +7746,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 580,
-        "y": 560,
+        "y": 600,
         "wires": [
             [
                 "f7e5e987.a11838"
@@ -11866,7 +11867,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 12,
+        "order": 13,
         "width": "20",
         "height": "1",
         "name": "",
@@ -11874,7 +11875,7 @@
         "format": "{{msg.payload.wifi.rssi}}",
         "layout": "row-left",
         "x": 580,
-        "y": 840,
+        "y": 880,
         "wires": []
     },
     {
@@ -11928,7 +11929,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 13,
+        "order": 14,
         "width": "20",
         "height": "1",
         "name": "",
@@ -11936,7 +11937,7 @@
         "format": "{{msg.payload}}",
         "layout": "row-left",
         "x": 760,
-        "y": 880,
+        "y": 920,
         "wires": []
     },
     {
@@ -11948,7 +11949,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 580,
-        "y": 880,
+        "y": 920,
         "wires": [
             [
                 "1d816adb.69a065"
@@ -14013,7 +14014,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 8,
+        "order": 9,
         "width": "20",
         "height": "1",
         "name": "",
@@ -14021,7 +14022,7 @@
         "format": "{{msg.payload.wifi.apmac}}",
         "layout": "row-left",
         "x": 580,
-        "y": 680,
+        "y": 720,
         "wires": []
     },
     {
@@ -14029,7 +14030,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 9,
+        "order": 10,
         "width": "20",
         "height": "1",
         "name": "",
@@ -14037,7 +14038,7 @@
         "format": "{{msg.payload.wifi.dnsname}}",
         "layout": "row-left",
         "x": 590,
-        "y": 720,
+        "y": 760,
         "wires": []
     },
     {
@@ -15445,5 +15446,21 @@
                 "16b0884d.4bb698"
             ]
         ]
+    },
+    {
+        "id": "36551f9c.2443a",
+        "type": "ui_text",
+        "z": "67442bb3.903494",
+        "group": "5de7d7da.a53e18",
+        "order": 3,
+        "width": "20",
+        "height": "1",
+        "name": "",
+        "label": "branch",
+        "format": "{{msg.payload.branch}}",
+        "layout": "row-left",
+        "x": 570,
+        "y": 480,
+        "wires": []
     }
 ]
