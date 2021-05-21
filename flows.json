@@ -368,7 +368,7 @@
         "tab": "abd18845.7765b8",
         "order": 2,
         "disp": true,
-        "width": "20",
+        "width": "12",
         "collapse": false
     },
     {
@@ -483,6 +483,16 @@
         "influxdbVersion": "2.0",
         "url": "http://influxdb:8086",
         "rejectUnauthorized": false
+    },
+    {
+        "id": "e1874da3.cb8cb",
+        "type": "ui_group",
+        "name": "Settings",
+        "tab": "abd18845.7765b8",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
     },
     {
         "id": "1f55c701.4fff39",
@@ -7377,11 +7387,12 @@
         "type": "function",
         "z": "67442bb3.903494",
         "name": "retrieve config",
-        "func": "\nvar id = msg.payload;\nvar store = flow.get ( 'store' );\nvar config = store.id [id];\n\n//node.warn ( \"id=\" + id + \" config=\" + config );\n\nif ( config !== undefined ) {\n\n    var parts = config.topic.split ( '/' );\n    var topic = parts [1] + \"/\" + parts [2] + \"/\" + parts [3];\n\n    return [{ payload: config }, { payload: topic }];\n\n    \n}\n\n",
+        "func": "\nvar id = msg.payload;\nvar store = flow.get ( 'store' );\nvar config = store.id [id];\n\n//node.warn ( \"id=\" + id + \" config=\" + config );\n\nif ( config !== undefined ) {\n\n    var parts = config.topic.split ( '/' );\n    var topic = parts [1] + \"/\" + parts [2] + \"/\" + parts [3];\n\n    return [{ payload: config}, { payload: topic }];\n\n}\n\n",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 760,
         "y": 151,
         "wires": [
@@ -7399,14 +7410,14 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 2,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "topic",
         "format": "{{msg.payload.topic}}",
         "layout": "row-left",
-        "x": 570,
-        "y": 440,
+        "x": 330,
+        "y": 420,
         "wires": []
     },
     {
@@ -7414,15 +7425,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 23,
-        "width": "20",
+        "order": 26,
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "appCfg",
         "format": "{{msg.payload.appCfg}}",
         "layout": "row-left",
-        "x": 580,
-        "y": 1280,
+        "x": 340,
+        "y": 1380,
         "wires": []
     },
     {
@@ -7431,14 +7442,14 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 12,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "wifi netmask",
         "format": "{{msg.payload.wifi.netmask}}",
         "layout": "row-left",
-        "x": 590,
-        "y": 840,
+        "x": 350,
+        "y": 820,
         "wires": []
     },
     {
@@ -7447,14 +7458,14 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 17,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "mqtt retain",
         "format": "{{msg.payload.mqtt.retain}}",
         "layout": "row-left",
-        "x": 590,
-        "y": 1040,
+        "x": 350,
+        "y": 1020,
         "wires": []
     },
     {
@@ -7462,15 +7473,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 18,
-        "width": "20",
+        "order": 21,
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "trace ip",
         "format": "{{msg.payload.trace.ip}}",
         "layout": "row-left",
-        "x": 580,
-        "y": 1080,
+        "x": 340,
+        "y": 1180,
         "wires": []
     },
     {
@@ -7479,14 +7490,14 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 4,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "version",
         "format": "{{msg.payload.version}}",
         "layout": "row-left",
-        "x": 580,
-        "y": 520,
+        "x": 340,
+        "y": 500,
         "wires": []
     },
     {
@@ -7495,14 +7506,14 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 5,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "app",
         "format": "{{msg.payload.app}}",
         "layout": "row-left",
-        "x": 570,
-        "y": 560,
+        "x": 330,
+        "y": 540,
         "wires": []
     },
     {
@@ -7511,14 +7522,14 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 7,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "comment",
         "format": "{{msg.payload.comment}}",
         "layout": "row-left",
-        "x": 580,
-        "y": 640,
+        "x": 340,
+        "y": 620,
         "wires": []
     },
     {
@@ -7529,8 +7540,8 @@
         "links": [
             "707adce5.9214a4"
         ],
-        "x": 415,
-        "y": 620,
+        "x": 175,
+        "y": 600,
         "wires": [
             [
                 "43ffcf96.c575c",
@@ -7555,7 +7566,10 @@
                 "e854fdce.cefd6",
                 "8a1d0e4a.c058b",
                 "ef35afde.2e836",
-                "36551f9c.2443a"
+                "36551f9c.2443a",
+                "e5090dcc.c2f7c",
+                "65591ef0.e545c",
+                "d7007cae.c95ec"
             ]
         ]
     },
@@ -7565,7 +7579,8 @@
         "z": "67442bb3.903494",
         "name": "",
         "links": [
-            "d2d36c1c.4b86d"
+            "d2d36c1c.4b86d",
+            "f56eb07.80cfa5"
         ],
         "x": 955,
         "y": 180,
@@ -7576,15 +7591,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 22,
-        "width": "20",
+        "order": 25,
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "timer",
         "format": "{{msg.payload.timer}}",
         "layout": "row-left",
-        "x": 570,
-        "y": 1240,
+        "x": 330,
+        "y": 1340,
         "wires": []
     },
     {
@@ -7615,14 +7630,14 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 6,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "lfs timestamp",
         "format": "{{msg.payload.lfsts}}",
         "layout": "row-left",
-        "x": 750,
-        "y": 600,
+        "x": 510,
+        "y": 580,
         "wires": []
     },
     {
@@ -7631,14 +7646,14 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 8,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "wifi ip",
         "format": "{{msg.payload.wifi.ip}}",
         "layout": "row-left",
-        "x": 570,
-        "y": 680,
+        "x": 330,
+        "y": 660,
         "wires": []
     },
     {
@@ -7647,14 +7662,14 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 11,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "wifi gateway",
         "format": "{{msg.payload.wifi.gateway}}",
         "layout": "row-left",
-        "x": 590,
-        "y": 800,
+        "x": 350,
+        "y": 780,
         "wires": []
     },
     {
@@ -7663,14 +7678,14 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 15,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "mqtt broker",
         "format": "{{msg.payload.mqtt.broker}}",
         "layout": "row-left",
-        "x": 590,
-        "y": 960,
+        "x": 350,
+        "y": 940,
         "wires": []
     },
     {
@@ -7679,14 +7694,14 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 16,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "mqtt keepalivetime",
         "format": "{{msg.payload.mqtt.keepAliveTime}}",
         "layout": "row-left",
-        "x": 610,
-        "y": 1000,
+        "x": 370,
+        "y": 980,
         "wires": []
     },
     {
@@ -7694,15 +7709,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 19,
-        "width": "20",
+        "order": 22,
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "trace port",
         "format": "{{msg.payload.trace.port}}",
         "layout": "row-left",
-        "x": 580,
-        "y": 1120,
+        "x": 340,
+        "y": 1220,
         "wires": []
     },
     {
@@ -7710,15 +7725,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 20,
-        "width": "20",
+        "order": 23,
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "trace onupdate",
         "format": "{{msg.payload.trace.onUpdate}}",
         "layout": "row-left",
-        "x": 600,
-        "y": 1160,
+        "x": 360,
+        "y": 1260,
         "wires": []
     },
     {
@@ -7726,15 +7741,15 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 21,
-        "width": "20",
+        "order": 24,
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "trace onstartup",
         "format": "{{msg.payload.trace.onStartup}}",
         "layout": "row-left",
-        "x": 600,
-        "y": 1200,
+        "x": 360,
+        "y": 1300,
         "wires": []
     },
     {
@@ -7745,8 +7760,8 @@
         "func": "\nif ( msg.payload && msg.payload.lfsts ) {\n    \n    var timestamp = msg.payload.lfsts;\n    \n    var date = new Date ( timestamp * 1000 );\n    \n    var month = date.getMonth() + 1;\n    var day = date.getDate();\n    var hour = date.getHours();\n    var min = date.getMinutes();\n    var sec = date.getSeconds();\n    \n    month = (month < 10 ? \"0\" : \"\") + month;\n    day = (day < 10 ? \"0\" : \"\") + day;\n    hour = (hour < 10 ? \"0\" : \"\") + hour;\n    min = (min < 10 ? \"0\" : \"\") + min;\n    sec = (sec < 10 ? \"0\" : \"\") + sec;\n    \n    var s = day + \".\" + month + \".\" + date.getFullYear() + \"   \" + hour + \":\" + min + \":\" + sec;\n    \n    return { payload: { lfsts: timestamp + \" -> \" + s } };\n    \n}\nelse {\n    \n    return msg;\n    \n}",
         "outputs": 1,
         "noerr": 0,
-        "x": 580,
-        "y": 600,
+        "x": 340,
+        "y": 580,
         "wires": [
             [
                 "f7e5e987.a11838"
@@ -11868,14 +11883,14 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 13,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "wifi rssi",
         "format": "{{msg.payload.wifi.rssi}}",
         "layout": "row-left",
-        "x": 580,
-        "y": 880,
+        "x": 340,
+        "y": 860,
         "wires": []
     },
     {
@@ -11930,14 +11945,14 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 14,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "wifi access point",
         "format": "{{msg.payload}}",
         "layout": "row-left",
-        "x": 760,
-        "y": 920,
+        "x": 520,
+        "y": 900,
         "wires": []
     },
     {
@@ -11948,8 +11963,8 @@
         "func": "\nvar ap = [];\nap [ \"c8:0e:14:66:e0:e1\" ] = \"mauzi\";\nap [ \"cc:ce:1e:e2:dd:5b\" ] = \"draguran\";\nap [ \"f0:b0:14:e1:92:a5\" ] = \"meltan\";\n\nvar result = \"\";\nif ( msg.payload.wifi && msg.payload.wifi.apmac ) {\n    result = ap [msg.payload.wifi.apmac];\n}\nmsg.payload = result;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 580,
-        "y": 920,
+        "x": 340,
+        "y": 900,
         "wires": [
             [
                 "1d816adb.69a065"
@@ -14015,14 +14030,14 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 9,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "wifi mac",
         "format": "{{msg.payload.wifi.apmac}}",
         "layout": "row-left",
-        "x": 580,
-        "y": 720,
+        "x": 340,
+        "y": 700,
         "wires": []
     },
     {
@@ -14031,14 +14046,14 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 10,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "wifi dnsname",
         "format": "{{msg.payload.wifi.dnsname}}",
         "layout": "row-left",
-        "x": 590,
-        "y": 760,
+        "x": 350,
+        "y": 740,
         "wires": []
     },
     {
@@ -14824,6 +14839,7 @@
         ],
         "payload": "",
         "topic": "",
+        "topicType": "str",
         "x": 590,
         "y": 211,
         "wires": [
@@ -14859,14 +14875,14 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 1,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "chipid",
         "format": "{{msg.payload.chipid}}",
         "layout": "row-left",
-        "x": 570,
-        "y": 400,
+        "x": 330,
+        "y": 380,
         "wires": []
     },
     {
@@ -15453,14 +15469,210 @@
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
         "order": 3,
-        "width": "20",
+        "width": "12",
         "height": "1",
         "name": "",
         "label": "branch",
         "format": "{{msg.payload.branch}}",
         "layout": "row-left",
-        "x": 570,
-        "y": 480,
+        "x": 330,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "e5090dcc.c2f7c",
+        "type": "ui_text",
+        "z": "67442bb3.903494",
+        "group": "5de7d7da.a53e18",
+        "order": 18,
+        "width": "12",
+        "height": "1",
+        "name": "",
+        "label": "syslog host",
+        "format": "{{msg.payload.syslog.host}}",
+        "layout": "row-left",
+        "x": 350,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "65591ef0.e545c",
+        "type": "ui_text",
+        "z": "67442bb3.903494",
+        "group": "5de7d7da.a53e18",
+        "order": 19,
+        "width": "12",
+        "height": "1",
+        "name": "",
+        "label": "syslog port",
+        "format": "{{msg.payload.syslog.port}}",
+        "layout": "row-left",
+        "x": 350,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "d7007cae.c95ec",
+        "type": "ui_text",
+        "z": "67442bb3.903494",
+        "group": "5de7d7da.a53e18",
+        "order": 20,
+        "width": "12",
+        "height": "1",
+        "name": "",
+        "label": "syslog level",
+        "format": "{{msg.payload.syslog.level}}",
+        "layout": "row-left",
+        "x": 350,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "35a00a8e.9f6916",
+        "type": "ui_dropdown",
+        "z": "67442bb3.903494",
+        "name": "",
+        "label": "syslog level",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "e1874da3.cb8cb",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "",
+                "value": "EMERGENCY",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "ALERT",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "CRITICAL",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "ERROR",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "WARNING",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "NOTICE",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "INFO",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "DEBUG",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "send",
+        "topicType": "str",
+        "x": 1050,
+        "y": 380,
+        "wires": [
+            [
+                "395b9d00.f93612"
+            ]
+        ]
+    },
+    {
+        "id": "a7623748.5c4ef8",
+        "type": "change",
+        "z": "67442bb3.903494",
+        "name": "set level",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.syslog.level",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 380,
+        "wires": [
+            [
+                "35a00a8e.9f6916"
+            ]
+        ]
+    },
+    {
+        "id": "f56eb07.80cfa5",
+        "type": "link in",
+        "z": "67442bb3.903494",
+        "name": "",
+        "links": [
+            "707adce5.9214a4"
+        ],
+        "x": 775,
+        "y": 380,
+        "wires": [
+            [
+                "a7623748.5c4ef8",
+                "395b9d00.f93612"
+            ]
+        ]
+    },
+    {
+        "id": "395b9d00.f93612",
+        "type": "function",
+        "z": "67442bb3.903494",
+        "name": "",
+        "func": "if ( msg.topic == \"send\" ) {\n    var config = context.get ( \"config\" );\n//    if ( config && config.syslog && config.syslog.level && config.syslog.level == msg.payload ) {\n    if ( config ) {\n        var topic = config.topic + \"/service/sysloglevel\";\n        return ( {topic: topic, payload: msg.payload } );\n    }\n}\nelse {\n    // received config\n    context.set ( \"config\", msg.payload );\n}\n\nreturn null;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 460,
+        "wires": [
+            [
+                "1f2e404a.64996"
+            ]
+        ]
+    },
+    {
+        "id": "1f2e404a.64996",
+        "type": "mqtt out",
+        "z": "67442bb3.903494",
+        "name": "",
+        "topic": "",
+        "qos": "1",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7bc3dc1a.d27a94",
+        "x": 1190,
+        "y": 460,
         "wires": []
     }
 ]
