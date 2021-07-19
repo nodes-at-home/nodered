@@ -7425,7 +7425,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 26,
+        "order": 27,
         "width": "12",
         "height": "1",
         "name": "",
@@ -7433,7 +7433,7 @@
         "format": "{{msg.payload.appCfg}}",
         "layout": "row-left",
         "x": 340,
-        "y": 1380,
+        "y": 1420,
         "wires": []
     },
     {
@@ -7457,7 +7457,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 17,
+        "order": 18,
         "width": "12",
         "height": "1",
         "name": "",
@@ -7465,7 +7465,7 @@
         "format": "{{msg.payload.mqtt.retain}}",
         "layout": "row-left",
         "x": 350,
-        "y": 1020,
+        "y": 1060,
         "wires": []
     },
     {
@@ -7473,7 +7473,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 21,
+        "order": 22,
         "width": "12",
         "height": "1",
         "name": "",
@@ -7481,7 +7481,7 @@
         "format": "{{msg.payload.trace.ip}}",
         "layout": "row-left",
         "x": 340,
-        "y": 1180,
+        "y": 1220,
         "wires": []
     },
     {
@@ -7569,7 +7569,8 @@
                 "36551f9c.2443a",
                 "e5090dcc.c2f7c",
                 "65591ef0.e545c",
-                "d7007cae.c95ec"
+                "d7007cae.c95ec",
+                "8ddbe386.5d2ec"
             ]
         ]
     },
@@ -7591,7 +7592,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 25,
+        "order": 26,
         "width": "12",
         "height": "1",
         "name": "",
@@ -7599,7 +7600,7 @@
         "format": "{{msg.payload.timer}}",
         "layout": "row-left",
         "x": 330,
-        "y": 1340,
+        "y": 1380,
         "wires": []
     },
     {
@@ -7677,7 +7678,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 15,
+        "order": 16,
         "width": "12",
         "height": "1",
         "name": "",
@@ -7685,7 +7686,7 @@
         "format": "{{msg.payload.mqtt.broker}}",
         "layout": "row-left",
         "x": 350,
-        "y": 940,
+        "y": 980,
         "wires": []
     },
     {
@@ -7693,7 +7694,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 16,
+        "order": 17,
         "width": "12",
         "height": "1",
         "name": "",
@@ -7701,7 +7702,7 @@
         "format": "{{msg.payload.mqtt.keepAliveTime}}",
         "layout": "row-left",
         "x": 370,
-        "y": 980,
+        "y": 1020,
         "wires": []
     },
     {
@@ -7709,7 +7710,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 22,
+        "order": 23,
         "width": "12",
         "height": "1",
         "name": "",
@@ -7717,7 +7718,7 @@
         "format": "{{msg.payload.trace.port}}",
         "layout": "row-left",
         "x": 340,
-        "y": 1220,
+        "y": 1260,
         "wires": []
     },
     {
@@ -7725,7 +7726,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 23,
+        "order": 24,
         "width": "12",
         "height": "1",
         "name": "",
@@ -7733,7 +7734,7 @@
         "format": "{{msg.payload.trace.onUpdate}}",
         "layout": "row-left",
         "x": 360,
-        "y": 1260,
+        "y": 1300,
         "wires": []
     },
     {
@@ -7741,7 +7742,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 24,
+        "order": 25,
         "width": "12",
         "height": "1",
         "name": "",
@@ -7749,7 +7750,7 @@
         "format": "{{msg.payload.trace.onStartup}}",
         "layout": "row-left",
         "x": 360,
-        "y": 1300,
+        "y": 1340,
         "wires": []
     },
     {
@@ -11960,9 +11961,12 @@
         "type": "function",
         "z": "67442bb3.903494",
         "name": "ap_name",
-        "func": "\nvar ap = [];\nap [ \"c8:0e:14:66:e0:e1\" ] = \"mauzi\";\nap [ \"cc:ce:1e:e2:dd:5b\" ] = \"draguran\";\nap [ \"f0:b0:14:e1:92:a5\" ] = \"meltan\";\n\nvar result = \"\";\nif ( msg.payload.wifi && msg.payload.wifi.apmac ) {\n    result = ap [msg.payload.wifi.apmac];\n}\nmsg.payload = result;\n\nreturn msg;",
+        "func": "\nvar ap = [];\nap [ \"74:42:7f:a5:22:c5\" ] = \"mauzi\";       // Fritz!Box 7590\nap [ \"c8:0e:14:66:e0:e1\" ] = \"skorgla\";       // Fritz!Box 7490\nap [ \"cc:ce:1e:e2:dd:5b\" ] = \"draguran\";\nap [ \"f0:b0:14:e1:92:a5\" ] = \"meltan\";\n\nvar result = \"\";\nif ( msg.payload.wifi && msg.payload.wifi.apmac ) {\n    result = ap [msg.payload.wifi.apmac];\n}\nmsg.payload = result;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 340,
         "y": 900,
         "wires": [
@@ -12037,7 +12041,7 @@
         "type": "function",
         "z": "fc8ae83a.bd2f98",
         "name": "fields+tags",
-        "func": "var ap = [];\nap [ \"c8:0e:14:66:e0:e1\" ] = \"mauzi\";       // Fritz!Box 7490\nap [ \"74:42:7f:a5:22:c5\" ] = \"mauzi\";       // Fritz!Box 7590\nap [ \"cc:ce:1e:e2:dd:5b\" ] = \"draguran\";\nap [ \"f0:b0:14:e1:92:a5\" ] = \"meltan\";\n\nvar name = \"\";\nif ( msg.payload.apmac ) {\n    name = ap [msg.payload.apmac];\n}\n\nvar result = [\n    // fields\n    {\n        value: msg.payload.value,\n        unit: msg.payload.unit,\n        apmac: msg.payload.apmac\n    },\n    // tags\n    {\n        apname: name,\n        chipid: msg.payload.chipid,\n        topic: msg.payload.topic.slice ( 11 )\n    }\n];\n\nmsg.payload = result;\n\nreturn msg;\n",
+        "func": "var ap = [];\nap [ \"74:42:7f:a5:22:c5\" ] = \"mauzi\";       // Fritz!Box 7590\nap [ \"c8:0e:14:66:e0:e1\" ] = \"skorgla\";       // Fritz!Box 7490\nap [ \"cc:ce:1e:e2:dd:5b\" ] = \"draguran\";\nap [ \"f0:b0:14:e1:92:a5\" ] = \"meltan\";\n\nvar name = \"\";\nif ( msg.payload.apmac ) {\n    name = ap [msg.payload.apmac];\n}\n\nvar result = [\n    // fields\n    {\n        value: msg.payload.value,\n        unit: msg.payload.unit,\n        apmac: msg.payload.apmac\n    },\n    // tags\n    {\n        apname: name,\n        chipid: msg.payload.chipid,\n        topic: msg.payload.topic.slice ( 11 )\n    }\n];\n\nmsg.payload = result;\n\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -14037,7 +14041,7 @@
         "height": "1",
         "name": "",
         "label": "wifi mac",
-        "format": "{{msg.payload.wifi.apmac}}",
+        "format": "{{msg.payload.wifi.mac}}",
         "layout": "row-left",
         "x": 340,
         "y": 700,
@@ -15487,7 +15491,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 18,
+        "order": 19,
         "width": "12",
         "height": "1",
         "name": "",
@@ -15495,7 +15499,7 @@
         "format": "{{msg.payload.syslog.host}}",
         "layout": "row-left",
         "x": 350,
-        "y": 1060,
+        "y": 1100,
         "wires": []
     },
     {
@@ -15503,7 +15507,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 19,
+        "order": 20,
         "width": "12",
         "height": "1",
         "name": "",
@@ -15511,7 +15515,7 @@
         "format": "{{msg.payload.syslog.port}}",
         "layout": "row-left",
         "x": 350,
-        "y": 1100,
+        "y": 1140,
         "wires": []
     },
     {
@@ -15519,7 +15523,7 @@
         "type": "ui_text",
         "z": "67442bb3.903494",
         "group": "5de7d7da.a53e18",
-        "order": 20,
+        "order": 21,
         "width": "12",
         "height": "1",
         "name": "",
@@ -15527,7 +15531,7 @@
         "format": "{{msg.payload.syslog.level}}",
         "layout": "row-left",
         "x": 350,
-        "y": 1140,
+        "y": 1180,
         "wires": []
     },
     {
@@ -15676,6 +15680,22 @@
         "broker": "7bc3dc1a.d27a94",
         "x": 1190,
         "y": 460,
+        "wires": []
+    },
+    {
+        "id": "8ddbe386.5d2ec",
+        "type": "ui_text",
+        "z": "67442bb3.903494",
+        "group": "5de7d7da.a53e18",
+        "order": 15,
+        "width": "12",
+        "height": "1",
+        "name": "",
+        "label": "wifi access point mac",
+        "format": "{{msg.payload.wifi.apmac}}",
+        "layout": "row-left",
+        "x": 380,
+        "y": 940,
         "wires": []
     }
 ]
