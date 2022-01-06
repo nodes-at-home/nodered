@@ -744,13 +744,22 @@
         "id": "a2d95a64.27a1a8",
         "type": "inject",
         "z": "c9cf8bbb.029148",
-        "name": "\"Gelber Sack\"",
+        "name": "\"Gelbe Tonne\"",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
         "repeat": "",
         "crontab": "*/15 5-19 * * *",
         "once": true,
         "onceDelay": "180",
         "topic": "nodes@home/display/pixel/kitchen/message/calendar/yellowbag",
-        "payload": "Gelber Sack",
+        "payload": "Gelbe Tonne",
         "payloadType": "str",
         "x": 160,
         "y": 560,
@@ -765,9 +774,12 @@
         "type": "function",
         "z": "c9cf8bbb.029148",
         "name": "mqtt payload",
-        "func": "// junand 16.01.2017\n\nconst now = +new Date ();\nconst start = Date.parse ( msg.payload.start );\nconst diff = now - start;\nconst oneDay = 1 * 24 * 60 * 60 * 1000; \n\nvar titleMap = [];\ntitleMap [\"Müll\"] = 6;\ntitleMap [\"Papier\"] = 7;\ntitleMap [\"Gelber Sack\"] = 8;\ntitleMap [\"Biotonne\"] = 9;\n\nvar s = null;\nif ( Math.abs ( diff ) < oneDay ) {\n    if ( diff < 0 ) {\n        s = \"morgen\";\n    }\n    else {\n        s = \"heute\";\n    }\n    s += \" ist \" + msg.payload.title;\n}\n\nvar messages;\n\nif ( s === null ) {\n    messages = { messages: [{ line: titleMap [msg.payload.title], clear: true } ]};\n}\nelse {\n    messages = { messages: [{ line: titleMap [msg.payload.title], text: s } ]};\n}\n\nmsg.payload = messages; // preserve msg attributes!!!\n\nreturn msg;",
+        "func": "// junand 16.01.2017\n\nconst now = +new Date ();\nconst start = Date.parse ( msg.payload.start );\nconst diff = now - start;\nconst oneDay = 1 * 24 * 60 * 60 * 1000; \n\nvar titleMap = [];\ntitleMap [\"Müll\"] = 6;\ntitleMap [\"Papier\"] = 7;\ntitleMap [\"Gelbe Tonne\"] = 8;\ntitleMap [\"Biotonne\"] = 9;\n\nvar s = null;\nif ( Math.abs ( diff ) < oneDay ) {\n    if ( diff < 0 ) {\n        s = \"morgen\";\n    }\n    else {\n        s = \"heute\";\n    }\n    s += \" ist \" + msg.payload.title;\n}\n\nvar messages;\n\nif ( s === null ) {\n    messages = { messages: [{ line: titleMap [msg.payload.title], clear: true } ]};\n}\nelse {\n    messages = { messages: [{ line: titleMap [msg.payload.title], text: s } ]};\n}\n\nmsg.payload = messages; // preserve msg attributes!!!\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 590,
         "y": 540,
         "wires": [
