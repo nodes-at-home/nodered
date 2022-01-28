@@ -3772,37 +3772,37 @@
             },
             {
                 "t": "eq",
-                "v": "sensor/flowercare/plant1",
+                "v": "sensor/flowercare/goldfruchtpalme",
                 "vt": "str"
             },
             {
                 "t": "eq",
-                "v": "sensor/flowercare/plant2",
+                "v": "sensor/flowercare/birkenfeige",
                 "vt": "str"
             },
             {
                 "t": "eq",
-                "v": "sensor/flowercare/plant3",
+                "v": "sensor/flowercare/palmlilie",
                 "vt": "str"
             },
             {
                 "t": "eq",
-                "v": "sensor/flowercare/plant4",
+                "v": "sensor/flowercare/bogenhanf",
                 "vt": "str"
             },
             {
                 "t": "eq",
-                "v": "sensor/flowercare/plant5",
+                "v": "sensor/flowercare/korbmarante",
                 "vt": "str"
             },
             {
                 "t": "eq",
-                "v": "sensor/flowercare/plant6",
+                "v": "sensor/flowercare/fensterblatt",
                 "vt": "str"
             },
             {
                 "t": "eq",
-                "v": "sensor/flowercare/plant7",
+                "v": "sensor/flowercare/gummibaum",
                 "vt": "str"
             },
             {
@@ -8220,11 +8220,11 @@
         "id": "da40fe87.b517f",
         "type": "tcp request",
         "z": "8e2c5c11.fae26",
+        "name": "",
         "server": "",
         "port": "23",
         "out": "time",
         "splitc": "100",
-        "name": "",
         "x": 2520,
         "y": 3080,
         "wires": [
@@ -8325,11 +8325,11 @@
         "id": "80ffc6f3.361d98",
         "type": "tcp request",
         "z": "8e2c5c11.fae26",
+        "name": "",
         "server": "",
         "port": "23",
         "out": "time",
         "splitc": "100",
-        "name": "",
         "x": 2880,
         "y": 3080,
         "wires": [
@@ -8796,51 +8796,11 @@
                 "t": "eq",
                 "v": "sensor/rain/garden",
                 "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "sensor/flowercare/plant1",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "sensor/flowercare/plant2",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "sensor/flowercare/plant3",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "sensor/flowercare/plant4",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "sensor/flowercare/plant5",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "sensor/flowercare/plant6",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "sensor/flowercare/plant7",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "sensor/flowercare/plant8",
-                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 48,
+        "outputs": 40,
         "x": 550,
         "y": 3260,
         "wires": [
@@ -8963,30 +8923,6 @@
             ],
             [
                 "e15cdbcb.1c21b8"
-            ],
-            [
-                "800e6d1d67c9529f"
-            ],
-            [
-                "02908c7092f1e44d"
-            ],
-            [
-                "ee257568051cc4d6"
-            ],
-            [
-                "d3af88cb428dcc41"
-            ],
-            [
-                "2c696cf989f3a502"
-            ],
-            [
-                "afe1e5e161791cd4"
-            ],
-            [
-                "2cfdfd76150a3dc2"
-            ],
-            [
-                "c0aafeed41e746ca"
             ]
         ]
     },
@@ -11055,11 +10991,11 @@
         "type": "ui_switch",
         "z": "8e2c5c11.fae26",
         "name": "",
-        "label": "sensor/flowercare/plant1",
+        "label": "sensor/flowercare/goldfruchtpalme",
         "tooltip": "watchdog state",
         "group": "69929a92d5b22fc4",
         "order": 1,
-        "width": 5,
+        "width": 6,
         "height": 1,
         "passthru": false,
         "decouple": "true",
@@ -11075,7 +11011,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "animate": true,
-        "x": 1521,
+        "x": 1551,
         "y": 1640,
         "wires": [
             []
@@ -11086,11 +11022,11 @@
         "type": "ui_switch",
         "z": "8e2c5c11.fae26",
         "name": "",
-        "label": "sensor/flowercare/plant2",
+        "label": "sensor/flowercare/birkenfeige",
         "tooltip": "watchdog state",
         "group": "69929a92d5b22fc4",
-        "order": 3,
-        "width": 5,
+        "order": 2,
+        "width": 6,
         "height": 1,
         "passthru": false,
         "decouple": "true",
@@ -11106,7 +11042,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "animate": true,
-        "x": 1520,
+        "x": 1530,
         "y": 1680,
         "wires": [
             []
@@ -11143,11 +11079,11 @@
         "type": "ui_switch",
         "z": "8e2c5c11.fae26",
         "name": "",
-        "label": "sensor/flowercare/plant3",
+        "label": "sensor/flowercare/palmlilie",
         "tooltip": "watchdog state",
         "group": "69929a92d5b22fc4",
-        "order": 5,
-        "width": 5,
+        "order": 3,
+        "width": 6,
         "height": 1,
         "passthru": false,
         "decouple": "true",
@@ -11163,7 +11099,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "animate": true,
-        "x": 1520,
+        "x": 1530,
         "y": 1720,
         "wires": [
             []
@@ -11200,11 +11136,11 @@
         "type": "ui_switch",
         "z": "8e2c5c11.fae26",
         "name": "",
-        "label": "sensor/flowercare/plant4",
+        "label": "sensor/flowercare/bogenhanf",
         "tooltip": "watchdog state",
         "group": "69929a92d5b22fc4",
-        "order": 7,
-        "width": 5,
+        "order": 4,
+        "width": 6,
         "height": 1,
         "passthru": false,
         "decouple": "true",
@@ -11220,7 +11156,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "animate": true,
-        "x": 1520,
+        "x": 1530,
         "y": 1760,
         "wires": [
             []
@@ -11257,11 +11193,11 @@
         "type": "ui_switch",
         "z": "8e2c5c11.fae26",
         "name": "",
-        "label": "sensor/flowercare/plant5",
+        "label": "sensor/flowercare/korbmarante",
         "tooltip": "watchdog state",
         "group": "69929a92d5b22fc4",
-        "order": 9,
-        "width": 5,
+        "order": 5,
+        "width": 6,
         "height": 1,
         "passthru": false,
         "decouple": "true",
@@ -11277,7 +11213,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "animate": true,
-        "x": 1520,
+        "x": 1540,
         "y": 1800,
         "wires": [
             []
@@ -11314,11 +11250,11 @@
         "type": "ui_switch",
         "z": "8e2c5c11.fae26",
         "name": "",
-        "label": "sensor/flowercare/plant6",
+        "label": "sensor/flowercare/fensterblatt",
         "tooltip": "watchdog state",
         "group": "69929a92d5b22fc4",
-        "order": 11,
-        "width": 5,
+        "order": 6,
+        "width": 6,
         "height": 1,
         "passthru": false,
         "decouple": "true",
@@ -11334,7 +11270,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "animate": true,
-        "x": 1520,
+        "x": 1540,
         "y": 1840,
         "wires": [
             []
@@ -11371,11 +11307,11 @@
         "type": "ui_switch",
         "z": "8e2c5c11.fae26",
         "name": "",
-        "label": "sensor/flowercare/plant7",
+        "label": "sensor/flowercare/gummibaum",
         "tooltip": "watchdog state",
         "group": "69929a92d5b22fc4",
-        "order": 13,
-        "width": 5,
+        "order": 7,
+        "width": 6,
         "height": 1,
         "passthru": false,
         "decouple": "true",
@@ -11391,7 +11327,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "animate": true,
-        "x": 1520,
+        "x": 1540,
         "y": 1880,
         "wires": [
             []
@@ -11431,8 +11367,8 @@
         "label": "sensor/flowercare/plant8",
         "tooltip": "watchdog state",
         "group": "69929a92d5b22fc4",
-        "order": 15,
-        "width": 5,
+        "order": 8,
+        "width": 6,
         "height": 1,
         "passthru": false,
         "decouple": "true",
@@ -11481,259 +11417,11 @@
         ]
     },
     {
-        "id": "800e6d1d67c9529f",
-        "type": "ui_switch",
-        "z": "8e2c5c11.fae26",
-        "name": "mqtt sensor/flowercare/plant1",
-        "label": "",
-        "tooltip": "mqtt connection state",
-        "group": "69929a92d5b22fc4",
-        "order": 2,
-        "width": 1,
-        "height": 1,
-        "passthru": false,
-        "decouple": "true",
-        "topic": "",
-        "topicType": "str",
-        "style": "",
-        "onvalue": "online",
-        "onvalueType": "str",
-        "onicon": "done",
-        "oncolor": "green",
-        "offvalue": "offline",
-        "offvalueType": "str",
-        "officon": "error_outline",
-        "offcolor": "red",
-        "animate": true,
-        "x": 990,
-        "y": 4360,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "02908c7092f1e44d",
-        "type": "ui_switch",
-        "z": "8e2c5c11.fae26",
-        "name": "mqtt sensor/flowercare/plant2",
-        "label": "",
-        "tooltip": "mqtt connection state",
-        "group": "69929a92d5b22fc4",
-        "order": 4,
-        "width": 1,
-        "height": 1,
-        "passthru": false,
-        "decouple": "true",
-        "topic": "",
-        "topicType": "str",
-        "style": "",
-        "onvalue": "online",
-        "onvalueType": "str",
-        "onicon": "done",
-        "oncolor": "green",
-        "offvalue": "offline",
-        "offvalueType": "str",
-        "officon": "error_outline",
-        "offcolor": "red",
-        "animate": true,
-        "x": 990,
-        "y": 4400,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "ee257568051cc4d6",
-        "type": "ui_switch",
-        "z": "8e2c5c11.fae26",
-        "name": "mqtt sensor/flowercare/plant3",
-        "label": "",
-        "tooltip": "mqtt connection state",
-        "group": "69929a92d5b22fc4",
-        "order": 6,
-        "width": 1,
-        "height": 1,
-        "passthru": false,
-        "decouple": "true",
-        "topic": "",
-        "topicType": "str",
-        "style": "",
-        "onvalue": "online",
-        "onvalueType": "str",
-        "onicon": "done",
-        "oncolor": "green",
-        "offvalue": "offline",
-        "offvalueType": "str",
-        "officon": "error_outline",
-        "offcolor": "red",
-        "animate": true,
-        "x": 990,
-        "y": 4440,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "d3af88cb428dcc41",
-        "type": "ui_switch",
-        "z": "8e2c5c11.fae26",
-        "name": "mqtt sensor/flowercare/plant4",
-        "label": "",
-        "tooltip": "mqtt connection state",
-        "group": "69929a92d5b22fc4",
-        "order": 8,
-        "width": 1,
-        "height": 1,
-        "passthru": false,
-        "decouple": "true",
-        "topic": "",
-        "topicType": "str",
-        "style": "",
-        "onvalue": "online",
-        "onvalueType": "str",
-        "onicon": "done",
-        "oncolor": "green",
-        "offvalue": "offline",
-        "offvalueType": "str",
-        "officon": "error_outline",
-        "offcolor": "red",
-        "animate": true,
-        "x": 990,
-        "y": 4480,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "2c696cf989f3a502",
-        "type": "ui_switch",
-        "z": "8e2c5c11.fae26",
-        "name": "mqtt sensor/flowercare/plant5",
-        "label": "",
-        "tooltip": "mqtt connection state",
-        "group": "69929a92d5b22fc4",
-        "order": 10,
-        "width": 1,
-        "height": 1,
-        "passthru": false,
-        "decouple": "true",
-        "topic": "",
-        "topicType": "str",
-        "style": "",
-        "onvalue": "online",
-        "onvalueType": "str",
-        "onicon": "done",
-        "oncolor": "green",
-        "offvalue": "offline",
-        "offvalueType": "str",
-        "officon": "error_outline",
-        "offcolor": "red",
-        "animate": true,
-        "x": 990,
-        "y": 4520,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "afe1e5e161791cd4",
-        "type": "ui_switch",
-        "z": "8e2c5c11.fae26",
-        "name": "mqtt sensor/flowercare/plant6",
-        "label": "",
-        "tooltip": "mqtt connection state",
-        "group": "69929a92d5b22fc4",
-        "order": 12,
-        "width": 1,
-        "height": 1,
-        "passthru": false,
-        "decouple": "true",
-        "topic": "",
-        "topicType": "str",
-        "style": "",
-        "onvalue": "online",
-        "onvalueType": "str",
-        "onicon": "done",
-        "oncolor": "green",
-        "offvalue": "offline",
-        "offvalueType": "str",
-        "officon": "error_outline",
-        "offcolor": "red",
-        "animate": true,
-        "x": 990,
-        "y": 4560,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "2cfdfd76150a3dc2",
-        "type": "ui_switch",
-        "z": "8e2c5c11.fae26",
-        "name": "mqtt sensor/flowercare/plant7",
-        "label": "",
-        "tooltip": "mqtt connection state",
-        "group": "69929a92d5b22fc4",
-        "order": 14,
-        "width": 1,
-        "height": 1,
-        "passthru": false,
-        "decouple": "true",
-        "topic": "",
-        "topicType": "str",
-        "style": "",
-        "onvalue": "online",
-        "onvalueType": "str",
-        "onicon": "done",
-        "oncolor": "green",
-        "offvalue": "offline",
-        "offvalueType": "str",
-        "officon": "error_outline",
-        "offcolor": "red",
-        "animate": true,
-        "x": 990,
-        "y": 4600,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "c0aafeed41e746ca",
-        "type": "ui_switch",
-        "z": "8e2c5c11.fae26",
-        "name": "mqtt sensor/flowercare/plant8",
-        "label": "",
-        "tooltip": "mqtt connection state",
-        "group": "69929a92d5b22fc4",
-        "order": 16,
-        "width": 1,
-        "height": 1,
-        "passthru": false,
-        "decouple": "true",
-        "topic": "",
-        "topicType": "str",
-        "style": "",
-        "onvalue": "online",
-        "onvalueType": "str",
-        "onicon": "done",
-        "oncolor": "green",
-        "offvalue": "offline",
-        "offvalueType": "str",
-        "officon": "error_outline",
-        "offcolor": "red",
-        "animate": true,
-        "x": 990,
-        "y": 4640,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "6ccbfadac80f932f",
         "type": "ui_text",
         "z": "8e2c5c11.fae26",
         "group": "69929a92d5b22fc4",
-        "order": 17,
+        "order": 9,
         "width": 6,
         "height": 1,
         "name": "dummy line 3",
@@ -11749,7 +11437,7 @@
         "type": "ui_text",
         "z": "8e2c5c11.fae26",
         "group": "69929a92d5b22fc4",
-        "order": 18,
+        "order": 10,
         "width": 6,
         "height": 1,
         "name": "dummy line 4",
@@ -11765,7 +11453,7 @@
         "type": "ui_text",
         "z": "8e2c5c11.fae26",
         "group": "69929a92d5b22fc4",
-        "order": 19,
+        "order": 11,
         "width": 6,
         "height": 1,
         "name": "dummy line 5",
@@ -11781,7 +11469,7 @@
         "type": "ui_text",
         "z": "8e2c5c11.fae26",
         "group": "69929a92d5b22fc4",
-        "order": 20,
+        "order": 12,
         "width": 6,
         "height": 1,
         "name": "dummy line 6",
@@ -11797,7 +11485,7 @@
         "type": "ui_text",
         "z": "8e2c5c11.fae26",
         "group": "69929a92d5b22fc4",
-        "order": 21,
+        "order": 13,
         "width": 6,
         "height": 1,
         "name": "dummy line 7",
@@ -11813,7 +11501,7 @@
         "type": "ui_text",
         "z": "8e2c5c11.fae26",
         "group": "69929a92d5b22fc4",
-        "order": 22,
+        "order": 14,
         "width": 6,
         "height": 1,
         "name": "dummy line 8",
