@@ -5,3 +5,4 @@ settings.js
 .config.*.json
 *.backup
 .npm/
+weather_vaccation.json

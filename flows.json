@@ -1264,18 +1264,27 @@
         "type": "inject",
         "z": "c9cf8bbb.029148",
         "name": "Daily 05:00 .. 22:00",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
         "repeat": "",
         "crontab": "*/15 5-21 * * *",
         "once": false,
         "onceDelay": "",
-        "topic": "nodes@home/display/pixel/kitchen/message/brisbane",
+        "topic": "nodes@home/display/pixel/kitchen/message/vaccation",
         "payload": "",
         "payloadType": "date",
         "x": 180,
         "y": 1180,
         "wires": [
             [
-                "78864514.cd9c1c"
+                "6d9debda10666e81"
             ]
         ]
     },
@@ -1283,14 +1292,14 @@
         "id": "78864514.cd9c1c",
         "type": "openweathermap",
         "z": "c9cf8bbb.029148",
-        "name": "Fiss",
+        "name": "",
         "wtype": "current",
-        "lon": "10.614543",
-        "lat": "47.056504",
+        "lon": "",
+        "lat": "",
         "city": "",
         "country": "",
         "language": "de",
-        "x": 350,
+        "x": 910,
         "y": 1180,
         "wires": [
             [
@@ -1331,7 +1340,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 500,
+        "x": 1120,
         "y": 1180,
         "wires": [
             [
@@ -1760,7 +1769,7 @@
             "424b6bd.468cb94",
             "c029cd0a.008a9"
         ],
-        "x": 615,
+        "x": 1235,
         "y": 1180,
         "wires": []
     },
@@ -2184,6 +2193,69 @@
         "wires": [
             [
                 "9ed62c96.78bbc"
+            ]
+        ]
+    },
+    {
+        "id": "6d9debda10666e81",
+        "type": "file in",
+        "z": "c9cf8bbb.029148",
+        "name": "location",
+        "filename": "/data/weather_vaccation.json",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 380,
+        "y": 1180,
+        "wires": [
+            [
+                "f8468a9d5b2172a9"
+            ]
+        ]
+    },
+    {
+        "id": "f8468a9d5b2172a9",
+        "type": "json",
+        "z": "c9cf8bbb.029148",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 530,
+        "y": 1180,
+        "wires": [
+            [
+                "b7e5337b494776ca"
+            ]
+        ]
+    },
+    {
+        "id": "b7e5337b494776ca",
+        "type": "change",
+        "z": "c9cf8bbb.029148",
+        "name": "set location",
+        "rules": [
+            {
+                "t": "set",
+                "p": "location",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 690,
+        "y": 1180,
+        "wires": [
+            [
+                "78864514.cd9c1c"
             ]
         ]
     },
