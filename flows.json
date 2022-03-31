@@ -3879,7 +3879,7 @@
             },
             {
                 "t": "eq",
-                "v": "sensor/flowercare/plant8",
+                "v": "sensor/flowercare/fiederaralie",
                 "vt": "str"
             }
         ],
@@ -11436,7 +11436,7 @@
         "type": "ui_switch",
         "z": "8e2c5c11.fae26",
         "name": "",
-        "label": "sensor/flowercare/plant8",
+        "label": "sensor/flowercare/fiederaralie",
         "tooltip": "watchdog state",
         "group": "69929a92d5b22fc4",
         "order": 8,
@@ -11456,7 +11456,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "animate": true,
-        "x": 1520,
+        "x": 1540,
         "y": 1920,
         "wires": [
             []
