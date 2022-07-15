@@ -80,6 +80,16 @@
         "info": ""
     },
     {
+        "id": "1c92e6eaab1ea884",
+        "type": "junction",
+        "z": "c9cf8bbb.029148",
+        "x": 350,
+        "y": 1380,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "899805d0.4345c8",
         "type": "google-api-config"
     },
@@ -1737,7 +1747,8 @@
             "a89f51a1.a0746",
             "f446ce97.9881a",
             "f859864a.ddee78",
-            "e7c6094d.8fb398"
+            "e7c6094d.8fb398",
+            "8fff3aaac7e8e406"
         ],
         "x": 75,
         "y": 80,
@@ -1821,7 +1832,8 @@
             "a89f51a1.a0746",
             "f446ce97.9881a",
             "f859864a.ddee78",
-            "e7c6094d.8fb398"
+            "e7c6094d.8fb398",
+            "8fff3aaac7e8e406"
         ],
         "x": 75,
         "y": 160,
@@ -2256,6 +2268,230 @@
         "wires": [
             [
                 "78864514.cd9c1c"
+            ]
+        ]
+    },
+    {
+        "id": "d9859a5e7e7572c9",
+        "type": "comment",
+        "z": "c9cf8bbb.029148",
+        "name": "water status",
+        "info": "",
+        "x": 130,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "99dcb32338ae41db",
+        "type": "http request",
+        "z": "c9cf8bbb.029148",
+        "name": "http",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://www.eigenbetrieb-panketal.de/wassersparen/",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 400,
+        "y": 1380,
+        "wires": [
+            [
+                "b9189175595c0754",
+                "ea527b96fe3348e7"
+            ]
+        ]
+    },
+    {
+        "id": "b9189175595c0754",
+        "type": "html",
+        "z": "c9cf8bbb.029148",
+        "name": "",
+        "property": "",
+        "outproperty": "",
+        "tag": ".post-content > p > strong > span",
+        "ret": "text",
+        "as": "multi",
+        "x": 630,
+        "y": 1380,
+        "wires": [
+            [
+                "729d9f969598bc0d"
+            ]
+        ]
+    },
+    {
+        "id": "729d9f969598bc0d",
+        "type": "change",
+        "z": "c9cf8bbb.029148",
+        "name": "trim",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload ~> $trim ~> $lowercase",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 1380,
+        "wires": [
+            [
+                "f0d9aed1a8aae71f",
+                "35c5a47dce71e5be"
+            ]
+        ]
+    },
+    {
+        "id": "0573924ba15e1c7d",
+        "type": "change",
+        "z": "c9cf8bbb.029148",
+        "name": "pixel message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "nodes@home/display/pixel/kitchen/message/waterstatus",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload_new.messages[0].line",
+                "pt": "msg",
+                "to": "18",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "payload_new.messages[0].text",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload_new",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1150,
+        "y": 1380,
+        "wires": [
+            [
+                "8fff3aaac7e8e406"
+            ]
+        ]
+    },
+    {
+        "id": "8fff3aaac7e8e406",
+        "type": "link out",
+        "z": "c9cf8bbb.029148",
+        "name": "",
+        "links": [
+            "424b6bd.468cb94",
+            "c029cd0a.008a9"
+        ],
+        "x": 1260.9999885559082,
+        "y": 1379.999942779541,
+        "wires": []
+    },
+    {
+        "id": "f0d9aed1a8aae71f",
+        "type": "template",
+        "z": "c9cf8bbb.029148",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Die Wasserampel ist {{payload}}",
+        "output": "str",
+        "x": 990,
+        "y": 1380,
+        "wires": [
+            [
+                "0573924ba15e1c7d"
+            ]
+        ]
+    },
+    {
+        "id": "35c5a47dce71e5be",
+        "type": "mqtt out",
+        "z": "c9cf8bbb.029148",
+        "name": "",
+        "topic": "nodes@home/sensor/wasserampel",
+        "qos": "1",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7bc3dc1a.d27a94",
+        "x": 1045.9999885559082,
+        "y": 1449.999942779541,
+        "wires": []
+    },
+    {
+        "id": "47979cc7dfa8053a",
+        "type": "inject",
+        "z": "c9cf8bbb.029148",
+        "name": "Hourly",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3600",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 1380,
+        "wires": [
+            [
+                "99dcb32338ae41db"
+            ]
+        ]
+    },
+    {
+        "id": "ea527b96fe3348e7",
+        "type": "html",
+        "z": "c9cf8bbb.029148",
+        "name": "",
+        "property": "",
+        "outproperty": "",
+        "tag": ".post-content > p > span",
+        "ret": "text",
+        "as": "multi",
+        "x": 600,
+        "y": 1420,
+        "wires": [
+            [
+                "729d9f969598bc0d"
             ]
         ]
     },
