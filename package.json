@@ -4,17 +4,17 @@
     "version": "0.0.1",
     "private": true,
     "dependencies": {
-        "node-red-asterisk-ami-manager": "0.0.9",
+        "node-red-asterisk-ami-manager": "~0.0.9",
         "node-red-contrib-config": "~1.2.1",
         "node-red-contrib-fritz": "~1.4.5",
-        "node-red-contrib-hass": "0.0.2",
-        "node-red-contrib-influxdb": "~0.6.0",
+        "node-red-contrib-hass": "~0.0.2",
+        "node-red-contrib-influxdb": "~0.6.1",
         "node-red-contrib-play-audio": "~2.5.0",
-        "node-red-contrib-smartswitch": "0.0.1",
-        "node-red-contrib-splitter": "0.0.16",
-        "node-red-dashboard": "~2.29.0",
+        "node-red-contrib-smartswitch": "~0.0.1",
+        "node-red-contrib-splitter": "~0.0.16",
+        "node-red-dashboard": "~3.2.0",
         "node-red-node-google": "~0.2.2",
-        "node-red-node-openweathermap": "~0.4.0",
+        "node-red-node-openweathermap": "~0.5.1",
         "node-red-node-rbe": "~0.5.0"
     }
 }
