@@ -306,22 +306,6 @@
         "width": "10"
     },
     {
-        "id": "a3020470.5bcbd8",
-        "type": "ui_group",
-        "name": "Strom",
-        "tab": "f34c6870.38cee8",
-        "order": 1,
-        "disp": true,
-        "width": "10"
-    },
-    {
-        "id": "f34c6870.38cee8",
-        "type": "ui_tab",
-        "name": "Hausverbrauch",
-        "icon": "dashboard",
-        "order": 4
-    },
-    {
         "id": "33d343b9.d5d19c",
         "type": "ui_tab",
         "name": "Pool",
@@ -13149,6 +13133,140 @@
                 "1f6c1953.c84e17"
             ]
         ]
+    },
+    {
+        "id": "4b8d2875c5980af7",
+        "type": "comment",
+        "z": "fc8ae83a.bd2f98",
+        "name": "check solis inverter every 10 seconds",
+        "info": "",
+        "x": 190,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "e010e666977eeaa5",
+        "type": "inject",
+        "z": "fc8ae83a.bd2f98",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 760,
+        "wires": [
+            [
+                "a85143bc24de6591"
+            ]
+        ]
+    },
+    {
+        "id": "a85143bc24de6591",
+        "type": "http request",
+        "z": "fc8ae83a.bd2f98",
+        "name": "",
+        "method": "GET",
+        "ret": "bin",
+        "paytoqs": "ignore",
+        "url": "http://solisinverter/inverter.cgi",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": true,
+        "headers": [],
+        "x": 290,
+        "y": 760,
+        "wires": [
+            [
+                "6f035e813d502625",
+                "73f12028dfa0109c"
+            ]
+        ]
+    },
+    {
+        "id": "6f035e813d502625",
+        "type": "function",
+        "z": "fc8ae83a.bd2f98",
+        "name": "pasrse data",
+        "func": "\n// split input\n\nif ( msg.payload.length == 0 ) return null;\n\nlet start = 0;\nlet end = msg.payload.length;\n\nfor (var i = 0; i < end; i++ ) { if ( msg.payload[i] != 0x00 ) { start = i; break; } }\nfor (var i = start; i < end; i++ ) { if ( msg.payload[i] == 0x00 ) { end = i; break; } }\n\nlet values = msg.payload.toString ().substr ( start, end - start ).split ( \";\" );\n\n// index 6 is the total energy amount\nmsg.payload = {\n    wifi_stick: {\n        serial_number: values [0].toString (),\n        firmware_version: values [1]\n    },\n    inverter: {\n        model: values[2],\n        temperature: parseFloat ( values[3] ),\n        power_w: parseInt ( values[4] ),\n        today_kwh: parseFloat ( values [5] ),\n        alarm: values [7]\n    }\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 760,
+        "wires": [
+            [
+                "6b1ce995bdd3dc84",
+                "6c743c13ace21df6"
+            ]
+        ]
+    },
+    {
+        "id": "6b1ce995bdd3dc84",
+        "type": "mqtt out",
+        "z": "fc8ae83a.bd2f98",
+        "name": "",
+        "topic": "nodes@home/inverter/solis/carport/value",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7bc3dc1a.d27a94",
+        "x": 800,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "6c743c13ace21df6",
+        "type": "debug",
+        "z": "fc8ae83a.bd2f98",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "73f12028dfa0109c",
+        "type": "debug",
+        "z": "fc8ae83a.bd2f98",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 880,
+        "wires": []
     },
     {
         "id": "f011c448.9eb0e8",
