@@ -77,7 +77,7 @@
         "type": "junction",
         "z": "c9cf8bbb.029148",
         "x": 350,
-        "y": 1380,
+        "y": 1420,
         "wires": [
             []
         ]
@@ -1216,8 +1216,10 @@
         "z": "c9cf8bbb.029148",
         "name": "id file",
         "filename": "/data/ids/vbb_access_id.txt",
+        "filenameType": "str",
         "format": "utf8",
         "sendError": true,
+        "allProps": false,
         "x": 290,
         "y": 1060,
         "wires": [
@@ -1242,7 +1244,8 @@
         "y": 1060,
         "wires": [
             [
-                "dd45aa8e.25e4d8"
+                "dd45aa8e.25e4d8",
+                "1c34ee99e17a418c"
             ]
         ]
     },
@@ -1268,7 +1271,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 180,
-        "y": 1180,
+        "y": 1220,
         "wires": [
             [
                 "6d9debda10666e81"
@@ -1287,7 +1290,7 @@
         "country": "",
         "language": "de",
         "x": 910,
-        "y": 1180,
+        "y": 1220,
         "wires": [
             [
                 "4d4d9c14.97f994"
@@ -1328,7 +1331,7 @@
         "to": "",
         "reg": false,
         "x": 1120,
-        "y": 1180,
+        "y": 1220,
         "wires": [
             [
                 "f446ce97.9881a"
@@ -1342,7 +1345,7 @@
         "name": "Current Weather in Holiday Location",
         "info": "",
         "x": 200,
-        "y": 1140,
+        "y": 1180,
         "wires": []
     },
     {
@@ -1359,11 +1362,14 @@
         "id": "8c22d895.8a3258",
         "type": "function",
         "z": "c9cf8bbb.029148",
-        "name": "status",
-        "func": "node.status ( \n    { \n        fill: \"blue\", \n        shape: \"dot\", \n        text: msg.payload \n    } \n);\n\nreturn null;",
+        "name": "id",
+        "func": "node.status ( \n    { \n        fill: \"blue\", \n        shape: \"dot\", \n        text: msg.payload \n    } \n);\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 530,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
         "y": 1060,
         "wires": [
             []
@@ -1424,7 +1430,7 @@
         "y": 960,
         "wires": [
             [
-                "e54ef2b7.71ac1"
+                "6836168346e50fc3"
             ]
         ]
     },
@@ -1441,7 +1447,7 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 550,
+        "x": 670,
         "y": 960,
         "wires": [
             [
@@ -1468,7 +1474,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 730,
+        "x": 830,
         "y": 960,
         "wires": [
             [
@@ -1485,7 +1491,7 @@
         "func": "// junand 22.01.2017\n\nif ( !msg.payload ) return null;\n\nvar result = [];\n\n//const threshhold = new Date ().getTime () + 10 * 60 * 1000 + 60 * 60 * 1000;\nconst threshhold = new Date ().getTime () + 10 * 60 * 1000;\n\nfor ( var i = 0; i < msg.payload.length; i++ ) {\n    \n    var departure = msg.payload [i];\n    var date = new Date ( departure.date + \"T\" + departure.time );\n    \n    //node.warn ( \"departure: date=\" + departure.date + \" time=\" + departure.time );\n    //node.warn ( \"thr=\" + new Date ( threshhold ) + \" d=\" + date );\n\n    if ( threshhold < date.getTime () ) {\n        result [result.length] = msg.payload [i];\n    }\n    \n}\n\nmsg.payload = result;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 910,
+        "x": 1030,
         "y": 960,
         "wires": [
             [
@@ -1547,7 +1553,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1100,
+        "x": 1220,
         "y": 960,
         "wires": [
             [
@@ -1565,7 +1571,7 @@
                 "t": "set",
                 "p": "url",
                 "pt": "msg",
-                "to": "\"https://fahrinfo.vbb.de/restproxy/2.4/departureBoard?format=json&accessId=\" & $flowContext(\"vbb_access_id\") & \"&id=\" & payload",
+                "to": "\"https://fahrinfo.vbb.de/restproxy/\" & $flowContext(\"vbb_access_version\") & \"/departureBoard?format=json&accessId=\" & $flowContext(\"vbb_access_id\") & \"&id=\" & payload",
                 "tot": "jsonata"
             },
             {
@@ -1579,7 +1585,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 390,
+        "x": 530,
         "y": 960,
         "wires": [
             [
@@ -1592,6 +1598,18 @@
         "type": "inject",
         "z": "c9cf8bbb.029148",
         "name": "Bus 893 (every 10 min)",
+        "props": [
+            {
+                "p": "payload",
+                "v": "A=1@O=Zepernick, Inntaler Str.@X=13534150@Y=52648319@U=86@L=900350173@B=1@V=3.9,@p=1544015948@",
+                "vt": "str"
+            },
+            {
+                "p": "topic",
+                "v": "",
+                "vt": "str"
+            }
+        ],
         "repeat": "600",
         "crontab": "",
         "once": true,
@@ -1603,7 +1621,7 @@
         "y": 1000,
         "wires": [
             [
-                "8d0686b9.503b28"
+                "c8b1bcd65eae11b4"
             ]
         ]
     },
@@ -1626,7 +1644,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 730,
+        "x": 830,
         "y": 1000,
         "wires": [
             [
@@ -1643,7 +1661,7 @@
         "func": "// junand 22.01.2017\n\nif ( !msg.payload ) return null;\n\nvar result = [];\n\nconst threshhold = new Date ().getTime () + 10 * 60 * 1000;\n\nfor ( var i = 0; i < msg.payload.length; i++ ) {\n    \n    var departure = msg.payload [i];\n    var date = new Date ( departure.date + \"T\" + departure.time );\n    \n    //node.warn ( \"departure: date=\" + departure.date + \" time=\" + departure.time );\n    //node.warn ( \"thr=\" + new Date ( threshhold ) + \" d=\" + date );\n\n    if ( threshhold < date.getTime () ) {\n        result [result.length] = msg.payload [i];\n    }\n    \n}\n\nmsg.payload = result;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 910,
+        "x": 1030,
         "y": 1000,
         "wires": [
             [
@@ -1691,7 +1709,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1100,
+        "x": 1220,
         "y": 1000,
         "wires": [
             [
@@ -1758,7 +1776,7 @@
             "c029cd0a.008a9"
         ],
         "x": 1235,
-        "y": 1180,
+        "y": 1220,
         "wires": []
     },
     {
@@ -1770,7 +1788,7 @@
             "424b6bd.468cb94",
             "c029cd0a.008a9"
         ],
-        "x": 1255,
+        "x": 1375,
         "y": 980,
         "wires": []
     },
@@ -1835,7 +1853,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 950,
+        "x": 990,
         "y": 1040,
         "wires": [
             [
@@ -1869,7 +1887,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1100,
+        "x": 1220,
         "y": 1040,
         "wires": [
             [
@@ -1887,7 +1905,7 @@
                 "t": "set",
                 "p": "url",
                 "pt": "msg",
-                "to": "\"https://fahrinfo.vbb.de/restproxy/2.4/departureBoard?format=json&accessId=\" & $flowContext(\"vbb_access_id\") & \"&id=\" & payload",
+                "to": "\"https://fahrinfo.vbb.de/restproxy/\" & $flowContext(\"vbb_access_version\") & \"/departureBoard?format=json&accessId=\" & $flowContext(\"vbb_access_id\") & \"&id=\" & payload",
                 "tot": "jsonata"
             },
             {
@@ -1901,7 +1919,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 390,
+        "x": 530,
         "y": 1000,
         "wires": [
             [
@@ -1918,7 +1936,7 @@
         "ret": "obj",
         "url": "",
         "tls": "",
-        "x": 550,
+        "x": 670,
         "y": 1000,
         "wires": [
             [
@@ -1933,7 +1951,7 @@
         "name": "saying of the day",
         "info": "",
         "x": 140,
-        "y": 1240,
+        "y": 1280,
         "wires": []
     },
     {
@@ -1949,7 +1967,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 150,
-        "y": 1280,
+        "y": 1320,
         "wires": [
             [
                 "57e93e23.3c74f"
@@ -1969,7 +1987,7 @@
         "proxy": "",
         "authType": "",
         "x": 314.0000114440918,
-        "y": 1280.000057220459,
+        "y": 1320.000057220459,
         "wires": [
             [
                 "332b2179.26503e"
@@ -1987,7 +2005,7 @@
         "ret": "text",
         "as": "multi",
         "x": 450,
-        "y": 1280,
+        "y": 1320,
         "wires": [
             [
                 "5c7ed672.1d77a8"
@@ -2014,7 +2032,7 @@
         "to": "",
         "reg": false,
         "x": 570,
-        "y": 1280,
+        "y": 1320,
         "wires": [
             [
                 "5d77bcc8.90d964"
@@ -2062,7 +2080,7 @@
         "to": "",
         "reg": false,
         "x": 720,
-        "y": 1280,
+        "y": 1320,
         "wires": [
             [
                 "e7c6094d.8fb398"
@@ -2079,7 +2097,7 @@
             "c029cd0a.008a9"
         ],
         "x": 835,
-        "y": 1280,
+        "y": 1320,
         "wires": []
     },
     {
@@ -2143,7 +2161,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 950,
+        "x": 990,
         "y": 920,
         "wires": [
             [
@@ -2177,7 +2195,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1100,
+        "x": 1220,
         "y": 920,
         "wires": [
             [
@@ -2197,7 +2215,7 @@
         "encoding": "none",
         "allProps": false,
         "x": 380,
-        "y": 1180,
+        "y": 1220,
         "wires": [
             [
                 "f8468a9d5b2172a9"
@@ -2213,7 +2231,7 @@
         "action": "",
         "pretty": false,
         "x": 530,
-        "y": 1180,
+        "y": 1220,
         "wires": [
             [
                 "b7e5337b494776ca"
@@ -2241,7 +2259,7 @@
         "to": "",
         "reg": false,
         "x": 690,
-        "y": 1180,
+        "y": 1220,
         "wires": [
             [
                 "78864514.cd9c1c"
@@ -2255,7 +2273,7 @@
         "name": "water status",
         "info": "",
         "x": 130,
-        "y": 1340,
+        "y": 1380,
         "wires": []
     },
     {
@@ -2273,7 +2291,7 @@
         "authType": "",
         "senderr": false,
         "x": 400,
-        "y": 1380,
+        "y": 1420,
         "wires": [
             [
                 "b9189175595c0754",
@@ -2292,7 +2310,7 @@
         "ret": "text",
         "as": "multi",
         "x": 630,
-        "y": 1380,
+        "y": 1420,
         "wires": [
             [
                 "729d9f969598bc0d"
@@ -2319,7 +2337,7 @@
         "to": "",
         "reg": false,
         "x": 850,
-        "y": 1380,
+        "y": 1420,
         "wires": [
             [
                 "f0d9aed1a8aae71f",
@@ -2368,7 +2386,7 @@
         "to": "",
         "reg": false,
         "x": 1150,
-        "y": 1380,
+        "y": 1420,
         "wires": [
             [
                 "8fff3aaac7e8e406"
@@ -2385,7 +2403,7 @@
             "c029cd0a.008a9"
         ],
         "x": 1260.9999885559082,
-        "y": 1379.999942779541,
+        "y": 1419.999942779541,
         "wires": []
     },
     {
@@ -2400,7 +2418,7 @@
         "template": "Die Wasserampel ist {{payload}}",
         "output": "str",
         "x": 990,
-        "y": 1380,
+        "y": 1420,
         "wires": [
             [
                 "0573924ba15e1c7d"
@@ -2422,7 +2440,7 @@
         "expiry": "",
         "broker": "7bc3dc1a.d27a94",
         "x": 1045.9999885559082,
-        "y": 1449.999942779541,
+        "y": 1489.999942779541,
         "wires": []
     },
     {
@@ -2447,7 +2465,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 140,
-        "y": 1380,
+        "y": 1420,
         "wires": [
             [
                 "99dcb32338ae41db"
@@ -2465,10 +2483,107 @@
         "ret": "text",
         "as": "multi",
         "x": 600,
-        "y": 1420,
+        "y": 1460,
         "wires": [
             [
                 "729d9f969598bc0d"
+            ]
+        ]
+    },
+    {
+        "id": "83b637584fba0b12",
+        "type": "function",
+        "z": "c9cf8bbb.029148",
+        "name": "version",
+        "func": "node.status ( \n    { \n        fill: \"blue\", \n        shape: \"dot\", \n        text: msg.payload \n    } \n);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1c34ee99e17a418c",
+        "type": "change",
+        "z": "c9cf8bbb.029148",
+        "name": "set version",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "2.15",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "vbb_access_version",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 1120,
+        "wires": [
+            [
+                "83b637584fba0b12"
+            ]
+        ]
+    },
+    {
+        "id": "6836168346e50fc3",
+        "type": "switch",
+        "z": "c9cf8bbb.029148",
+        "name": "?id",
+        "property": "vbb_access_id",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 410,
+        "y": 960,
+        "wires": [
+            [
+                "e54ef2b7.71ac1"
+            ]
+        ]
+    },
+    {
+        "id": "c8b1bcd65eae11b4",
+        "type": "switch",
+        "z": "c9cf8bbb.029148",
+        "name": "?id",
+        "property": "vbb_access_id",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 410,
+        "y": 1000,
+        "wires": [
+            [
+                "8d0686b9.503b28"
             ]
         ]
     },
