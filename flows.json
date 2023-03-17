@@ -5481,11 +5481,11 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 770,
-        "y": 1120,
+        "x": 250,
+        "y": 200,
         "wires": [
             [
-                "bf07b832.b1d128"
+                "115f9d4c14583295"
             ]
         ]
     },
@@ -5494,6 +5494,18 @@
         "type": "inject",
         "z": "8e2c5c11.fae26",
         "name": "",
+        "props": [
+            {
+                "p": "payload",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "p": "topic",
+                "v": "test/test",
+                "vt": "str"
+            }
+        ],
         "repeat": "",
         "crontab": "",
         "once": false,
@@ -5501,8 +5513,8 @@
         "topic": "test/test",
         "payload": "0",
         "payloadType": "str",
-        "x": 620,
-        "y": 1180,
+        "x": 100,
+        "y": 260,
         "wires": [
             [
                 "f1399c8c.93ab8"
@@ -5518,44 +5530,10 @@
         "ret": "txt",
         "url": "",
         "tls": "",
-        "x": 1040,
-        "y": 1120,
+        "x": 630,
+        "y": 200,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "bf07b832.b1d128",
-        "type": "change",
-        "z": "8e2c5c11.fae26",
-        "name": "url",
-        "rules": [
-            {
-                "t": "set",
-                "p": "node",
-                "pt": "msg",
-                "to": "$replace ( topic, \"/\", \"_\" ) & \" is not alive\"",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "url",
-                "pt": "msg",
-                "to": "\"https://api.simplepush.io/send/\" & $flowContext(\"simple_push_id\") & \"/\" & node & \"/event/nodes\"",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 890,
-        "y": 1120,
-        "wires": [
-            [
-                "d5d988d5.0c43b8"
-            ]
         ]
     },
     {
@@ -5564,8 +5542,8 @@
         "z": "8e2c5c11.fae26",
         "name": "send msg to simplepush if trigger is outtimed",
         "info": "",
-        "x": 730,
-        "y": 1080,
+        "x": 210,
+        "y": 160,
         "wires": []
     },
     {
@@ -8549,8 +8527,8 @@
             "45517f7d.b95e6",
             "729afff.40124"
         ],
-        "x": 575,
-        "y": 1120,
+        "x": 55,
+        "y": 200,
         "wires": [
             [
                 "f1399c8c.93ab8"
@@ -8825,8 +8803,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 630,
-        "y": 1240,
+        "x": 110,
+        "y": 320,
         "wires": [
             [
                 "d892a08.731916"
@@ -8838,11 +8816,13 @@
         "type": "file in",
         "z": "8e2c5c11.fae26",
         "name": "id file",
-        "filename": "/data/ids/simple_push_id.txt",
+        "filename": "/data/ids/simplepush_id.txt",
+        "filenameType": "str",
         "format": "utf8",
         "sendError": true,
-        "x": 770,
-        "y": 1240,
+        "allProps": false,
+        "x": 250,
+        "y": 320,
         "wires": [
             [
                 "9575ef08.405e6"
@@ -8857,7 +8837,7 @@
         "rules": [
             {
                 "t": "set",
-                "p": "simple_push_id",
+                "p": "simplepush_id",
                 "pt": "flow",
                 "to": "$substring(msg.payload,0,$length(msg.payload)-1)",
                 "tot": "jsonata"
@@ -8868,8 +8848,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 890,
-        "y": 1240,
+        "x": 370,
+        "y": 320,
         "wires": [
             [
                 "2aea1965.023656"
@@ -8884,8 +8864,8 @@
         "func": "node.status ( \n    { \n        fill: \"blue\", \n        shape: \"dot\", \n        text: msg.payload \n    } \n);\n\nreturn null;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1010,
-        "y": 1240,
+        "x": 490,
+        "y": 320,
         "wires": [
             []
         ]
@@ -11929,6 +11909,63 @@
         "wires": [
             [
                 "1b9ae81f.fbc0b8"
+            ]
+        ]
+    },
+    {
+        "id": "7a5f85fa3c074142",
+        "type": "change",
+        "z": "8e2c5c11.fae26",
+        "name": "url",
+        "rules": [
+            {
+                "t": "set",
+                "p": "hostname",
+                "pt": "msg",
+                "to": "PARENT_HOSTNAME",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "\"https://api.simplepush.io/send/\" & $flowContext(\"simplepush_id\") & \"/Nodered (\" & hostname & \")/\" & $replace ( topic, \"/\", \"_\" ) & \" is not alive\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 200,
+        "wires": [
+            [
+                "d5d988d5.0c43b8"
+            ]
+        ]
+    },
+    {
+        "id": "115f9d4c14583295",
+        "type": "switch",
+        "z": "8e2c5c11.fae26",
+        "name": "?id",
+        "property": "simplepush_id",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 370,
+        "y": 200,
+        "wires": [
+            [
+                "7a5f85fa3c074142"
             ]
         ]
     },
