@@ -897,16 +897,6 @@
         "height": "1"
     },
     {
-        "id": "c372280bcbe5bab0",
-        "type": "ui_spacer",
-        "z": "8e2c5c11.fae26",
-        "name": "spacer",
-        "group": "4759591f.23c438",
-        "order": 36,
-        "width": "1",
-        "height": "1"
-    },
-    {
         "id": "eb891899c9f2b7e1",
         "type": "ui_spacer",
         "z": "8e2c5c11.fae26",
@@ -1004,7 +994,7 @@
         "group": "69929a92d5b22fc4",
         "order": 17,
         "width": "6",
-        "height": "4"
+        "height": "3"
     },
     {
         "id": "28f809dfb66280ab",
@@ -1012,19 +1002,29 @@
         "z": "8e2c5c11.fae26",
         "name": "spacer",
         "group": "69929a92d5b22fc4",
-        "order": 19,
+        "order": 22,
         "width": "1",
         "height": "1"
     },
     {
-        "id": "535685a28aab281a",
+        "id": "4e53ec7c8368e2d3",
         "type": "ui_spacer",
         "z": "8e2c5c11.fae26",
         "name": "spacer",
-        "group": "69929a92d5b22fc4",
-        "order": 21,
-        "width": "1",
-        "height": "1"
+        "group": "4759591f.23c438",
+        "order": 45,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "9b7308e48b85fe2a",
+        "type": "ui_spacer",
+        "z": "37197cb5.c49ee4",
+        "name": "spacer",
+        "group": "68f8422e.2c21dc",
+        "order": 4,
+        "width": "6",
+        "height": "13"
     },
     {
         "id": "1f55c701.4fff39",
@@ -3402,17 +3402,17 @@
             },
             {
                 "t": "eq",
-                "v": "sensor/DHT22/office",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
                 "v": "light/ws2812/xmasstar",
                 "vt": "str"
             },
             {
                 "t": "eq",
-                "v": "display/pitouch/corridor",
+                "v": "switch/relay/hydrotower",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "light/ws2812/x1c",
                 "vt": "str"
             },
             {
@@ -3454,11 +3454,16 @@
                 "t": "eq",
                 "v": "sensor/flowercare/fiederaralie",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "display/pitouch/corridor",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 50,
+        "outputs": 51,
         "x": 1050,
         "y": 440,
         "wires": [
@@ -3580,13 +3585,13 @@
                 "4acfd9c.8c4c128"
             ],
             [
-                "e4862060.d7295"
-            ],
-            [
                 "650cc836b22ac976"
             ],
             [
-                "ab67c34c.04f02"
+                "3d297e5d6da7479f"
+            ],
+            [
+                "d63dedce2c2af28d"
             ],
             [
                 "40ed2fdcaf0c0a08"
@@ -3611,6 +3616,9 @@
             ],
             [
                 "752b28716690f35c"
+            ],
+            [
+                "ab67c34c.04f02"
             ]
         ]
     },
@@ -4802,59 +4810,6 @@
         ]
     },
     {
-        "id": "e4862060.d7295",
-        "type": "trigger",
-        "z": "8e2c5c11.fae26",
-        "name": "",
-        "op1": "1",
-        "op2": "0",
-        "op1type": "str",
-        "op2type": "str",
-        "duration": "20",
-        "extend": true,
-        "units": "min",
-        "reset": "",
-        "bytopic": "all",
-        "outputs": 1,
-        "x": 1280,
-        "y": 1760,
-        "wires": [
-            [
-                "4e10d3f2.f6e7cc",
-                "36e0dc01.361524"
-            ]
-        ]
-    },
-    {
-        "id": "4e10d3f2.f6e7cc",
-        "type": "ui_switch",
-        "z": "8e2c5c11.fae26",
-        "name": "",
-        "label": "sensor/DHT22/office",
-        "tooltip": "watchdog state",
-        "group": "4759591f.23c438",
-        "order": 34,
-        "width": 5,
-        "height": 1,
-        "passthru": false,
-        "decouple": "true",
-        "topic": "",
-        "style": "",
-        "onvalue": "1",
-        "onvalueType": "str",
-        "onicon": "done",
-        "oncolor": "green",
-        "offvalue": "0",
-        "offvalueType": "str",
-        "officon": "error_outline",
-        "offcolor": "red",
-        "x": 1490,
-        "y": 1760,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "bbf89a33.56c808",
         "type": "ui_button",
         "z": "8e2c5c11.fae26",
@@ -5429,32 +5384,6 @@
         "topic": "sensor/spindle/fermenter",
         "x": 170,
         "y": 2080,
-        "wires": [
-            [
-                "b6bc8fd1.c46ec"
-            ]
-        ]
-    },
-    {
-        "id": "c61588db.943618",
-        "type": "ui_button",
-        "z": "8e2c5c11.fae26",
-        "name": "reset sensor/DHT22/office",
-        "group": "4759591f.23c438",
-        "order": 35,
-        "width": 1,
-        "height": 1,
-        "passthru": false,
-        "label": "",
-        "tooltip": "restart via mqtt",
-        "color": "#00ABEC",
-        "bgcolor": "white",
-        "icon": "refresh",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "sensor/DHT22/office",
-        "x": 150,
-        "y": 2280,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -6174,7 +6103,7 @@
         "syntax": "mustache",
         "template": "[\n    { \"topic\":\"switch/rfhub/lounge\",            \"ip\": \"192.168.2.20\"},\n    { \"topic\":\"sensor/ttp223/bedroom\",          \"ip\": \"192.168.2.21\"},\n    { \"topic\":\"sensor/DHT22/roof\",              \"ip\": \"192.168.2.22\"},\n    { \"topic\":\"sensor/DHT22/terrace\",           \"ip\": \"192.168.2.23\"},\n    { \"topic\":\"cover/relay/garage\",             \"ip\": \"192.168.2.25\"},\n    { \"topic\":\"switch/sonoff/utilityroom\",      \"ip\": \"192.168.2.26\"},\n    { \"topic\":\"switch/sonoff/garage\",           \"ip\": \"192.168.2.27\"},\n    { \"topic\":\"switch/relay/dining1\",           \"ip\": \"192.168.2.28\"},\n    { \"topic\":\"switch/relay/backyard\",          \"ip\": \"192.168.2.29\"},\n    { \"topic\":\"switch/relay/dining2\",           \"ip\": \"192.168.2.30\"},\n    { \"topic\":\"light/xmastree/dining\",          \"ip\": \"192.168.2.31\"},\n    { \"topic\":\"sensor/button/indoor\",           \"ip\": \"192.168.2.32\"},\n    { \"topic\":\"sensor/button/garage\",           \"ip\": \"192.168.2.33\"},\n    { \"topic\":\"sensor/button/pool\",             \"ip\": \"192.168.2.34\"},\n    { \"topic\":\"sensor/DHT22/lounge\",            \"ip\": \"192.168.2.35\"},\n    { \"topic\":\"light/ws2812/xmasstar\",          \"ip\": \"192.168.2.36\"},\n    { \"topic\":\"switch/sonoff/pool\",             \"ip\": \"192.168.2.37\"},\n    { \"topic\":\"switch/relay/garden\",            \"ip\": \"192.168.2.38\"},\n    { \"topic\":\"switch/sonoff/yardgate\",         \"ip\": \"192.168.2.39\"},\n    { \"topic\":\"switch/sonoff/corridor\",         \"ip\": \"192.168.2.40\"},\n    { \"topic\":\"sensor/soil/garden\",             \"ip\": \"192.168.2.41\"},\n    { \"topic\":\"light/led/kitchen\",              \"ip\": \"192.168.2.42\"},\n    { \"topic\":\"sensor/gesture/kitchen\",         \"ip\": \"192.168.2.43\"},\n    { \"topic\":\"sensor/ds18b20/pool\",            \"ip\": \"192.168.2.44\"},\n    { \"topic\":\"sensor/ds18b20/brewery\",         \"ip\": \"192.168.2.45\"},\n    { \"topic\":\"sensor/spinlde/fermenter\",       \"ip\": \"192.168.2.46\"},\n    { \"topic\":\"sensor/DHT22/office\",            \"ip\": \"192.168.2.47\"},\n    { \"topic\":\"meter/electricity/utilityroom\",  \"ip\": \"192.168.2.48\"},\n    { \"topic\":\"display/pixel/kitchen\",          \"ip\": \"192.168.2.49\"},\n    { \"topic\":\"light/ws2812/terrace1\",          \"ip\": \"192.168.2.50\"},\n    { \"topic\":\"light/ws1812/terrace2\",          \"ip\": \"192.168.2.51\"},\n    { \"topic\":\"switch/sonoff/bedroom\",          \"ip\": \"192.168.2.52\"},\n    { \"topic\":\"switch/sonoff/gallery1\",         \"ip\": \"192.168.2.53\"},\n    { \"topic\":\"switch/sonoff/k8200\",            \"ip\": \"192.168.2.54\"},\n    { \"topic\":\"sensor/gesture/test\",            \"ip\": \"192.168.2.55\"},\n    { \"topic\":\"switch/shelly/roof\",             \"ip\": \"192.168.2.56\"},\n    { \"topic\":\"switch/shelly/bath\",             \"ip\": \"192.168.2.57\"},\n    { \"topic\":\"switch/shelly/shower\",           \"ip\": \"192.168.2.58\"},\n    { \"topic\":\"switch/shelly/terrace\",          \"ip\": \"192.168.2.59\"},\n    { \"topic\":\"light/led/corridor\",             \"ip\": \"192.168.2.60\"},\n    { \"topic\":\"sensor/soil/garden\",             \"ip\": \"192.168.2.51\"},\n    { \"topic\":\"sensor/rain/garden\",             \"ip\": \"192.168.2.62\"}\n]\n",
         "output": "json",
-        "x": 600,
+        "x": 400,
         "y": 2780,
         "wires": [
             [
@@ -6194,7 +6123,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 450,
+        "x": 250,
         "y": 2780,
         "wires": [
             [
@@ -6221,7 +6150,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 730,
+        "x": 530,
         "y": 2780,
         "wires": [
             []
@@ -6232,6 +6161,18 @@
         "type": "inject",
         "z": "8e2c5c11.fae26",
         "name": "",
+        "props": [
+            {
+                "p": "payload",
+                "v": "",
+                "vt": "date"
+            },
+            {
+                "p": "topic",
+                "v": "sensor/gesture/test",
+                "vt": "str"
+            }
+        ],
         "repeat": "",
         "crontab": "",
         "once": false,
@@ -6240,7 +6181,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 240,
-        "y": 2960,
+        "y": 2640,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -6378,8 +6319,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 910,
-        "y": 2960,
+        "x": 770,
+        "y": 2760,
         "wires": []
     },
     {
@@ -6474,8 +6415,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 1150,
-        "y": 2920,
+        "x": 1110,
+        "y": 2740,
         "wires": []
     },
     {
@@ -6499,7 +6440,7 @@
         "z": "8e2c5c11.fae26",
         "name": "topic2ip tab",
         "info": "",
-        "x": 450,
+        "x": 250,
         "y": 2740,
         "wires": []
     },
@@ -6592,8 +6533,8 @@
             "45517f7d.b95e6",
             "729afff.40124"
         ],
-        "x": 455,
-        "y": 2400,
+        "x": 205,
+        "y": 2600,
         "wires": [
             [
                 "4d40eb53.434b74"
@@ -6617,8 +6558,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 550,
-        "y": 2400,
+        "x": 310,
+        "y": 2600,
         "wires": [
             [
                 "e59e4935.4a4238"
@@ -6641,7 +6582,7 @@
         "bytopic": "all",
         "outputs": 1,
         "x": 1280,
-        "y": 1840,
+        "y": 2280,
         "wires": [
             [
                 "e1605b6d.9b3238",
@@ -6656,8 +6597,8 @@
         "name": "",
         "label": "display/pitouch/corridor",
         "tooltip": "watchdog state",
-        "group": "4759591f.23c438",
-        "order": 40,
+        "group": "69929a92d5b22fc4",
+        "order": 18,
         "width": 5,
         "height": 1,
         "passthru": false,
@@ -6673,7 +6614,7 @@
         "officon": "error_outline",
         "offcolor": "red",
         "x": 1501,
-        "y": 1840,
+        "y": 2280,
         "wires": [
             []
         ]
@@ -6683,8 +6624,8 @@
         "type": "ui_button",
         "z": "8e2c5c11.fae26",
         "name": "reset display/pitouch/corridor",
-        "group": "4759591f.23c438",
-        "order": 41,
+        "group": "69929a92d5b22fc4",
+        "order": 19,
         "width": 1,
         "height": 1,
         "passthru": false,
@@ -6697,7 +6638,7 @@
         "payloadType": "str",
         "topic": "display/pitouch/corridor",
         "x": 160,
-        "y": 2420,
+        "y": 2440,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -8054,7 +7995,7 @@
         "bytopic": "all",
         "outputs": 1,
         "x": 1280,
-        "y": 1800,
+        "y": 1760,
         "wires": [
             [
                 "b17cd3710c0b3bcf"
@@ -8088,7 +8029,7 @@
         "animate": true,
         "className": "",
         "x": 1490,
-        "y": 1800,
+        "y": 1760,
         "wires": [
             []
         ]
@@ -8114,7 +8055,7 @@
         "topic": "light/ws2812/xmsstar",
         "topicType": "str",
         "x": 160,
-        "y": 2320,
+        "y": 2280,
         "wires": [
             [
                 "b6bc8fd1.c46ec"
@@ -8231,7 +8172,7 @@
         "topic": "topic",
         "outputs": 1,
         "x": 1270,
-        "y": 2280,
+        "y": 2320,
         "wires": [
             [
                 "f2c954165875011e",
@@ -8247,7 +8188,7 @@
         "label": "tele/tasmota_08E112/STATE",
         "tooltip": "watchdog state",
         "group": "69929a92d5b22fc4",
-        "order": 18,
+        "order": 21,
         "width": "5",
         "height": 1,
         "passthru": false,
@@ -8266,7 +8207,7 @@
         "animate": true,
         "className": "",
         "x": 1511,
-        "y": 2280,
+        "y": 2320,
         "wires": [
             []
         ]
@@ -8279,7 +8220,7 @@
         "label": "ems-esp/heartbeat",
         "tooltip": "watchdog state",
         "group": "69929a92d5b22fc4",
-        "order": 20,
+        "order": 23,
         "width": "5",
         "height": 1,
         "passthru": false,
@@ -8298,7 +8239,7 @@
         "animate": true,
         "className": "",
         "x": 1481,
-        "y": 2320,
+        "y": 2360,
         "wires": [
             []
         ]
@@ -8321,7 +8262,7 @@
         "topic": "topic",
         "outputs": 1,
         "x": 1270,
-        "y": 2320,
+        "y": 2360,
         "wires": [
             [
                 "b26c214374b512de",
@@ -8342,7 +8283,7 @@
         "rap": false,
         "inputs": 0,
         "x": 960,
-        "y": 2280,
+        "y": 2320,
         "wires": [
             [
                 "3cc7b480c8b59ff7",
@@ -8363,11 +8304,391 @@
         "rap": false,
         "inputs": 0,
         "x": 930,
+        "y": 2360,
+        "wires": [
+            [
+                "eb24094407bab5f6",
+                "85efdfb9f40d6d1e"
+            ]
+        ]
+    },
+    {
+        "id": "85efdfb9f40d6d1e",
+        "type": "debug",
+        "z": "8e2c5c11.fae26",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1170,
+        "y": 2420,
+        "wires": []
+    },
+    {
+        "id": "577d589b717eac30",
+        "type": "inject",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 2920,
+        "wires": [
+            [
+                "32b60a06d2961bdc"
+            ]
+        ]
+    },
+    {
+        "id": "32b60a06d2961bdc",
+        "type": "http request",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://ems-esp/api/system/info",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 410,
+        "y": 2920,
+        "wires": [
+            [
+                "4132186d0c90a651"
+            ]
+        ]
+    },
+    {
+        "id": "976945b241245f2b",
+        "type": "debug",
+        "z": "8e2c5c11.fae26",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 2920,
+        "wires": []
+    },
+    {
+        "id": "4132186d0c90a651",
+        "type": "json",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 570,
+        "y": 2920,
+        "wires": [
+            [
+                "889539316790c4b4"
+            ]
+        ]
+    },
+    {
+        "id": "889539316790c4b4",
+        "type": "switch",
+        "z": "8e2c5c11.fae26",
+        "name": "?disconnected",
+        "property": "payload.\"MQTT Info\".\"MQTT status\"",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "disconnected",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 720,
+        "y": 2920,
+        "wires": [
+            [
+                "5d1403def482f6e9"
+            ]
+        ]
+    },
+    {
+        "id": "5d1403def482f6e9",
+        "type": "http request",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://ems-esp/api/system/restart",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 910,
+        "y": 2920,
+        "wires": [
+            [
+                "976945b241245f2b"
+            ]
+        ]
+    },
+    {
+        "id": "44b136a791fcf175",
+        "type": "comment",
+        "z": "8e2c5c11.fae26",
+        "name": "ems-esp restart - work in progress",
+        "info": "",
+        "x": 320,
+        "y": 2880,
+        "wires": []
+    },
+    {
+        "id": "708f45f6dd96a88e",
+        "type": "comment",
+        "z": "8e2c5c11.fae26",
+        "name": "restart - work in progress",
+        "info": "",
+        "x": 290,
+        "y": 2540,
+        "wires": []
+    },
+    {
+        "id": "daef2720c2e8fdde",
+        "type": "comment",
+        "z": "8e2c5c11.fae26",
+        "name": "TODO: send to syslog",
+        "info": "",
+        "x": 1300,
+        "y": 2680,
+        "wires": []
+    },
+    {
+        "id": "d8abb4240d10ba21",
+        "type": "comment",
+        "z": "8e2c5c11.fae26",
+        "name": "TODO: decide prod mode",
+        "info": "",
+        "x": 590,
+        "y": 2360,
+        "wires": []
+    },
+    {
+        "id": "3d297e5d6da7479f",
+        "type": "trigger",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "20",
+        "extend": true,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "outputs": 1,
+        "x": 1280,
+        "y": 1800,
+        "wires": [
+            [
+                "51e44baf5d49a3d6",
+                "36e0dc01.361524"
+            ]
+        ]
+    },
+    {
+        "id": "51e44baf5d49a3d6",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "label": "switch/relay/hydrotower",
+        "tooltip": "watchdog state",
+        "group": "4759591f.23c438",
+        "order": 40,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 1501,
+        "y": 1800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f4cab95d82d46f72",
+        "type": "comment",
+        "z": "8e2c5c11.fae26",
+        "name": "TODO: aufsplitten in Blöcke pro Spalte",
+        "info": "",
+        "x": 950,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "6dab545b208eaf81",
+        "type": "comment",
+        "z": "8e2c5c11.fae26",
+        "name": "Plants",
+        "info": "",
+        "x": 90,
+        "y": 2400,
+        "wires": []
+    },
+    {
+        "id": "610ecc19a4b61c99",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "reset switch/relay/hydrotower",
+        "group": "4759591f.23c438",
+        "order": 44,
+        "width": 1,
+        "height": 1,
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via mqtt",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "className": "",
+        "icon": "refresh",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "switch/relay/hydrotower",
+        "topicType": "str",
+        "x": 160,
         "y": 2320,
         "wires": [
             [
-                "eb24094407bab5f6"
+                "b6bc8fd1.c46ec"
             ]
+        ]
+    },
+    {
+        "id": "bbab73dfe4aedb67",
+        "type": "ui_button",
+        "z": "8e2c5c11.fae26",
+        "name": "reset light/ws2812/x1c",
+        "group": "4759591f.23c438",
+        "order": 41,
+        "width": 1,
+        "height": 1,
+        "passthru": false,
+        "label": "",
+        "tooltip": "restart via mqtt",
+        "color": "#00ABEC",
+        "bgcolor": "white",
+        "className": "",
+        "icon": "refresh",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "light/ws2812/x1c",
+        "topicType": "str",
+        "x": 140,
+        "y": 2360,
+        "wires": [
+            [
+                "b6bc8fd1.c46ec"
+            ]
+        ]
+    },
+    {
+        "id": "d63dedce2c2af28d",
+        "type": "trigger",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "20",
+        "extend": true,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "outputs": 1,
+        "x": 1280,
+        "y": 1840,
+        "wires": [
+            [
+                "b769ee7df5a65a5c",
+                "36e0dc01.361524"
+            ]
+        ]
+    },
+    {
+        "id": "b769ee7df5a65a5c",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "label": "light/ws2812/x1c",
+        "tooltip": "watchdog state",
+        "group": "4759591f.23c438",
+        "order": 43,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 1481,
+        "y": 1840,
+        "wires": [
+            []
         ]
     },
     {
@@ -8583,16 +8904,20 @@
         "z": "37197cb5.c49ee4",
         "name": "update all nodes",
         "group": "68f8422e.2c21dc",
-        "order": 4,
+        "order": 5,
         "width": 0,
         "height": 0,
+        "passthru": false,
         "label": "update all",
+        "tooltip": "",
         "color": "",
         "bgcolor": "red",
+        "className": "",
         "icon": "update",
         "payload": "",
         "payloadType": "date",
         "topic": "",
+        "topicType": "str",
         "x": 100,
         "y": 80,
         "wires": [
@@ -8618,7 +8943,6 @@
                 "a2528b01.80cda8",
                 "bd16e16f.9a17b",
                 "c1f32206.0a9d1",
-                "62197c5a.e4cf94",
                 "63fbd124.f57c",
                 "940467a.8b33698",
                 "a5bbcab1.3e7988",
@@ -8636,7 +8960,9 @@
                 "8a746cbee086d574",
                 "eb6816f34b822f4b",
                 "665aaaa206444ff1",
-                "f2beb1ef6fb84287"
+                "f2beb1ef6fb84287",
+                "7fe2b0eacf437ac6",
+                "8db6257c24ba3aa3"
             ]
         ]
     },
@@ -9213,32 +9539,6 @@
         ]
     },
     {
-        "id": "62197c5a.e4cf94",
-        "type": "ui_button",
-        "z": "37197cb5.c49ee4",
-        "name": "update sensor/DHT22/office",
-        "group": "457a1e5.d114de",
-        "order": 12,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "label": "sensor/DHT22/office",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "date",
-        "topic": "sensor/DHT22/office",
-        "x": 420,
-        "y": 1720,
-        "wires": [
-            [
-                "6ed6dc87.f74a94"
-            ]
-        ]
-    },
-    {
         "id": "63fbd124.f57c",
         "type": "ui_button",
         "z": "37197cb5.c49ee4",
@@ -9704,7 +10004,7 @@
         "topic": "light/ws2812/xmsstar",
         "topicType": "str",
         "x": 420,
-        "y": 1760,
+        "y": 1720,
         "wires": [
             [
                 "6ed6dc87.f74a94"
@@ -9733,6 +10033,62 @@
         "topicType": "str",
         "x": 440,
         "y": 1360,
+        "wires": [
+            [
+                "6ed6dc87.f74a94"
+            ]
+        ]
+    },
+    {
+        "id": "7fe2b0eacf437ac6",
+        "type": "ui_button",
+        "z": "37197cb5.c49ee4",
+        "name": "update switch/relay/hydrotower",
+        "group": "457a1e5.d114de",
+        "order": 13,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "switch/relay/hydrotower",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "switch/relay/hydrotower",
+        "topicType": "str",
+        "x": 430,
+        "y": 1760,
+        "wires": [
+            [
+                "6ed6dc87.f74a94"
+            ]
+        ]
+    },
+    {
+        "id": "8db6257c24ba3aa3",
+        "type": "ui_button",
+        "z": "37197cb5.c49ee4",
+        "name": "update light/ws2812/x1c",
+        "group": "457a1e5.d114de",
+        "order": 13,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "light/ws2812/x1c",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "light/ws2812/x1c",
+        "topicType": "str",
+        "x": 410,
+        "y": 1800,
         "wires": [
             [
                 "6ed6dc87.f74a94"
@@ -11519,6 +11875,16 @@
         "seg2": "26",
         "x": 635,
         "y": 380,
+        "wires": []
+    },
+    {
+        "id": "cb46a0fd90e024d8",
+        "type": "comment",
+        "z": "6df5d2ea.45922c",
+        "name": "TODO: nach HA verschieben",
+        "info": "",
+        "x": 580,
+        "y": 60,
         "wires": []
     },
     {
