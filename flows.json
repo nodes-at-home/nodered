@@ -11333,7 +11333,7 @@
         "type": "function",
         "z": "fc8ae83a.bd2f98",
         "name": "fields+tags",
-        "func": "var ap = [];\nap [ \"74:42:7f:a5:22:c5\" ] = \"mauzi\";       // Fritz!Box 7590\nap [ \"c8:0e:14:66:e0:e1\" ] = \"skorgla\";       // Fritz!Box 7490\nap [ \"cc:ce:1e:e2:dd:5b\" ] = \"draguran\";\nap [ \"f0:b0:14:e1:92:a5\" ] = \"meltan\";\nap [ \"b0:f2:08:d1:04:49\" ] = \"evoli\";\n\nvar name = \"\";\nif ( msg.payload.apmac ) {\n    name = ap [msg.payload.apmac];\n}\n\nvar result = [\n    // fields\n    {\n        value: msg.payload.value,\n        unit: msg.payload.unit,\n        apmac: msg.payload.apmac\n    },\n    // tags\n    {\n        apname: name,\n        chipid: msg.payload.chipid,\n        topic: msg.payload.topic.slice ( 11 )\n    }\n];\n\nmsg.payload = result;\n\nreturn msg;\n",
+        "func": "var ap = [];\nap [ \"74:42:7f:a5:22:c5\" ] = \"mauzi\";       // Fritz!Box 7590\nap [ \"c8:0e:14:66:e0:e1\" ] = \"skorgla\";     // Fritz!Box 7490\nap [ \"cc:ce:1e:e2:dd:5b\" ] = \"draguran\";    // Repeater 1750E\nap [ \"f0:b0:14:e1:92:a5\" ] = \"meltan\";      // Repeater 1750E\nap [ \"b0:f2:08:d1:04:49\" ] = \"evoli\";       // Repeater 600\nap [ \"d4:24:dd:45:a1:d4\" ] = \"dartiri\"      // Repeater 1200 AX\n\nvar name = \"unknown\";\nif ( msg.payload.apmac ) {\n    name = ap [msg.payload.apmac];\n}\n\nvar result = [\n    // fields\n    {\n        value: msg.payload.value,\n        unit: msg.payload.unit,\n        apmac: msg.payload.apmac\n    },\n    // tags\n    {\n        apname: name,\n        chipid: msg.payload.chipid,\n        topic: msg.payload.topic.slice ( 11 )\n    }\n];\n\nmsg.payload = result;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
