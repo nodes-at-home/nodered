@@ -2827,30 +2827,11 @@
         "proxy": "",
         "authType": "",
         "senderr": false,
-        "x": 400,
+        "x": 310,
         "y": 1420,
         "wires": [
             [
-                "b9189175595c0754",
-                "ea527b96fe3348e7"
-            ]
-        ]
-    },
-    {
-        "id": "b9189175595c0754",
-        "type": "html",
-        "z": "c9cf8bbb.029148",
-        "name": "",
-        "property": "payload",
-        "outproperty": "payload",
-        "tag": ".post-content > p > strong > span",
-        "ret": "text",
-        "as": "multi",
-        "x": 640,
-        "y": 1420,
-        "wires": [
-            [
-                "729d9f969598bc0d"
+                "e4560a94737eccb7"
             ]
         ]
     },
@@ -2864,7 +2845,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "payload ~> $trim ~> $lowercase",
+                "to": "payload [0] ~> $trim ~> $lowercase",
                 "tot": "jsonata"
             }
         ],
@@ -3010,24 +2991,6 @@
         ]
     },
     {
-        "id": "ea527b96fe3348e7",
-        "type": "html",
-        "z": "c9cf8bbb.029148",
-        "name": "",
-        "property": "payload",
-        "outproperty": "payload",
-        "tag": ".post-content > p > span",
-        "ret": "text",
-        "as": "multi",
-        "x": 600,
-        "y": 1460,
-        "wires": [
-            [
-                "729d9f969598bc0d"
-            ]
-        ]
-    },
-    {
         "id": "83b637584fba0b12",
         "type": "function",
         "z": "c9cf8bbb.029148",
@@ -3121,6 +3084,25 @@
         "wires": [
             [
                 "8d0686b9.503b28"
+            ]
+        ]
+    },
+    {
+        "id": "e4560a94737eccb7",
+        "type": "html",
+        "z": "c9cf8bbb.029148",
+        "name": "",
+        "property": "payload",
+        "outproperty": "payload",
+        "tag": ".post-content > h3 > span > strong",
+        "ret": "text",
+        "as": "single",
+        "chr": "",
+        "x": 580,
+        "y": 1420,
+        "wires": [
+            [
+                "729d9f969598bc0d"
             ]
         ]
     },
