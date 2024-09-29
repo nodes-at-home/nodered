@@ -2274,7 +2274,6 @@
         "name": "input mqtt",
         "links": [
             "7b7d8aa9.c0aaf4",
-            "8d31c4d1.457928",
             "9ed62c96.78bbc",
             "a89f51a1.a0746",
             "f446ce97.9881a",
@@ -2359,7 +2358,6 @@
         "name": "input logfile",
         "links": [
             "7b7d8aa9.c0aaf4",
-            "8d31c4d1.457928",
             "9ed62c96.78bbc",
             "a89f51a1.a0746",
             "f446ce97.9881a",
@@ -6176,9 +6174,7 @@
         "z": "8e2c5c11.fae26",
         "name": "send message",
         "links": [
-            "36e0dc01.361524",
-            "45517f7d.b95e6",
-            "729afff.40124"
+            "36e0dc01.361524"
         ],
         "x": 55,
         "y": 200,
@@ -6195,7 +6191,6 @@
         "name": "onoff trigger",
         "links": [
             "686644ad.6f27fc",
-            "d020750c.975588",
             "eb5af1ed.6181d"
         ],
         "x": 1775,
@@ -6511,9 +6506,7 @@
         "z": "8e2c5c11.fae26",
         "name": "automatic restart telnet input",
         "links": [
-            "36e0dc01.361524",
-            "45517f7d.b95e6",
-            "729afff.40124"
+            "36e0dc01.361524"
         ],
         "x": 205,
         "y": 2600,
@@ -8248,7 +8241,8 @@
         "wires": [
             [
                 "b26c214374b512de",
-                "36e0dc01.361524"
+                "36e0dc01.361524",
+                "8c68fbf478544c5c"
             ]
         ]
     },
@@ -8289,27 +8283,9 @@
         "y": 2360,
         "wires": [
             [
-                "eb24094407bab5f6",
-                "85efdfb9f40d6d1e"
+                "eb24094407bab5f6"
             ]
         ]
-    },
-    {
-        "id": "85efdfb9f40d6d1e",
-        "type": "debug",
-        "z": "8e2c5c11.fae26",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1170,
-        "y": 2420,
-        "wires": []
     },
     {
         "id": "577d589b717eac30",
@@ -8333,7 +8309,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 240,
-        "y": 2920,
+        "y": 2960,
         "wires": [
             [
                 "32b60a06d2961bdc"
@@ -8363,22 +8339,6 @@
                 "4132186d0c90a651"
             ]
         ]
-    },
-    {
-        "id": "976945b241245f2b",
-        "type": "debug",
-        "z": "8e2c5c11.fae26",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1080,
-        "y": 2920,
-        "wires": []
     },
     {
         "id": "4132186d0c90a651",
@@ -8417,7 +8377,7 @@
         "y": 2920,
         "wires": [
             [
-                "5d1403def482f6e9"
+                "6093b6d2f0d9aa7c"
             ]
         ]
     },
@@ -8429,7 +8389,7 @@
         "method": "GET",
         "ret": "txt",
         "paytoqs": "ignore",
-        "url": "http://ems-esp/api/system/restart",
+        "url": "",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -8437,12 +8397,10 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 910,
+        "x": 1130,
         "y": 2920,
         "wires": [
-            [
-                "976945b241245f2b"
-            ]
+            []
         ]
     },
     {
@@ -8671,6 +8629,177 @@
         "y": 1840,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "a7a9bd761a169de5",
+        "type": "file in",
+        "z": "8e2c5c11.fae26",
+        "name": "id file",
+        "filename": "/data/ids/ems_esp_id.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "sendError": true,
+        "allProps": false,
+        "x": 390,
+        "y": 3020,
+        "wires": [
+            [
+                "1eb2c7cfa4cf40a8"
+            ]
+        ]
+    },
+    {
+        "id": "c6b71b39b7bffced",
+        "type": "inject",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 3020,
+        "wires": [
+            [
+                "a7a9bd761a169de5"
+            ]
+        ]
+    },
+    {
+        "id": "414ba1e7ad58c775",
+        "type": "function",
+        "z": "8e2c5c11.fae26",
+        "name": "id",
+        "func": "node.status ( \n    { \n        fill: \"blue\", \n        shape: \"dot\", \n        text: msg.payload \n    } \n);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 3020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1eb2c7cfa4cf40a8",
+        "type": "change",
+        "z": "8e2c5c11.fae26",
+        "name": "set id",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ems_esp_id",
+                "pt": "flow",
+                "to": "$substring(msg.payload,0,$length(msg.payload)-1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 3020,
+        "wires": [
+            [
+                "414ba1e7ad58c775"
+            ]
+        ]
+    },
+    {
+        "id": "6093b6d2f0d9aa7c",
+        "type": "switch",
+        "z": "8e2c5c11.fae26",
+        "name": "?id",
+        "property": "ems_esp_id",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 870,
+        "y": 2920,
+        "wires": [
+            [],
+            [
+                "61d88ddfe9cebe8b"
+            ]
+        ]
+    },
+    {
+        "id": "61d88ddfe9cebe8b",
+        "type": "change",
+        "z": "8e2c5c11.fae26",
+        "name": "set url",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "\"http://ems-esp/rest/restart?access_token=\" & $flowContext ( \"ems_esp_id\" )",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 990,
+        "y": 2920,
+        "wires": [
+            [
+                "5d1403def482f6e9"
+            ]
+        ]
+    },
+    {
+        "id": "8c68fbf478544c5c",
+        "type": "link out",
+        "z": "8e2c5c11.fae26",
+        "name": "restart emsp-esp",
+        "mode": "link",
+        "links": [
+            "9f442cf897f223a1"
+        ],
+        "x": 1415,
+        "y": 2420,
+        "wires": []
+    },
+    {
+        "id": "9f442cf897f223a1",
+        "type": "link in",
+        "z": "8e2c5c11.fae26",
+        "name": "restart ems-esp",
+        "links": [
+            "8c68fbf478544c5c"
+        ],
+        "x": 195,
+        "y": 2920,
+        "wires": [
+            [
+                "32b60a06d2961bdc"
+            ]
         ]
     },
     {
