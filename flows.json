@@ -994,7 +994,7 @@
         "group": "69929a92d5b22fc4",
         "order": 17,
         "width": "6",
-        "height": "3"
+        "height": "2"
     },
     {
         "id": "28f809dfb66280ab",
@@ -1002,7 +1002,7 @@
         "z": "8e2c5c11.fae26",
         "name": "spacer",
         "group": "69929a92d5b22fc4",
-        "order": 22,
+        "order": 21,
         "width": "1",
         "height": "1"
     },
@@ -1025,6 +1025,16 @@
         "order": 4,
         "width": "6",
         "height": "13"
+    },
+    {
+        "id": "8c0a719316f8e0cb",
+        "type": "ui_spacer",
+        "z": "8e2c5c11.fae26",
+        "name": "spacer",
+        "group": "69929a92d5b22fc4",
+        "order": 23,
+        "width": 1,
+        "height": 1
     },
     {
         "id": "1f55c701.4fff39",
@@ -8163,7 +8173,7 @@
         "label": "tele/tasmota_08E112/STATE",
         "tooltip": "watchdog state",
         "group": "69929a92d5b22fc4",
-        "order": 21,
+        "order": 20,
         "width": "5",
         "height": 1,
         "passthru": false,
@@ -8195,7 +8205,7 @@
         "label": "ems-esp/heartbeat",
         "tooltip": "watchdog state",
         "group": "69929a92d5b22fc4",
-        "order": 23,
+        "order": 22,
         "width": "5",
         "height": 1,
         "passthru": false,
@@ -8352,7 +8362,8 @@
         "y": 2920,
         "wires": [
             [
-                "889539316790c4b4"
+                "889539316790c4b4",
+                "98ac236da95e207d"
             ]
         ]
     },
@@ -8377,7 +8388,8 @@
         "y": 2920,
         "wires": [
             [
-                "6093b6d2f0d9aa7c"
+                "6093b6d2f0d9aa7c",
+                "4e80f40daae9a11c"
             ]
         ]
     },
@@ -8400,7 +8412,9 @@
         "x": 1130,
         "y": 2920,
         "wires": [
-            []
+            [
+                "2eaf238304d75167"
+            ]
         ]
     },
     {
@@ -8737,7 +8751,8 @@
         "wires": [
             [],
             [
-                "61d88ddfe9cebe8b"
+                "61d88ddfe9cebe8b",
+                "815cb0bb592935d3"
             ]
         ]
     },
@@ -8769,7 +8784,8 @@
         "y": 2920,
         "wires": [
             [
-                "5d1403def482f6e9"
+                "5d1403def482f6e9",
+                "d8da1d36ac0193bf"
             ]
         ]
     },
@@ -8783,7 +8799,7 @@
             "9f442cf897f223a1"
         ],
         "x": 1415,
-        "y": 2420,
+        "y": 2460,
         "wires": []
     },
     {
@@ -8800,6 +8816,166 @@
             [
                 "32b60a06d2961bdc"
             ]
+        ]
+    },
+    {
+        "id": "98ac236da95e207d",
+        "type": "debug",
+        "z": "8e2c5c11.fae26",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 3200,
+        "wires": []
+    },
+    {
+        "id": "4e80f40daae9a11c",
+        "type": "debug",
+        "z": "8e2c5c11.fae26",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 3140,
+        "wires": []
+    },
+    {
+        "id": "815cb0bb592935d3",
+        "type": "debug",
+        "z": "8e2c5c11.fae26",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 3000,
+        "wires": []
+    },
+    {
+        "id": "d8da1d36ac0193bf",
+        "type": "debug",
+        "z": "8e2c5c11.fae26",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 2820,
+        "wires": []
+    },
+    {
+        "id": "2eaf238304d75167",
+        "type": "debug",
+        "z": "8e2c5c11.fae26",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1300,
+        "y": 2940,
+        "wires": []
+    },
+    {
+        "id": "1eabffbe9e04631d",
+        "type": "mqtt in",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "topic": "watermeter/status",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "7bc3dc1a.d27a94",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 930,
+        "y": 2400,
+        "wires": [
+            [
+                "f5b363d1fda1bdd2"
+            ]
+        ]
+    },
+    {
+        "id": "f5b363d1fda1bdd2",
+        "type": "trigger",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "1",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1270,
+        "y": 2400,
+        "wires": [
+            [
+                "dd8f718263c331a2",
+                "36e0dc01.361524"
+            ]
+        ]
+    },
+    {
+        "id": "dd8f718263c331a2",
+        "type": "ui_switch",
+        "z": "8e2c5c11.fae26",
+        "name": "",
+        "label": "watermeter/status",
+        "tooltip": "watchdog state",
+        "group": "69929a92d5b22fc4",
+        "order": 24,
+        "width": "5",
+        "height": 1,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "done",
+        "oncolor": "green",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "error_outline",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 1490,
+        "y": 2400,
+        "wires": [
+            []
         ]
     },
     {
