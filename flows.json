@@ -8,7 +8,7 @@
         "id": "8e2c5c11.fae26",
         "type": "tab",
         "label": "node state",
-        "disabled": false,
+        "disabled": true,
         "info": ""
     },
     {
@@ -228,9 +228,12 @@
     {
         "id": "4053cb3b.f891e4",
         "type": "ui_tab",
+        "d": true,
         "name": "Node States",
         "icon": "dashboard",
-        "order": 1
+        "order": 1,
+        "disabled": false,
+        "hidden": false
     },
     {
         "id": "eec5fbfe.9e9ef8",
@@ -343,26 +346,6 @@
         "width": "10"
     },
     {
-        "id": "d4a7808d.ee6f9",
-        "type": "ui_group",
-        "name": "select",
-        "tab": "abd18845.7765b8",
-        "order": 1,
-        "disp": true,
-        "width": "6",
-        "collapse": false
-    },
-    {
-        "id": "5de7d7da.a53e18",
-        "type": "ui_group",
-        "name": "config",
-        "tab": "abd18845.7765b8",
-        "order": 2,
-        "disp": true,
-        "width": "12",
-        "collapse": false
-    },
-    {
         "id": "abd18845.7765b8",
         "type": "ui_tab",
         "name": "Node Config",
@@ -394,26 +377,6 @@
         "id": "6e66383c.a2a358",
         "type": "google-credentials",
         "displayName": "Andreas Jungierek"
-    },
-    {
-        "id": "78b675c7.c40cbc",
-        "type": "ui_group",
-        "name": "Asterisk",
-        "tab": "7d9bb14a.88f6c",
-        "order": 1,
-        "disp": true,
-        "width": "6",
-        "collapse": false
-    },
-    {
-        "id": "a02ee1d2.24219",
-        "type": "ui_group",
-        "name": "Devices",
-        "tab": "7d9bb14a.88f6c",
-        "order": 2,
-        "disp": true,
-        "width": "6",
-        "collapse": false
     },
     {
         "id": "7d9bb14a.88f6c",
@@ -1035,6 +998,46 @@
         "order": 23,
         "width": 1,
         "height": 1
+    },
+    {
+        "id": "d4a7808d.ee6f9",
+        "type": "ui_group",
+        "name": "select",
+        "tab": "abd18845.7765b8",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "5de7d7da.a53e18",
+        "type": "ui_group",
+        "name": "config",
+        "tab": "abd18845.7765b8",
+        "order": 2,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "78b675c7.c40cbc",
+        "type": "ui_group",
+        "name": "Asterisk",
+        "tab": "7d9bb14a.88f6c",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "a02ee1d2.24219",
+        "type": "ui_group",
+        "name": "Devices",
+        "tab": "7d9bb14a.88f6c",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
     },
     {
         "id": "1f55c701.4fff39",
@@ -2839,7 +2842,8 @@
         "y": 1420,
         "wires": [
             [
-                "e4560a94737eccb7"
+                "e4560a94737eccb7",
+                "0182cc022d127272"
             ]
         ]
     },
@@ -2853,7 +2857,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "payload [0] ~> $trim ~> $lowercase",
+                "to": "( payload [0] ~> $trim ~> $lowercase ~> $split ( \" \" ) ) [-1]",
                 "tot": "jsonata"
             }
         ],
@@ -2867,7 +2871,8 @@
         "wires": [
             [
                 "f0d9aed1a8aae71f",
-                "35c5a47dce71e5be"
+                "35c5a47dce71e5be",
+                "6dea4dfcb02114ca"
             ]
         ]
     },
@@ -2915,7 +2920,8 @@
         "y": 1420,
         "wires": [
             [
-                "8fff3aaac7e8e406"
+                "8fff3aaac7e8e406",
+                "3250f759abcefa13"
             ]
         ]
     },
@@ -3102,17 +3108,82 @@
         "name": "",
         "property": "payload",
         "outproperty": "payload",
-        "tag": ".post-content > h3 > span > strong",
+        "tag": ".post-content > h3:first-of-type",
         "ret": "text",
         "as": "single",
         "chr": "",
-        "x": 580,
+        "x": 570,
         "y": 1420,
         "wires": [
             [
-                "729d9f969598bc0d"
+                "729d9f969598bc0d",
+                "a928fbe057b88bb8"
             ]
         ]
+    },
+    {
+        "id": "0182cc022d127272",
+        "type": "debug",
+        "z": "c9cf8bbb.029148",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "a928fbe057b88bb8",
+        "type": "debug",
+        "z": "c9cf8bbb.029148",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "3250f759abcefa13",
+        "type": "debug",
+        "z": "c9cf8bbb.029148",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "6dea4dfcb02114ca",
+        "type": "debug",
+        "z": "c9cf8bbb.029148",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 1580,
+        "wires": []
     },
     {
         "id": "d4597f9c.58c9c",
@@ -8813,9 +8884,7 @@
         "x": 195,
         "y": 2920,
         "wires": [
-            [
-                "32b60a06d2961bdc"
-            ]
+            []
         ]
     },
     {
@@ -9393,7 +9462,7 @@
         "z": "37197cb5.c49ee4",
         "name": "create command",
         "func": "// junand 21.02.2017\n\nvar dest;\nvar cmd;\n\nfunction createDir ( path ) {\n\n    if ( !context.global.fs.existsSync ( dest ) ) {\n        context.global.fs.mkdirSync ( dest );\n    }\n    \n}\n\nif ( msg.topic == \"config_version\" ) {\n    \n    //node.error ( msg.payload );\n    if (  msg.payload === \"\" ) {\n        \n        context.set ( \"version\", undefined );\n        node.status ( {} );\n        \n    }\n    else {\n        \n        dest = \"/var/www/html/luanodes_ota/\" + msg.payload;\n        context.set ( \"dest\", dest );\n        //node.error ( dest );\n        //createDir ( dest );\n        \n        context.set ( \"version\", msg.payload );\n        node.status ( { fill: \"blue\", shape: \"dot\", text: msg.payload } );\n        \n    }\n\n    return null; // break flow\n\n}\n\ndest = context.get ( \"dest\" );\nif ( dest === undefined ) {\n    node.error ( \"NO destination defined\")\n    return null;\n}\n    \nif ( msg.payload === \"\" ) { // last line!\n    \n//    cmd = \"cd \" + dest + \";../gen_list_v2.sh\"; \n    \n}\nelse {\n\n    createDir ( dest );\n    \n    cmd = \"F=\\\"\" + msg.payload + \"\\\";\";\n    cmd += \"chmod 755 ${F};\"\n    cmd += \"mv $F \" + dest + \";\";\n\n}\n\nmsg.payload = cmd;\n\nreturn msg;",
-        "outputs": "1",
+        "outputs": 1,
         "noerr": 0,
         "x": 1050,
         "y": 820,
@@ -10503,7 +10572,7 @@
         "format": "{{msg.payload.appCfg}}",
         "layout": "row-left",
         "x": 340,
-        "y": 1420,
+        "y": 1460,
         "wires": []
     },
     {
@@ -10535,7 +10604,7 @@
         "format": "{{msg.payload.mqtt.retain}}",
         "layout": "row-left",
         "x": 350,
-        "y": 1060,
+        "y": 1100,
         "wires": []
     },
     {
@@ -10551,7 +10620,7 @@
         "format": "{{msg.payload.trace.ip}}",
         "layout": "row-left",
         "x": 340,
-        "y": 1220,
+        "y": 1260,
         "wires": []
     },
     {
@@ -10640,7 +10709,8 @@
                 "e5090dcc.c2f7c",
                 "65591ef0.e545c",
                 "d7007cae.c95ec",
-                "8ddbe386.5d2ec"
+                "8ddbe386.5d2ec",
+                "77e17bb0abcfd9b4"
             ]
         ]
     },
@@ -10670,7 +10740,7 @@
         "format": "{{msg.payload.timer}}",
         "layout": "row-left",
         "x": 330,
-        "y": 1380,
+        "y": 1420,
         "wires": []
     },
     {
@@ -10768,7 +10838,7 @@
         "format": "{{msg.payload.mqtt.broker}}",
         "layout": "row-left",
         "x": 350,
-        "y": 980,
+        "y": 1020,
         "wires": []
     },
     {
@@ -10784,7 +10854,7 @@
         "format": "{{msg.payload.mqtt.keepAliveTime}}",
         "layout": "row-left",
         "x": 370,
-        "y": 1020,
+        "y": 1060,
         "wires": []
     },
     {
@@ -10800,7 +10870,7 @@
         "format": "{{msg.payload.trace.port}}",
         "layout": "row-left",
         "x": 340,
-        "y": 1260,
+        "y": 1300,
         "wires": []
     },
     {
@@ -10816,7 +10886,7 @@
         "format": "{{msg.payload.trace.onUpdate}}",
         "layout": "row-left",
         "x": 360,
-        "y": 1300,
+        "y": 1340,
         "wires": []
     },
     {
@@ -10832,7 +10902,7 @@
         "format": "{{msg.payload.trace.onStartup}}",
         "layout": "row-left",
         "x": 360,
-        "y": 1340,
+        "y": 1380,
         "wires": []
     },
     {
@@ -10880,7 +10950,7 @@
         "format": "{{msg.payload}}",
         "layout": "row-left",
         "x": 520,
-        "y": 900,
+        "y": 940,
         "wires": []
     },
     {
@@ -10888,14 +10958,15 @@
         "type": "function",
         "z": "67442bb3.903494",
         "name": "ap_name",
-        "func": "\nvar ap = [];\nap [ \"74:42:7f:a5:22:c5\" ] = \"mauzi\";       // Fritz!Box 7590\nap [ \"c8:0e:14:66:e0:e1\" ] = \"skorgla\";       // Fritz!Box 7490\nap [ \"cc:ce:1e:e2:dd:5b\" ] = \"draguran\";\nap [ \"f0:b0:14:e1:92:a5\" ] = \"meltan\";\n\nvar result = \"\";\nif ( msg.payload.wifi && msg.payload.wifi.apmac ) {\n    result = ap [msg.payload.wifi.apmac];\n}\nmsg.payload = result;\n\nreturn msg;",
+        "func": "\nvar ap = [];\nap [ \"74:42:7f:a5:22:c5\" ] = \"mauzi\";       // Fritz!Box 7590\nap [ \"c8:0e:14:66:e0:e1\" ] = \"skorgla\";     // Fritz!Box 7490\nap [ \"cc:ce:1e:e2:dd:5b\" ] = \"draguran\";\nap [ \"f0:b0:14:e1:92:a5\" ] = \"meltan\";\nap [ \"d2:f2:08:d1:04:49\" ] = \"evoli\";\nap [ \"f6:24:dd:45:a1:d4\" ] = \"datiri\";\n\nvar result = \"\";\nif ( msg.payload.wifi && msg.payload.wifi.apmac ) {\n    result = ap [msg.payload.wifi.apmac];\n}\nmsg.payload = result;\n\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 340,
-        "y": 900,
+        "y": 940,
         "wires": [
             [
                 "1d816adb.69a065"
@@ -11032,7 +11103,7 @@
         "format": "{{msg.payload.syslog.host}}",
         "layout": "row-left",
         "x": 350,
-        "y": 1100,
+        "y": 1140,
         "wires": []
     },
     {
@@ -11048,7 +11119,7 @@
         "format": "{{msg.payload.syslog.port}}",
         "layout": "row-left",
         "x": 350,
-        "y": 1140,
+        "y": 1180,
         "wires": []
     },
     {
@@ -11064,7 +11135,7 @@
         "format": "{{msg.payload.syslog.level}}",
         "layout": "row-left",
         "x": 350,
-        "y": 1180,
+        "y": 1220,
         "wires": []
     },
     {
@@ -11228,7 +11299,24 @@
         "format": "{{msg.payload.wifi.apmac}}",
         "layout": "row-left",
         "x": 380,
-        "y": 940,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "77e17bb0abcfd9b4",
+        "type": "ui_text",
+        "z": "67442bb3.903494",
+        "group": "5de7d7da.a53e18",
+        "order": 13,
+        "width": "12",
+        "height": "1",
+        "name": "",
+        "label": "wifi phymode",
+        "format": "{{msg.payload.wifi.phymode}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 350,
+        "y": 900,
         "wires": []
     },
     {
