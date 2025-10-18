@@ -2859,6 +2859,13 @@
                 "pt": "msg",
                 "to": "( payload [0] ~> $trim ~> $lowercase ~> $split ( \" \" ) ) [-1]",
                 "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload = \"\" ? \"außer Betrieb\" : payload",
+                "tot": "jsonata"
             }
         ],
         "action": "",
@@ -11665,7 +11672,8 @@
         "y": 640,
         "wires": [
             [
-                "8332262c.de3608"
+                "8332262c.de3608",
+                "736a8a3df9aa8c20"
             ]
         ]
     },
@@ -11789,6 +11797,23 @@
                 "1f6c1953.c84e17"
             ]
         ]
+    },
+    {
+        "id": "736a8a3df9aa8c20",
+        "type": "debug",
+        "z": "fc8ae83a.bd2f98",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 740,
+        "wires": []
     },
     {
         "id": "f011c448.9eb0e8",
