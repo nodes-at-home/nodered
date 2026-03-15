@@ -6,3 +6,5 @@ settings.js
 *.backup
 .npm/
 weather_vaccation.json
+git_ssh
+
